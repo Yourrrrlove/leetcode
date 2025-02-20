@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2634.Filter%20Elements%20from%20Array/README_EN.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
 # [2634. Filter Elements from Array](https://leetcode.com/problems/filter-elements-from-array)
 
 [中文文档](/solution/2600-2699/2634.Filter%20Elements%20from%20Array/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>arr</code> and a filtering function <code>fn</code>, return a filtered array <code>filteredArr</code>.</p>
 
@@ -54,7 +66,11 @@ Falsey values such as 0 should be filtered out
 	<li><code>-10<sup>9</sup>&nbsp;&lt;= arr[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Traversal
 
@@ -63,6 +79,8 @@ We traverse the array $arr$ and for each element $arr[i]$, if $fn(arr[i], i)$ is
 The time complexity is $O(n)$, where $n$ is the length of the array $arr$. Ignoring the space consumption of the answer, the space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 function filter(arr: number[], fn: (n: number, i: number) => any): number[] {
@@ -78,4 +96,6 @@ function filter(arr: number[], fn: (n: number, i: number) => any): number[] {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

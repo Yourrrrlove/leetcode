@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2200-2299/2240.Number%20of%20Ways%20to%20Buy%20Pens%20and%20Pencils/README_EN.md
+rating: 1399
+source: Biweekly Contest 76 Q2
+tags:
+    - Math
+    - Enumeration
+---
+
+<!-- problem:start -->
+
 # [2240. Number of Ways to Buy Pens and Pencils](https://leetcode.com/problems/number-of-ways-to-buy-pens-and-pencils)
 
 [中文文档](/solution/2200-2299/2240.Number%20of%20Ways%20to%20Buy%20Pens%20and%20Pencils/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an integer <code>total</code> indicating the amount of money you have. You are also given two integers <code>cost1</code> and <code>cost2</code> indicating the price of a pen and pencil respectively. You can spend <strong>part or all</strong> of your money to buy multiple quantities (or none) of each kind of writing utensil.</p>
 
@@ -36,11 +51,21 @@ The total number of ways to buy pens and pencils is 5 + 3 + 1 = 9.
 	<li><code>1 &lt;= total, cost1, cost2 &lt;= 10<sup>6</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Enumeration
+
+We can enumerate the number of pens to buy, denoted as $x$. For each $x$, the maximum number of pencils we can buy is $\frac{\textit{total} - x \times \textit{cost1}}{\textit{cost2}}$. The number of ways for each $x$ is this value plus 1. We sum up the number of ways for all $x$ to get the answer.
+
+The time complexity is $O(\frac{\textit{total}}{\textit{cost1}})$, and the space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -51,6 +76,8 @@ class Solution:
             ans += y
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -64,6 +91,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -79,6 +108,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func waysToBuyPensPencils(total int, cost1 int, cost2 int) (ans int64) {
 	for x := 0; x <= total/cost1; x++ {
@@ -88,6 +119,8 @@ func waysToBuyPensPencils(total int, cost1 int, cost2 int) (ans int64) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function waysToBuyPensPencils(total: number, cost1: number, cost2: number): number {
@@ -99,6 +132,8 @@ function waysToBuyPensPencils(total: number, cost1: number, cost2: number): numb
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -114,4 +149,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

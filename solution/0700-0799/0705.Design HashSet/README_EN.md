@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0705.Design%20HashSet/README_EN.md
+tags:
+    - Design
+    - Array
+    - Hash Table
+    - Linked List
+    - Hash Function
+---
+
+<!-- problem:start -->
+
 # [705. Design HashSet](https://leetcode.com/problems/design-hashset)
 
 [中文文档](/solution/0700-0799/0705.Design%20HashSet/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Design a HashSet without using any built-in hash table libraries.</p>
 
@@ -43,11 +59,23 @@ myHashSet.contains(2); // return False, (already removed)</pre>
 	<li>At most <code>10<sup>4</sup></code> calls will be made to <code>add</code>, <code>remove</code>, and <code>contains</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Static Array Implementation
+
+Directly create an array of size $1000001$, initially with each element set to `false`, indicating that the element does not exist in the hash set.
+
+When adding an element to the hash set, set the corresponding position in the array to `true`; when deleting an element, set the corresponding position in the array to `false`; when checking if an element exists, directly return the value at the corresponding position in the array.
+
+The time complexity of the above operations is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class MyHashSet:
@@ -70,6 +98,8 @@ class MyHashSet:
 # obj.remove(key)
 # param_3 = obj.contains(key)
 ```
+
+#### Java
 
 ```java
 class MyHashSet {
@@ -99,6 +129,8 @@ class MyHashSet {
  * boolean param_3 = obj.contains(key);
  */
 ```
+
+#### C++
 
 ```cpp
 class MyHashSet {
@@ -131,6 +163,8 @@ public:
  */
 ```
 
+#### Go
+
 ```go
 type MyHashSet struct {
 	data []bool
@@ -161,6 +195,8 @@ func (this *MyHashSet) Contains(key int) bool {
  * param_3 := obj.Contains(key);
  */
 ```
+
+#### TypeScript
 
 ```ts
 class MyHashSet {
@@ -193,9 +229,17 @@ class MyHashSet {
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 2: Array of Linked Lists
+
+We can also create an array of size $SIZE=1000$, where each position in the array is a linked list.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class MyHashSet:
@@ -229,6 +273,8 @@ class MyHashSet:
 # obj.remove(key)
 # param_3 = obj.contains(key)
 ```
+
+#### Java
 
 ```java
 class MyHashSet {
@@ -284,6 +330,8 @@ class MyHashSet {
  */
 ```
 
+#### C++
+
 ```cpp
 class MyHashSet {
 private:
@@ -334,6 +382,8 @@ public:
  * bool param_3 = obj->contains(key);
  */
 ```
+
+#### Go
 
 ```go
 type MyHashSet struct {
@@ -386,4 +436,6 @@ func (this *MyHashSet) hash(key int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

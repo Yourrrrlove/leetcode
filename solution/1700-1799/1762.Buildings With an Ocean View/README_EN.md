@@ -1,8 +1,22 @@
-# [1762. Buildings With an Ocean View](https://leetcode.com/problems/buildings-with-an-ocean-view)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1700-1799/1762.Buildings%20With%20an%20Ocean%20View/README_EN.md
+tags:
+    - Stack
+    - Array
+    - Monotonic Stack
+---
+
+<!-- problem:start -->
+
+# [1762. Buildings With an Ocean View 🔒](https://leetcode.com/problems/buildings-with-an-ocean-view)
 
 [中文文档](/solution/1700-1799/1762.Buildings%20With%20an%20Ocean%20View/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There are <code>n</code> buildings in a line. You are given an integer array <code>heights</code> of size <code>n</code> that represents the heights of the buildings in the line.</p>
 
@@ -43,11 +57,23 @@
 	<li><code>1 &lt;= heights[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Reverse Traversal to Find the Maximum on the Right
+
+We traverse the array $\textit{height}$ in reverse order for each element $v$, comparing $v$ with the maximum element $mx$ on the right. If $mx \lt v$, it means all elements to the right are smaller than the current element, so the current position can see the ocean and is added to the result array $\textit{ans}$. Then we update $mx$ to $v$.
+
+After the traversal, return $\textit{ans}$ in reverse order.
+
+The time complexity is $O(n)$, where $n$ is the length of the array. Ignoring the space consumption of the answer array, the space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -60,6 +86,8 @@ class Solution:
                 mx = heights[i]
         return ans[::-1]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -79,6 +107,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -97,6 +127,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func findBuildings(heights []int) (ans []int) {
 	mx := 0
@@ -113,6 +145,8 @@ func findBuildings(heights []int) (ans []int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function findBuildings(heights: number[]): number[] {
     const ans: number[] = [];
@@ -126,6 +160,8 @@ function findBuildings(heights: number[]): number[] {
     return ans.reverse();
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -147,4 +183,6 @@ var findBuildings = function (heights) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

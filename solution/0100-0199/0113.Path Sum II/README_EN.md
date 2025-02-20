@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0113.Path%20Sum%20II/README_EN.md
+tags:
+    - Tree
+    - Depth-First Search
+    - Backtracking
+    - Binary Tree
+---
+
+<!-- problem:start -->
+
 # [113. Path Sum II](https://leetcode.com/problems/path-sum-ii)
 
 [中文文档](/solution/0100-0199/0113.Path%20Sum%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given the <code>root</code> of a binary tree and an integer <code>targetSum</code>, return <em>all <strong>root-to-leaf</strong> paths where the sum of the node values in the path equals </em><code>targetSum</code><em>. Each path should be returned as a list of the node <strong>values</strong>, not node references</em>.</p>
 
@@ -42,7 +57,11 @@
 	<li><code>-1000 &lt;= targetSum &lt;= 1000</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: DFS
 
@@ -51,6 +70,8 @@ We start from the root node, recursively traverse all paths from the root node t
 The time complexity is $O(n^2)$, where $n$ is the number of nodes in the binary tree. The space complexity is $O(n)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -77,6 +98,8 @@ class Solution:
         dfs(root, 0)
         return ans
 ```
+
+#### Java
 
 ```java
 /**
@@ -119,6 +142,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -151,6 +176,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -181,6 +208,8 @@ func pathSum(root *TreeNode, targetSum int) (ans [][]int) {
 }
 ```
 
+#### Rust
+
 ```rust
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
@@ -200,14 +229,14 @@ func pathSum(root *TreeNode, targetSum int) (ans [][]int) {
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     fn dfs(
         root: Option<Rc<RefCell<TreeNode>>>,
         paths: &mut Vec<i32>,
         mut target_sum: i32,
-        res: &mut Vec<Vec<i32>>
+        res: &mut Vec<Vec<i32>>,
     ) {
         if let Some(node) = root {
             let mut node = node.borrow_mut();
@@ -237,6 +266,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -271,4 +302,6 @@ var pathSum = function (root, targetSum) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

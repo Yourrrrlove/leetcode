@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2400-2499/2485.Find%20the%20Pivot%20Integer/README.md
+rating: 1207
+source: 第 321 场周赛 Q1
+tags:
+    - 数学
+    - 前缀和
+---
+
+<!-- problem:start -->
+
 # [2485. 找出中枢整数](https://leetcode.cn/problems/find-the-pivot-integer)
 
 [English Version](/solution/2400-2499/2485.Find%20the%20Pivot%20Integer/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个正整数 <code>n</code> ，找出满足下述条件的<strong> 中枢整数</strong> <code>x</code> ：</p>
 
@@ -47,7 +60,11 @@
 	<li><code>1 &lt;= n &lt;= 1000</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：枚举
 
@@ -61,6 +78,8 @@ $$
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def pivotInteger(self, n: int) -> int:
@@ -69,6 +88,8 @@ class Solution:
                 return x
         return -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -82,6 +103,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -97,6 +120,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func pivotInteger(n int) int {
 	for x := 1; x <= n; x++ {
@@ -108,6 +133,8 @@ func pivotInteger(n int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function pivotInteger(n: number): number {
     for (let x = 1; x <= n; ++x) {
@@ -118,6 +145,8 @@ function pivotInteger(n: number): number {
     return -1;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -133,6 +162,8 @@ impl Solution {
     }
 }
 ```
+
+#### PHP
 
 ```php
 class Solution {
@@ -156,6 +187,10 @@ class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：数学
 
 我们可以将上述等式进行变形，得到：
@@ -176,6 +211,8 @@ $$
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def pivotInteger(self, n: int) -> int:
@@ -183,6 +220,8 @@ class Solution:
         x = int(sqrt(y))
         return x if x * x == y else -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -193,6 +232,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -205,6 +246,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func pivotInteger(n int) int {
 	y := n * (n + 1) / 2
@@ -216,6 +259,8 @@ func pivotInteger(n int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function pivotInteger(n: number): number {
     const y = Math.floor((n * (n + 1)) / 2);
@@ -226,4 +271,6 @@ function pivotInteger(n: number): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

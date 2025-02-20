@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0600-0699/0626.Exchange%20Seats/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
 # [626. Exchange Seats](https://leetcode.com/problems/exchange-seats)
 
 [中文文档](/solution/0600-0699/0626.Exchange%20Seats/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table: <code>Seat</code></p>
 
@@ -15,7 +27,7 @@
 +-------------+---------+
 id is the primary key (unique value) column for this table.
 Each row of this table indicates the name and the ID of a student.
-id is a continuous increment.
+The ID sequence always starts from 1 and increments continuously.
 </pre>
 
 <p>&nbsp;</p>
@@ -55,11 +67,17 @@ Seat table:
 Note that if the number of students is odd, there is no need to change the last one&#39;s seat.
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -72,9 +90,15 @@ ORDER BY 1;
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -94,9 +118,15 @@ ORDER BY 1;
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 3
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -108,9 +138,15 @@ FROM Seat;
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 4
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -127,4 +163,6 @@ ORDER BY 1;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

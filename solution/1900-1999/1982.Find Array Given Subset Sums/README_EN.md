@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1982.Find%20Array%20Given%20Subset%20Sums/README_EN.md
+rating: 2872
+source: Weekly Contest 255 Q4
+tags:
+    - Array
+    - Divide and Conquer
+---
+
+<!-- problem:start -->
+
 # [1982. Find Array Given Subset Sums](https://leetcode.com/problems/find-array-given-subset-sums)
 
 [中文文档](/solution/1900-1999/1982.Find%20Array%20Given%20Subset%20Sums/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an integer <code>n</code> representing the length of an unknown array that you are trying to recover. You are also given an array <code>sums</code> containing the values of all <code>2<sup>n</sup></code> <strong>subset sums</strong> of the unknown array (in no particular order).</p>
 
@@ -55,16 +70,19 @@ Note that any permutation of [1,2,-3] and also any permutation of [-1,-2,3] will
 	<li><code>-10<sup>4</sup> &lt;= sums[i] &lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedList
-
-
 class Solution:
     def recoverArray(self, n: int, sums: List[int]) -> List[int]:
         m = -min(sums)
@@ -86,6 +104,8 @@ class Solution:
                 break
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -141,6 +161,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -188,6 +210,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func recoverArray(n int, sums []int) []int {
@@ -248,9 +272,15 @@ func recoverArray(n int, sums []int) []int {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -276,6 +306,8 @@ class Solution:
             sums = sums1 if sign == 1 else sums2
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -312,6 +344,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -351,6 +385,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func recoverArray(n int, sums []int) (ans []int) {
 	sort.Ints(sums)
@@ -387,4 +423,6 @@ func recoverArray(n int, sums []int) (ans []int) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2000-2099/2043.Simple%20Bank%20System/README_EN.md
+rating: 1356
+source: Weekly Contest 263 Q2
+tags:
+    - Design
+    - Array
+    - Hash Table
+    - Simulation
+---
+
+<!-- problem:start -->
+
 # [2043. Simple Bank System](https://leetcode.com/problems/simple-bank-system)
 
 [中文文档](/solution/2000-2099/2043.Simple%20Bank%20System/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You have been tasked with writing a program for a popular bank that will automate all its incoming transactions (transfer, deposit, and withdraw). The bank has <code>n</code> accounts numbered from <code>1</code> to <code>n</code>. The initial balance of each account is stored in a <strong>0-indexed</strong> integer array <code>balance</code>, with the <code>(i + 1)<sup>th</sup></code> account having an initial balance of <code>balance[i]</code>.</p>
 
@@ -34,14 +51,14 @@
 
 <strong>Explanation</strong>
 Bank bank = new Bank([10, 100, 20, 50, 30]);
-bank.withdraw(3, 10);    // return true, account 3 has a balance of 20, so it is valid to withdraw 10.
-                         // Account 3 has 20 - 10 = 10.
-bank.transfer(5, 1, 20); // return true, account 5 has a balance of 30, so it is valid to transfer 20.
-                         // Account 5 has 30 - 20 = 10, and account 1 has 10 + 20 = 30.
-bank.deposit(5, 20);     // return true, it is valid to deposit 20 to account 5.
-                         // Account 5 has 10 + 20 = 30.
-bank.transfer(3, 4, 15); // return false, the current balance of account 3 is 10,
-                         // so it is invalid to transfer 15 from it.
+bank.withdraw(3, 10);    // return true, account 3 has a balance of $20, so it is valid to withdraw $10.
+                         // Account 3 has $20 - $10 = $10.
+bank.transfer(5, 1, 20); // return true, account 5 has a balance of $30, so it is valid to transfer $20.
+                         // Account 5 has $30 - $20 = $10, and account 1 has $10 + $20 = $30.
+bank.deposit(5, 20);     // return true, it is valid to deposit $20 to account 5.
+                         // Account 5 has $10 + $20 = $30.
+bank.transfer(3, 4, 15); // return false, the current balance of account 3 is $10,
+                         // so it is invalid to transfer $15 from it.
 bank.withdraw(10, 50);   // return false, it is invalid because account 10 does not exist.
 </pre>
 
@@ -55,7 +72,11 @@ bank.withdraw(10, 50);   // return false, it is invalid because account 10 does 
 	<li>At most <code>10<sup>4</sup></code> calls will be made to <strong>each</strong> function <code>transfer</code>, <code>deposit</code>, <code>withdraw</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Simulation
 
@@ -69,6 +90,8 @@ According to the problem description, we can use an array `balance` to simulate 
 The time complexity of the above operations is $O(1)$, and the space complexity is $O(n)$. Here, $n$ is the length of `balance`.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Bank:
@@ -102,6 +125,8 @@ class Bank:
 # param_2 = obj.deposit(account,money)
 # param_3 = obj.withdraw(account,money)
 ```
+
+#### Java
 
 ```java
 class Bank {
@@ -148,6 +173,8 @@ class Bank {
  */
 ```
 
+#### C++
+
 ```cpp
 class Bank {
 public:
@@ -187,6 +214,8 @@ public:
  * bool param_3 = obj->withdraw(account,money);
  */
 ```
+
+#### Go
 
 ```go
 type Bank struct {
@@ -232,6 +261,8 @@ func (this *Bank) Withdraw(account int, money int64) bool {
  */
 ```
 
+#### TypeScript
+
 ```ts
 class Bank {
     balance: number[];
@@ -274,6 +305,8 @@ class Bank {
  * var param_3 = obj.withdraw(account,money)
  */
 ```
+
+#### Rust
 
 ```rust
 struct Bank {
@@ -322,15 +355,11 @@ impl Bank {
         self.balance[account - 1] -= money;
         true
     }
-}/**
- * Your Bank object will be instantiated and called as such:
- * let obj = Bank::new(balance);
- * let ret_1: bool = obj.transfer(account1, account2, money);
- * let ret_2: bool = obj.deposit(account, money);
- * let ret_3: bool = obj.withdraw(account, money);
- */
+}
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

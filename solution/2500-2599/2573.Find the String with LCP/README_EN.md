@@ -1,8 +1,27 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2573.Find%20the%20String%20with%20LCP/README_EN.md
+rating: 2681
+source: Weekly Contest 333 Q4
+tags:
+    - Greedy
+    - Union Find
+    - Array
+    - String
+    - Dynamic Programming
+    - Matrix
+---
+
+<!-- problem:start -->
+
 # [2573. Find the String with LCP](https://leetcode.com/problems/find-the-string-with-lcp)
 
 [中文文档](/solution/2500-2599/2573.Find%20the%20String%20with%20LCP/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>We define the <code>lcp</code> matrix of any <strong>0-indexed</strong> string <code>word</code> of <code>n</code> lowercase English letters as an <code>n x n</code> grid such that:</p>
 
@@ -47,7 +66,11 @@
 	<li><code><font face="monospace">0 &lt;= lcp[i][j] &lt;= n</font></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Greedy + Construction
 
@@ -67,6 +90,8 @@ If every position in the string meets the above conditions, then we can construc
 The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Where $n$ is the length of the string.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -96,6 +121,8 @@ class Solution:
                     return ""
         return "".join(s)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -141,6 +168,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -183,6 +212,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func findTheString(lcp [][]int) string {
 	i, n := 0, len(lcp)
@@ -222,6 +253,51 @@ func findTheString(lcp [][]int) string {
 }
 ```
 
+#### TypeScript
+
+```ts
+function findTheString(lcp: number[][]): string {
+    let i: number = 0;
+    const n: number = lcp.length;
+    let s: string = '\0'.repeat(n);
+    for (let ascii = 97; ascii < 123; ++ascii) {
+        const c: string = String.fromCharCode(ascii);
+        while (i < n && s[i] !== '\0') {
+            ++i;
+        }
+        if (i === n) {
+            break;
+        }
+        for (let j = i; j < n; ++j) {
+            if (lcp[i][j]) {
+                s = s.substring(0, j) + c + s.substring(j + 1);
+            }
+        }
+    }
+    if (s.indexOf('\0') !== -1) {
+        return '';
+    }
+    for (i = n - 1; ~i; --i) {
+        for (let j = n - 1; ~j; --j) {
+            if (s[i] === s[j]) {
+                if (i === n - 1 || j === n - 1) {
+                    if (lcp[i][j] !== 1) {
+                        return '';
+                    }
+                } else if (lcp[i][j] !== lcp[i + 1][j + 1] + 1) {
+                    return '';
+                }
+            } else if (lcp[i][j]) {
+                return '';
+            }
+        }
+    }
+    return s;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

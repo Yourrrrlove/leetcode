@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0719.Find%20K-th%20Smallest%20Pair%20Distance/README_EN.md
+tags:
+    - Array
+    - Two Pointers
+    - Binary Search
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [719. Find K-th Smallest Pair Distance](https://leetcode.com/problems/find-k-th-smallest-pair-distance)
 
 [中文文档](/solution/0700-0799/0719.Find%20K-th%20Smallest%20Pair%20Distance/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>The <strong>distance of a pair</strong> of integers <code>a</code> and <code>b</code> is defined as the absolute difference between <code>a</code> and <code>b</code>.</p>
 
@@ -45,11 +60,17 @@ Then the 1<sup>st</sup> smallest distance pair is (1,1), and its distance is 0.
 	<li><code>1 &lt;= k &lt;= n * (n - 1) / 2</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -65,6 +86,8 @@ class Solution:
         nums.sort()
         return bisect_left(range(nums[-1] - nums[0]), k, key=count)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -102,6 +125,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -129,6 +154,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func smallestDistancePair(nums []int, k int) int {
@@ -164,6 +191,8 @@ func smallestDistancePair(nums []int, k int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function smallestDistancePair(nums: number[], k: number): number {
     nums.sort((a, b) => a - b);
@@ -191,6 +220,45 @@ function smallestDistancePair(nums: number[], k: number): number {
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+function smallestDistancePair(nums, k) {
+    nums.sort((a, b) => a - b);
+    const n = nums.length;
+    let left = 0,
+        right = nums[n - 1] - nums[0];
+
+    while (left < right) {
+        const mid = (left + right) >> 1;
+        let count = 0,
+            i = 0;
+
+        for (let j = 0; j < n; j++) {
+            while (nums[j] - nums[i] > mid) {
+                i++;
+            }
+            count += j - i;
+        }
+
+        if (count >= k) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+
+    return left;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

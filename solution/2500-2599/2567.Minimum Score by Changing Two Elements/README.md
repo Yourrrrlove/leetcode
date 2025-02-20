@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2567.Minimum%20Score%20by%20Changing%20Two%20Elements/README.md
+rating: 1608
+source: 第 98 场双周赛 Q2
+tags:
+    - 贪心
+    - 数组
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [2567. 修改两个元素的最小分数](https://leetcode.cn/problems/minimum-score-by-changing-two-elements)
 
 [English Version](/solution/2500-2599/2567.Minimum%20Score%20by%20Changing%20Two%20Elements/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个下标从 <strong>0</strong>&nbsp;开始的整数数组&nbsp;<code>nums</code>&nbsp;。</p>
 
@@ -51,7 +65,11 @@
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序 + 贪心
 
@@ -69,9 +87,11 @@
 
 相似题目：
 
--   [1509. 三次操作后最大值与最小值的最小差](/solution/1500-1599/1509.Minimum%20Difference%20Between%20Largest%20and%20Smallest%20Value%20in%20Three%20Moves/README.md)
+-   [1509. 三次操作后最大值与最小值的最小差](https://github.com/doocs/leetcode/blob/main/solution/1500-1599/1509.Minimum%20Difference%20Between%20Largest%20and%20Smallest%20Value%20in%20Three%20Moves/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -79,6 +99,8 @@ class Solution:
         nums.sort()
         return min(nums[-1] - nums[2], nums[-2] - nums[1], nums[-3] - nums[0])
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -93,6 +115,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -104,6 +128,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minimizeSum(nums []int) int {
 	sort.Ints(nums)
@@ -111,6 +137,8 @@ func minimizeSum(nums []int) int {
 	return min(nums[n-1]-nums[2], min(nums[n-2]-nums[1], nums[n-3]-nums[0]))
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minimizeSum(nums: number[]): number {
@@ -120,15 +148,21 @@ function minimizeSum(nums: number[]): number {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn minimize_sum(mut nums: Vec<i32>) -> i32 {
         nums.sort();
         let n = nums.len();
-        (nums[n - 1] - nums[2]).min(nums[n - 2] - nums[1]).min(nums[n - 3] - nums[0])
+        (nums[n - 1] - nums[2])
+            .min(nums[n - 2] - nums[1])
+            .min(nums[n - 3] - nums[0])
     }
 }
 ```
+
+#### C
 
 ```c
 #define min(a, b) (((a) < (b)) ? (a) : (b))
@@ -145,4 +179,6 @@ int minimizeSum(int* nums, int numsSize) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

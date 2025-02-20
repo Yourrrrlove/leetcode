@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0600-0699/0605.Can%20Place%20Flowers/README.md
+tags:
+    - 贪心
+    - 数组
+---
+
+<!-- problem:start -->
+
 # [605. 种花问题](https://leetcode.cn/problems/can-place-flowers)
 
 [English Version](/solution/0600-0699/0605.Can%20Place%20Flowers/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>假设有一个很长的花坛，一部分地块种植了花，另一部分却没有。可是，花不能种植在相邻的地块上，它们会争夺水源，两者都会死去。</p>
 
@@ -37,7 +48,11 @@
 	<li><code>0 &lt;= n &lt;= flowerbed.length</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：贪心
 
@@ -46,6 +61,8 @@
 时间复杂度 $O(n)$，其中 $n$ 是数组 $flowerbed$ 的长度。我们只需要遍历数组一次。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -57,6 +74,8 @@ class Solution:
                 n -= 1
         return n <= 0
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -75,6 +94,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -92,6 +113,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func canPlaceFlowers(flowerbed []int, n int) bool {
@@ -113,6 +136,8 @@ func canPlaceFlowers(flowerbed []int, n int) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function canPlaceFlowers(flowerbed: number[], n: number): boolean {
     const m = flowerbed.length;
@@ -127,6 +152,8 @@ function canPlaceFlowers(flowerbed: number[], n: number): boolean {
     return n <= 0;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -146,6 +173,8 @@ impl Solution {
     }
 }
 ```
+
+#### PHP
 
 ```php
 class Solution {
@@ -172,4 +201,6 @@ class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0090.Subsets%20II/README_EN.md
+tags:
+    - Bit Manipulation
+    - Array
+    - Backtracking
+---
+
+<!-- problem:start -->
+
 # [90. Subsets II](https://leetcode.com/problems/subsets-ii)
 
 [中文文档](/solution/0000-0099/0090.Subsets%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>nums</code> that may contain duplicates, return <em>all possible</em> <span data-keyword="subset"><em>subsets</em></span><em> (the power set)</em>.</p>
 
@@ -24,23 +38,29 @@
 	<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Sorting + DFS
 
-We can first sort the array $nums$ to facilitate deduplication.
+We can first sort the array $\textit{nums}$ to facilitate deduplication.
 
-Then, we design a function $dfs(i)$, which represents searching for subsets starting from the $i$-th element. The execution logic of the function $dfs(i)$ is as follows:
+Then, we design a function $\textit{dfs}(i)$, which represents the current search for subsets starting from the $i$-th element. The execution logic of the function $\textit{dfs}(i)$ is as follows:
 
-If $i \geq n$, it means that all elements have been searched, and the current subset is added to the answer array, and the recursion ends.
+If $i \geq n$, it means all elements have been searched, add the current subset to the answer array, and end the recursion.
 
-If $i < n$, add the $i$-th element to the subset, execute $dfs(i + 1)$, and then remove the $i$-th element from the subset. Next, we judge whether the $i$-th element is the same as the next element. If it is the same, we loop to skip this element until we find the first element that is different from the $i$-th element, and execute $dfs(i + 1)$.
+If $i < n$, add the $i$-th element to the subset, execute $\textit{dfs}(i + 1)$, then remove the $i$-th element from the subset. Next, we check if the $i$-th element is the same as the next element. If they are the same, skip the element in a loop until we find the first element different from the $i$-th element, then execute $\textit{dfs}(i + 1)$.
 
-Finally, we only need to call $dfs(0)$ and return the answer array.
+Finally, we only need to call $\textit{dfs}(0)$ and return the answer array.
 
-The time complexity is $O(n \times 2^n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array.
+The time complexity is $O(n \times 2^n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{nums}$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -62,6 +82,8 @@ class Solution:
         dfs(0)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -92,15 +114,17 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
+        ranges::sort(nums);
         vector<vector<int>> ans;
         vector<int> t;
         int n = nums.size();
-        function<void(int)> dfs = [&](int i) {
+        auto dfs = [&](this auto&& dfs, int i) {
             if (i >= n) {
                 ans.push_back(t);
                 return;
@@ -119,9 +143,11 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func subsetsWithDup(nums []int) (ans [][]int) {
-	sort.Ints(nums)
+	slices.Sort(nums)
 	n := len(nums)
 	t := []int{}
 	var dfs func(int)
@@ -142,6 +168,8 @@ func subsetsWithDup(nums []int) (ans [][]int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function subsetsWithDup(nums: number[]): number[][] {
@@ -166,6 +194,8 @@ function subsetsWithDup(nums: number[]): number[][] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -196,19 +226,86 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsetsWithDup = function (nums) {
+    nums.sort((a, b) => a - b);
+    const n = nums.length;
+    const t = [];
+    const ans = [];
+    const dfs = i => {
+        if (i >= n) {
+            ans.push([...t]);
+            return;
+        }
+        t.push(nums[i]);
+        dfs(i + 1);
+        t.pop();
+        while (i + 1 < n && nums[i] === nums[i + 1]) {
+            i++;
+        }
+        dfs(i + 1);
+    };
+    dfs(0);
+    return ans;
+};
+```
+
+#### C#
+
+```cs
+public class Solution {
+    private IList<IList<int>> ans = new List<IList<int>>();
+    private IList<int> t = new List<int>();
+    private int[] nums;
+
+    public IList<IList<int>> SubsetsWithDup(int[] nums) {
+        Array.Sort(nums);
+        this.nums = nums;
+        Dfs(0);
+        return ans;
+    }
+
+    private void Dfs(int i) {
+        if (i >= nums.Length) {
+            ans.Add(new List<int>(t));
+            return;
+        }
+        t.Add(nums[i]);
+        Dfs(i + 1);
+        t.RemoveAt(t.Count - 1);
+        while (i + 1 < nums.Length && nums[i + 1] == nums[i]) {
+            ++i;
+        }
+        Dfs(i + 1);
+    }
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### Solution 2: Sorting + Binary Enumeration
 
-Similar to Solution 1, we first sort the array $nums$ to facilitate deduplication.
+Similar to Solution 1, we first sort the array $\textit{nums}$ to facilitate deduplication.
 
-Next, we enumerate a binary number $mask$ in the range of $[0, 2^n)$, where the binary representation of $mask$ is an $n$-bit bit string. If the $i$-th bit of $mask$ is $1$, it means to select $nums[i]$, and $0$ means not to select $nums[i]$. Note that if the $i - 1$ bit of $mask$ is $0$, and $nums[i] = nums[i - 1]$, it means that in the current enumerated scheme, the $i$-th element and the $i - 1$-th element are the same. To avoid repetition, we skip this situation. Otherwise, we add the subset corresponding to $mask$ to the answer array.
+Next, we enumerate a binary number $\textit{mask}$ in the range $[0, 2^n)$, where the binary representation of $\textit{mask}$ is an $n$-bit bit string. If the $i$-th bit of $\textit{mask}$ is $1$, it means selecting $\textit{nums}[i]$, and $0$ means not selecting $\textit{nums}[i]$. Note that if the $(i - 1)$-th bit of $\textit{mask}$ is $0$ and $\textit{nums}[i] = \textit{nums}[i - 1]$, it means that the $i$-th element is the same as the $(i - 1)$-th element in the current enumeration scheme. To avoid duplication, we skip this case. Otherwise, we add the subset corresponding to $\textit{mask}$ to the answer array.
 
-After the enumeration ends, we return the answer array.
+After the enumeration, we return the answer array.
 
-The time complexity is $O(n \times 2^n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array.
+The time complexity is $O(n \times 2^n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{nums}$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -229,6 +326,8 @@ class Solution:
                 ans.append(t)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -257,11 +356,13 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
+        ranges::sort(nums);
         int n = nums.size();
         vector<vector<int>> ans;
         for (int mask = 0; mask < 1 << n; ++mask) {
@@ -284,6 +385,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func subsetsWithDup(nums []int) (ans [][]int) {
@@ -309,6 +412,8 @@ func subsetsWithDup(nums []int) (ans [][]int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function subsetsWithDup(nums: number[]): number[][] {
     nums.sort((a, b) => a - b);
@@ -333,6 +438,8 @@ function subsetsWithDup(nums: number[]): number[][] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -362,6 +469,68 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsetsWithDup = function (nums) {
+    nums.sort((a, b) => a - b);
+    const n = nums.length;
+    const ans = [];
+    for (let mask = 0; mask < 1 << n; ++mask) {
+        const t = [];
+        let ok = true;
+        for (let i = 0; i < n; ++i) {
+            if (((mask >> i) & 1) === 1) {
+                if (i && ((mask >> (i - 1)) & 1) === 0 && nums[i] === nums[i - 1]) {
+                    ok = false;
+                    break;
+                }
+                t.push(nums[i]);
+            }
+        }
+        if (ok) {
+            ans.push(t);
+        }
+    }
+    return ans;
+};
+```
+
+#### C#
+
+```cs
+public class Solution {
+    public IList<IList<int>> SubsetsWithDup(int[] nums) {
+        Array.Sort(nums);
+        int n = nums.Length;
+        IList<IList<int>> ans = new List<IList<int>>();
+        for (int mask = 0; mask < 1 << n; ++mask) {
+            IList<int> t = new List<int>();
+            bool ok = true;
+            for (int i = 0; i < n; ++i) {
+                if ((mask >> i & 1) == 1) {
+                    if (i > 0 && (mask >> (i - 1) & 1) == 0 && nums[i] == nums[i - 1]) {
+                        ok = false;
+                        break;
+                    }
+                    t.Add(nums[i]);
+                }
+            }
+            if (ok) {
+                ans.Add(t);
+            }
+        }
+        return ans;
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

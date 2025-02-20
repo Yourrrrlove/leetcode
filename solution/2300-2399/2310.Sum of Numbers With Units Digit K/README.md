@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2310.Sum%20of%20Numbers%20With%20Units%20Digit%20K/README.md
+rating: 1558
+source: 第 298 场周赛 Q2
+tags:
+    - 贪心
+    - 数学
+    - 动态规划
+    - 枚举
+---
+
+<!-- problem:start -->
+
 # [2310. 个位数字为 K 的整数之和](https://leetcode.cn/problems/sum-of-numbers-with-units-digit-k)
 
 [English Version](/solution/2300-2399/2310.Sum%20of%20Numbers%20With%20Units%20Digit%20K/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你两个整数 <code>num</code> 和 <code>k</code> ，考虑具有以下属性的正整数多重集：</p>
 
@@ -59,17 +74,25 @@
 	<li><code>0 &lt;= k &lt;= 9</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：数学 + 枚举
 
-符合拆分条件的每个数都可以表示成 $10x_i+k$，若总共有 $n$ 个数，那么 $num-n*k$ 必然是 $10$ 的倍数。
+符合拆分条件的每个数都可以表示成 $10x_i+k$，若总共有 $n$ 个数，那么 $\textit{num}-n \times k$ 必然是 $10$ 的倍数。
 
-我们从小到达枚举 $n$，找到第一个满足 $num-n*k$ 是 $10$ 的倍数的 $n$。由于 $n$ 不会超过 $num$，因此 $n$ 最大枚举至 $num$。
+我们从小到达枚举 $n$，找到第一个满足 $\textit{num}-n \times k$ 是 $10$ 的倍数的 $n$。由于 $n$ 不会超过 $\textit{num}$，因此 $n$ 最大枚举至 $\textit{num}$。
 
 也可以只考虑个位，个位满足，高位随意。
 
+时间复杂度 $O(n)$，其中 $n$ 为 $\textit{num}$ 的大小。空间复杂度 $O(1)$。
+
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -81,6 +104,8 @@ class Solution:
                 return i
         return -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -99,6 +124,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -112,6 +139,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minimumNumbers(num int, k int) int {
@@ -128,6 +157,8 @@ func minimumNumbers(num int, k int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minimumNumbers(num: number, k: number): number {
     if (!num) return 0;
@@ -142,9 +173,15 @@ function minimumNumbers(num: number, k: number): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：记忆化搜索
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -156,6 +193,8 @@ class Solution:
                 return i
         return -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -173,6 +212,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -185,6 +226,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minimumNumbers(num int, k int) int {
@@ -202,9 +245,15 @@ func minimumNumbers(num int, k int) int {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法三
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -232,4 +281,6 @@ class Solution:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

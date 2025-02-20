@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0767.Reorganize%20String/README_EN.md
+tags:
+    - Greedy
+    - Hash Table
+    - String
+    - Counting
+    - Sorting
+    - Heap (Priority Queue)
+---
+
+<!-- problem:start -->
+
 # [767. Reorganize String](https://leetcode.com/problems/reorganize-string)
 
 [中文文档](/solution/0700-0799/0767.Reorganize%20String/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a string <code>s</code>, rearrange the characters of <code>s</code> so that any two adjacent characters are not the same.</p>
 
@@ -24,11 +41,17 @@
 	<li><code>s</code> consists of lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -49,6 +72,8 @@ class Solution:
                     i = 1
         return ''.join(ans)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -95,6 +120,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -124,6 +151,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func reorganizeString(s string) string {
@@ -163,8 +192,10 @@ func reorganizeString(s string) string {
 }
 ```
 
+#### Rust
+
 ```rust
-use std::collections::{ HashMap, BinaryHeap, VecDeque };
+use std::collections::{BinaryHeap, HashMap, VecDeque};
 
 impl Solution {
     #[allow(dead_code)]
@@ -216,9 +247,15 @@ impl Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -241,6 +278,8 @@ class Solution:
                     heappush(h, (-w, c))
         return "" if len(ans) != len(s) else "".join(ans)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -279,6 +318,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -310,6 +351,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func reorganizeString(s string) string {
@@ -365,4 +408,6 @@ func (h *hp) Pop() any     { a := *h; v := a[len(a)-1]; *h = a[:len(a)-1]; retur
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0136.Single%20Number/README_EN.md
+tags:
+    - Bit Manipulation
+    - Array
+---
+
+<!-- problem:start -->
+
 # [136. Single Number](https://leetcode.com/problems/single-number)
 
 [中文文档](/solution/0100-0199/0136.Single%20Number/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a <strong>non-empty</strong>&nbsp;array of integers <code>nums</code>, every element appears <em>twice</em> except for one. Find that single one.</p>
 
@@ -10,15 +23,29 @@
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
-<pre><strong>Input:</strong> nums = [2,2,1]
-<strong>Output:</strong> 1
-</pre><p><strong class="example">Example 2:</strong></p>
-<pre><strong>Input:</strong> nums = [4,1,2,1,2]
-<strong>Output:</strong> 4
-</pre><p><strong class="example">Example 3:</strong></p>
-<pre><strong>Input:</strong> nums = [1]
-<strong>Output:</strong> 1
-</pre>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">nums = [2,2,1]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">1</span></p>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">nums = [4,1,2,1,2]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">4</span></p>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">nums = [1]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">1</span></p>
+</div>
+
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
@@ -28,7 +55,11 @@
 	<li>Each element in the array appears twice except for one element which appears only once.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Bitwise Operation
 
@@ -43,11 +74,15 @@ The time complexity is $O(n)$, where $n$ is the length of the array. The space c
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
         return reduce(xor, nums)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -60,6 +95,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -74,6 +111,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func singleNumber(nums []int) (ans int) {
 	for _, v := range nums {
@@ -83,21 +122,25 @@ func singleNumber(nums []int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function singleNumber(nums: number[]): number {
     return nums.reduce((r, v) => r ^ v);
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn single_number(nums: Vec<i32>) -> i32 {
-        nums.into_iter()
-            .reduce(|r, v| r ^ v)
-            .unwrap()
+        nums.into_iter().reduce(|r, v| r ^ v).unwrap()
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -109,6 +152,8 @@ var singleNumber = function (nums) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public int SingleNumber(int[] nums) {
@@ -116,6 +161,8 @@ public class Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 int singleNumber(int* nums, int numsSize) {
@@ -127,6 +174,8 @@ int singleNumber(int* nums, int numsSize) {
 }
 ```
 
+#### Swift
+
 ```swift
 class Solution {
     func singleNumber(_ nums: [Int]) -> Int {
@@ -137,9 +186,15 @@ class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Java
 
 ```java
 class Solution {
@@ -151,4 +206,6 @@ class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

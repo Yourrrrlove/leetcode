@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0885.Spiral%20Matrix%20III/README.md
+tags:
+    - 数组
+    - 矩阵
+    - 模拟
+---
+
+<!-- problem:start -->
+
 # [885. 螺旋矩阵 III](https://leetcode.cn/problems/spiral-matrix-iii)
 
 [English Version](/solution/0800-0899/0885.Spiral%20Matrix%20III/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>在 <code>rows x cols</code> 的网格上，你从单元格 <code>(rStart, cStart)</code> 面朝东面开始。网格的西北角位于第一行第一列，网格的东南角位于最后一行最后一列。</p>
 
@@ -40,11 +52,17 @@
 	<li><code>0 &lt;= cStart &lt; cols</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -66,6 +84,8 @@ class Solution:
                             return ans
             k += 2
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -96,6 +116,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -121,6 +143,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func spiralMatrixIII(rows int, cols int, rStart int, cStart int) [][]int {
@@ -149,6 +173,73 @@ func spiralMatrixIII(rows int, cols int, rStart int, cStart int) [][]int {
 }
 ```
 
+#### TypeScript
+
+```ts
+function spiralMatrixIII(rows: number, cols: number, rStart: number, cStart: number): number[][] {
+    // prettier-ignore
+    const dir = [[1,0],[0,1],[-1,0],[0,-1]]
+    let [x, y, i, size] = [cStart, rStart, 0, 0];
+    const ans: number[][] = [[y, x]];
+    const total = rows * cols;
+
+    while (ans.length < total) {
+        if (i % 2 === 0) size++;
+
+        for (let j = 0; ans.length < total && j < size; j++) {
+            x += dir[i][0];
+            y += dir[i][1];
+
+            if (0 <= x && x < cols && 0 <= y && y < rows) {
+                ans.push([y, x]);
+            }
+        }
+
+        i = (i + 1) % 4;
+    }
+
+    return ans;
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {number} rows
+ * @param {number} cols
+ * @param {number} rStart
+ * @param {number} cStart
+ * @return {number[][]}
+ */
+var spiralMatrixIII = function (rows, cols, rStart, cStart) {
+    // prettier-ignore
+    const dir = [[1,0],[0,1],[-1,0],[0,-1]]
+    let [x, y, i, size] = [cStart, rStart, 0, 0];
+    const ans = [[y, x]];
+    const total = rows * cols;
+
+    while (ans.length < total) {
+        if (i % 2 === 0) size++;
+
+        for (let j = 0; ans.length < total && j < size; j++) {
+            x += dir[i][0];
+            y += dir[i][1];
+
+            if (0 <= x && x < cols && 0 <= y && y < rows) {
+                ans.push([y, x]);
+            }
+        }
+
+        i = (i + 1) % 4;
+    }
+
+    return ans;
+};
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

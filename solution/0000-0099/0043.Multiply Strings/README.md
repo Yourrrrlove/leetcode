@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0043.Multiply%20Strings/README.md
+tags:
+    - 数学
+    - 字符串
+    - 模拟
+---
+
+<!-- problem:start -->
+
 # [43. 字符串相乘](https://leetcode.cn/problems/multiply-strings)
 
 [English Version](/solution/0000-0099/0043.Multiply%20Strings/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定两个以字符串形式表示的非负整数&nbsp;<code>num1</code>&nbsp;和&nbsp;<code>num2</code>，返回&nbsp;<code>num1</code>&nbsp;和&nbsp;<code>num2</code>&nbsp;的乘积，它们的乘积也表示为字符串形式。</p>
 
@@ -34,7 +46,11 @@
 	<li><code>num1</code>&nbsp;和 <code>num2</code>&nbsp;都不包含任何前导零，除了数字0本身。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：数学乘法模拟
 
@@ -55,6 +71,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def multiply(self, num1: str, num2: str) -> str:
@@ -73,6 +91,8 @@ class Solution:
         i = 0 if arr[0] else 1
         return "".join(str(x) for x in arr[i:])
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -102,6 +122,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -133,6 +155,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func multiply(num1 string, num2 string) string {
 	if num1 == "0" || num2 == "0" {
@@ -163,6 +187,8 @@ func multiply(num1 string, num2 string) string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function multiply(num1: string, num2: string): string {
     if (num1 === '0' || num2 === '0') {
@@ -189,6 +215,8 @@ function multiply(num1: string, num2: string): string {
     return arr.slice(i).join('');
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -221,6 +249,8 @@ impl Solution {
     }
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -261,6 +291,124 @@ public class Solution {
 }
 ```
 
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param string $num1
+     * @param string $num2
+     * @return string
+     */
+
+    function multiply($num1, $num2) {
+        $length1 = strlen($num1);
+        $length2 = strlen($num2);
+        $product = array_fill(0, $length1 + $length2, 0);
+
+        for ($i = $length1 - 1; $i >= 0; $i--) {
+            for ($j = $length2 - 1; $j >= 0; $j--) {
+                $digit1 = intval($num1[$i]);
+                $digit2 = intval($num2[$j]);
+
+                $temp = $digit1 * $digit2 + $product[$i + $j + 1];
+                $product[$i + $j + 1] = $temp % 10;
+
+                $carry = intval($temp / 10);
+                $product[$i + $j] += $carry;
+            }
+        }
+        $result = implode('', $product);
+        $result = ltrim($result, '0');
+        return $result === '' ? '0' : $result;
+    }
+}
+```
+
+#### Kotlin
+
+```kotlin
+class Solution {
+    fun multiply(num1: String, num2: String): String {
+        if (num1 == "0" || num2 == "0") return "0"
+
+        val chars_1 = num1.toCharArray().reversedArray()
+        val chars_2 = num2.toCharArray().reversedArray()
+
+        val result = mutableListOf<Int>()
+
+        chars_1.forEachIndexed { i, c1 ->
+            val multiplier_1 = c1 - '0'
+            var over = 0
+            var index = 0
+
+            fun sum(product: Int = 0): Unit {
+                while (index >= result.size) {
+                    result.add(0)
+                }
+                val value = product + over + result[index]
+                result[index] = value % 10
+                over = value / 10
+                return
+            }
+
+            chars_2.forEachIndexed { j, c2 ->
+                index = i + j
+                val multiplier_2 = c2 - '0'
+                sum(multiplier_1 * multiplier_2)
+            }
+
+            while (over > 0) {
+                index++
+                sum()
+            }
+        }
+
+        return result.reversed().joinToString("")
+    }
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ */
+var multiply = function (num1, num2) {
+    if (num1 === '0' || num2 === '0') return '0';
+
+    const result = Array(num1.length + num2.length).fill(0);
+    const code_0 = '0'.charCodeAt(0);
+
+    const num1_len = num1.length;
+    const num2_len = num2.length;
+
+    for (let i = 0; i < num1_len; ++i) {
+        const multiplier_1 = num1.charCodeAt(num1_len - i - 1) - code_0;
+        for (let j = 0; j < num2_len; ++j) {
+            const multiplier_2 = num2.charCodeAt(num2_len - j - 1) - code_0;
+            result[i + j] += multiplier_1 * multiplier_2;
+        }
+    }
+
+    result.reduce((carry, value, index) => {
+        const sum = carry + value;
+        result[index] = sum % 10;
+        return (sum / 10) | 0;
+    }, 0);
+
+    return result
+        .slice(0, result.findLastIndex(d => d !== 0) + 1)
+        .reverse()
+        .join('');
+};
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

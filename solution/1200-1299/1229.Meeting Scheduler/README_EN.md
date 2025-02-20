@@ -1,8 +1,24 @@
-# [1229. Meeting Scheduler](https://leetcode.com/problems/meeting-scheduler)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1229.Meeting%20Scheduler/README_EN.md
+rating: 1541
+source: Biweekly Contest 11 Q2
+tags:
+    - Array
+    - Two Pointers
+    - Sorting
+---
+
+<!-- problem:start -->
+
+# [1229. Meeting Scheduler 🔒](https://leetcode.com/problems/meeting-scheduler)
 
 [中文文档](/solution/1200-1299/1229.Meeting%20Scheduler/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given the availability time slots arrays <code>slots1</code> and <code>slots2</code> of two people and a meeting duration <code>duration</code>, return the <strong>earliest time slot</strong> that works for both of them and is of duration <code>duration</code>.</p>
 
@@ -39,15 +55,21 @@
 	<li><code>1 &lt;= duration &lt;= 10<sup>6</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Sorting + Two Pointers
 
-We can sort the free time of the two people separately, then use two pointers to traverse the two arrays, find the intersection of the free time periods of the two people, and if the length of the intersection is greater than or equal to `duration`, then return the start time of the intersection and the start time plus `duration`.
+We can sort the free time intervals of both people, then use two pointers to traverse the two arrays and find the intersection of the free time intervals of both people. If the length of the intersection is greater than or equal to `duration`, return the start time of the intersection and the start time plus `duration`. Otherwise, if the end time of the first person's free time interval is less than the end time of the second person's free time interval, move the first person's pointer; otherwise, move the second person's pointer. Continue traversing until a suitable time interval is found or the traversal ends.
 
-The time complexity is $O(m \times \log m + n \times \log n)$, and the space complexity is $O(\log m + \log n)$. Where $m$ and $n$ are the lengths of the two arrays respectively.
+The time complexity is $O(m \times \log m + n \times \log n)$, and the space complexity is $O(\log m + \log n)$. Here, $m$ and $n$ are the lengths of the two arrays, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -69,6 +91,8 @@ class Solution:
                 j += 1
         return []
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -93,6 +117,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -119,6 +145,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minAvailableDuration(slots1 [][]int, slots2 [][]int, duration int) []int {
 	sort.Slice(slots1, func(i, j int) bool { return slots1[i][0] < slots1[j][0] })
@@ -140,49 +168,61 @@ func minAvailableDuration(slots1 [][]int, slots2 [][]int, duration int) []int {
 }
 ```
 
+#### TypeScript
+
+```ts
+function minAvailableDuration(slots1: number[][], slots2: number[][], duration: number): number[] {
+    slots1.sort((a, b) => a[0] - b[0]);
+    slots2.sort((a, b) => a[0] - b[0]);
+    const [m, n] = [slots1.length, slots2.length];
+    let [i, j] = [0, 0];
+    while (i < m && j < n) {
+        const [start1, end1] = slots1[i];
+        const [start2, end2] = slots2[j];
+        const start = Math.max(start1, start2);
+        const end = Math.min(end1, end2);
+        if (end - start >= duration) {
+            return [start, start + duration];
+        }
+        if (end1 < end2) {
+            i++;
+        } else {
+            j++;
+        }
+    }
+    return [];
+}
+```
+
+#### Rust
+
 ```rust
 impl Solution {
-    #[allow(dead_code)]
-    pub fn min_available_duration(
-        slots1: Vec<Vec<i32>>,
-        slots2: Vec<Vec<i32>>,
-        duration: i32
-    ) -> Vec<i32> {
-        let mut slots1 = slots1;
-        let mut slots2 = slots2;
+    pub fn min_available_duration(mut slots1: Vec<Vec<i32>>, mut slots2: Vec<Vec<i32>>, duration: i32) -> Vec<i32> {
+        slots1.sort_by_key(|slot| slot[0]);
+        slots2.sort_by_key(|slot| slot[0]);
 
-        // First sort the two vectors based on the beginning time
-        slots1.sort_by(|lhs, rhs| { lhs[0].cmp(&rhs[0]) });
-        slots2.sort_by(|lhs, rhs| { lhs[0].cmp(&rhs[0]) });
+        let (mut i, mut j) = (0, 0);
+        let (m, n) = (slots1.len(), slots2.len());
 
-        // Then traverse the two vector
-        let mut i: usize = 0;
-        let mut j: usize = 0;
-        let N = slots1.len();
-        let M = slots2.len();
+        while i < m && j < n {
+            let (start1, end1) = (slots1[i][0], slots1[i][1]);
+            let (start2, end2) = (slots2[j][0], slots2[j][1]);
 
-        while i < N && j < M {
-            let (start, end) = (slots1[i][0], slots1[i][1]);
-            while j < M && slots2[j][0] < end {
-                // If still in the scope
-                let (cur_x, cur_y) = (
-                    std::cmp::max(start, slots2[j][0]),
-                    std::cmp::min(end, slots2[j][1]),
-                );
-                if cur_y - cur_x >= duration {
-                    return vec![cur_x, cur_x + duration];
-                }
-                // Otherwise, keep iterating
-                if slots1[i][1] < slots2[j][1] {
-                    // Update i then
-                    break;
-                }
+            let start = start1.max(start2);
+            let end = end1.min(end2);
+
+            if end - start >= duration {
+                return vec![start, start + duration];
+            }
+
+            if end1 < end2 {
+                i += 1;
+            } else {
                 j += 1;
             }
-            i += 1;
         }
 
-        // The default is an empty vector
         vec![]
     }
 }
@@ -190,4 +230,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

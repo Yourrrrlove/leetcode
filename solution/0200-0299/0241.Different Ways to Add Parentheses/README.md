@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0241.Different%20Ways%20to%20Add%20Parentheses/README.md
+tags:
+    - 递归
+    - 记忆化搜索
+    - 数学
+    - 字符串
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [241. 为运算表达式设计优先级](https://leetcode.cn/problems/different-ways-to-add-parentheses)
 
 [English Version](/solution/0200-0299/0241.Different%20Ways%20to%20Add%20Parentheses/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个由数字和运算符组成的字符串&nbsp;<code>expression</code> ，按不同优先级组合数字和运算符，计算并返回所有可能组合的结果。你可以 <strong>按任意顺序</strong> 返回答案。</p>
 
@@ -43,13 +57,20 @@
 	<li><code>1 &lt;= expression.length &lt;= 20</code></li>
 	<li><code>expression</code> 由数字和算符 <code>'+'</code>、<code>'-'</code> 和 <code>'*'</code> 组成。</li>
 	<li>输入表达式中的所有整数值在范围 <code>[0, 99]</code>&nbsp;</li>
+	<li>输入表达式中的所有整数都没有前导&nbsp;<code>'-'</code>&nbsp;或&nbsp;<code>'+'</code> 表示符号。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：记忆化搜索
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -74,6 +95,8 @@ class Solution:
 
         return dfs(expression)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -116,6 +139,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -154,6 +179,8 @@ private:
 };
 ```
 
+#### Go
+
 ```go
 var memo = map[string][]int{}
 
@@ -190,6 +217,8 @@ func dfs(exp string) []int {
 	return ans
 }
 ```
+
+#### C#
 
 ```cs
 using System.Collections.Generic;
@@ -257,4 +286,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

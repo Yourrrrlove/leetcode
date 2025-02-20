@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0264.Ugly%20Number%20II/README_EN.md
+tags:
+    - Hash Table
+    - Math
+    - Dynamic Programming
+    - Heap (Priority Queue)
+---
+
+<!-- problem:start -->
+
 # [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii)
 
 [中文文档](/solution/0200-0299/0264.Ugly%20Number%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>An <strong>ugly number</strong> is a positive integer whose prime factors are limited to <code>2</code>, <code>3</code>, and <code>5</code>.</p>
 
@@ -32,11 +47,17 @@
 	<li><code>1 &lt;= n &lt;= 1690</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -53,6 +74,8 @@ class Solution:
                     heappush(h, nxt)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -76,6 +99,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -101,6 +126,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func nthUglyNumber(n int) int {
@@ -139,6 +166,8 @@ func (h *IntHeap) Pop() any {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number} n
@@ -162,6 +191,8 @@ var nthUglyNumber = function (n) {
     return dp[n - 1];
 };
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -189,9 +220,15 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -209,6 +246,8 @@ class Solution:
                 p5 += 1
         return dp[-1]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -228,6 +267,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -246,6 +287,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func nthUglyNumber(n int) int {
@@ -271,4 +314,6 @@ func nthUglyNumber(n int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

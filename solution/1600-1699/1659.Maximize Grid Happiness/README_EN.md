@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1659.Maximize%20Grid%20Happiness/README_EN.md
+rating: 2655
+source: Weekly Contest 215 Q4
+tags:
+    - Bit Manipulation
+    - Memoization
+    - Dynamic Programming
+    - Bitmask
+---
+
+<!-- problem:start -->
+
 # [1659. Maximize Grid Happiness](https://leetcode.com/problems/maximize-grid-happiness)
 
 [中文文档](/solution/1600-1699/1659.Maximize%20Grid%20Happiness/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given four integers, <code>m</code>, <code>n</code>, <code>introvertsCount</code>, and <code>extrovertsCount</code>. You have an <code>m x n</code> grid, and there are two types of people: introverts and extroverts. There are <code>introvertsCount</code> introverts and <code>extrovertsCount</code> extroverts.</p>
 
@@ -61,11 +78,44 @@ The grid happiness is 90 + 80 + 90 = 260.
 	<li><code>0 &lt;= introvertsCount, extrovertsCount &lt;= min(m * n, 6)</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Ternary State Compression + Memoization
+
+We notice that in the problem, $1 \leq m, n \leq 5$, and each grid cell has three states: no personnel assigned, introverted personnel assigned, and extroverted personnel assigned. Therefore, we can use $0$, $1$, $2$ to represent these three states, and each row in the grid can be represented by a ternary number of length $n$.
+
+We define a function $dfs(i, pre, ic, ec)$, which represents the maximum happiness of the grid starting from the $i$-th row, with the state of the previous row being $pre$, $ic$ introverted people left, and $ec$ extroverted people left. The answer is $dfs(0, 0, introvertsCount, extrovertsCount)$.
+
+The calculation process of the function $dfs(i, pre, ic, ec)$ is as follows:
+
+If $i = m$, it means that all rows have been processed, so return $0$;
+
+If $ic = 0$ and $ec = 0$, it means that all people have been assigned, so return $0$;
+
+Otherwise, enumerate the current row's state $cur$, where $cur \in [0, 3^n)$, then calculate the happiness $f[cur]$ of the current row, and the contribution $g[pre][cur]$ to the happiness between the state $pre$ of the previous row, and recursively calculate $dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])$, finally return the maximum value of $f[cur] + g[pre][cur] + dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])$, that is:
+
+$$
+dfs(i, pre, ic, ec) = \max_{cur} \{f[cur] + g[pre][cur] + dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])\}
+$$
+
+Where:
+
+-   $ix[cur]$ represents the number of introverted people in state $cur$;
+-   $ex[cur]$ represents the number of extroverted people in state $cur$;
+-   $f[cur]$ represents the initial happiness of the people in state $cur$;
+-   $g[pre][cur]$ represents the contribution to happiness of two adjacent state rows.
+
+These values can be obtained through preprocessing. And we can use the method of memoization to avoid repeated calculations.
+
+The time complexity is $O(3^{2n} \times (m \times ic \times ec + n))$, and the space complexity is $O(3^{2n} + 3^n \times m \times ic \times ec)$. Where $ic$ and $ec$ represent the number of introverted and extroverted people, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -110,6 +160,8 @@ class Solution:
                     g[i][j] += h[bits[i][k]][bits[j][k]]
         return dfs(0, 0, introvertsCount, extrovertsCount)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -179,6 +231,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -241,6 +295,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func getMaxGridHappiness(m int, n int, introvertsCount int, extrovertsCount int) int {
@@ -313,6 +369,8 @@ func getMaxGridHappiness(m int, n int, introvertsCount int, extrovertsCount int)
 	return dfs(0, 0, introvertsCount, extrovertsCount)
 }
 ```
+
+#### TypeScript
 
 ```ts
 function getMaxGridHappiness(
@@ -395,9 +453,33 @@ function getMaxGridHappiness(
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 2: Contour Line Memorized Search
+
+We can consider searching each grid cell, each time searching a position $(i, j)$, we denote $pos = i \times n + j$. Then its left and upper adjacent grids will affect their happiness contribution.
+
+We define a function $dfs(pos, pre, ic, ec)$, which represents the maximum happiness of the grid when we search to position $pos$, and the state of the previous $n$ grid cells is $pre$, with $ic$ introverted people left, and $ec$ extroverted people left. The answer is $dfs(0, 0, introvertsCount, extrovertsCount)$.
+
+The calculation process of the function $dfs(pos, pre, ic, ec)$ is as follows:
+
+If $pos = m \times n$, it means that all grid cells have been processed, so return $0$;
+
+If $ic = 0$ and $ec = 0$, it means that all people have been assigned, so return $0$;
+
+Otherwise, we calculate the state $up = \frac{pre}{3^{n-1}}$ of the upper adjacent grid cell of the current grid cell based on $pre$, and the state $left = pre \bmod 3$ of the left adjacent grid cell (note that if $pos$ is in the $0$-th column, then $left = 0$).
+
+Next, we enumerate the state $i$ of the current grid cell, where $i \in [0, 3)$. Then the state of the current $n$ grid cells is $cur = pre \bmod 3^{n-1} \times 3 + i$, and the happiness contribution of the current grid cell and its left and upper adjacent grid cells is $h[up][i]+h[left][i]$; the happiness of the current grid cell itself depends on whether personnel are assigned to this position, and whether the assigned personnel are introverted or extroverted. If they are introverted, the happiness is $120$, if they are extroverted, the happiness is $40$, otherwise, the happiness is $0$; then, if personnel are assigned to the current grid cell, we need to update $ic$ or $ec$ when we recursively call the function. Accumulate these happiness values, and take the maximum value as the return value of the function.
+
+Similar to Solution 1, we can also use the method of memoization to avoid repeated calculations.
+
+The time complexity is $O(3^{n+1} \times m \times n \times ic \times ec)$, and the space complexity is $O(3^n \times m \times n \times ic \times ec)$. Where $ic$ and $ec$ represent the number of introverted and extroverted people, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -429,6 +511,8 @@ class Solution:
         h = [[0, 0, 0], [0, -60, -10], [0, -10, 40]]
         return dfs(0, 0, introvertsCount, extrovertsCount)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -471,6 +555,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -505,6 +591,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func getMaxGridHappiness(m int, n int, introvertsCount int, extrovertsCount int) int {
@@ -562,6 +650,8 @@ func getMaxGridHappiness(m int, n int, introvertsCount int, extrovertsCount int)
 }
 ```
 
+#### TypeScript
+
 ```ts
 function getMaxGridHappiness(
     m: number,
@@ -616,4 +706,6 @@ function getMaxGridHappiness(
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

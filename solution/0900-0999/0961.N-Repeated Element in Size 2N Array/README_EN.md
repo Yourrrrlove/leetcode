@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0900-0999/0961.N-Repeated%20Element%20in%20Size%202N%20Array/README_EN.md
+tags:
+    - Array
+    - Hash Table
+---
+
+<!-- problem:start -->
+
 # [961. N-Repeated Element in Size 2N Array](https://leetcode.com/problems/n-repeated-element-in-size-2n-array)
 
 [中文文档](/solution/0900-0999/0961.N-Repeated%20Element%20in%20Size%202N%20Array/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an integer array <code>nums</code> with the following properties:</p>
 
@@ -35,11 +48,17 @@
 	<li><code>nums</code> contains <code>n + 1</code> <strong>unique</strong> elements and one of them is repeated exactly <code>n</code> times.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -50,6 +69,8 @@ class Solution:
                 return x
             s.add(x)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -63,6 +84,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -79,6 +102,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func repeatedNTimes(nums []int) int {
 	s := map[int]bool{}
@@ -91,6 +116,8 @@ func repeatedNTimes(nums []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function repeatedNTimes(nums: number[]): number {
     const s: Set<number> = new Set();
@@ -102,6 +129,8 @@ function repeatedNTimes(nums: number[]): number {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -121,4 +150,6 @@ var repeatedNTimes = function (nums) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

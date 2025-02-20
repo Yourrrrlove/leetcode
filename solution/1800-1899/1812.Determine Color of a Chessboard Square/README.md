@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1800-1899/1812.Determine%20Color%20of%20a%20Chessboard%20Square/README.md
+rating: 1328
+source: 第 49 场双周赛 Q1
+tags:
+    - 数学
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [1812. 判断国际象棋棋盘中一个格子的颜色](https://leetcode.cn/problems/determine-color-of-a-chessboard-square)
 
 [English Version](/solution/1800-1899/1812.Determine%20Color%20of%20a%20Chessboard%20Square/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个坐标 <code>coordinates</code> ，它是一个字符串，表示国际象棋棋盘中一个格子的坐标。下图是国际象棋棋盘示意图。</p>
 
@@ -49,23 +62,31 @@
 	<li><code>'1' <= coordinates[1] <= '8'</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：找规律
 
 观察棋盘我们发现，颜色相同的两个格子 $(x_1, y_1)$ 和 $(x_2, y_2)$ 满足 $x_1 + y_1$ 和 $x_2 + y_2$ 均为奇数或偶数。
 
-因此，我们可以根据 `coordinates` 获取对应的坐标 $(x, y)$，如果 $x + y$ 为奇数，则格子为白色，返回 `true`，否则返回 `false`。
+因此，我们可以根据 $\textit{coordinates}$ 获取对应的坐标 $(x, y)$，如果 $x + y$ 为奇数，则格子为白色，返回 $\textit{true}$，否则返回 $\textit{false}$。
 
 时间复杂度 $O(1)$，空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def squareIsWhite(self, coordinates: str) -> bool:
         return (ord(coordinates[0]) + ord(coordinates[1])) % 2 == 1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -74,6 +95,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -84,17 +107,23 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func squareIsWhite(coordinates string) bool {
 	return (coordinates[0]+coordinates[1])%2 == 1
 }
 ```
 
+#### TypeScript
+
 ```ts
 function squareIsWhite(coordinates: string): boolean {
     return ((coordinates.charCodeAt(0) + coordinates.charCodeAt(1)) & 1) === 1;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -105,17 +134,19 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {string} coordinates
  * @return {boolean}
  */
 var squareIsWhite = function (coordinates) {
-    const x = coordinates.charAt(0).charCodeAt();
-    const y = coordinates.charAt(1).charCodeAt();
-    return (x + y) % 2 == 1;
+    return (coordinates[0].charCodeAt() + coordinates[1].charCodeAt()) % 2 == 1;
 };
 ```
+
+#### C
 
 ```c
 bool squareIsWhite(char* coordinates) {
@@ -125,4 +156,6 @@ bool squareIsWhite(char* coordinates) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

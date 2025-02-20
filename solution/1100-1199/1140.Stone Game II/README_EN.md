@@ -1,34 +1,62 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1100-1199/1140.Stone%20Game%20II/README_EN.md
+rating: 2034
+source: Weekly Contest 147 Q4
+tags:
+    - Array
+    - Math
+    - Dynamic Programming
+    - Game Theory
+    - Prefix Sum
+---
+
+<!-- problem:start -->
+
 # [1140. Stone Game II](https://leetcode.com/problems/stone-game-ii)
 
 [中文文档](/solution/1100-1199/1140.Stone%20Game%20II/README.md)
 
 ## Description
 
-<p>Alice and Bob continue their&nbsp;games with piles of stones.&nbsp; There are a number of&nbsp;piles&nbsp;<strong>arranged in a row</strong>, and each pile has a positive integer number of stones&nbsp;<code>piles[i]</code>.&nbsp; The objective of the game is to end with the most&nbsp;stones.&nbsp;</p>
+<!-- description:start -->
 
-<p>Alice&nbsp;and Bob take turns, with Alice starting first.&nbsp; Initially, <code>M = 1</code>.</p>
+<p>Alice and Bob continue their games with piles of stones. There are a number of piles <strong>arranged in a row</strong>, and each pile has a positive integer number of stones <code>piles[i]</code>. The objective of the game is to end with the most stones.</p>
 
-<p>On each player&#39;s turn, that player&nbsp;can take <strong>all the stones</strong> in the <strong>first</strong> <code>X</code> remaining piles, where <code>1 &lt;= X &lt;= 2M</code>.&nbsp; Then, we set&nbsp;<code>M = max(M, X)</code>.</p>
+<p>Alice and Bob take turns, with Alice starting first.</p>
+
+<p>On each player&#39;s turn, that player can take <strong>all the stones</strong> in the <strong>first</strong> <code>X</code> remaining piles, where <code>1 &lt;= X &lt;= 2M</code>. Then, we set <code>M = max(M, X)</code>. Initially, M = 1.</p>
 
 <p>The game continues until all the stones have been taken.</p>
 
-<p>Assuming Alice and Bob play optimally, return the maximum number of stones Alice&nbsp;can get.</p>
+<p>Assuming Alice and Bob play optimally, return the maximum number of stones Alice can get.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre>
-<strong>Input:</strong> piles = [2,7,9,4,4]
-<strong>Output:</strong> 10
-<strong>Explanation:</strong>  If Alice takes one pile at the beginning, Bob takes two piles, then Alice takes 2 piles again. Alice can get 2 + 4 + 4 = 10 piles in total. If Alice takes two piles at the beginning, then Bob can take all three piles left. In this case, Alice get 2 + 7 = 9 piles in total. So we return 10 since it&#39;s larger. 
-</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">piles = [2,7,9,4,4]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">10</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<ul>
+	<li>If Alice takes one pile at the beginning, Bob takes two piles, then Alice takes 2 piles again. Alice can get <code>2 + 4 + 4 = 10</code> stones in total.</li>
+	<li>If Alice takes two piles at the beginning, then Bob can take all three piles left. In this case, Alice get <code>2 + 7 = 9</code> stones in total.</li>
+</ul>
+
+<p>So we return 10 since it&#39;s larger.</p>
+</div>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre>
-<strong>Input:</strong> piles = [1,2,3,4,5,100]
-<strong>Output:</strong> 104
-</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">piles = [1,2,3,4,5,100]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">104</span></p>
+</div>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
@@ -38,7 +66,11 @@
 	<li><code>1 &lt;= piles[i]&nbsp;&lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Prefix Sum + Memoization Search
 
@@ -59,6 +91,8 @@ The time complexity is $O(n^3)$, and the space complexity is $O(n^2)$. Here, $n$
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def stoneGameII(self, piles: List[int]) -> int:
@@ -74,6 +108,8 @@ class Solution:
         s = list(accumulate(piles, initial=0))
         return dfs(0, 1)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -107,6 +143,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -137,6 +175,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func stoneGameII(piles []int) int {
 	n := len(piles)
@@ -163,6 +203,8 @@ func stoneGameII(piles []int) int {
 	return dfs(0, 1)
 }
 ```
+
+#### TypeScript
 
 ```ts
 function stoneGameII(piles: number[]): number {
@@ -191,9 +233,15 @@ function stoneGameII(piles: number[]): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -213,4 +261,6 @@ class Solution:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

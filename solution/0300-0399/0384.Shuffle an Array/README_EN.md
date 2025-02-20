@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0384.Shuffle%20an%20Array/README_EN.md
+tags:
+    - Design
+    - Array
+    - Math
+    - Randomized
+---
+
+<!-- problem:start -->
+
 # [384. Shuffle an Array](https://leetcode.com/problems/shuffle-an-array)
 
 [中文文档](/solution/0300-0399/0384.Shuffle%20an%20Array/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>nums</code>, design an algorithm to randomly shuffle the array. All permutations of the array should be <strong>equally likely</strong> as a result of the shuffling.</p>
 
@@ -44,11 +59,17 @@ solution.shuffle();    // Returns the random shuffling of array [1,2,3]. Example
 	<li>At most <code>10<sup>4</sup></code> calls <strong>in total</strong> will be made to <code>reset</code> and <code>shuffle</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,6 +93,8 @@ class Solution:
 # param_1 = obj.reset()
 # param_2 = obj.shuffle()
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -112,6 +135,8 @@ class Solution {
  */
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -146,6 +171,8 @@ public:
  */
 ```
 
+#### Go
+
 ```go
 type Solution struct {
 	nums, original []int
@@ -176,6 +203,8 @@ func (this *Solution) Shuffle() []int {
  * param_2 := obj.Shuffle();
  */
 ```
+
+#### TypeScript
 
 ```ts
 class Solution {
@@ -208,6 +237,8 @@ class Solution {
  */
 ```
 
+#### Rust
+
 ```rust
 use rand::Rng;
 struct Solution {
@@ -236,13 +267,10 @@ impl Solution {
         }
         res
     }
-}/**
- * Your Solution object will be instantiated and called as such:
- * let obj = Solution::new(nums);
- * let ret_1: Vec<i32> = obj.reset();
- * let ret_2: Vec<i32> = obj.shuffle();
- */
+}
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -285,4 +313,6 @@ Solution.prototype.shuffle = function () {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

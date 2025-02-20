@@ -1,10 +1,20 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2727.Is%20Object%20Empty/README.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
 # [2727. 判断对象是否为空](https://leetcode.cn/problems/is-object-empty)
 
 [English Version](/solution/2700-2799/2727.Is%20Object%20Empty/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个对象或数组，判断它是否为空。</p>
 
@@ -53,7 +63,11 @@
 <p>&nbsp;</p>
 <strong>你可以在 O(1) 时间复杂度内解决这个问题吗？</strong>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：遍历
 
@@ -63,6 +77,8 @@
 
 <!-- tabs:start -->
 
+#### TypeScript
+
 ```ts
 function isEmpty(obj: Record<string, any> | any[]): boolean {
     for (const x in obj) {
@@ -71,6 +87,8 @@ function isEmpty(obj: Record<string, any> | any[]): boolean {
     return true;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -87,9 +105,15 @@ var isEmpty = function (obj) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 function isEmpty(obj: Record<string, any> | any[]): boolean {
@@ -99,4 +123,6 @@ function isEmpty(obj: Record<string, any> | any[]): boolean {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

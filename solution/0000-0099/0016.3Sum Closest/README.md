@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0016.3Sum%20Closest/README.md
+tags:
+    - 数组
+    - 双指针
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [16. 最接近的三数之和](https://leetcode.cn/problems/3sum-closest)
 
 [English Version](/solution/0000-0099/0016.3Sum%20Closest/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个长度为 <code>n</code> 的整数数组&nbsp;<code>nums</code><em>&nbsp;</em>和 一个目标值&nbsp;<code>target</code>。请你从 <code>nums</code><em> </em>中选出三个整数，使它们的和与&nbsp;<code>target</code>&nbsp;最接近。</p>
 
@@ -19,7 +31,7 @@
 <pre>
 <strong>输入：</strong>nums = [-1,2,1,-4], target = 1
 <strong>输出：</strong>2
-<strong>解释：</strong>与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。
+<strong>解释：</strong>与 target 最接近的和是 2 (-1 + 2 + 1 = 2)。
 </pre>
 
 <p><strong>示例 2：</strong></p>
@@ -27,7 +39,7 @@
 <pre>
 <strong>输入：</strong>nums = [0,0,0], target = 1
 <strong>输出：</strong>0
-</pre>
+<strong>解释：</strong>与 target 最接近的和是 0（0 + 0 + 0 = 0）。</pre>
 
 <p>&nbsp;</p>
 
@@ -39,7 +51,11 @@
 	<li><code>-10<sup>4</sup> &lt;= target &lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序 + 双指针
 
@@ -48,6 +64,8 @@
 时间复杂度 $O(n^2)$，空间复杂度 $O(\log n)$。其中 $n$ 为数组长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -69,6 +87,8 @@ class Solution:
                     j += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -98,6 +118,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -121,6 +143,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func threeSumClosest(nums []int, target int) int {
@@ -155,6 +179,8 @@ func abs(x int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function threeSumClosest(nums: number[], target: number): number {
     nums.sort((a, b) => a - b);
@@ -181,6 +207,8 @@ function threeSumClosest(nums: number[], target: number): number {
     return ans;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -214,6 +242,81 @@ var threeSumClosest = function (nums, target) {
 };
 ```
 
+#### C#
+
+```cs
+public class Solution {
+    public int ThreeSumClosest(int[] nums, int target) {
+        Array.Sort(nums);
+        int ans = 1 << 30;
+        int n = nums.Length;
+        for (int i = 0; i < n; ++i) {
+            int j = i + 1, k = n - 1;
+            while (j < k) {
+                int t = nums[i] + nums[j] + nums[k];
+                if (t == target) {
+                    return t;
+                }
+                if (Math.Abs(t - target) < Math.Abs(ans - target)) {
+                    ans = t;
+                }
+                if (t > target) {
+                    --k;
+                } else {
+                    ++j;
+                }
+            }
+        }
+        return ans;
+    }
+}
+```
+
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param int[] $nums
+     * @param int $target
+     * @return int
+     */
+
+    function threeSumClosest($nums, $target) {
+        $n = count($nums);
+        $closestSum = $nums[0] + $nums[1] + $nums[2];
+        $minDiff = abs($closestSum - $target);
+
+        sort($nums);
+
+        for ($i = 0; $i < $n - 2; $i++) {
+            $left = $i + 1;
+            $right = $n - 1;
+
+            while ($left < $right) {
+                $sum = $nums[$i] + $nums[$left] + $nums[$right];
+                $diff = abs($sum - $target);
+
+                if ($diff < $minDiff) {
+                    $minDiff = $diff;
+                    $closestSum = $sum;
+                } elseif ($sum < $target) {
+                    $left++;
+                } elseif ($sum > $target) {
+                    $right--;
+                } else {
+                    return $sum;
+                }
+            }
+        }
+
+        return $closestSum;
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

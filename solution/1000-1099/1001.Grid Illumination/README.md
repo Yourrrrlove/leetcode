@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1000-1099/1001.Grid%20Illumination/README.md
+rating: 1873
+source: 第 125 场周赛 Q4
+tags:
+    - 数组
+    - 哈希表
+---
+
+<!-- problem:start -->
+
 # [1001. 网格照明](https://leetcode.cn/problems/grid-illumination)
 
 [English Version](/solution/1000-1099/1001.Grid%20Illumination/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>在大小为 <code>n x n</code> 的网格 <code>grid</code> 上，每个单元格都有一盏灯，最初灯都处于 <strong>关闭</strong> 状态。</p>
 
@@ -57,23 +70,29 @@
 	<li><code>0 &lt;= row<sub>j</sub>, col<sub>j</sub> &lt; n</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：哈希表
 
 假设一盏灯的坐标为 $(x, y)$，那么它所在的行的数值为 $x$，列的数值为 $y$，正对角线的数值为 $x-y$，反对角线的数值为 $x+y$。确定某一直线的唯一数值标识后，我们就可以通过哈希表来记录某一直线所拥有的灯的数目。
 
-我们遍历数组 $lamps$，将当前遍历到的灯所在的行、列和正、反对角线拥有灯的数目分别加 $1$。
+我们遍历数组 $\textit{lamps}$，将当前遍历到的灯所在的行、列和正、反对角线拥有灯的数目分别加 $1$。
 
-注意，在处理 $lamps$ 时，需要进行去重，因为我们将重复的灯看作同一盏灯。
+注意，在处理 $\textit{lamps}$ 时，需要进行去重，因为我们将重复的灯看作同一盏灯。
 
 接下来，我们遍历 queries，判断当前查询点所在的行，列和正、反对角线是否有灯，如果有，则置 $1$，即该点在查询时是被照亮的。然后进行关闭操作，查找查询点所在的八近邻点及它本身是否有灯，如果有，将该点所在的行、列和正、反对角线的灯数目分别减 $1$，并且将灯从网格中去掉。
 
 最后，返回答案数组即可。
 
-时间复杂度 $O(m + q)$，其中 $m$ 和 $q$ 分别为数组 $lamps$ 和 $queries$ 的长度。
+时间复杂度 $O(m + q)$，其中 $m$ 和 $q$ 分别为数组 $\textit{lamps}$ 和 $\textit{queries}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -101,6 +120,8 @@ class Solution:
                         diag2[x + y] -= 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -160,6 +181,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -204,6 +227,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func gridIllumination(n int, lamps [][]int, queries [][]int) []int {
 	row, col, diag1, diag2 := map[int]int{}, map[int]int{}, map[int]int{}, map[int]int{}
@@ -243,6 +268,8 @@ func gridIllumination(n int, lamps [][]int, queries [][]int) []int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function gridIllumination(n: number, lamps: number[][], queries: number[][]): number[] {
@@ -287,4 +314,6 @@ function gridIllumination(n: number, lamps: number[][], queries: number[][]): nu
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

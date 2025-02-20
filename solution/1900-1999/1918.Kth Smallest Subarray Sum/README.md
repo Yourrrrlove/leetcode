@@ -1,10 +1,22 @@
-# [1918. 第 K 小的子数组和·](https://leetcode.cn/problems/kth-smallest-subarray-sum)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1918.Kth%20Smallest%20Subarray%20Sum/README.md
+tags:
+    - 数组
+    - 二分查找
+    - 滑动窗口
+---
+
+<!-- problem:start -->
+
+# [1918. 第 K 小的子数组和 🔒](https://leetcode.cn/problems/kth-smallest-subarray-sum)
 
 [English Version](/solution/1900-1999/1918.Kth%20Smallest%20Subarray%20Sum/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个 长度为&nbsp;<code>n</code>&nbsp;的整型数组&nbsp;<code>nums</code>&nbsp;和一个数值&nbsp;<code>k</code>&nbsp;，返回<strong> 第<em>&nbsp;</em><code>k</code>&nbsp;小的子数组和<i>。</i></strong></p>
 
@@ -57,7 +69,11 @@
 	<li><code>1 &lt;= k &lt;= n * (n + 1) / 2</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：二分查找 + 双指针
 
@@ -79,6 +95,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def kthSmallestSubarraySum(self, nums: List[int], k: int) -> int:
@@ -96,6 +114,8 @@ class Solution:
         l, r = min(nums), sum(nums)
         return l + bisect_left(range(l, r + 1), True, key=f)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -131,6 +151,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -163,6 +185,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func kthSmallestSubarraySum(nums []int, k int) int {
@@ -197,4 +221,6 @@ func kthSmallestSubarraySum(nums []int, k int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2745.Construct%20the%20Longest%20New%20String/README_EN.md
+rating: 1607
+source: Biweekly Contest 107 Q2
+tags:
+    - Greedy
+    - Brainteaser
+    - Math
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [2745. Construct the Longest New String](https://leetcode.com/problems/construct-the-longest-new-string)
 
 [中文文档](/solution/2700-2799/2745.Construct%20the%20Longest%20New%20String/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given three integers <code>x</code>, <code>y</code>, and <code>z</code>.</p>
 
@@ -18,7 +35,7 @@
 <pre>
 <strong>Input:</strong> x = 2, y = 5, z = 1
 <strong>Output:</strong> 12
-<strong>Explanation: </strong>We can concactenate the strings &quot;BB&quot;, &quot;AA&quot;, &quot;BB&quot;, &quot;AA&quot;, &quot;BB&quot;, and &quot;AB&quot; in that order. Then, our new string is &quot;BBAABBAABBAB&quot;. 
+<strong>Explanation: </strong>We can concatenate the strings &quot;BB&quot;, &quot;AA&quot;, &quot;BB&quot;, &quot;AA&quot;, &quot;BB&quot;, and &quot;AB&quot; in that order. Then, our new string is &quot;BBAABBAABBAB&quot;. 
 That string has length 12, and we can show that it is impossible to construct a string of longer length.
 </pre>
 
@@ -27,7 +44,7 @@ That string has length 12, and we can show that it is impossible to construct a 
 <pre>
 <strong>Input:</strong> x = 3, y = 2, z = 2
 <strong>Output:</strong> 14
-<strong>Explanation:</strong> We can concactenate the strings &quot;AB&quot;, &quot;AB&quot;, &quot;AA&quot;, &quot;BB&quot;, &quot;AA&quot;, &quot;BB&quot;, and &quot;AA&quot; in that order. Then, our new string is &quot;ABABAABBAABBAA&quot;. 
+<strong>Explanation:</strong> We can concatenate the strings &quot;AB&quot;, &quot;AB&quot;, &quot;AA&quot;, &quot;BB&quot;, &quot;AA&quot;, &quot;BB&quot;, and &quot;AA&quot; in that order. Then, our new string is &quot;ABABAABBAABBAA&quot;. 
 That string has length 14, and we can show that it is impossible to construct a string of longer length.
 </pre>
 
@@ -38,7 +55,11 @@ That string has length 14, and we can show that it is impossible to construct a 
 	<li><code>1 &lt;= x, y, z &lt;= 50</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Case Discussion
 
@@ -52,6 +73,8 @@ The time complexity is $O(1)$, and the space complexity is $O(1)$.
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def longestString(self, x: int, y: int, z: int) -> int:
@@ -61,6 +84,8 @@ class Solution:
             return (y * 2 + z + 1) * 2
         return (x + y + z) * 2
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -75,6 +100,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -91,6 +118,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func longestString(x int, y int, z int) int {
 	if x < y {
@@ -102,6 +131,8 @@ func longestString(x int, y int, z int) int {
 	return (x + y + z) * 2
 }
 ```
+
+#### TypeScript
 
 ```ts
 function longestString(x: number, y: number, z: number): number {
@@ -117,4 +148,6 @@ function longestString(x: number, y: number, z: number): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

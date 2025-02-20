@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1800-1899/1877.Minimize%20Maximum%20Pair%20Sum%20in%20Array/README.md
+rating: 1301
+source: 第 53 场双周赛 Q2
+tags:
+    - 贪心
+    - 数组
+    - 双指针
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [1877. 数组中最大数对和的最小值](https://leetcode.cn/problems/minimize-maximum-pair-sum-in-array)
 
 [English Version](/solution/1800-1899/1877.Minimize%20Maximum%20Pair%20Sum%20in%20Array/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>一个数对 <code>(a,b)</code> 的 <strong>数对和</strong> 等于 <code>a + b</code> 。<strong>最大数对和</strong> 是一个数对数组中最大的 <strong>数对和</strong> 。</p>
 
@@ -50,7 +65,11 @@
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：贪心
 
@@ -58,17 +77,20 @@
 
 因此，我们可以先对数组进行排序，然后使用两个指针分别指向数组的两端，求出两个指针指向的数的和，更新最大数对和的值，然后将左指针右移一位，右指针左移一位，继续进行操作，直到两个指针相遇为止，即可得到最小的最大数对和。
 
-时间复杂度 $O(n \times \log n)$，空间复杂度 $O(\log n)$。其中 $n$ 是数组的长度。
+时间复杂度 $O(n \times \log n)$，空间复杂度 $O(\log n)$。其中 $n$ 是数组 $\textit{nums}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def minPairSum(self, nums: List[int]) -> int:
         nums.sort()
-        n = len(nums)
-        return max(x + nums[n - i - 1] for i, x in enumerate(nums[: n >> 1]))
+        return max(x + nums[-i - 1] for i, x in enumerate(nums[: len(nums) >> 1]))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -83,11 +105,13 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     int minPairSum(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
+        ranges::sort(nums);
         int ans = 0, n = nums.size();
         for (int i = 0; i < n >> 1; ++i) {
             ans = max(ans, nums[i] + nums[n - i - 1]);
@@ -96,6 +120,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minPairSum(nums []int) (ans int) {
@@ -108,6 +134,8 @@ func minPairSum(nums []int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minPairSum(nums: number[]): number {
     nums.sort((a, b) => a - b);
@@ -119,6 +147,43 @@ function minPairSum(nums: number[]): number {
     return ans;
 }
 ```
+
+#### Rust
+
+```rust
+impl Solution {
+    pub fn min_pair_sum(nums: Vec<i32>) -> i32 {
+        let mut nums = nums;
+        nums.sort();
+        let mut ans = 0;
+        let n = nums.len();
+        for i in 0..n / 2 {
+            ans = ans.max(nums[i] + nums[n - i - 1]);
+        }
+        ans
+    }
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var minPairSum = function (nums) {
+    nums.sort((a, b) => a - b);
+    let ans = 0;
+    const n = nums.length;
+    for (let i = 0; i < n >> 1; ++i) {
+        ans = Math.max(ans, nums[i] + nums[n - 1 - i]);
+    }
+    return ans;
+};
+```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -135,4 +200,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,21 +1,42 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0242.Valid%20Anagram/README_EN.md
+tags:
+    - Hash Table
+    - String
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [242. Valid Anagram](https://leetcode.com/problems/valid-anagram)
 
 [中文文档](/solution/0200-0299/0242.Valid%20Anagram/README.md)
 
 ## Description
 
-<p>Given two strings <code>s</code> and <code>t</code>, return <code>true</code> <em>if</em> <code>t</code> <em>is an anagram of</em> <code>s</code><em>, and</em> <code>false</code> <em>otherwise</em>.</p>
+<!-- description:start -->
 
-<p>An <strong>Anagram</strong> is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.</p>
+<p>Given two strings <code>s</code> and <code>t</code>, return <code>true</code> if <code>t</code> is an <span data-keyword="anagram">anagram</span> of <code>s</code>, and <code>false</code> otherwise.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
-<pre><strong>Input:</strong> s = "anagram", t = "nagaram"
-<strong>Output:</strong> true
-</pre><p><strong class="example">Example 2:</strong></p>
-<pre><strong>Input:</strong> s = "rat", t = "car"
-<strong>Output:</strong> false
-</pre>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;anagram&quot;, t = &quot;nagaram&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;rat&quot;, t = &quot;car&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">false</span></p>
+</div>
+
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
@@ -27,7 +48,11 @@
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> What if the inputs contain Unicode characters? How would you adapt your solution to such a case?</p>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Counting
 
@@ -38,6 +63,8 @@ Otherwise, we use a hash table or an array of length $26$ to record the number o
 The time complexity is $O(n)$, the space complexity is $O(C)$, where $n$ is the length of the string; and $C$ is the size of the character set, which is $C=26$ in this problem.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -51,6 +78,8 @@ class Solution:
                 return False
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -73,6 +102,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -89,6 +120,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func isAnagram(s string, t string) bool {
@@ -109,6 +142,8 @@ func isAnagram(s string, t string) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function isAnagram(s: string, t: string): boolean {
     if (s.length !== t.length) {
@@ -122,6 +157,8 @@ function isAnagram(s: string, t: string): boolean {
     return cnt.every(x => x === 0);
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -145,6 +182,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {string} s
@@ -164,6 +203,8 @@ var isAnagram = function (s, t) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public bool IsAnagram(string s, string t) {
@@ -179,6 +220,8 @@ public class Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 int cmp(const void* a, const void* b) {
@@ -199,15 +242,23 @@ bool isAnagram(char* s, char* t) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         return Counter(s) == Counter(t)
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -227,6 +278,8 @@ impl Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 bool isAnagram(char* s, char* t) {
@@ -251,4 +304,6 @@ bool isAnagram(char* s, char* t) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

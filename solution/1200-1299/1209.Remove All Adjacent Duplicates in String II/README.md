@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1209.Remove%20All%20Adjacent%20Duplicates%20in%20String%20II/README.md
+rating: 1541
+source: 第 156 场周赛 Q3
+tags:
+    - 栈
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [1209. 删除字符串中的所有相邻重复项 II](https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string-ii)
 
 [English Version](/solution/1200-1299/1209.Remove%20All%20Adjacent%20Duplicates%20in%20String%20II/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个字符串&nbsp;<code>s</code>，「<code>k</code> 倍重复项删除操作」将会从 <code>s</code>&nbsp;中选择&nbsp;<code>k</code>&nbsp;个相邻且相等的字母，并删除它们，使被删去的字符串的左侧和右侧连在一起。</p>
 
@@ -47,7 +60,11 @@
 	<li><code>s</code>&nbsp;中只含有小写英文字母。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：栈
 
@@ -59,27 +76,24 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def removeDuplicates(self, s: str, k: int) -> str:
-        t = []
-        i, n = 0, len(s)
-        while i < n:
-            j = i
-            while j < n and s[j] == s[i]:
-                j += 1
-            cnt = j - i
-            cnt %= k
-            if t and t[-1][0] == s[i]:
-                t[-1][1] = (t[-1][1] + cnt) % k
-                if t[-1][1] == 0:
-                    t.pop()
-            elif cnt:
-                t.append([s[i], cnt])
-            i = j
-        ans = [c * v for c, v in t]
+        stk = []
+        for c in s:
+            if stk and stk[-1][0] == c:
+                stk[-1][1] = (stk[-1][1] + 1) % k
+                if stk[-1][1] == 0:
+                    stk.pop()
+            else:
+                stk.append([c, 1])
+        ans = [c * v for c, v in stk]
         return "".join(ans)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -109,6 +123,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -132,6 +148,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func removeDuplicates(s string, k int) string {
@@ -163,25 +181,6 @@ type pair struct {
 
 <!-- tabs:end -->
 
-### 方法二
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```python
-class Solution:
-    def removeDuplicates(self, s: str, k: int) -> str:
-        stk = []
-        for c in s:
-            if stk and stk[-1][0] == c:
-                stk[-1][1] = (stk[-1][1] + 1) % k
-                if stk[-1][1] == 0:
-                    stk.pop()
-            else:
-                stk.append([c, 1])
-        ans = [c * v for c, v in stk]
-        return "".join(ans)
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

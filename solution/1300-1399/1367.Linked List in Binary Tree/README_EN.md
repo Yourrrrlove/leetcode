@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1300-1399/1367.Linked%20List%20in%20Binary%20Tree/README_EN.md
+rating: 1649
+source: Weekly Contest 178 Q3
+tags:
+    - Tree
+    - Depth-First Search
+    - Linked List
+    - Binary Tree
+---
+
+<!-- problem:start -->
+
 # [1367. Linked List in Binary Tree](https://leetcode.com/problems/linked-list-in-binary-tree)
 
 [中文文档](/solution/1300-1399/1367.Linked%20List%20in%20Binary%20Tree/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a binary tree <code>root</code> and a&nbsp;linked list with&nbsp;<code>head</code>&nbsp;as the first node.&nbsp;</p>
 
@@ -47,7 +64,11 @@
 	<li><code>1 &lt;= Node.val&nbsp;&lt;= 100</code>&nbsp;for each node in the linked list and binary tree.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Recursion
 
@@ -63,6 +84,8 @@ In the main function, we call $dfs(head, root)$ for each node of the binary tree
 The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Where $n$ is the number of nodes in the binary tree.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for singly-linked list.
@@ -93,6 +116,8 @@ class Solution:
             or self.isSubPath(head, root.right)
         )
 ```
+
+#### Java
 
 ```java
 /**
@@ -140,6 +165,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for singly-linked list.
@@ -183,6 +210,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for singly-linked list.
@@ -216,6 +245,8 @@ func dfs(head *ListNode, root *TreeNode) bool {
 	return dfs(head.Next, root.Left) || dfs(head.Next, root.Right)
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -262,6 +293,8 @@ function isSubPath(head: ListNode | null, root: TreeNode | null): boolean {
 }
 ```
 
+#### Rust
+
 ```rust
 // Definition for singly-linked list.
 // #[derive(PartialEq, Eq, Clone, Debug)]
@@ -297,8 +330,8 @@ function isSubPath(head: ListNode | null, root: TreeNode | null): boolean {
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     fn dfs(head: &Option<Box<ListNode>>, root: &Option<Rc<RefCell<TreeNode>>>) -> bool {
         if head.is_none() {
@@ -320,9 +353,9 @@ impl Solution {
             return false;
         }
         let node = root.as_ref().unwrap().borrow();
-        Self::dfs(head, root) ||
-            Self::my_is_sub_path(head, &node.left) ||
-            Self::my_is_sub_path(head, &node.right)
+        Self::dfs(head, root)
+            || Self::my_is_sub_path(head, &node.left)
+            || Self::my_is_sub_path(head, &node.right)
     }
 
     pub fn is_sub_path(head: Option<Box<ListNode>>, root: Option<Rc<RefCell<TreeNode>>>) -> bool {
@@ -333,4 +366,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

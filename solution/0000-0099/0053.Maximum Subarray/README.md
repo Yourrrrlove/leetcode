@@ -1,14 +1,26 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0053.Maximum%20Subarray/README.md
+tags:
+    - 数组
+    - 分治
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [53. 最大子数组和](https://leetcode.cn/problems/maximum-subarray)
 
 [English Version](/solution/0000-0099/0053.Maximum%20Subarray/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
 
-<p><strong>子数组 </strong>是数组中的一个连续部分。</p>
+<p><strong><span data-keyword="subarray-nonempty">子数组 </span></strong>是数组中的一个连续部分。</p>
 
 <p>&nbsp;</p>
 
@@ -47,29 +59,35 @@
 
 <p><strong>进阶：</strong>如果你已经实现复杂度为 <code>O(n)</code> 的解法，尝试使用更为精妙的 <strong>分治法</strong> 求解。</p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：动态规划
 
-我们定义 $f[i]$ 表示以元素 $nums[i]$ 为结尾的连续子数组的最大和，初始时 $f[0] = nums[0]$，那么最终我们要求的答案即为 $\max_{0 \leq i < n} f[i]$。
+我们定义 $f[i]$ 表示以元素 $\textit{nums}[i]$ 为结尾的连续子数组的最大和，初始时 $f[0] = \textit{nums}[0]$，那么最终我们要求的答案即为 $\max_{0 \leq i < n} f[i]$。
 
 考虑 $f[i]$，其中 $i \geq 1$，它的状态转移方程为：
 
 $$
-f[i] = \max \{ f[i - 1] + nums[i], nums[i] \}
+f[i] = \max(f[i - 1] + \textit{nums}[i], \textit{nums}[i])
 $$
 
 也即：
 
 $$
-f[i] = \max \{ f[i - 1], 0 \} + nums[i]
+f[i] = \max(f[i - 1], 0) + \textit{nums}[i]
 $$
 
 由于 $f[i]$ 只与 $f[i - 1]$ 有关系，因此我们可以只用一个变量 $f$ 来维护对于当前 $f[i]$ 的值是多少，然后进行状态转移即可。答案为 $\max_{0 \leq i < n} f$。
 
-时间复杂度 $O(n)$，其中 $n$ 为数组 $nums$ 的长度。我们只需要遍历一遍数组即可求得答案。空间复杂度 $O(1)$，我们只需要常数空间存放若干变量。
+时间复杂度 $O(n)$，其中 $n$ 为数组 $\textit{nums}$ 的长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -80,6 +98,8 @@ class Solution:
             ans = max(ans, f)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -93,6 +113,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -108,6 +130,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxSubArray(nums []int) int {
 	ans, f := nums[0], nums[0]
@@ -119,6 +143,8 @@ func maxSubArray(nums []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function maxSubArray(nums: number[]): number {
     let [ans, f] = [nums[0], nums[0]];
@@ -129,6 +155,8 @@ function maxSubArray(nums: number[]): number {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -145,6 +173,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number[]} nums
@@ -159,6 +189,8 @@ var maxSubArray = function (nums) {
     return ans;
 };
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -175,9 +207,15 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -205,6 +243,8 @@ class Solution:
         left, right = 0, len(nums) - 1
         return maxSub(nums, left, right)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -240,4 +280,6 @@ class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

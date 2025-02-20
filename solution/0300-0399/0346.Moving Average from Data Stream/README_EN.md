@@ -1,8 +1,23 @@
-# [346. Moving Average from Data Stream](https://leetcode.com/problems/moving-average-from-data-stream)
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0346.Moving%20Average%20from%20Data%20Stream/README_EN.md
+tags:
+    - Design
+    - Queue
+    - Array
+    - Data Stream
+---
+
+<!-- problem:start -->
+
+# [346. Moving Average from Data Stream 🔒](https://leetcode.com/problems/moving-average-from-data-stream)
 
 [中文文档](/solution/0300-0399/0346.Moving%20Average%20from%20Data%20Stream/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a stream of integers and a window size, calculate the moving average of all integers in the sliding window.</p>
 
@@ -40,11 +55,17 @@ movingAverage.next(5); // return 6.0 = (10 + 3 + 5) / 3
 	<li>At most <code>10<sup>4</sup></code> calls will be made to <code>next</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class MovingAverage:
@@ -65,6 +86,8 @@ class MovingAverage:
 # obj = MovingAverage(size)
 # param_1 = obj.next(val)
 ```
+
+#### Java
 
 ```java
 class MovingAverage {
@@ -91,6 +114,8 @@ class MovingAverage {
  * double param_1 = obj.next(val);
  */
 ```
+
+#### C++
 
 ```cpp
 class MovingAverage {
@@ -119,6 +144,8 @@ private:
  * double param_1 = obj->next(val);
  */
 ```
+
+#### Go
 
 ```go
 type MovingAverage struct {
@@ -149,9 +176,15 @@ func (this *MovingAverage) Next(val int) float64 {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class MovingAverage:
@@ -172,6 +205,8 @@ class MovingAverage:
 # obj = MovingAverage(size)
 # param_1 = obj.next(val)
 ```
+
+#### Java
 
 ```java
 class MovingAverage {
@@ -199,6 +234,8 @@ class MovingAverage {
  * double param_1 = obj.next(val);
  */
 ```
+
+#### C++
 
 ```cpp
 class MovingAverage {
@@ -230,6 +267,8 @@ private:
  */
 ```
 
+#### Go
+
 ```go
 type MovingAverage struct {
 	q []int
@@ -260,4 +299,6 @@ func (this *MovingAverage) Next(val int) float64 {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

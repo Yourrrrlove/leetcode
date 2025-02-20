@@ -1,8 +1,28 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2659.Make%20Array%20Empty/README_EN.md
+rating: 2281
+source: Biweekly Contest 103 Q4
+tags:
+    - Greedy
+    - Binary Indexed Tree
+    - Segment Tree
+    - Array
+    - Binary Search
+    - Ordered Set
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [2659. Make Array Empty](https://leetcode.com/problems/make-array-empty)
 
 [中文文档](/solution/2600-2699/2659.Make%20Array%20Empty/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an integer array <code>nums</code> containing <strong>distinct</strong> numbers, and you can perform the following operations <strong>until the array is empty</strong>:</p>
 
@@ -129,7 +149,11 @@
 	<li>All values in <code>nums</code> are <strong>distinct</strong>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hash Table + Sorting + Fenwick Tree
 
@@ -143,10 +167,9 @@ The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$.
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedList
-
-
 class Solution:
     def countOperationsToEmptyArray(self, nums: List[int]) -> int:
         pos = {x: i for i, x in enumerate(nums)}
@@ -161,6 +184,8 @@ class Solution:
             sl.add(i)
         return ans
 ```
+
+#### Java
 
 ```java
 class BinaryIndexedTree {
@@ -209,6 +234,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class BinaryIndexedTree {
@@ -260,6 +287,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 type BinaryIndexedTree struct {
 	n int
@@ -308,6 +337,8 @@ func countOperationsToEmptyArray(nums []int) int64 {
 	return int64(ans)
 }
 ```
+
+#### TypeScript
 
 ```ts
 class BinaryIndexedTree {
@@ -361,9 +392,15 @@ function countOperationsToEmptyArray(nums: number[]): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class BinaryIndexedTree:
@@ -401,4 +438,6 @@ class Solution:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

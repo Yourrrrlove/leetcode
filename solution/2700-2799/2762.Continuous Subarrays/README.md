@@ -1,10 +1,27 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2762.Continuous%20Subarrays/README.md
+rating: 1940
+source: 第 352 场周赛 Q3
+tags:
+    - 队列
+    - 数组
+    - 有序集合
+    - 滑动窗口
+    - 单调队列
+    - 堆（优先队列）
+---
+
+<!-- problem:start -->
+
 # [2762. 不间断子数组](https://leetcode.cn/problems/continuous-subarrays)
 
 [English Version](/solution/2700-2799/2762.Continuous%20Subarrays/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个下标从 <strong>0</strong>&nbsp;开始的整数数组&nbsp;<code>nums</code>&nbsp;。<code>nums</code>&nbsp;的一个子数组如果满足以下条件，那么它是 <strong>不间断</strong> 的：</p>
 
@@ -53,7 +70,11 @@
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：有序列表 + 双指针
 
@@ -67,10 +88,9 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedList
-
-
 class Solution:
     def continuousSubarrays(self, nums: List[int]) -> int:
         ans = i = 0
@@ -83,6 +103,8 @@ class Solution:
             ans += len(sl)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -106,6 +128,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -124,6 +148,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func continuousSubarrays(nums []int) (ans int64) {
@@ -151,10 +177,85 @@ func continuousSubarrays(nums []int) (ans int64) {
 		}
 		ans += int64(j - i + 1)
 	}
-	return
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### 方法二：单调队列 + 双指针
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function continuousSubarrays(nums: number[]): number {
+    const [minQ, maxQ]: [number[], number[]] = [[], []];
+    const n = nums.length;
+    let res = 0;
+
+    for (let r = 0, l = 0; r < n; r++) {
+        const x = nums[r];
+        while (minQ.length && nums[minQ.at(-1)!] > x) minQ.pop();
+        while (maxQ.length && nums[maxQ.at(-1)!] < x) maxQ.pop();
+        minQ.push(r);
+        maxQ.push(r);
+
+        while (minQ.length && maxQ.length && nums[maxQ[0]] - nums[minQ[0]] > 2) {
+            if (maxQ[0] < minQ[0]) {
+                l = maxQ[0] + 1;
+                maxQ.shift();
+            } else {
+                l = minQ[0] + 1;
+                minQ.shift();
+            }
+        }
+
+        res += r - l + 1;
+    }
+
+    return res;
+}
+```
+
+#### JavaScript
+
+```js
+function continuousSubarrays(nums) {
+    const [minQ, maxQ] = [[], []];
+    const n = nums.length;
+    let res = 0;
+
+    for (let r = 0, l = 0; r < n; r++) {
+        const x = nums[r];
+        while (minQ.length && nums[minQ.at(-1)] > x) minQ.pop();
+        while (maxQ.length && nums[maxQ.at(-1)] < x) maxQ.pop();
+        minQ.push(r);
+        maxQ.push(r);
+
+        while (minQ.length && maxQ.length && nums[maxQ[0]] - nums[minQ[0]] > 2) {
+            if (maxQ[0] < minQ[0]) {
+                l = maxQ[0] + 1;
+                maxQ.shift();
+            } else {
+                l = minQ[0] + 1;
+                minQ.shift();
+            }
+        }
+
+        res += r - l + 1;
+    }
+
+    return res;
+}
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

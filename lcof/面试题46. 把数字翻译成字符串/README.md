@@ -1,8 +1,16 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9846.%20%E6%8A%8A%E6%95%B0%E5%AD%97%E7%BF%BB%E8%AF%91%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2/README.md
+---
+
+<!-- problem:start -->
+
 # [面试题 46. 把数字翻译成字符串](https://leetcode.cn/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 &ldquo;a&rdquo; ，1 翻译成 &ldquo;b&rdquo;，&hellip;&hellip;，11 翻译成 &ldquo;l&rdquo;，&hellip;&hellip;，25 翻译成 &ldquo;z&rdquo;。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。</p>
 
@@ -22,24 +30,30 @@
 	<li><code>0 &lt;= num &lt; 2<sup>31</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：记忆化搜索
 
 我们先将数字 `num` 转为字符串 $s$，字符串 $s$ 的长度记为 $n$。
 
-然后我们设计一个函数 $dfs(i)$，表示从第 $i$ 个数字开始的不同翻译的数目。那么答案就是 $dfs(0)$。
+然后我们设计一个函数 $dfs(i)$，表示从索引为 $i$ 的数字开始的不同翻译的数目。那么答案就是 $dfs(0)$。
 
 函数 $dfs(i)$ 的计算如下：
 
--   如果 $i \ge n - 1$，说明已经翻译到最后一个数字，只有一种翻译方法，返回 $1$；
--   否则，我们可以选择翻译第 $i$ 个数字，此时翻译方法数目为 $dfs(i + 1)$；如果第 $i$ 个数字和第 $i + 1$ 个数字可以组成一个有效的字符（即 $s[i] == 1$ 或者 $s[i] == 2$ 且 $s[i + 1] \lt 6$），那么我们还可以选择翻译第 $i$ 和第 $i + 1$ 个数字，此时翻译方法数目为 $dfs(i + 2)$。因此 $dfs(i) = dfs(i+1) + dfs(i+2)$。
+-   如果 $i \ge n - 1$，说明已经翻译到最后一个数字或者越过最后一个字符，均只有一种翻译方法，返回 $1$；
+-   否则，我们可以选择翻译索引为 $i$ 的数字，此时翻译方法数目为 $dfs(i + 1)$；如果索引为 $i$ 的数字和索引为 $i + 1$ 的数字可以组成一个有效的字符（即 $s[i] == 1$ 或者 $s[i] == 2$ 且 $s[i + 1] \lt 6$），那么我们还可以选择翻译索引为 $i$ 和索引为 $i + 1$ 的数字，此时翻译方法数目为 $dfs(i + 2)$。因此 $dfs(i) = dfs(i+1) + dfs(i+2)$。
 
 过程中我们可以使用记忆化搜索，将已经计算过的 $dfs(i)$ 的值存储起来，避免重复计算。
 
 时间复杂度 $O(\log num)$，空间复杂度 $O(\log num)$。其中 $num$ 为给定的数字。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -57,6 +71,8 @@ class Solution:
         n = len(s)
         return dfs(0)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -87,6 +103,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -112,6 +130,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func translateNum(num int) int {
 	s := strconv.Itoa(num)
@@ -136,6 +156,8 @@ func translateNum(num int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function translateNum(num: number): number {
     const s = num.toString();
@@ -159,6 +181,8 @@ function translateNum(num: number): number {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn translate_num(num: i32) -> i32 {
@@ -177,6 +201,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -205,6 +231,8 @@ var translateNum = function (num) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public int TranslateNum(int num) {
@@ -224,7 +252,43 @@ public class Solution {
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    private var n: Int = 0
+    private var s: [Character] = []
+    private var memo: [Int?] = []
+
+    func translateNum(_ num: Int) -> Int {
+        s = Array(String(num))
+        n = s.count
+        memo = [Int?](repeating: nil, count: n)
+        return dfs(0)
+    }
+
+    private func dfs(_ i: Int) -> Int {
+        if i >= n - 1 {
+            return 1
+        }
+        if let cachedResult = memo[i] {
+            return cachedResult
+        }
+        var ans = dfs(i + 1)
+        if s[i] == "1" || (s[i] == "2" && s[i + 1] < "6") {
+            ans += dfs(i + 2)
+        }
+        memo[i] = ans
+        return ans
+    }
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start-->
 
 ### 方法二：动态规划
 
@@ -240,6 +304,8 @@ public class Solution {
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def translateNum(self, num: int) -> int:
@@ -253,6 +319,8 @@ class Solution:
             a, b = b, c
         return b
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -272,6 +340,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -293,6 +363,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func translateNum(num int) int {
 	s := strconv.Itoa(num)
@@ -308,6 +380,8 @@ func translateNum(num int) int {
 	return b
 }
 ```
+
+#### TypeScript
 
 ```ts
 function translateNum(num: number): number {
@@ -326,6 +400,8 @@ function translateNum(num: number): number {
     return b;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -349,6 +425,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -374,4 +452,6 @@ var translateNum = function (num) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

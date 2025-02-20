@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2900-2999/2976.Minimum%20Cost%20to%20Convert%20String%20I/README_EN.md
+rating: 1882
+source: Weekly Contest 377 Q3
+tags:
+    - Graph
+    - Array
+    - String
+    - Shortest Path
+---
+
+<!-- problem:start -->
+
 # [2976. Minimum Cost to Convert String I](https://leetcode.com/problems/minimum-cost-to-convert-string-i)
 
 [中文文档](/solution/2900-2999/2976.Minimum%20Cost%20to%20Convert%20String%20I/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given two <strong>0-indexed</strong> strings <code>source</code> and <code>target</code>, both of length <code>n</code> and consisting of <strong>lowercase</strong> English letters. You are also given two <strong>0-indexed</strong> character arrays <code>original</code> and <code>changed</code>, and an integer array <code>cost</code>, where <code>cost[i]</code> represents the cost of changing the character <code>original[i]</code> to the character <code>changed[i]</code>.</p>
 
@@ -55,7 +72,11 @@ It can be shown that this is the minimum possible cost.
 	<li><code>original[i] != changed[i]</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Floyd Algorithm
 
@@ -70,6 +91,8 @@ After the traversal ends, we return the answer.
 The time complexity is $O(m + n + |\Sigma|^3)$, and the space complexity is $O(|\Sigma|^2)$. Where $m$ and $n$ are the lengths of the arrays $original$ and $source$ respectively; and $|\Sigma|$ is the size of the alphabet, that is, $|\Sigma| = 26$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -101,6 +124,8 @@ class Solution:
                 ans += g[x][y]
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -141,6 +166,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -184,6 +211,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minimumCost(source string, target string, original []byte, changed []byte, cost []int) (ans int64) {
@@ -229,6 +258,8 @@ func minimumCost(source string, target string, original []byte, changed []byte, 
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minimumCost(
     source: string,
@@ -237,41 +268,88 @@ function minimumCost(
     changed: string[],
     cost: number[],
 ): number {
-    const g: number[][] = Array.from({ length: 26 }, () => Array(26).fill(Infinity));
-    for (let i = 0; i < 26; ++i) {
-        g[i][i] = 0;
-    }
-    for (let i = 0; i < original.length; ++i) {
-        let x: number = original[i].charCodeAt(0) - 'a'.charCodeAt(0);
-        let y: number = changed[i].charCodeAt(0) - 'a'.charCodeAt(0);
-        let z: number = cost[i];
+    const [n, m, MAX] = [source.length, original.length, Number.POSITIVE_INFINITY];
+    const g: number[][] = Array.from({ length: 26 }, () => Array(26).fill(MAX));
+    const getIndex = (ch: string) => ch.charCodeAt(0) - 'a'.charCodeAt(0);
+
+    for (let i = 0; i < 26; ++i) g[i][i] = 0;
+    for (let i = 0; i < m; ++i) {
+        const x = getIndex(original[i]);
+        const y = getIndex(changed[i]);
+        const z = cost[i];
         g[x][y] = Math.min(g[x][y], z);
     }
 
     for (let k = 0; k < 26; ++k) {
         for (let i = 0; i < 26; ++i) {
-            for (let j = 0; j < 26; ++j) {
-                g[i][j] = Math.min(g[i][j], g[i][k] + g[k][j]);
+            for (let j = 0; g[i][k] < MAX && j < 26; j++) {
+                if (g[k][j] < MAX) {
+                    g[i][j] = Math.min(g[i][j], g[i][k] + g[k][j]);
+                }
             }
         }
     }
 
-    let ans: number = 0;
-    let n: number = source.length;
+    let ans = 0;
     for (let i = 0; i < n; ++i) {
-        let x: number = source.charCodeAt(i) - 'a'.charCodeAt(0);
-        let y: number = target.charCodeAt(i) - 'a'.charCodeAt(0);
-        if (x !== y) {
-            if (g[x][y] >= Infinity) {
-                return -1;
-            }
-            ans += g[x][y];
-        }
+        const x = getIndex(source[i]);
+        const y = getIndex(target[i]);
+        if (x === y) continue;
+        if (g[x][y] === MAX) return -1;
+        ans += g[x][y];
     }
     return ans;
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {string} source
+ * @param {string} target
+ * @param {character[]} original
+ * @param {character[]} changed
+ * @param {number[]} cost
+ * @return {number}
+ */
+var minimumCost = function (source, target, original, changed, cost) {
+    const [n, m, MAX] = [source.length, original.length, Number.POSITIVE_INFINITY];
+    const g = Array.from({ length: 26 }, () => Array(26).fill(MAX));
+    const getIndex = ch => ch.charCodeAt(0) - 'a'.charCodeAt(0);
+
+    for (let i = 0; i < 26; ++i) g[i][i] = 0;
+    for (let i = 0; i < m; ++i) {
+        const x = getIndex(original[i]);
+        const y = getIndex(changed[i]);
+        const z = cost[i];
+        g[x][y] = Math.min(g[x][y], z);
+    }
+
+    for (let k = 0; k < 26; ++k) {
+        for (let i = 0; i < 26; ++i) {
+            for (let j = 0; g[i][k] < MAX && j < 26; j++) {
+                if (g[k][j] < MAX) {
+                    g[i][j] = Math.min(g[i][j], g[i][k] + g[k][j]);
+                }
+            }
+        }
+    }
+
+    let ans = 0;
+    for (let i = 0; i < n; ++i) {
+        const x = getIndex(source[i]);
+        const y = getIndex(target[i]);
+        if (x === y) continue;
+        if (g[x][y] === MAX) return -1;
+        ans += g[x][y];
+    }
+    return ans;
+};
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

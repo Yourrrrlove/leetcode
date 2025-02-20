@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0400-0499/0451.Sort%20Characters%20By%20Frequency/README.md
+tags:
+    - 哈希表
+    - 字符串
+    - 桶排序
+    - 计数
+    - 排序
+    - 堆（优先队列）
+---
+
+<!-- problem:start -->
+
 # [451. 根据字符出现频率排序](https://leetcode.cn/problems/sort-characters-by-frequency)
 
 [English Version](/solution/0400-0499/0451.Sort%20Characters%20By%20Frequency/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个字符串 <code>s</code> ，根据字符出现的 <strong>频率</strong> 对其进行 <strong>降序排序</strong> 。一个字符出现的 <strong>频率</strong> 是它出现在字符串中的次数。</p>
 
@@ -12,7 +27,7 @@
 
 <p>&nbsp;</p>
 
-<p><strong>示例 1:</strong></p>
+<p><strong class="example">示例 1:</strong></p>
 
 <pre>
 <strong>输入: </strong>s = "tree"
@@ -21,7 +36,7 @@
 因此'e'必须出现在'r'和't'之前。此外，"eetr"也是一个有效的答案。
 </pre>
 
-<p><strong>示例 2:</strong></p>
+<p><strong class="example">示例 2:</strong></p>
 
 <pre>
 <strong>输入: </strong>s = "cccaaa"
@@ -30,7 +45,7 @@
 注意"cacaca"是不正确的，因为相同的字母必须放在一起。
 </pre>
 
-<p><strong>示例 3:</strong></p>
+<p><strong class="example">示例 3:</strong></p>
 
 <pre>
 <strong>输入: </strong>s = "Aabb"
@@ -48,15 +63,21 @@
 	<li><code>s</code>&nbsp;由大小写英文字母和数字组成</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：哈希表 + 排序
 
-我们用哈希表 $cnt$ 统计字符串 $s$ 中每个字符出现的次数，然后将 $cnt$ 中的键值对按照出现次数降序排序，最后按照排序后的顺序拼接字符串即可。
+我们用哈希表 $\textit{cnt}$ 统计字符串 $s$ 中每个字符出现的次数，然后将 $\textit{cnt}$ 中的键值对按照出现次数降序排序，最后按照排序后的顺序拼接字符串即可。
 
 时间复杂度 $O(n + k \times \log k)$，空间复杂度 $O(n + k)$，其中 $n$ 为字符串 $s$ 的长度，而 $k$ 为不同字符的个数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -64,6 +85,8 @@ class Solution:
         cnt = Counter(s)
         return ''.join(c * v for c, v in sorted(cnt.items(), key=lambda x: -x[1]))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -84,6 +107,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -109,6 +134,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func frequencySort(s string) string {
 	cnt := map[byte]int{}
@@ -128,6 +155,8 @@ func frequencySort(s string) string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function frequencySort(s: string): string {
     const cnt: Map<string, number> = new Map();
@@ -142,6 +171,8 @@ function frequencySort(s: string): string {
     return ans.join('');
 }
 ```
+
+#### Rust
 
 ```rust
 use std::collections::HashMap;
@@ -160,6 +191,8 @@ impl Solution {
 }
 ```
 
+#### PHP
+
 ```php
 class Solution {
     /**
@@ -167,19 +200,22 @@ class Solution {
      * @return String
      */
     function frequencySort($s) {
-        for ($i = 0; $i < strlen($s); $i++) {
-            $hashtable[$s[$i]] += 1;
+        $cnt = array_count_values(str_split($s));
+        $cs = array_keys($cnt);
+        usort($cs, function ($a, $b) use ($cnt) {
+            return $cnt[$b] <=> $cnt[$a];
+        });
+        $ans = '';
+        foreach ($cs as $c) {
+            $ans .= str_repeat($c, $cnt[$c]);
         }
-        arsort($hashtable);
-        $keys = array_keys($hashtable);
-        for ($j = 0; $j < count($keys); $j++) {
-            $rs = $rs . str_repeat($keys[$j], $hashtable[$keys[$j]]);
-        }
-        return $rs;
+        return $ans;
     }
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

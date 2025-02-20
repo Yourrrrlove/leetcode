@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0260.Single%20Number%20III/README.md
+tags:
+    - 位运算
+    - 数组
+---
+
+<!-- problem:start -->
+
 # [260. 只出现一次的数字 III](https://leetcode.cn/problems/single-number-iii)
 
 [English Version](/solution/0200-0299/0260.Single%20Number%20III/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个整数数组&nbsp;<code>nums</code>，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。你可以按 <strong>任意顺序</strong> 返回答案。</p>
 
@@ -44,7 +55,11 @@
 	<li>除两个只出现一次的整数外，<code>nums</code> 中的其他数字都出现两次</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：位运算
 
@@ -63,6 +78,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def singleNumber(self, nums: List[int]) -> List[int]:
@@ -75,6 +92,8 @@ class Solution:
         b = xs ^ a
         return [a, b]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -95,6 +114,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -117,6 +138,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func singleNumber(nums []int) []int {
 	xs := 0
@@ -135,6 +158,8 @@ func singleNumber(nums []int) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function singleNumber(nums: number[]): number[] {
     const xs = nums.reduce((a, b) => a ^ b);
@@ -149,6 +174,8 @@ function singleNumber(nums: number[]): number[] {
     return [a, b];
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -166,6 +193,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -186,6 +215,8 @@ var singleNumber = function (nums) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public int[] SingleNumber(int[] nums) {
@@ -205,4 +236,50 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### 方法二：哈希表
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function singleNumber(nums: number[]): number[] {
+    const set = new Set<number>();
+
+    for (const x of nums) {
+        if (set.has(x)) set.delete(x);
+        else set.add(x);
+    }
+
+    return [...set];
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+function singleNumber(nums) {
+    const set = new Set();
+
+    for (const x of nums) {
+        if (set.has(x)) set.delete(x);
+        else set.add(x);
+    }
+
+    return [...set];
+}
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

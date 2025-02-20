@@ -1,10 +1,20 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1683.Invalid%20Tweets/README.md
+tags:
+    - 数据库
+---
+
+<!-- problem:start -->
+
 # [1683. 无效的推文](https://leetcode.cn/problems/invalid-tweets)
 
 [English Version](/solution/1600-1699/1683.Invalid%20Tweets/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>表：<code>Tweets</code></p>
 
@@ -16,6 +26,7 @@
 | content        | varchar |
 +----------------+---------+
 在 SQL 中，tweet_id 是这个表的主键。
+content 只包含美式键盘上的字符，不包含其它特殊字符。
 这个表包含某社交媒体 App 中所有的推文。</pre>
 
 <p>&nbsp;</p>
@@ -51,7 +62,11 @@ Tweets 表：
 推文 2 的长度 length = 32。该推文是无效的。
 </pre>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：使用 `CHAR_LENGTH` 函数
 
@@ -63,6 +78,8 @@ Tweets 表：
 
 <!-- tabs:start -->
 
+#### MySQL
+
 ```sql
 # Write your MySQL query statement below
 SELECT
@@ -73,4 +90,6 @@ WHERE CHAR_LENGTH(content) > 15;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

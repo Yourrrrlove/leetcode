@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0400-0499/0493.Reverse%20Pairs/README_EN.md
+tags:
+    - Binary Indexed Tree
+    - Segment Tree
+    - Array
+    - Binary Search
+    - Divide and Conquer
+    - Ordered Set
+    - Merge Sort
+---
+
+<!-- problem:start -->
+
 # [493. Reverse Pairs](https://leetcode.com/problems/reverse-pairs)
 
 [中文文档](/solution/0400-0499/0493.Reverse%20Pairs/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>nums</code>, return <em>the number of <strong>reverse pairs</strong> in the array</em>.</p>
 
@@ -43,11 +61,17 @@
 	<li><code>-2<sup>31</sup> &lt;= nums[i] &lt;= 2<sup>31</sup> - 1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -80,6 +104,8 @@ class Solution:
 
         return merge_sort(0, len(nums) - 1)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -131,6 +157,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -176,6 +204,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func reversePairs(nums []int) int {
@@ -224,9 +254,15 @@ func reversePairs(nums []int) int {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class BinaryIndexedTree:
@@ -266,6 +302,8 @@ class Solution:
             tree.update(m[num * 2], 1)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -322,6 +360,8 @@ class BinaryIndexedTree {
 }
 ```
 
+#### C++
+
 ```cpp
 class BinaryIndexedTree {
 public:
@@ -374,6 +414,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 type BinaryIndexedTree struct {
@@ -433,9 +475,15 @@ func reversePairs(nums []int) int {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 3
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Node:
@@ -501,6 +549,8 @@ class Solution:
             tree.modify(1, m[v * 2], 1)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -589,6 +639,8 @@ class SegmentTree {
 }
 ```
 
+#### C++
+
 ```cpp
 class Node {
 public:
@@ -667,4 +719,6 @@ public:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

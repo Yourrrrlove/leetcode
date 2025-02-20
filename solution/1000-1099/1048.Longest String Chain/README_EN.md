@@ -1,8 +1,27 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1000-1099/1048.Longest%20String%20Chain/README_EN.md
+rating: 1599
+source: Weekly Contest 137 Q3
+tags:
+    - Array
+    - Hash Table
+    - Two Pointers
+    - String
+    - Dynamic Programming
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [1048. Longest String Chain](https://leetcode.com/problems/longest-string-chain)
 
 [中文文档](/solution/1000-1099/1048.Longest%20String%20Chain/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an array of <code>words</code> where each word consists of lowercase English letters.</p>
 
@@ -51,11 +70,17 @@
 	<li><code>words[i]</code> only consists of lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -84,6 +109,8 @@ class Solution:
         return res
 ```
 
+#### Java
+
 ```java
 class Solution {
     public int longestStrChain(String[] words) {
@@ -103,6 +130,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -125,6 +154,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func longestStrChain(words []string) int {
 	sort.Slice(words, func(i, j int) bool { return len(words[i]) < len(words[j]) })
@@ -142,6 +173,8 @@ func longestStrChain(words []string) int {
 	return res
 }
 ```
+
+#### TypeScript
 
 ```ts
 function longestStrChain(words: string[]): number {
@@ -161,6 +194,8 @@ function longestStrChain(words: string[]): number {
 }
 ```
 
+#### Rust
+
 ```rust
 use std::collections::HashMap;
 
@@ -172,7 +207,7 @@ impl Solution {
         let mut map: HashMap<String, i32> = HashMap::new();
 
         // Sort the words vector first
-        words.sort_by(|lhs, rhs| { lhs.len().cmp(&rhs.len()) });
+        words.sort_by(|lhs, rhs| lhs.len().cmp(&rhs.len()));
 
         // Begin the "dp" process
         for w in words.iter() {
@@ -197,9 +232,15 @@ impl Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -219,4 +260,6 @@ class Solution:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

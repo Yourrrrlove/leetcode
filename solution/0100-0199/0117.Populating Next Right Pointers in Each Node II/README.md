@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0117.Populating%20Next%20Right%20Pointers%20in%20Each%20Node%20II/README.md
+tags:
+    - 树
+    - 深度优先搜索
+    - 广度优先搜索
+    - 链表
+    - 二叉树
+---
+
+<!-- problem:start -->
+
 # [117. 填充每个节点的下一个右侧节点指针 II](https://leetcode.cn/problems/populating-next-right-pointers-in-each-node-ii)
 
 [English Version](/solution/0100-0199/0117.Populating%20Next%20Right%20Pointers%20in%20Each%20Node%20II/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个二叉树：</p>
 
@@ -55,7 +69,11 @@ struct Node {
 <ul>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：BFS
 
@@ -64,6 +82,8 @@ struct Node {
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为二叉树的节点个数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 """
@@ -95,6 +115,8 @@ class Solution:
                     q.append(node.right)
         return root
 ```
+
+#### Java
 
 ```java
 /*
@@ -148,6 +170,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /*
 // Definition for a Node.
@@ -196,6 +220,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a Node.
@@ -232,6 +258,8 @@ func connect(root *Node) *Node {
 	return root
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -272,6 +300,8 @@ function connect(root: Node | null): Node | null {
     return root;
 }
 ```
+
+#### C#
 
 ```cs
 /*
@@ -327,6 +357,10 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：空间优化
 
 方法一的空间复杂度较高，因为需要使用队列存储每一层的节点。我们可以使用常数空间来实现。
@@ -336,6 +370,8 @@ public class Solution {
 时间复杂度 $O(n)$，其中 $n$ 为二叉树的节点个数。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 """
@@ -370,6 +406,8 @@ class Solution:
             node = next
         return root
 ```
+
+#### Java
 
 ```java
 /*
@@ -428,6 +466,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /*
 // Definition for a Node.
@@ -479,6 +519,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a Node.
@@ -517,6 +559,8 @@ func connect(root *Node) *Node {
 	return root
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -560,6 +604,8 @@ function connect(root: Node | null): Node | null {
     return root;
 }
 ```
+
+#### C#
 
 ```cs
 /*
@@ -620,4 +666,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

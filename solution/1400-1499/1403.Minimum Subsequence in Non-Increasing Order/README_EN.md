@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1400-1499/1403.Minimum%20Subsequence%20in%20Non-Increasing%20Order/README_EN.md
+rating: 1288
+source: Weekly Contest 183 Q1
+tags:
+    - Greedy
+    - Array
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [1403. Minimum Subsequence in Non-Increasing Order](https://leetcode.com/problems/minimum-subsequence-in-non-increasing-order)
 
 [中文文档](/solution/1400-1499/1403.Minimum%20Subsequence%20in%20Non-Increasing%20Order/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given the array <code>nums</code>, obtain a subsequence of the array whose sum of elements is <strong>strictly greater</strong> than the sum of the non&nbsp;included elements in such subsequence.&nbsp;</p>
 
@@ -24,7 +40,7 @@
 <pre>
 <strong>Input:</strong> nums = [4,4,7,6,7]
 <strong>Output:</strong> [7,7,6] 
-<strong>Explanation:</strong> The subsequence [7,7] has the sum of its elements equal to 14 which is not strictly greater than the sum of elements not included (14 = 4 + 4 + 6). Therefore, the subsequence [7,6,7] is the minimal satisfying the conditions. Note the subsequence has to be returned in non-decreasing order.  
+<strong>Explanation:</strong> The subsequence [7,7] has the sum of its elements equal to 14 which is not strictly greater than the sum of elements not included (14 = 4 + 4 + 6). Therefore, the subsequence [7,6,7] is the minimal satisfying the conditions. Note the subsequence has to be returned in non-increasing order.  
 </pre>
 
 <p>&nbsp;</p>
@@ -35,7 +51,11 @@
 	<li><code>1 &lt;= nums[i] &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Sorting
 
@@ -44,6 +64,8 @@ We can first sort the array $nums$ in descending order, then add the elements to
 The time complexity is $O(n \times \log n)$, and the space complexity is $O(\log n)$. Where $n$ is the length of the array $nums$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -57,6 +79,8 @@ class Solution:
                 break
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -76,6 +100,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -97,6 +123,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minSubsequence(nums []int) (ans []int) {
 	sort.Ints(nums)
@@ -114,6 +142,8 @@ func minSubsequence(nums []int) (ans []int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minSubsequence(nums: number[]): number[] {
     nums.sort((a, b) => b - a);
@@ -127,6 +157,8 @@ function minSubsequence(nums: number[]): number[] {
     }
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -149,4 +181,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

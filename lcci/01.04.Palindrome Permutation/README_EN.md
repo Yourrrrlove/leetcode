@@ -1,8 +1,18 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/lcci/01.04.Palindrome%20Permutation/README_EN.md
+---
+
+<!-- problem:start -->
+
 # [01.04. Palindrome Permutation](https://leetcode.cn/problems/palindrome-permutation-lcci)
 
 [中文文档](/lcci/01.04.Palindrome%20Permutation/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a string, write a function to check if it is a permutation of a palin&shy; drome. A palindrome is a word or phrase that is the same forwards and backwards. A permutation is a rearrangement of letters. The palindrome does not need to be limited to just dictionary words.</p>
 
@@ -18,7 +28,11 @@
 
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hash Table
 
@@ -28,12 +42,16 @@ The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is 
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def canPermutePalindrome(self, s: str) -> bool:
         cnt = Counter(s)
         return sum(v & 1 for v in cnt.values()) < 2
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -50,6 +68,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -68,56 +88,75 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func canPermutePalindrome(s string) bool {
-	vis := map[rune]bool{}
-	cnt := 0
+	cnt := map[rune]int{}
 	for _, c := range s {
-		if vis[c] {
-			vis[c] = false
-			cnt--
-		} else {
-			vis[c] = true
-			cnt++
-		}
+		cnt[c]++
 	}
-	return cnt < 2
+	sum := 0
+	for _, v := range cnt {
+		sum += v & 1
+	}
+	return sum < 2
 }
 ```
+
+#### TypeScript
 
 ```ts
 function canPermutePalindrome(s: string): boolean {
-    const set = new Set<string>();
+    const cnt: Record<string, number> = {};
     for (const c of s) {
-        if (set.has(c)) {
-            set.delete(c);
-        } else {
-            set.add(c);
-        }
+        cnt[c] = (cnt[c] || 0) + 1;
     }
-    return set.size <= 1;
+    return Object.values(cnt).filter(v => v % 2 === 1).length < 2;
 }
 ```
 
+#### Rust
+
 ```rust
-use std::collections::HashSet;
+use std::collections::HashMap;
 
 impl Solution {
     pub fn can_permute_palindrome(s: String) -> bool {
-        let mut set = HashSet::new();
+        let mut cnt = HashMap::new();
         for c in s.chars() {
-            if set.contains(&c) {
-                set.remove(&c);
-            } else {
-                set.insert(c);
-            }
+            *cnt.entry(c).or_insert(0) += 1;
         }
-        set.len() <= 1
+        cnt.values().filter(|&&v| v % 2 == 1).count() < 2
+    }
+}
+```
+
+#### Swift
+
+```swift
+class Solution {
+    func canPermutePalindrome(_ s: String) -> Bool {
+        var cnt = [Character: Int]()
+        for char in s {
+            cnt[char, default: 0] += 1
+        }
+
+        var sum = 0
+        for count in cnt.values {
+            sum += count % 2
+        }
+
+        return sum < 2
     }
 }
 ```
 
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### Solution 2: Another Implementation of Hash Table
 
@@ -128,6 +167,8 @@ Finally, we check whether the number of characters in the hash table is less tha
 The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the string.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -140,6 +181,8 @@ class Solution:
                 vis.add(c)
         return len(vis) < 2
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -155,6 +198,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -173,6 +218,78 @@ public:
 };
 ```
 
+#### Go
+
+```go
+func canPermutePalindrome(s string) bool {
+	vis := map[rune]bool{}
+	for _, c := range s {
+		if vis[c] {
+			delete(vis, c)
+		} else {
+			vis[c] = true
+		}
+	}
+	return len(vis) < 2
+}
+```
+
+#### TypeScript
+
+```ts
+function canPermutePalindrome(s: string): boolean {
+    const vis = new Set<string>();
+    for (const c of s) {
+        if (vis.has(c)) {
+            vis.delete(c);
+        } else {
+            vis.add(c);
+        }
+    }
+    return vis.size < 2;
+}
+```
+
+#### Rust
+
+```rust
+use std::collections::HashSet;
+
+impl Solution {
+    pub fn can_permute_palindrome(s: String) -> bool {
+        let mut vis = HashSet::new();
+        for c in s.chars() {
+            if vis.contains(&c) {
+                vis.remove(&c);
+            } else {
+                vis.insert(c);
+            }
+        }
+        vis.len() < 2
+    }
+}
+```
+
+#### Swift
+
+```swift
+class Solution {
+    func canPermutePalindrome(_ s: String) -> Bool {
+        var vis = Set<Character>()
+        for c in s {
+            if vis.contains(c) {
+                vis.remove(c)
+            } else {
+                vis.insert(c)
+            }
+        }
+        return vis.count < 2
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

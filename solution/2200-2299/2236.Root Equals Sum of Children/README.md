@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2200-2299/2236.Root%20Equals%20Sum%20of%20Children/README.md
+tags:
+    - 树
+    - 二叉树
+---
+
+<!-- problem:start -->
+
 # [2236. 判断根结点是否等于子结点之和](https://leetcode.cn/problems/root-equals-sum-of-children)
 
 [English Version](/solution/2200-2299/2236.Root%20Equals%20Sum%20of%20Children/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个 <strong>二叉树 </strong>的根结点&nbsp;<code>root</code>，该二叉树由恰好&nbsp;<code>3</code>&nbsp;个结点组成：根结点、左子结点和右子结点。</p>
 
@@ -39,7 +50,11 @@
 	<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：直接判断
 
@@ -48,6 +63,8 @@
 时间复杂度 $O(1)$，空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -60,6 +77,8 @@ class Solution:
     def checkTree(self, root: Optional[TreeNode]) -> bool:
         return root.val == root.left.val + root.right.val
 ```
+
+#### Java
 
 ```java
 /**
@@ -84,6 +103,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -104,6 +125,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -117,6 +140,8 @@ func checkTree(root *TreeNode) bool {
 	return root.Val == root.Left.Val+root.Right.Val
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -138,6 +163,8 @@ function checkTree(root: TreeNode | null): boolean {
 }
 ```
 
+#### Rust
+
 ```rust
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
@@ -157,8 +184,8 @@ function checkTree(root: TreeNode | null): boolean {
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn check_tree(root: Option<Rc<RefCell<TreeNode>>>) -> bool {
         let node = root.as_ref().unwrap().borrow();
@@ -168,6 +195,8 @@ impl Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 /**
@@ -186,4 +215,6 @@ bool checkTree(struct TreeNode* root) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

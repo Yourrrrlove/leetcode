@@ -1,8 +1,16 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/lcp/LCP%2050.%20%E5%AE%9D%E7%9F%B3%E8%A1%A5%E7%BB%99/README.md
+---
+
+<!-- problem:start -->
+
 # [LCP 50. 宝石补给](https://leetcode.cn/problems/WHnhjV)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 欢迎各位勇者来到力扣新手村，在开始试炼之前，请各位勇者先进行「宝石补给」。
 
@@ -53,7 +61,11 @@
 -   `operations[i].length == 2`
 -   `0 <= operations[i][0], operations[i][1] < gem.length`
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：模拟
 
@@ -62,6 +74,8 @@
 时间复杂度 $O(m + n)$，其中 $m$ 和 $n$ 分别是数组 `gem` 和 `operations` 的长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,6 +86,8 @@ class Solution:
             gem[x] -= v
         return max(gem) - min(gem)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -92,6 +108,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -109,6 +127,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func giveGem(gem []int, operations [][]int) int {
 	for _, op := range operations {
@@ -121,6 +141,8 @@ func giveGem(gem []int, operations [][]int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function giveGem(gem: number[], operations: number[][]): number {
     for (const [x, y] of operations) {
@@ -132,6 +154,29 @@ function giveGem(gem: number[], operations: number[][]): number {
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func giveGem(_ gem: [Int], _ operations: [[Int]]) -> Int {
+        var gem = gem
+
+        for op in operations {
+            let x = op[0], y = op[1]
+            let v = gem[x] / 2
+            gem[y] += v
+            gem[x] -= v
+        }
+
+        let maxGem = gem.max() ?? 0
+        let minGem = gem.min() ?? 0
+        return maxGem - minGem
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

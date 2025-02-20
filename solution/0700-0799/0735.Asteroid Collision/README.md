@@ -1,12 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0735.Asteroid%20Collision/README.md
+tags:
+    - 栈
+    - 数组
+    - 模拟
+---
+
+<!-- problem:start -->
+
 # [735. 小行星碰撞](https://leetcode.cn/problems/asteroid-collision)
 
 [English Version](/solution/0700-0799/0735.Asteroid%20Collision/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给定一个整数数组 <code>asteroids</code>，表示在同一行的小行星。</p>
+<p>给定一个整数数组 <code>asteroids</code>，表示在同一行的小行星。数组中小行星的索引表示它们在空间中的相对位置。</p>
 
 <p>对于数组中的每一个元素，其绝对值表示小行星的大小，正负表示小行星的移动方向（正表示向右移动，负表示向左移动）。每一颗小行星以相同的速度移动。</p>
 
@@ -14,21 +26,21 @@
 
 <p>&nbsp;</p>
 
-<p><strong>示例 1：</strong></p>
+<p><strong class="example">示例 1：</strong></p>
 
 <pre>
 <strong>输入：</strong>asteroids = [5,10,-5]
 <strong>输出：</strong>[5,10]
 <b>解释：</b>10 和 -5 碰撞后只剩下 10 。 5 和 10 永远不会发生碰撞。</pre>
 
-<p><strong>示例 2：</strong></p>
+<p><strong class="example">示例 2：</strong></p>
 
 <pre>
 <strong>输入：</strong>asteroids = [8,-8]
 <strong>输出：</strong>[]
 <b>解释：</b>8 和 -8 碰撞后，两者都发生爆炸。</pre>
 
-<p><strong>示例 3：</strong></p>
+<p><strong class="example">示例 3：</strong></p>
 
 <pre>
 <strong>输入：</strong>asteroids = [10,2,-5]
@@ -45,7 +57,11 @@
 	<li><code>asteroids[i] != 0</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：栈
 
@@ -59,6 +75,8 @@
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $asteroids$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -76,6 +94,8 @@ class Solution:
                     stk.append(x)
         return stk
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -99,6 +119,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -124,6 +146,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func asteroidCollision(asteroids []int) (stk []int) {
 	for _, x := range asteroids {
@@ -143,6 +167,8 @@ func asteroidCollision(asteroids []int) (stk []int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function asteroidCollision(asteroids: number[]): number[] {
@@ -164,6 +190,8 @@ function asteroidCollision(asteroids: number[]): number[] {
     return stk;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -191,4 +219,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

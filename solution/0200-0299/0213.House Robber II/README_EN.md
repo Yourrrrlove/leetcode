@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0213.House%20Robber%20II/README_EN.md
+tags:
+    - Array
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [213. House Robber II](https://leetcode.com/problems/house-robber-ii)
 
 [中文文档](/solution/0200-0299/0213.House%20Robber%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are <strong>arranged in a circle.</strong> That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and&nbsp;<b>it will automatically contact the police if two adjacent houses were broken into on the same night</b>.</p>
 
@@ -41,7 +54,11 @@ Total amount you can rob = 1 + 3 = 4.
 	<li><code>0 &lt;= nums[i] &lt;= 1000</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Dynamic Programming
 
@@ -50,6 +67,8 @@ The circular arrangement means that at most one of the first and last houses can
 The time complexity is $O(n)$, where $n$ is the length of the array. The space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -64,6 +83,8 @@ class Solution:
             return nums[0]
         return max(_rob(nums[1:]), _rob(nums[:-1]))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -86,6 +107,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -110,6 +133,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func rob(nums []int) int {
 	n := len(nums)
@@ -128,6 +153,8 @@ func robRange(nums []int, l, r int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function rob(nums: number[]): number {
     const n = nums.length;
@@ -144,6 +171,8 @@ function rob(nums: number[]): number {
     return Math.max(robRange(0, n - 2), robRange(1, n - 1));
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -166,4 +195,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

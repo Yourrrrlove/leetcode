@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2900-2999/2904.Shortest%20and%20Lexicographically%20Smallest%20Beautiful%20String/README.md
+rating: 1483
+source: 第 367 场周赛 Q2
+tags:
+    - 字符串
+    - 滑动窗口
+---
+
+<!-- problem:start -->
+
 # [2904. 最短且字典序最小的美丽子字符串](https://leetcode.cn/problems/shortest-and-lexicographically-smallest-beautiful-string)
 
 [English Version](/solution/2900-2999/2904.Shortest%20and%20Lexicographically%20Smallest%20Beautiful%20String/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个二进制字符串 <code>s</code> 和一个正整数 <code>k</code> 。</p>
 
@@ -28,13 +41,13 @@
 <strong>输入：</strong>s = "100011001", k = 3
 <strong>输出：</strong>"11001"
 <strong>解释：</strong>示例中共有 7 个美丽子字符串：
-1. 子字符串 "<em><strong>100011</strong></em>001" 。
-2. 子字符串 "<strong><em>1000110</em></strong>01" 。
-3. 子字符串 "<strong><em>100011001</em></strong>" 。
-4. 子字符串 "1<strong><em>00011001</em></strong>" 。
-5. 子字符串 "10<strong><em>0011001</em></strong>" 。
-6. 子字符串 "100<em><strong>011001</strong></em>" 。
-7. 子字符串 "1000<strong><em>11001</em></strong>" 。
+1. 子字符串 "<u>100011</u>001" 。
+2. 子字符串 "<u>1000110</u>01" 。
+3. 子字符串 "<u>10001100</u>1" 。
+4. 子字符串 "1<u>00011001</u>" 。
+5. 子字符串 "10<u>0011001</u>" 。
+6. 子字符串 "100<u>011001</u>" 。
+7. 子字符串 "1000<u>11001</u>" 。
 最短美丽子字符串的长度是 5 。
 长度为 5 且字典序最小的美丽子字符串是子字符串 "11001" 。
 </pre>
@@ -45,9 +58,9 @@
 <strong>输入：</strong>s = "1011", k = 2
 <strong>输出：</strong>"11"
 <strong>解释：</strong>示例中共有 3 个美丽子字符串：
-1. 子字符串 "<em><strong>101</strong></em>1" 。
-2. 子字符串 "1<em><strong>011</strong></em>" 。
-3. 子字符串 "10<em><strong>11</strong></em>" 。
+1. 子字符串 "<u>101</u>1" 。
+2. 子字符串 "1<u>011</u>" 。
+3. 子字符串 "10<u>11</u>" 。
 最短美丽子字符串的长度是 2 。
 长度为 2 且字典序最小的美丽子字符串是子字符串 "11" 。 
 </pre>
@@ -69,7 +82,11 @@
 	<li><code>1 &lt;= k &lt;= s.length</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：枚举
 
@@ -78,6 +95,8 @@
 时间复杂度 $O(n^3)$，空间复杂度 $O(n)$。其中 $n$ 是字符串 $s$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -93,6 +112,8 @@ class Solution:
                     ans = t
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -118,6 +139,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -137,6 +160,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func shortestBeautifulSubstring(s string, k int) (ans string) {
@@ -159,6 +184,8 @@ func shortestBeautifulSubstring(s string, k int) (ans string) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function shortestBeautifulSubstring(s: string, k: number): string {
     const n = s.length;
@@ -179,6 +206,8 @@ function shortestBeautifulSubstring(s: string, k: number): string {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn shortest_beautiful_substring(s: String, k: i32) -> String {
@@ -188,9 +217,8 @@ impl Solution {
         for i in 0..n {
             for j in i + (k as usize)..=n {
                 let t = &s[i..j];
-                if
-                    (t.matches('1').count() as i32) == k &&
-                    (ans.is_empty() || j - i < ans.len() || (j - i == ans.len() && t < &ans))
+                if (t.matches('1').count() as i32) == k
+                    && (ans.is_empty() || j - i < ans.len() || (j - i == ans.len() && t < &ans))
                 {
                     ans = t.to_string();
                 }
@@ -203,6 +231,10 @@ impl Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：双指针
 
 我们也可以用两个指针维护一个滑动窗口，其中指针 $i$ 指向滑动窗口的左端点，指针 $j$ 指向滑动窗口的右端点。初始时 $i = j = 0$。另外，我们用变量 $cnt$ 记录滑动窗口中的 $1$ 的个数。
@@ -214,6 +246,8 @@ impl Solution {
 时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 是字符串 $s$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -233,6 +267,8 @@ class Solution:
                 ans = s[i:j]
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -259,6 +295,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -282,6 +320,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func shortestBeautifulSubstring(s string, k int) (ans string) {
 	i, j, cnt := 0, 0, 0
@@ -302,6 +342,8 @@ func shortestBeautifulSubstring(s string, k int) (ans string) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function shortestBeautifulSubstring(s: string, k: number): string {
     let [i, j, cnt] = [0, 0, 0];
@@ -321,6 +363,8 @@ function shortestBeautifulSubstring(s: string, k: number): string {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -346,9 +390,8 @@ impl Solution {
 
             j += 1;
 
-            if
-                cnt == k &&
-                (ans.is_empty() || j - i < ans.len() || (j - i == ans.len() && &s[i..j] < &ans))
+            if cnt == k
+                && (ans.is_empty() || j - i < ans.len() || (j - i == ans.len() && &s[i..j] < &ans))
             {
                 ans = s_chars[i..j].iter().collect();
             }
@@ -361,4 +404,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

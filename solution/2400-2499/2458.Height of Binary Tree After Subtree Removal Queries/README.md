@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2400-2499/2458.Height%20of%20Binary%20Tree%20After%20Subtree%20Removal%20Queries/README.md
+rating: 2298
+source: 第 317 场周赛 Q4
+tags:
+    - 树
+    - 深度优先搜索
+    - 广度优先搜索
+    - 数组
+    - 二叉树
+---
+
+<!-- problem:start -->
+
 # [2458. 移除子树后的二叉树高度](https://leetcode.cn/problems/height-of-binary-tree-after-subtree-removal-queries)
 
 [English Version](/solution/2400-2499/2458.Height%20of%20Binary%20Tree%20After%20Subtree%20Removal%20Queries/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一棵 <strong>二叉树</strong> 的根节点 <code>root</code> ，树中有 <code>n</code> 个节点。每个节点都可以被分配一个从 <code>1</code> 到 <code>n</code> 且互不相同的值。另给你一个长度为 <code>m</code> 的数组 <code>queries</code> 。</p>
 
@@ -65,7 +81,11 @@
 	<li><code>queries[i] != root.val</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：两次 DFS
 
@@ -92,6 +112,8 @@
 时间复杂度 $O(n+m)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别是树的节点数和查询数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -123,6 +145,8 @@ class Solution:
         dfs(root, -1, 0)
         return [res[v] for v in queries]
 ```
+
+#### Java
 
 ```java
 /**
@@ -178,6 +202,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -216,6 +242,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -259,4 +287,106 @@ func treeQueries(root *TreeNode, queries []int) (ans []int) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### 方法二：一次 DFS + 排序
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function treeQueries(root: TreeNode | null, queries: number[]): number[] {
+    const ans: number[] = [];
+    const levels: Map<number, [number, number][]> = new Map();
+    const valToLevel = new Map<number, number>();
+
+    const dfs = (node: TreeNode | null, level = 0): number => {
+        if (!node) return level - 1;
+
+        const max = Math.max(dfs(node.left, level + 1), dfs(node.right, level + 1));
+
+        if (!levels.has(level)) {
+            levels.set(level, []);
+        }
+        levels.get(level)?.push([max, node.val]);
+        valToLevel.set(node.val, level);
+
+        return max;
+    };
+
+    dfs(root, 0);
+
+    for (const [_, l] of levels) {
+        l.sort(([a], [b]) => b - a);
+    }
+
+    for (const q of queries) {
+        const level = valToLevel.get(q)!;
+        const maxes = levels.get(level)!;
+
+        if (maxes.length === 1) {
+            ans.push(level - 1);
+        } else {
+            const [val0, max0, max1] = [maxes[0][1], maxes[0][0], maxes[1][0]];
+            const max = val0 === q ? max1 : max0;
+            ans.push(max);
+        }
+    }
+
+    return ans;
+}
+```
+
+#### JavaScript
+
+```js
+function treeQueries(root, queries) {
+    const ans = [];
+    const levels = new Map();
+    const valToLevel = new Map();
+
+    const dfs = (node, level = 0) => {
+        if (!node) return level - 1;
+
+        const max = Math.max(dfs(node.left, level + 1), dfs(node.right, level + 1));
+
+        if (!levels.has(level)) {
+            levels.set(level, []);
+        }
+        levels.get(level)?.push([max, node.val]);
+        valToLevel.set(node.val, level);
+
+        return max;
+    };
+
+    dfs(root, 0);
+
+    for (const [_, l] of levels) {
+        l.sort(([a], [b]) => b - a);
+    }
+
+    for (const q of queries) {
+        const level = valToLevel.get(q);
+        const maxes = levels.get(level);
+
+        if (maxes.length === 1) {
+            ans.push(level - 1);
+        } else {
+            const [val0, max0, max1] = [maxes[0][1], maxes[0][0], maxes[1][0]];
+            const max = val0 === q ? max1 : max0;
+            ans.push(max);
+        }
+    }
+
+    return ans;
+}
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

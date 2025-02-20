@@ -1,8 +1,21 @@
-# [1999. Smallest Greater Multiple Made of Two Digits](https://leetcode.com/problems/smallest-greater-multiple-made-of-two-digits)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1999.Smallest%20Greater%20Multiple%20Made%20of%20Two%20Digits/README_EN.md
+tags:
+    - Math
+    - Enumeration
+---
+
+<!-- problem:start -->
+
+# [1999. Smallest Greater Multiple Made of Two Digits 🔒](https://leetcode.com/problems/smallest-greater-multiple-made-of-two-digits)
 
 [中文文档](/solution/1900-1999/1999.Smallest%20Greater%20Multiple%20Made%20of%20Two%20Digits/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given three integers, <code>k</code>, <code>digit1</code>, and <code>digit2</code>, you want to find the <strong>smallest</strong> integer that is:</p>
 
@@ -51,11 +64,17 @@
 	<li><code>0 &lt;= digit2 &lt;= 9</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -75,6 +94,8 @@ class Solution:
             if digit1 != digit2:
                 q.append(x * 10 + digit2)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -103,6 +124,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -133,6 +156,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func findInteger(k int, digit1 int, digit2 int) int {
 	if digit1 == 0 && digit2 == 0 {
@@ -161,4 +186,6 @@ func findInteger(k int, digit1 int, digit2 int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

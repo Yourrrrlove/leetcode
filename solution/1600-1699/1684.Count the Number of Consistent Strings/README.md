@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1684.Count%20the%20Number%20of%20Consistent%20Strings/README.md
+rating: 1288
+source: 第 41 场双周赛 Q1
+tags:
+    - 位运算
+    - 数组
+    - 哈希表
+    - 字符串
+    - 计数
+---
+
+<!-- problem:start -->
+
 # [1684. 统计一致字符串的数目](https://leetcode.cn/problems/count-the-number-of-consistent-strings)
 
 [English Version](/solution/1600-1699/1684.Count%20the%20Number%20of%20Consistent%20Strings/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个由不同字符组成的字符串 <code>allowed</code> 和一个字符串数组 <code>words</code> 。如果一个字符串的每一个字符都在 <code>allowed</code> 中，就称这个字符串是 <strong>一致字符串 </strong>。</p>
 
@@ -48,7 +64,11 @@
 	<li><code>words[i]</code> 和 <code>allowed</code> 只包含小写英文字母。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：哈希表或数组
 
@@ -58,12 +78,16 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
         s = set(allowed)
         return sum(all(c in s for c in w) for w in words)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -92,6 +116,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -109,6 +135,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func countConsistentStrings(allowed string, words []string) (ans int) {
@@ -133,6 +161,8 @@ func countConsistentStrings(allowed string, words []string) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function countConsistentStrings(allowed: string, words: string[]): number {
     const set = new Set([...allowed]);
@@ -149,6 +179,8 @@ function countConsistentStrings(allowed: string, words: string[]): number {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -171,6 +203,8 @@ impl Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 int countConsistentStrings(char* allowed, char** words, int wordsSize) {
@@ -195,6 +229,10 @@ int countConsistentStrings(char* allowed, char** words, int wordsSize) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：位运算
 
 我们也可以仅用一个整数来表示每个字符串中字符的出现情况。其中，整数的二进制表示中的每一位表示一个字符是否出现。
@@ -207,6 +245,8 @@ int countConsistentStrings(char* allowed, char** words, int wordsSize) {
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
@@ -216,6 +256,8 @@ class Solution:
         mask = f(allowed)
         return sum((mask | f(w)) == mask for w in words)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -240,6 +282,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -256,6 +300,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func countConsistentStrings(allowed string, words []string) (ans int) {
@@ -276,6 +322,8 @@ func countConsistentStrings(allowed string, words []string) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function countConsistentStrings(allowed: string, words: string[]): number {
     const helper = (s: string) => {
@@ -295,6 +343,8 @@ function countConsistentStrings(allowed: string, words: string[]): number {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -318,6 +368,8 @@ impl Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 int helper(char* s) {
@@ -343,4 +395,6 @@ int countConsistentStrings(char* allowed, char** words, int wordsSize) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

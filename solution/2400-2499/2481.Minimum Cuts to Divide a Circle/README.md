@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2400-2499/2481.Minimum%20Cuts%20to%20Divide%20a%20Circle/README.md
+rating: 1246
+source: 第 92 场双周赛 Q1
+tags:
+    - 几何
+    - 数学
+---
+
+<!-- problem:start -->
+
 # [2481. 分割圆的最少切割次数](https://leetcode.cn/problems/minimum-cuts-to-divide-a-circle)
 
 [English Version](/solution/2400-2499/2481.Minimum%20Cuts%20to%20Divide%20a%20Circle/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>圆内一个 <strong>有效切割</strong>&nbsp;，符合以下二者之一：</p>
 
@@ -53,7 +66,11 @@
 	<li><code>1 &lt;= n &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：分类讨论
 
@@ -64,9 +81,9 @@
 综上，可以得到：
 
 $$
-\text{ans} = \begin{cases}
-n, & n \gt 1 \text{ 且 } n \text{ 为奇数} \\
-\frac{n}{2}, & n \text{ 为其它} \\
+\textit{ans} = \begin{cases}
+n, & n \gt 1 \textit{ 且 } n \textit{ 为奇数} \\
+\frac{n}{2}, & n \textit{ 为其它} \\
 \end{cases}
 $$
 
@@ -74,11 +91,15 @@ $$
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def numberOfCuts(self, n: int) -> int:
         return n if (n > 1 and n & 1) else n >> 1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -87,6 +108,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -97,6 +120,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numberOfCuts(n int) int {
 	if n > 1 && n%2 == 1 {
@@ -106,11 +131,15 @@ func numberOfCuts(n int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function numberOfCuts(n: number): number {
     return n > 1 && n & 1 ? n : n >> 1;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -123,6 +152,8 @@ impl Solution {
 }
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public int NumberOfCuts(int n) {
@@ -133,4 +164,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

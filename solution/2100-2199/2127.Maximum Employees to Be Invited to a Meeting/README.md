@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2100-2199/2127.Maximum%20Employees%20to%20Be%20Invited%20to%20a%20Meeting/README.md
+rating: 2449
+source: 第 274 场周赛 Q4
+tags:
+    - 深度优先搜索
+    - 图
+    - 拓扑排序
+---
+
+<!-- problem:start -->
+
 # [2127. 参加会议的最多员工数](https://leetcode.cn/problems/maximum-employees-to-be-invited-to-a-meeting)
 
 [English Version](/solution/2100-2199/2127.Maximum%20Employees%20to%20Be%20Invited%20to%20a%20Meeting/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>一个公司准备组织一场会议，邀请名单上有&nbsp;<code>n</code>&nbsp;位员工。公司准备了一张 <strong>圆形</strong>&nbsp;的桌子，可以坐下 <strong>任意数目</strong>&nbsp;的员工。</p>
 
@@ -67,7 +81,11 @@
 	<li><code>favorite[i] != i</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：图的最大环 + 最长链
 
@@ -85,9 +103,13 @@
 
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 `favorite` 的长度。
 
-相似题目：[2360. 图中的最长环](/solution/2300-2399/2360.Longest%20Cycle%20in%20a%20Graph/README.md)
+相似题目：
+
+-   [2360. 图中的最长环](https://github.com/doocs/leetcode/blob/main/solution/2300-2399/2360.Longest%20Cycle%20in%20a%20Graph/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -128,6 +150,8 @@ class Solution:
 
         return max(max_cycle(favorite), topological_sort(favorite))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -191,6 +215,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -242,6 +268,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func maximumInvitations(favorite []int) int {
@@ -309,6 +337,8 @@ func topologicalSort(fa []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function maximumInvitations(favorite: number[]): number {
     return Math.max(maxCycle(favorite), topologicalSort(favorite));
@@ -369,4 +399,6 @@ function topologicalSort(fa: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

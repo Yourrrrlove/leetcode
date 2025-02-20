@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0022.Generate%20Parentheses/README.md
+tags:
+    - 字符串
+    - 动态规划
+    - 回溯
+---
+
+<!-- problem:start -->
+
 # [22. 括号生成](https://leetcode.cn/problems/generate-parentheses)
 
 [English Version](/solution/0000-0099/0022.Generate%20Parentheses/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>数字 <code>n</code>&nbsp;代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 <strong>有效的 </strong>括号组合。</p>
 
@@ -32,7 +44,11 @@
 	<li><code>1 &lt;= n &lt;= 8</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：DFS + 剪枝
 
@@ -48,6 +64,8 @@
 时间复杂度 $O(2^{n\times 2} \times n)$，空间复杂度 $O(n)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -65,6 +83,8 @@ class Solution:
         dfs(0, 0, '')
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -91,6 +111,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -111,6 +133,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func generateParenthesis(n int) (ans []string) {
 	var dfs func(int, int, string)
@@ -129,6 +153,8 @@ func generateParenthesis(n int) (ans []string) {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function generateParenthesis(n: number): string[] {
@@ -149,32 +175,32 @@ function generateParenthesis(n: number): string[] {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
-    fn dfs(left: i32, right: i32, s: &mut String, res: &mut Vec<String>) {
-        if left == 0 && right == 0 {
-            res.push(s.clone());
-            return;
-        }
-        if left > 0 {
-            s.push('(');
-            Self::dfs(left - 1, right, s, res);
-            s.pop();
-        }
-        if right > left {
-            s.push(')');
-            Self::dfs(left, right - 1, s, res);
-            s.pop();
-        }
-    }
-
     pub fn generate_parenthesis(n: i32) -> Vec<String> {
-        let mut res = Vec::new();
-        Self::dfs(n, n, &mut String::new(), &mut res);
-        res
+        let mut ans = Vec::new();
+
+        fn dfs(ans: &mut Vec<String>, l: i32, r: i32, t: String, n: i32) {
+            if l > n || r > n || l < r {
+                return;
+            }
+            if l == n && r == n {
+                ans.push(t);
+                return;
+            }
+            dfs(ans, l + 1, r, format!("{}(", t), n);
+            dfs(ans, l, r + 1, format!("{})", t), n);
+        }
+
+        dfs(&mut ans, 0, 0, String::new(), n);
+        ans
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -199,43 +225,104 @@ var generateParenthesis = function (n) {
 };
 ```
 
-<!-- tabs:end -->
+#### C#
 
-### 方法二
+```cs
+public class Solution {
+    private List<string> ans = new List<string>();
+    private int n;
 
-<!-- tabs:start -->
+    public List<string> GenerateParenthesis(int n) {
+        this.n = n;
+        Dfs(0, 0, "");
+        return ans;
+    }
 
-```rust
-impl Solution {
-    pub fn generate_parenthesis(n: i32) -> Vec<String> {
-        let mut dp: Vec<Vec<String>> = vec![vec![]; n as usize + 1];
-
-        // Initialize the dp vector
-        dp[0].push(String::from(""));
-        dp[1].push(String::from("()"));
-
-        // Begin the actual dp process
-        for i in 2..=n as usize {
-            for j in 0..i as usize {
-                let dp_c = dp.clone();
-                let first_half = &dp_c[j];
-                let second_half = &dp_c[i - j - 1];
-
-                for f in first_half {
-                    for s in second_half {
-                        let f_c = f.clone();
-                        let cur_str = f_c + "(" + &*s + ")";
-                        dp[i].push(cur_str);
-                    }
-                }
-            }
+    private void Dfs(int l, int r, string t) {
+        if (l > n || r > n || l < r) {
+            return;
         }
+        if (l == n && r == n) {
+            ans.Add(t);
+            return;
+        }
+        Dfs(l + 1, r, t + "(");
+        Dfs(l, r + 1, t + ")");
+    }
+}
+```
 
-        dp[n as usize].clone()
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param Integer $n
+     * @return String[]
+     */
+    function generateParenthesis($n) {
+        $ans = [];
+
+        $dfs = function ($l, $r, $t) use ($n, &$ans, &$dfs) {
+            if ($l > $n || $r > $n || $l < $r) {
+                return;
+            }
+            if ($l == $n && $r == $n) {
+                $ans[] = $t;
+                return;
+            }
+            $dfs($l + 1, $r, $t . '(');
+            $dfs($l, $r + 1, $t . ')');
+        };
+
+        $dfs(0, 0, '');
+        return $ans;
     }
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:start -->
+
+### 方法二：递归
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function generateParenthesis(n: number): string[] {
+    if (n === 1) return ['()'];
+
+    return [
+        ...new Set(
+            generateParenthesis(n - 1).flatMap(s =>
+                Array.from(s, (_, i) => s.slice(0, i) + '()' + s.slice(i)),
+            ),
+        ),
+    ];
+}
+```
+
+#### JavaScript
+
+```js
+function generateParenthesis(n) {
+    if (n === 1) return ['()'];
+
+    return [
+        ...new Set(
+            generateParenthesis(n - 1).flatMap(s =>
+                Array.from(s, (_, i) => s.slice(0, i) + '()' + s.slice(i)),
+            ),
+        ),
+    ];
+}
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

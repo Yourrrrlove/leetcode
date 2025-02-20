@@ -1,12 +1,26 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1921.Eliminate%20Maximum%20Number%20of%20Monsters/README.md
+rating: 1527
+source: 第 248 场周赛 Q2
+tags:
+    - 贪心
+    - 数组
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [1921. 消灭怪物的最大数量](https://leetcode.cn/problems/eliminate-maximum-number-of-monsters)
 
 [English Version](/solution/1900-1999/1921.Eliminate%20Maximum%20Number%20of%20Monsters/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>你正在玩一款电子游戏，在游戏中你需要保护城市免受怪物侵袭。给定一个 <strong>下标从 0 开始</strong> 且大小为 <code>n</code> 的整数数组 <code>dist</code> ，其中 <code>dist[i]</code> 是第 <code>i</code> 个怪物与城市的 <strong>初始距离</strong>（单位：米）。</p>
+<p>你正在玩一款电子游戏，在游戏中你需要保护城市免受怪物侵袭。给定一个 <strong>下标从 0 开始</strong> 且大小为 <code>n</code> 的整数数组 <code>dist</code> ，其中 <code>dist[i]</code> 是第 <code>i</code> 个怪物与城市的 <strong>初始距离</strong>（单位：千米）。</p>
 
 <p>怪物以 <strong>恒定</strong> 的速度走向城市。每个怪物的速度都以一个长度为 <code>n</code> 的整数数组 <code>speed</code> 表示，其中 <code>speed[i]</code> 是第 <code>i</code> 个怪物的速度（单位：千米/分）。</p>
 
@@ -61,23 +75,29 @@
 	<li><code>1 &lt;= dist[i], speed[i] &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序 + 贪心
 
-我们用 $times$ 数组记录每个怪物最晚可被消灭的时间。对于第 $i$ 个怪物，最晚可被消灭的时间满足：
+我们用 $\textit{times}$ 数组记录每个怪物最晚可被消灭的时间。对于第 $i$ 个怪物，最晚可被消灭的时间满足：
 
-$$times[i] = \lfloor \frac{dist[i]-1}{speed[i]} \rfloor$$
+$$\textit{times}[i] = \left\lfloor \frac{\textit{dist}[i]-1}{\textit{speed}[i]} \right\rfloor$$
 
-接下来，我们对 $times$ 数组升序排列。
+接下来，我们对 $\textit{times}$ 数组升序排列。
 
-然后遍历 $times$ 数组，对于第 $i$ 个怪物，如果 $times[i] \geq i$，说明第 $i$ 个怪物可以被消灭，否则说明第 $i$ 个怪物无法被消灭，直接返回 $i$ 即可。
+然后遍历 $\textit{times}$ 数组，对于第 $i$ 个怪物，如果 $\textit{times}[i] \geq i$，说明第 $i$ 个怪物可以被消灭，否则说明第 $i$ 个怪物无法被消灭，直接返回 $i$ 即可。
 
 若所有怪物都可以被消灭，则返回 $n$。
 
 时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 是数组的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -88,6 +108,8 @@ class Solution:
                 return i
         return len(times)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -107,6 +129,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -128,6 +152,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func eliminateMaximum(dist []int, speed []int) int {
 	n := len(dist)
@@ -145,10 +171,12 @@ func eliminateMaximum(dist []int, speed []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function eliminateMaximum(dist: number[], speed: number[]): number {
     const n = dist.length;
-    const times = new Array(n).fill(0);
+    const times: number[] = Array(n).fill(0);
     for (let i = 0; i < n; ++i) {
         times[i] = Math.floor((dist[i] - 1) / speed[i]);
     }
@@ -162,6 +190,8 @@ function eliminateMaximum(dist: number[], speed: number[]): number {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number[]} dist
@@ -169,19 +199,22 @@ function eliminateMaximum(dist: number[], speed: number[]): number {
  * @return {number}
  */
 var eliminateMaximum = function (dist, speed) {
-    let arr = [];
-    for (let i = 0; i < dist.length; i++) {
-        arr[i] = dist[i] / speed[i];
+    const n = dist.length;
+    const times = Array(n).fill(0);
+    for (let i = 0; i < n; ++i) {
+        times[i] = Math.floor((dist[i] - 1) / speed[i]);
     }
-    arr.sort((a, b) => a - b);
-    let ans = 0;
-    while (arr[0] > ans) {
-        arr.shift();
-        ++ans;
+    times.sort((a, b) => a - b);
+    for (let i = 0; i < n; ++i) {
+        if (times[i] < i) {
+            return i;
+        }
     }
-    return ans;
+    return n;
 };
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -204,4 +237,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

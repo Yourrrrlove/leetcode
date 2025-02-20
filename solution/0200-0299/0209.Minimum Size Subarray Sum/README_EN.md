@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0209.Minimum%20Size%20Subarray%20Sum/README_EN.md
+tags:
+    - Array
+    - Binary Search
+    - Prefix Sum
+    - Sliding Window
+---
+
+<!-- problem:start -->
+
 # [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum)
 
 [中文文档](/solution/0200-0299/0209.Minimum%20Size%20Subarray%20Sum/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an array of positive integers <code>nums</code> and a positive integer <code>target</code>, return <em>the <strong>minimal length</strong> of a </em><span data-keyword="subarray-nonempty"><em>subarray</em></span><em> whose sum is greater than or equal to</em> <code>target</code>. If there is no such subarray, return <code>0</code> instead.</p>
 
@@ -41,7 +56,11 @@
 <p>&nbsp;</p>
 <strong>Follow up:</strong> If you have figured out the <code>O(n)</code> solution, try coding another solution of which the time complexity is <code>O(n log(n))</code>.
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Prefix Sum + Binary Search
 
@@ -55,6 +74,8 @@ The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$.
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
@@ -67,6 +88,8 @@ class Solution:
                 ans = min(ans, j - i)
         return ans if ans <= n else 0
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -101,6 +124,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -122,6 +147,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minSubArrayLen(target int, nums []int) int {
 	n := len(nums)
@@ -142,6 +169,8 @@ func minSubArrayLen(target int, nums []int) int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minSubArrayLen(target: number, nums: number[]): number {
@@ -174,6 +203,8 @@ function minSubArrayLen(target: number, nums: number[]): number {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn min_sub_array_len(target: i32, nums: Vec<i32>) -> i32 {
@@ -198,6 +229,8 @@ impl Solution {
 }
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public int MinSubArrayLen(int target, int[] nums) {
@@ -218,6 +251,10 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Two Pointers
 
 We can use two pointers $j$ and $i$ to maintain a window, where the sum of all elements in the window is less than $target$. Initially, $j = 0$, and the answer $ans = n + 1$, where $n$ is the length of the array $nums$.
@@ -230,94 +267,103 @@ The time complexity is $O(n)$, and the space complexity is $O(1)$. Here, $n$ is 
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        n = len(nums)
-        ans = n + 1
-        s = j = 0
-        for i, x in enumerate(nums):
+        l = s = 0
+        ans = inf
+        for r, x in enumerate(nums):
             s += x
-            while j < n and s >= target:
-                ans = min(ans, i - j + 1)
-                s -= nums[j]
-                j += 1
-        return ans if ans <= n else 0
+            while s >= target:
+                ans = min(ans, r - l + 1)
+                s -= nums[l]
+                l += 1
+        return 0 if ans == inf else ans
 ```
+
+#### Java
 
 ```java
 class Solution {
     public int minSubArrayLen(int target, int[] nums) {
-        int n = nums.length;
+        int l = 0, n = nums.length;
         long s = 0;
         int ans = n + 1;
-        for (int i = 0, j = 0; i < n; ++i) {
-            s += nums[i];
-            while (j < n && s >= target) {
-                ans = Math.min(ans, i - j + 1);
-                s -= nums[j++];
+        for (int r = 0; r < n; ++r) {
+            s += nums[r];
+            while (s >= target) {
+                ans = Math.min(ans, r - l + 1);
+                s -= nums[l++];
             }
         }
-        return ans <= n ? ans : 0;
+        return ans > n ? 0 : ans;
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
-        int n = nums.size();
+        int l = 0, n = nums.size();
         long long s = 0;
         int ans = n + 1;
-        for (int i = 0, j = 0; i < n; ++i) {
-            s += nums[i];
-            while (j < n && s >= target) {
-                ans = min(ans, i - j + 1);
-                s -= nums[j++];
+        for (int r = 0; r < n; ++r) {
+            s += nums[r];
+            while (s >= target) {
+                ans = min(ans, r - l + 1);
+                s -= nums[l++];
             }
         }
-        return ans == n + 1 ? 0 : ans;
+        return ans > n ? 0 : ans;
     }
 };
 ```
 
+#### Go
+
 ```go
 func minSubArrayLen(target int, nums []int) int {
-	n := len(nums)
-	s := 0
-	ans := n + 1
-	for i, j := 0, 0; i < n; i++ {
-		s += nums[i]
+	l, n := 0, len(nums)
+	s, ans := 0, n+1
+	for r, x := range nums {
+		s += x
 		for s >= target {
-			ans = min(ans, i-j+1)
-			s -= nums[j]
-			j++
+			ans = min(ans, r-l+1)
+			s -= nums[l]
+			l++
 		}
 	}
-	if ans == n+1 {
+	if ans > n {
 		return 0
 	}
 	return ans
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minSubArrayLen(target: number, nums: number[]): number {
     const n = nums.length;
-    let s = 0;
-    let ans = n + 1;
-    for (let i = 0, j = 0; i < n; ++i) {
-        s += nums[i];
+    let [s, ans] = [0, n + 1];
+    for (let l = 0, r = 0; r < n; ++r) {
+        s += nums[r];
         while (s >= target) {
-            ans = Math.min(ans, i - j + 1);
-            s -= nums[j++];
+            ans = Math.min(ans, r - l + 1);
+            s -= nums[l++];
         }
     }
-    return ans === n + 1 ? 0 : ans;
+    return ans > n ? 0 : ans;
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

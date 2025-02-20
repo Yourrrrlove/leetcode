@@ -1,14 +1,30 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2725.Interval%20Cancellation/README.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
 # [2725. 间隔取消](https://leetcode.cn/problems/interval-cancellation)
 
 [English Version](/solution/2700-2799/2725.Interval%20Cancellation/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>现给定一个函数 <code>fn</code>，一个参数数组 <code>args</code> 和一个时间间隔 <code>t</code>，返回一个取消函数 <code>cancelFn</code>。</p>
 
-<p>函数 <code>fn</code> 应该立即使用 <code>args</code> 调用，并且在每个 <code>t</code> 毫秒内再次调用，直到调用 <code>cancelFn</code>。</p>
+<p>在经过 <code>cancelTimeMs</code> 毫秒的延迟后，将调用返回的取消函数 <code>cancelFn</code>。</p>
+
+<pre>
+setTimeout(cancelFn, cancelTimeMs)
+</pre>
+
+<p>函数 <code>fn</code> 应立即使用参数 <code>args</code> 调用，然后每隔 <code>t</code> 毫秒调用一次，直到在 <code>cancelTimeMs</code> 毫秒时调用 <code>cancelFn</code>。</p>
 
 <p>&nbsp;</p>
 
@@ -26,23 +42,9 @@
    {"time": 175, "returned": 8}
 ]
 <strong>解释：</strong> 
-const result = []
-const fn = (x) =&gt; x * 2
-const args = [4], t = 35, cancelT = 190
-
-const start = performance.now()
-
-const log = (...argsArr) =&gt; {
-    const diff = Math.floor(performance.now() - start)
-    result.push({"time": diff, "returned": fn(...argsArr)})
-}
-
-const cancel = cancellable(log, [4], 35);
-setTimeout(cancel, 190);
-
-setTimeout(() =&gt; {
-    console.log(result) // Output
- }, cancelT + t + 15) 
+const cancelTimeMs = 190;
+const cancelFn = cancellable((x) =&gt; x * 2, [4], 35);
+setTimeout(cancelFn, cancelTimeMs);
 
 每隔 35ms，调用 fn(4)。直到 t=190ms，然后取消。
 第一次调用 fn 是在 0ms。fn(4) 返回 8。
@@ -68,8 +70,9 @@ setTimeout(() =&gt; {
    {"time": 150, "returned": 10}
 ]
 <strong>解释：</strong>
-const cancel = cancellable((x1, x2) =&gt; (x1 * x2), [2, 5], 30); 
-setTimeout(cancel, 165);
+const cancelTimeMs = 165; 
+const cancelFn = cancellable((x1, x2) =&gt; (x1 * x2), [2, 5], 30) 
+setTimeout(cancelFn, cancelTimeMs)
 
 每隔 30ms，调用 fn(2, 5)。直到 t=165ms，然后取消。
 第一次调用 fn 是在 0ms
@@ -93,8 +96,9 @@ setTimeout(cancel, 165);
    {"time": 150, "returned": 9}
 ]
 <b>解释：</b>
-const cancel = cancellable((x1, x2, x3) =&gt; (x1 + x2 + x3), [5, 1, 3], 50);
-setTimeout(cancel, cancelT);
+const cancelTimeMs = 180;
+const cancelFn = cancellable((x1, x2, x3) =&gt; (x1 + x2 + x3), [5, 1, 3], 50)
+setTimeout(cancelFn, cancelTimeMs)
 
 每隔 50ms，调用 fn(5, 1, 3)。直到 t=180ms，然后取消。
 第一次调用 fn 是在 0ms
@@ -116,11 +120,17 @@ setTimeout(cancel, cancelT);
 	<li><code><font face="monospace">10 &lt;= cancelT &lt;= 500</font></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 function cancellable(fn: Function, args: any[], t: number): Function {
@@ -157,4 +167,6 @@ function cancellable(fn: Function, args: any[], t: number): Function {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

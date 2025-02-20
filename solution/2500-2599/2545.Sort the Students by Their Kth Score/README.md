@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2545.Sort%20the%20Students%20by%20Their%20Kth%20Score/README.md
+rating: 1294
+source: 第 329 场周赛 Q2
+tags:
+    - 数组
+    - 矩阵
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [2545. 根据第 K 场考试的分数排序](https://leetcode.cn/problems/sort-the-students-by-their-kth-score)
 
 [English Version](/solution/2500-2599/2545.Sort%20the%20Students%20by%20Their%20Kth%20Score/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>班里有 <code>m</code> 位学生，共计划组织 <code>n</code> 场考试。给你一个下标从 <strong>0</strong> 开始、大小为 <code>m x n</code> 的整数矩阵 <code>score</code> ，其中每一行对应一位学生，而 <code>score[i][j]</code> 表示第 <code>i</code> 位学生在第 <code>j</code> 场考试取得的分数。矩阵 <code>score</code> 包含的整数&nbsp;<strong>互不相同</strong>&nbsp;。</p>
 
@@ -52,21 +66,29 @@
 	<li><code>0 &lt;= k &lt; n</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序
 
-我们将 `score` 按照第 $k$ 列的分数从大到小排序，然后返回即可。
+我们直接将 $\textit{score}$ 按照第 $k$ 列的分数从大到小排序，然后返回即可。
 
-时间复杂度 $O(m \times \log m)$，空间复杂度 $O(1)$。其中 $m$ 为 `score` 的行数。
+时间复杂度 $O(m \times \log m)$，空间复杂度 $O(\log m)$。其中 $m$ 为 $\textit{score}$ 的行数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def sortTheStudents(self, score: List[List[int]], k: int) -> List[List[int]]:
         return sorted(score, key=lambda x: -x[k])
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -77,15 +99,19 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     vector<vector<int>> sortTheStudents(vector<vector<int>>& score, int k) {
-        sort(score.begin(), score.end(), [&](const auto& a, const auto& b) { return a[k] > b[k]; });
+        ranges::sort(score, [k](const auto& a, const auto& b) { return a[k] > b[k]; });
         return score;
     }
 };
 ```
+
+#### Go
 
 ```go
 func sortTheStudents(score [][]int, k int) [][]int {
@@ -94,11 +120,15 @@ func sortTheStudents(score [][]int, k int) [][]int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function sortTheStudents(score: number[][], k: number): number[][] {
     return score.sort((a, b) => b[k] - a[k]);
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -112,4 +142,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

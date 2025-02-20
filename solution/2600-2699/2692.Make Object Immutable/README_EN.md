@@ -1,8 +1,20 @@
-# [2692. Make Object Immutable](https://leetcode.com/problems/make-object-immutable)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2692.Make%20Object%20Immutable/README_EN.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
+# [2692. Make Object Immutable 🔒](https://leetcode.com/problems/make-object-immutable)
 
 [中文文档](/solution/2600-2699/2692.Make%20Object%20Immutable/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Write a function that takes an object&nbsp;<code>obj</code> and returns a new&nbsp;<strong>immutable</strong>&nbsp;version of this object.</p>
 
@@ -87,11 +99,17 @@ fn = (obj) =&gt; {
 	<li><code>2 &lt;= JSON.stringify(obj).length &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 type Obj = Array<any> | Record<any, any>;
@@ -136,4 +154,6 @@ function makeImmutable(obj: Obj): Obj {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

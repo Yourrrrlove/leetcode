@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1986.Minimum%20Number%20of%20Work%20Sessions%20to%20Finish%20the%20Tasks/README_EN.md
+rating: 1995
+source: Weekly Contest 256 Q3
+tags:
+    - Bit Manipulation
+    - Array
+    - Dynamic Programming
+    - Backtracking
+    - Bitmask
+---
+
+<!-- problem:start -->
+
 # [1986. Minimum Number of Work Sessions to Finish the Tasks](https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks)
 
 [中文文档](/solution/1900-1999/1986.Minimum%20Number%20of%20Work%20Sessions%20to%20Finish%20the%20Tasks/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There are <code>n</code> tasks assigned to you. The task times are represented as an integer array <code>tasks</code> of length <code>n</code>, where the <code>i<sup>th</sup></code> task takes <code>tasks[i]</code> hours to finish. A <strong>work session</strong> is when you work for <strong>at most</strong> <code>sessionTime</code> consecutive hours and then take a break.</p>
 
@@ -57,11 +75,27 @@
 	<li><code>max(tasks[i]) &lt;= sessionTime &lt;= 15</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: State Compression Dynamic Programming + Subset Enumeration
+
+We note that $n$ does not exceed $14$, so we can consider using state compression dynamic programming to solve this problem.
+
+We use a binary number $i$ of length $n$ to represent the current task state, where the $j$-th bit of $i$ is $1$ if and only if the $j$-th task is completed. We use $f[i]$ to represent the minimum number of work sessions needed to complete all tasks with state $i$.
+
+We can enumerate all subsets $j$ of $i$, where each bit of the binary representation of $j$ is a subset of the corresponding bit of the binary representation of $i$, i.e., $j \subseteq i$. If the tasks corresponding to $j$ can be completed in one work session, then we can update $f[i]$ using $f[i \oplus j] + 1$, where $i \oplus j$ represents the bitwise XOR of $i$ and $j$.
+
+The final answer is $f[2^n - 1]$.
+
+The time complexity is $O(n \times 3^n)$, and the space complexity is $O(2^n)$. Here, $n$ is the number of tasks.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -81,6 +115,8 @@ class Solution:
                 j = (j - 1) & i
         return f[-1]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -110,6 +146,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -142,6 +180,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minSessions(tasks []int, sessionTime int) int {
 	n := len(tasks)
@@ -167,6 +207,8 @@ func minSessions(tasks []int, sessionTime int) int {
 	return f[1<<n-1]
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minSessions(tasks: number[], sessionTime: number): number {
@@ -197,4 +239,6 @@ function minSessions(tasks: number[], sessionTime: number): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

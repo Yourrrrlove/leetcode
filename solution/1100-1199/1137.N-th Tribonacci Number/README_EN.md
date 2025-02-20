@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1100-1199/1137.N-th%20Tribonacci%20Number/README_EN.md
+rating: 1142
+source: Weekly Contest 147 Q1
+tags:
+    - Memoization
+    - Math
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [1137. N-th Tribonacci Number](https://leetcode.com/problems/n-th-tribonacci-number)
 
 [中文文档](/solution/1100-1199/1137.N-th%20Tribonacci%20Number/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>The Tribonacci sequence T<sub>n</sub> is defined as follows:&nbsp;</p>
 
@@ -36,7 +52,11 @@ T_4 = 1 + 1 + 2 = 4
 	<li>The answer is guaranteed to fit within a 32-bit integer, ie. <code>answer &lt;= 2^31 - 1</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Dynamic Programming
 
@@ -50,6 +70,8 @@ The time complexity is $O(n)$, and the space complexity is $O(1)$. Here, $n$ is 
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def tribonacci(self, n: int) -> int:
@@ -58,6 +80,8 @@ class Solution:
             a, b, c = b, c, a + b + c
         return a
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -73,6 +97,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -90,6 +116,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func tribonacci(n int) int {
 	a, b, c := 0, 1, 1
@@ -99,6 +127,8 @@ func tribonacci(n int) int {
 	return a
 }
 ```
+
+#### TypeScript
 
 ```ts
 function tribonacci(n: number): number {
@@ -142,6 +172,8 @@ function pow(a: number[][], n: number): number[][] {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number} n
@@ -160,6 +192,8 @@ var tribonacci = function (n) {
     return a;
 };
 ```
+
+#### PHP
 
 ```php
 class Solution {
@@ -183,6 +217,10 @@ class Solution {
 ```
 
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### Solution 2: Matrix Exponentiation to Accelerate Recurrence
 
@@ -212,34 +250,30 @@ The time complexity is $O(\log n)$, and the space complexity is $O(1)$.
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
+import numpy as np
+
+
 class Solution:
     def tribonacci(self, n: int) -> int:
-        def mul(a: List[List[int]], b: List[List[int]]) -> List[List[int]]:
-            m, n = len(a), len(b[0])
-            c = [[0] * n for _ in range(m)]
-            for i in range(m):
-                for j in range(n):
-                    for k in range(len(a[0])):
-                        c[i][j] = c[i][j] + a[i][k] * b[k][j]
-            return c
-
-        def pow(a: List[List[int]], n: int) -> List[List[int]]:
-            res = [[1, 1, 0]]
-            while n:
-                if n & 1:
-                    res = mul(res, a)
-                n >>= 1
-                a = mul(a, a)
-            return res
-
         if n == 0:
             return 0
         if n < 3:
             return 1
-        a = [[1, 1, 0], [1, 0, 1], [1, 0, 0]]
-        return sum(pow(a, n - 3)[0])
+        factor = np.asmatrix([(1, 1, 0), (1, 0, 1), (1, 0, 0)], np.dtype("O"))
+        res = np.asmatrix([(1, 1, 0)], np.dtype("O"))
+        n -= 3
+        while n:
+            if n & 1:
+                res *= factor
+            factor *= factor
+            n >>= 1
+        return res.sum()
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -286,6 +320,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -329,6 +365,8 @@ private:
     }
 };
 ```
+
+#### Go
 
 ```go
 func tribonacci(n int) (ans int) {
@@ -374,6 +412,8 @@ func pow(a [][]int, n int) [][]int {
 	return res
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -423,31 +463,6 @@ function pow(a, n) {
 
 <!-- tabs:end -->
 
-### Solution 3
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```python
-import numpy as np
-
-
-class Solution:
-    def tribonacci(self, n: int) -> int:
-        if n == 0:
-            return 0
-        if n < 3:
-            return 1
-        factor = np.mat([(1, 1, 0), (1, 0, 1), (1, 0, 0)], np.dtype("O"))
-        res = np.mat([(1, 1, 0)], np.dtype("O"))
-        n -= 3
-        while n:
-            if n & 1:
-                res *= factor
-            factor *= factor
-            n >>= 1
-        return res.sum()
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

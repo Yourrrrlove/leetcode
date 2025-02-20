@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2100-2199/2132.Stamping%20the%20Grid/README_EN.md
+rating: 2364
+source: Biweekly Contest 69 Q4
+tags:
+    - Greedy
+    - Array
+    - Matrix
+    - Prefix Sum
+---
+
+<!-- problem:start -->
+
 # [2132. Stamping the Grid](https://leetcode.com/problems/stamping-the-grid)
 
 [中文文档](/solution/2100-2199/2132.Stamping%20the%20Grid/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an <code>m x n</code> binary matrix <code>grid</code> where each cell is either <code>0</code> (empty) or <code>1</code> (occupied).</p>
 
@@ -48,7 +65,11 @@
 	<li><code>1 &lt;= stampHeight, stampWidth &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Two-Dimensional Prefix Sum + Two-Dimensional Difference
 
@@ -72,6 +93,8 @@ Finally, we perform a prefix sum operation on the two-dimensional difference arr
 The time complexity is $O(m \times n)$, and the space complexity is $O(m \times n)$. Here, $m$ and $n$ are the height and width of the two-dimensional matrix, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -99,6 +122,8 @@ class Solution:
                     return False
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -134,6 +159,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -172,6 +199,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func possibleToStamp(grid [][]int, stampHeight int, stampWidth int) bool {
@@ -215,6 +244,8 @@ func possibleToStamp(grid [][]int, stampHeight int, stampWidth int) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function possibleToStamp(grid: number[][], stampHeight: number, stampWidth: number): boolean {
     const m = grid.length;
@@ -251,6 +282,8 @@ function possibleToStamp(grid: number[][], stampHeight: number, stampWidth: numb
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn possible_to_stamp(grid: Vec<Vec<i32>>, stamp_height: i32, stamp_width: i32) -> bool {
@@ -282,9 +315,8 @@ impl Solution {
                 // Check the bound
                 if x <= n && y <= m {
                     // If the region can be sticked (All cells are empty, which means the sum will be zero)
-                    if
-                        prefix_vec[x][y] - prefix_vec[x][j] - prefix_vec[i][y] + prefix_vec[i][j] ==
-                        0
+                    if prefix_vec[x][y] - prefix_vec[x][j] - prefix_vec[i][y] + prefix_vec[i][j]
+                        == 0
                     {
                         // Update the difference vector
                         diff_vec[i][j] += 1;
@@ -319,6 +351,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -362,6 +396,82 @@ var possibleToStamp = function (grid, stampHeight, stampWidth) {
 };
 ```
 
+#### Kotlin
+
+```kotlin
+class Solution {
+    fun possibleToStamp(grid: Array<IntArray>, stampHeight: Int, stampWidth: Int): Boolean {
+        val m = grid.size
+        val n = grid[0].size
+
+        var prefix_sums_matrix = Array(m + 1) { IntArray(n + 1) }
+        var diff_matrix = Array(m + 1) { IntArray(n + 1) }
+        var sum_matrix = Array(m + 1) { IntArray(n + 1) }
+
+        for (i in 0..<m) {
+            for (j in 0..<n) {
+                prefix_sums_matrix[i + 1][j + 1] =
+                    prefix_sums_matrix[i + 1][j] +
+                    prefix_sums_matrix[i][j + 1] -
+                    prefix_sums_matrix[i][j] +
+                    grid[i][j]
+            }
+        }
+
+        for (i in 0..<m) {
+            for (j in 0..<n) {
+                if (grid[i][j] != 0) {
+                    continue
+                }
+
+                val bottom = i + stampHeight
+                val right = j + stampWidth
+
+                if (bottom > m || right > n) {
+                    continue
+                }
+
+                val sum = prefix_sums_matrix[bottom][right] -
+                    prefix_sums_matrix[bottom][j] -
+                    prefix_sums_matrix[i][right] +
+                    prefix_sums_matrix[i][j]
+
+                if (sum == 0) {
+                    diff_matrix[i][j] += 1
+                    diff_matrix[bottom][right] += 1
+
+                    diff_matrix[i][right] -= 1
+                    diff_matrix[bottom][j] -= 1
+                }
+            }
+        }
+
+        for (i in 0..<m) {
+            for (j in 0..<n) {
+                if (grid[i][j] != 0) {
+                    continue
+                }
+
+                val sum = sum_matrix[i][j + 1] +
+                    sum_matrix[i + 1][j] -
+                    sum_matrix[i][j] +
+                    diff_matrix[i][j]
+
+                if (sum == 0) {
+                    return false
+                }
+
+                sum_matrix[i + 1][j + 1] = sum
+            }
+        }
+
+        return true
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

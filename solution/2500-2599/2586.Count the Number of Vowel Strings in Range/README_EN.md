@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2586.Count%20the%20Number%20of%20Vowel%20Strings%20in%20Range/README_EN.md
+rating: 1178
+source: Weekly Contest 336 Q1
+tags:
+    - Array
+    - String
+    - Counting
+---
+
+<!-- problem:start -->
+
 # [2586. Count the Number of Vowel Strings in Range](https://leetcode.com/problems/count-the-number-of-vowel-strings-in-range)
 
 [中文文档](/solution/2500-2599/2586.Count%20the%20Number%20of%20Vowel%20Strings%20in%20Range/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> array of string <code>words</code> and two integers <code>left</code> and <code>right</code>.</p>
 
@@ -46,7 +62,11 @@ The number of vowel strings in the mentioned range is 3.
 	<li><code>0 &lt;= left &lt;= right &lt; words.length</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Simulation
 
@@ -58,6 +78,8 @@ The time complexity is $O(m)$, and the space complexity is $O(1)$. Where $m = ri
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def vowelStrings(self, words: List[str], left: int, right: int) -> int:
@@ -65,6 +87,8 @@ class Solution:
             w[0] in 'aeiou' and w[-1] in 'aeiou' for w in words[left : right + 1]
         )
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -85,6 +109,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -102,6 +128,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func vowelStrings(words []string, left int, right int) (ans int) {
 	check := func(c byte) bool {
@@ -115,6 +143,8 @@ func vowelStrings(words []string, left int, right int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function vowelStrings(words: string[], left: number, right: number): number {
@@ -130,12 +160,13 @@ function vowelStrings(words: string[], left: number, right: number): number {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn vowel_strings(words: Vec<String>, left: i32, right: i32) -> i32 {
-        let check = |c: u8| -> bool {
-            c == b'a' || c == b'e' || c == b'i' || c == b'o' || c == b'u'
-        };
+        let check =
+            |c: u8| -> bool { c == b'a' || c == b'e' || c == b'i' || c == b'o' || c == b'u' };
 
         let mut ans = 0;
         for i in left..=right {
@@ -152,4 +183,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

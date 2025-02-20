@@ -1,10 +1,19 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/lcci/01.05.One%20Away/README.md
+---
+
+<!-- problem:start -->
+
 # [面试题 01.05. 一次编辑](https://leetcode.cn/problems/one-away-lcci)
 
 [English Version](/lcci/01.05.One%20Away/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
+
 <p>字符串有三种编辑操作:插入一个字符、删除一个字符或者替换一个字符。 给定两个字符串，编写一个函数判定它们是否只需要一次(或者零次)编辑。</p>
 
 <p>&nbsp;</p>
@@ -26,21 +35,27 @@ second = &quot;pal&quot;
 <strong>输出:</strong> False
 </pre>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：分情况讨论 + 双指针
 
-我们将字符串 $first$ 和 $second$ 的长度记为 $m$ 和 $n$，不妨设 $m \geq n$。
+我们将字符串 $\textit{first}$ 和 $\textit{second}$ 的长度记为 $m$ 和 $n$，不妨设 $m \geq n$。
 
 接下来分情况讨论：
 
--   当 $m - n \gt 1$ 时，$first$ 和 $second$ 无法通过一次编辑得到，返回 `false`；
--   当 $m = n$ 时，$first$ 和 $second$ 只有在且仅在有且仅有一个字符不同的情况下才能通过一次编辑得到；
--   当 $m - n = 1$ 时，$first$ 和 $second$ 只有在且仅在 $second$ 是 $first$ 删除一个字符后得到的情况下才能通过一次编辑得到，我们可以使用双指针来实现。
+-   当 $m - n \gt 1$ 时，$\textit{first}$ 和 $\textit{second}$ 无法通过一次编辑得到，返回 `false`；
+-   当 $m = n$ 时，$\textit{first}$ 和 $\textit{second}$ 只有在且仅在有且仅有一个字符不同的情况下才能通过一次编辑得到；
+-   当 $m - n = 1$ 时，$\textit{first}$ 和 $\textit{second}$ 只有在且仅在 $\textit{second}$ 是 $\textit{first}$ 删除一个字符后得到的情况下才能通过一次编辑得到，我们可以使用双指针来实现。
 
 时间复杂度 $O(n)$，其中 $n$ 为字符串长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -61,6 +76,8 @@ class Solution:
             i += 1
         return cnt < 2
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -94,6 +111,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -129,6 +148,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func oneEditAway(first string, second string) bool {
 	m, n := len(first), len(second)
@@ -159,6 +180,8 @@ func oneEditAway(first string, second string) bool {
 	return cnt < 2
 }
 ```
+
+#### TypeScript
 
 ```ts
 function oneEditAway(first: string, second: string): boolean {
@@ -194,6 +217,8 @@ function oneEditAway(first: string, second: string): boolean {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn one_edit_away(first: String, second: String) -> bool {
@@ -223,6 +248,52 @@ impl Solution {
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func oneEditAway(_ first: String, _ second: String) -> Bool {
+        let m = first.count, n = second.count
+        if m < n {
+            return oneEditAway(second, first)
+        }
+        if m - n > 1 {
+            return false
+        }
+
+        var cnt = 0
+        var firstIndex = first.startIndex
+        var secondIndex = second.startIndex
+
+        if m == n {
+            while secondIndex != second.endIndex {
+                if first[firstIndex] != second[secondIndex] {
+                    cnt += 1
+                    if cnt > 1 {
+                        return false
+                    }
+                }
+                firstIndex = first.index(after: firstIndex)
+                secondIndex = second.index(after: secondIndex)
+            }
+            return true
+        } else {
+            while firstIndex != first.endIndex {
+                if secondIndex == second.endIndex || (secondIndex != second.endIndex && first[firstIndex] != second[secondIndex]) {
+                    cnt += 1
+                } else {
+                    secondIndex = second.index(after: secondIndex)
+                }
+                firstIndex = first.index(after: firstIndex)
+            }
+        }
+        return cnt < 2
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

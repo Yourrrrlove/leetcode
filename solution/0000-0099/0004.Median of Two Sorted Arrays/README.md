@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0004.Median%20of%20Two%20Sorted%20Arrays/README.md
+tags:
+    - 数组
+    - 二分查找
+    - 分治
+---
+
+<!-- problem:start -->
+
 # [4. 寻找两个正序数组的中位数](https://leetcode.cn/problems/median-of-two-sorted-arrays)
 
 [English Version](/solution/0000-0099/0004.Median%20of%20Two%20Sorted%20Arrays/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定两个大小分别为 <code>m</code> 和 <code>n</code> 的正序（从小到大）数组&nbsp;<code>nums1</code> 和&nbsp;<code>nums2</code>。请你找出并返回这两个正序数组的 <strong>中位数</strong> 。</p>
 
@@ -43,7 +55,11 @@
 	<li><code>-10<sup>6</sup> &lt;= nums1[i], nums2[i] &lt;= 10<sup>6</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：分治
 
@@ -66,6 +82,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
@@ -86,6 +104,8 @@ class Solution:
         b = f(0, 0, (m + n + 2) // 2)
         return (a + b) / 2
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -122,6 +142,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -148,6 +170,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
@@ -181,6 +205,8 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
     const m = nums1.length;
@@ -205,6 +231,8 @@ function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
     return (a + b) / 2;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -235,6 +263,8 @@ var findMedianSortedArrays = function (nums1, nums2) {
     return (a + b) / 2;
 };
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -271,6 +301,32 @@ public class Solution {
 }
 ```
 
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param int[] $nums1
+     * @param int[] $nums2
+     * @return float
+     */
+
+    function findMedianSortedArrays($nums1, $nums2) {
+        $arr = array_merge($nums1, $nums2);
+        sort($arr);
+        $cnt_arr = count($arr);
+
+        if ($cnt_arr % 2) {
+            return $arr[$cnt_arr / 2];
+        } else {
+            return ($arr[intdiv($cnt_arr, 2) - 1] + $arr[intdiv($cnt_arr, 2)]) / 2;
+        }
+    }
+}
+```
+
+#### Nim
+
 ```nim
 import std/[algorithm, sequtils]
 
@@ -296,4 +352,6 @@ proc medianOfTwoSortedArrays(nums1: seq[int], nums2: seq[int]): float =
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

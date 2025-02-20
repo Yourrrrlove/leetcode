@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1100-1199/1106.Parsing%20A%20Boolean%20Expression/README_EN.md
+rating: 1880
+source: Weekly Contest 143 Q4
+tags:
+    - Stack
+    - Recursion
+    - String
+---
+
+<!-- problem:start -->
+
 # [1106. Parsing A Boolean Expression](https://leetcode.com/problems/parsing-a-boolean-expression)
 
 [中文文档](/solution/1100-1199/1106.Parsing%20A%20Boolean%20Expression/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>A <strong>boolean expression</strong> is an expression that evaluates to either <code>true</code> or <code>false</code>. It can be in one of the following shapes:</p>
 
@@ -56,7 +72,11 @@ Then, evaluate !(f) --&gt; NOT false --&gt; true. We return true.
 	<li>expression[i] is one following characters: <code>&#39;(&#39;</code>, <code>&#39;)&#39;</code>, <code>&#39;&amp;&#39;</code>, <code>&#39;|&#39;</code>, <code>&#39;!&#39;</code>, <code>&#39;t&#39;</code>, <code>&#39;f&#39;</code>, and <code>&#39;,&#39;</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Stack
 
@@ -72,6 +92,8 @@ After traversing the expression `expression`, there is only one character left i
 The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the expression `expression`.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -96,6 +118,8 @@ class Solution:
                 stk.append(c)
         return stk[0] == 't'
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -123,6 +147,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -152,6 +178,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func parseBoolExpr(expression string) bool {
 	stk := []rune{}
@@ -180,6 +208,8 @@ func parseBoolExpr(expression string) bool {
 	return stk[0] == 't'
 }
 ```
+
+#### TypeScript
 
 ```ts
 function parseBoolExpr(expression: string): boolean {
@@ -212,6 +242,8 @@ function parseBoolExpr(expression: string): boolean {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     fn dfs(i: &mut usize, expr: &[u8]) -> Vec<bool> {
@@ -234,18 +266,10 @@ impl Solution {
                     res.push(!Self::dfs(i, expr)[0]);
                 }
                 b'&' => {
-                    res.push(
-                        Self::dfs(i, expr)
-                            .iter()
-                            .all(|v| *v)
-                    );
+                    res.push(Self::dfs(i, expr).iter().all(|v| *v));
                 }
                 b'|' => {
-                    res.push(
-                        Self::dfs(i, expr)
-                            .iter()
-                            .any(|v| *v)
-                    );
+                    res.push(Self::dfs(i, expr).iter().any(|v| *v));
                 }
                 _ => {}
             }
@@ -263,4 +287,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

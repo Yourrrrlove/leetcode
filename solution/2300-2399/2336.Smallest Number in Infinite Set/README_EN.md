@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2336.Smallest%20Number%20in%20Infinite%20Set/README_EN.md
+rating: 1375
+source: Weekly Contest 301 Q2
+tags:
+    - Design
+    - Hash Table
+    - Ordered Set
+    - Heap (Priority Queue)
+---
+
+<!-- problem:start -->
+
 # [2336. Smallest Number in Infinite Set](https://leetcode.com/problems/smallest-number-in-infinite-set)
 
 [中文文档](/solution/2300-2399/2336.Smallest%20Number%20in%20Infinite%20Set/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You have a set which contains all positive integers <code>[1, 2, 3, 4, 5, ...]</code>.</p>
 
@@ -45,7 +62,11 @@ smallestInfiniteSet.popSmallest(); // return 5, and remove it from the set.
 	<li>At most <code>1000</code> calls will be made <strong>in total</strong> to <code>popSmallest</code> and <code>addBack</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Ordered Set + Simulation
 
@@ -66,10 +87,9 @@ The space complexity is $O(n)$.
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedSet
-
-
 class SmallestInfiniteSet:
     def __init__(self):
         self.s = SortedSet(range(1, 1001))
@@ -88,6 +108,8 @@ class SmallestInfiniteSet:
 # param_1 = obj.popSmallest()
 # obj.addBack(num)
 ```
+
+#### Java
 
 ```java
 class SmallestInfiniteSet {
@@ -115,6 +137,8 @@ class SmallestInfiniteSet {
  * obj.addBack(num);
  */
 ```
+
+#### C++
 
 ```cpp
 class SmallestInfiniteSet {
@@ -147,6 +171,8 @@ private:
  */
 ```
 
+#### Go
+
 ```go
 type SmallestInfiniteSet struct {
 	s *treemap.Map
@@ -177,6 +203,8 @@ func (this *SmallestInfiniteSet) AddBack(num int) {
  * obj.AddBack(num);
  */
 ```
+
+#### TypeScript
 
 ```ts
 class SmallestInfiniteSet {
@@ -846,6 +874,8 @@ class TreeMultiSet<T = number> {
  */
 ```
 
+#### Rust
+
 ```rust
 use std::collections::BTreeSet;
 
@@ -871,19 +901,20 @@ impl SmallestInfiniteSet {
     fn add_back(&mut self, num: i32) {
         self.s.insert(num);
     }
-}/**
- * Your SmallestInfiniteSet object will be instantiated and called as such:
- * let obj = SmallestInfiniteSet::new();
- * let ret_1: i32 = obj.pop_smallest();
- * obj.add_back(num);
- */
+}
 ```
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 class SmallestInfiniteSet {
@@ -923,4 +954,6 @@ class SmallestInfiniteSet {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

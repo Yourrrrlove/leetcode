@@ -1,10 +1,20 @@
-# [2324. 产品销售分析 IV](https://leetcode.cn/problems/product-sales-analysis-iv)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2324.Product%20Sales%20Analysis%20IV/README.md
+tags:
+    - 数据库
+---
+
+<!-- problem:start -->
+
+# [2324. 产品销售分析 IV 🔒](https://leetcode.cn/problems/product-sales-analysis-iv)
 
 [English Version](/solution/2300-2399/2324.Product%20Sales%20Analysis%20IV/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>表: <code>Sales</code></p>
 
@@ -85,17 +95,23 @@ Product 表:
     - 在产品 3 上花费 7 * 15 = 105。
 用户101在产品3上花的钱最多。
 用户 102:
-    - 在产品 1 上花费 (9 + 7)* 10 = 150
+    - 在产品 1 上花费 (9 + 6)* 10 = 150
     - 在产品 2 上花费 6 * 25 = 150
     - 在产品 3 上花费 10 * 15 = 150。
 用户 102 在产品 1、2、3 上花的钱最多。
 </pre>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -120,4 +136,6 @@ WHERE rk = 1;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

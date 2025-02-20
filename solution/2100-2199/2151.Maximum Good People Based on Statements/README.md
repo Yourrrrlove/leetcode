@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2100-2199/2151.Maximum%20Good%20People%20Based%20on%20Statements/README.md
+rating: 1979
+source: 第 277 场周赛 Q4
+tags:
+    - 位运算
+    - 数组
+    - 回溯
+    - 枚举
+---
+
+<!-- problem:start -->
+
 # [2151. 基于陈述统计最多好人数](https://leetcode.cn/problems/maximum-good-people-based-on-statements)
 
 [English Version](/solution/2100-2199/2151.Maximum%20Good%20People%20Based%20on%20Statements/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>游戏中存在两种角色：</p>
 
@@ -86,7 +101,11 @@
 	<li><code>statements[i][i] == 2</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：二进制枚举
 
@@ -96,21 +115,25 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def maximumGood(self, statements: List[List[int]]) -> int:
-        def check(mask):
+        def check(mask: int) -> int:
             cnt = 0
-            for i, s in enumerate(statements):
-                if (mask >> i) & 1:
-                    for j, v in enumerate(s):
-                        if v < 2 and ((mask >> j) & 1) != v:
+            for i, row in enumerate(statements):
+                if mask >> i & 1:
+                    for j, x in enumerate(row):
+                        if x < 2 and (mask >> j & 1) != x:
                             return 0
                     cnt += 1
             return cnt
 
-        return max(check(mask) for mask in range(1, 1 << len(statements)))
+        return max(check(i) for i in range(1, 1 << len(statements)))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -141,6 +164,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -167,6 +192,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maximumGood(statements [][]int) int {
 	n := len(statements)
@@ -191,6 +218,8 @@ func maximumGood(statements [][]int) int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function maximumGood(statements: number[][]): number {
@@ -220,4 +249,6 @@ function maximumGood(statements: number[][]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

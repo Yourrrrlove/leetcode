@@ -1,8 +1,27 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0900-0999/0912.Sort%20an%20Array/README_EN.md
+tags:
+    - Array
+    - Divide and Conquer
+    - Bucket Sort
+    - Counting Sort
+    - Radix Sort
+    - Sorting
+    - Heap (Priority Queue)
+    - Merge Sort
+---
+
+<!-- problem:start -->
+
 # [912. Sort an Array](https://leetcode.com/problems/sort-an-array)
 
 [中文文档](/solution/0900-0999/0912.Sort%20an%20Array/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an array of integers <code>nums</code>, sort the array in ascending order and return it.</p>
 
@@ -33,11 +52,17 @@
 	<li><code>-5 * 10<sup>4</sup> &lt;= nums[i] &lt;= 5 * 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -62,6 +87,8 @@ class Solution:
         quick_sort(0, len(nums) - 1)
         return nums
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -96,6 +123,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -123,6 +152,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func sortArray(nums []int) []int {
@@ -158,6 +189,8 @@ func quickSort(nums []int, l, r int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function sortArray(nums: number[]): number[] {
     function quickSort(l: number, r: number) {
@@ -182,6 +215,8 @@ function sortArray(nums: number[]): number[] {
     return nums;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -212,11 +247,87 @@ var sortArray = function (nums) {
 };
 ```
 
+#### Rust
+
+```rs
+impl Solution {
+    pub fn sort_array(mut nums: Vec<i32>) -> Vec<i32> {
+        let n = nums.len();
+        Self::quick_sort(&mut nums, 0, n - 1);
+        return nums;
+    }
+
+    fn quick_sort(nums: &mut Vec<i32>, left: usize, right: usize) {
+        if left >= right {
+            return;
+        }
+        let mut i = left as i32 - 1;
+        let mut j = right as i32 + 1;
+        let pivot = nums[left];
+        while i < j {
+            loop {
+                i += 1;
+                if nums[i as usize] >= pivot {
+                    break;
+                }
+            }
+            loop {
+                j -= 1;
+                if nums[j as usize] <= pivot {
+                    break;
+                }
+            }
+            if i < j {
+                nums.swap(i as usize, j as usize);
+            }
+        }
+        Self::quick_sort(nums, left, j as usize);
+        Self::quick_sort(nums, j as usize + 1, right);
+    }
+}
+```
+
+#### Kotlin
+
+```kotlin
+class Solution {
+    fun sortArray(nums: IntArray): IntArray {
+        fun quickSort(left: Int, right: Int) {
+            if (left >= right) {
+                return
+            }
+            var i = left - 1
+            var j = right + 1
+            val pivot = nums[left]
+            while (i < j) {
+                while (nums[++i] < pivot) ;
+                while (nums[--j] > pivot) ;
+                if (i < j) {
+                    val temp = nums[i]
+                    nums[i] = nums[j]
+                    nums[j] = temp
+                }
+            }
+            quickSort(left, j)
+            quickSort(j + 1, right)
+        }
+        quickSort(0, nums.size - 1)
+        return nums
+    }
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -246,6 +357,8 @@ class Solution:
         merge_sort(0, len(nums) - 1)
         return nums
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -284,6 +397,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -319,6 +434,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func sortArray(nums []int) []int {
@@ -359,6 +476,8 @@ func mergeSort(nums []int, l, r int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function sortArray(nums: number[]): number[] {
     function mergetSort(l: number, r: number) {
@@ -392,6 +511,8 @@ function sortArray(nums: number[]): number[] {
     return nums;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -433,9 +554,15 @@ var sortArray = function (nums) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 3
 
 <!-- tabs:start -->
+
+#### Java
 
 ```java
 class Solution {
@@ -478,4 +605,6 @@ class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

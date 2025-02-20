@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2844.Minimum%20Operations%20to%20Make%20a%20Special%20Number/README_EN.md
+rating: 1588
+source: Weekly Contest 361 Q2
+tags:
+    - Greedy
+    - Math
+    - String
+    - Enumeration
+---
+
+<!-- problem:start -->
+
 # [2844. Minimum Operations to Make a Special Number](https://leetcode.com/problems/minimum-operations-to-make-a-special-number)
 
 [中文文档](/solution/2800-2899/2844.Minimum%20Operations%20to%20Make%20a%20Special%20Number/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> string <code>num</code> representing a non-negative integer.</p>
 
@@ -48,7 +65,11 @@ It can be shown that 1 is the minimum number of operations required to get a spe
 	<li><code>num</code> does not contain any leading zeros.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Memoization Search
 
@@ -65,6 +86,8 @@ The time complexity is $O(n \times 25)$, and the space complexity is $O(n \times
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def minimumOperations(self, num: str) -> int:
@@ -79,6 +102,8 @@ class Solution:
         n = len(num)
         return dfs(0, 0)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -107,6 +132,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -114,7 +141,7 @@ public:
         int n = num.size();
         int f[n][25];
         memset(f, -1, sizeof(f));
-        function<int(int, int)> dfs = [&](int i, int k) -> int {
+        auto dfs = [&](this auto&& dfs, int i, int k) -> int {
             if (i == n) {
                 return k == 0 ? 0 : n;
             }
@@ -129,6 +156,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minimumOperations(num string) int {
@@ -158,6 +187,8 @@ func minimumOperations(num string) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minimumOperations(num: string): number {
     const n = num.length;
@@ -179,4 +210,6 @@ function minimumOperations(num: string): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

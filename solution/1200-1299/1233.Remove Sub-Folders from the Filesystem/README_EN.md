@@ -1,12 +1,29 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1233.Remove%20Sub-Folders%20from%20the%20Filesystem/README_EN.md
+rating: 1544
+source: Weekly Contest 159 Q2
+tags:
+    - Depth-First Search
+    - Trie
+    - Array
+    - String
+---
+
+<!-- problem:start -->
+
 # [1233. Remove Sub-Folders from the Filesystem](https://leetcode.com/problems/remove-sub-folders-from-the-filesystem)
 
 [中文文档](/solution/1200-1299/1233.Remove%20Sub-Folders%20from%20the%20Filesystem/README.md)
 
 ## Description
 
+<!-- description:start -->
+
 <p>Given a list of folders <code>folder</code>, return <em>the folders after removing all <strong>sub-folders</strong> in those folders</em>. You may return the answer in <strong>any order</strong>.</p>
 
-<p>If a <code>folder[i]</code> is located within another <code>folder[j]</code>, it is called a <strong>sub-folder</strong> of it.</p>
+<p>If a <code>folder[i]</code> is located within another <code>folder[j]</code>, it is called a <strong>sub-folder</strong> of it. A sub-folder of <code>folder[j]</code> must start with <code>folder[j]</code>, followed by a <code>&quot;/&quot;</code>. For example, <code>&quot;/a/b&quot;</code> is a sub-folder of <code>&quot;/a&quot;</code>, but <code>&quot;/b&quot;</code> is not a sub-folder of <code>&quot;/a/b/c&quot;</code>.</p>
 
 <p>The format of a path is one or more concatenated strings of the form: <code>&#39;/&#39;</code> followed by one or more lowercase English letters.</p>
 
@@ -49,7 +66,11 @@
 	<li>Each folder name is <strong>unique</strong>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Sorting
 
@@ -60,6 +81,8 @@ After the traversal ends, the folders in the answer array are the answer require
 The time complexity is $O(n \times \log n \times m)$, and the space complexity is $O(m)$. Where $n$ and $m$ are the length of the array `folder` and the maximum length of the strings in the array `folder`, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,6 +95,8 @@ class Solution:
                 ans.append(f)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -93,6 +118,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -111,6 +138,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func removeSubfolders(folder []string) []string {
 	sort.Strings(folder)
@@ -125,7 +154,29 @@ func removeSubfolders(folder []string) []string {
 }
 ```
 
+#### TypeScript
+
+```ts
+function removeSubfolders(folder: string[]): string[] {
+    let s = folder[1];
+    return folder.sort().filter(x => !x.startsWith(s + '/') && (s = x));
+}
+```
+
+#### JavaScript
+
+```js
+function removeSubfolders(folder) {
+    let s = folder[1];
+    return folder.sort().filter(x => !x.startsWith(s + '/') && (s = x));
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### Solution 2: Trie
 
@@ -136,6 +187,8 @@ For each folder $f$ in the array `folder`, we first split $f$ into several subst
 The time complexity is $O(n \times m)$, and the space complexity is $O(n \times m)$. Where $n$ and $m$ are the length of the array `folder` and the maximum length of the strings in the array `folder`, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Trie:
@@ -172,6 +225,8 @@ class Solution:
             trie.insert(i, f)
         return [folder[i] for i in trie.search()]
 ```
+
+#### Java
 
 ```java
 class Trie {
@@ -222,6 +277,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Trie {
@@ -285,6 +342,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 type Trie struct {
 	children map[string]*Trie
@@ -337,11 +396,96 @@ func removeSubfolders(folder []string) []string {
 }
 ```
 
+#### TypeScript
+
+```ts
+function removeSubfolders(folder: string[]): string[] {
+    const createTrie = (): T => ({ '#': false, children: {} });
+    const trie = createTrie();
+
+    for (const f of folder) {
+        const path = f.split('/');
+        path.shift();
+
+        let node = trie;
+        for (const p of path) {
+            if (!node.children[p]) node.children[p] = createTrie();
+            node = node.children[p];
+        }
+        node['#'] = true;
+    }
+
+    const ans: string[] = [];
+    const dfs = (trie: T, path = '') => {
+        if (trie['#']) {
+            ans.push(path);
+            return;
+        }
+
+        for (const key in trie.children) {
+            dfs(trie.children[key], path + '/' + key);
+        }
+    };
+
+    dfs(trie);
+
+    return ans;
+}
+
+type T = {
+    '#': boolean;
+    children: Record<string, T>;
+};
+```
+
+#### JavaScript
+
+```js
+function removeSubfolders(folder) {
+    const createTrie = () => ({ '#': false, children: {} });
+    const trie = createTrie();
+
+    for (const f of folder) {
+        const path = f.split('/');
+        path.shift();
+
+        let node = trie;
+        for (const p of path) {
+            if (!node.children[p]) node.children[p] = createTrie();
+            node = node.children[p];
+        }
+        node['#'] = true;
+    }
+
+    const ans = [];
+    const dfs = (trie, path = '') => {
+        if (trie['#']) {
+            ans.push(path);
+            return;
+        }
+
+        for (const key in trie.children) {
+            dfs(trie.children[key], path + '/' + key);
+        }
+    };
+
+    dfs(trie);
+
+    return ans;
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### Solution 3
 
 <!-- tabs:start -->
+
+#### Go
 
 ```go
 type Trie struct {
@@ -394,4 +538,6 @@ func removeSubfolders(folder []string) (ans []string) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

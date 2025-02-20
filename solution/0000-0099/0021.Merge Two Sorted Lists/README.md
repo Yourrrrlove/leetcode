@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0021.Merge%20Two%20Sorted%20Lists/README.md
+tags:
+    - 递归
+    - 链表
+---
+
+<!-- problem:start -->
+
 # [21. 合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists)
 
 [English Version](/solution/0000-0099/0021.Merge%20Two%20Sorted%20Lists/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>将两个升序链表合并为一个新的 <strong>升序</strong> 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 </p>
 
@@ -41,7 +52,11 @@
 	<li><code>l1</code> 和 <code>l2</code> 均按 <strong>非递减顺序</strong> 排列</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：递归
 
@@ -53,6 +68,8 @@
 时间复杂度 $O(m + n)$，空间复杂度 $O(m + n)$。其中 $m$ 和 $n$ 分别为两个链表的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for singly-linked list.
@@ -73,6 +90,8 @@ class Solution:
             list2.next = self.mergeTwoLists(list1, list2.next)
             return list2
 ```
+
+#### Java
 
 ```java
 /**
@@ -104,6 +123,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for singly-linked list.
@@ -131,6 +152,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for singly-linked list.
@@ -155,6 +178,8 @@ func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 	}
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -183,6 +208,8 @@ function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode
 }
 ```
 
+#### Rust
+
 ```rust
 // Definition for singly-linked list.
 // #[derive(PartialEq, Eq, Clone, Debug)]
@@ -203,7 +230,7 @@ function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode
 impl Solution {
     pub fn merge_two_lists(
         list1: Option<Box<ListNode>>,
-        list2: Option<Box<ListNode>>
+        list2: Option<Box<ListNode>>,
     ) -> Option<Box<ListNode>> {
         match (list1, list2) {
             (None, None) => None,
@@ -222,6 +249,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -250,6 +279,8 @@ var mergeTwoLists = function (list1, list2) {
 };
 ```
 
+#### C#
+
 ```cs
 /**
  * Definition for singly-linked list.
@@ -264,27 +295,24 @@ var mergeTwoLists = function (list1, list2) {
  */
 public class Solution {
     public ListNode MergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode dummy = new ListNode();
-        ListNode cur = dummy;
-        while (list1 != null && list2 != null)
-        {
-            if (list1.val <= list2.val)
-            {
-                cur.next = list1;
-                list1 = list1.next;
-            }
-            else
-            {
-                cur.next = list2;
-                list2 = list2.next;
-            }
-            cur = cur.next;
+        if (list1 == null) {
+            return list2;
         }
-        cur.next = list1 == null ? list2 : list1;
-        return dummy.next;
+        if (list2 == null) {
+            return list1;
+        }
+        if (list1.val <= list2.val) {
+            list1.next = MergeTwoLists(list1.next, list2);
+            return list1;
+        } else {
+            list2.next = MergeTwoLists(list1, list2.next);
+            return list2;
+        }
     }
 }
 ```
+
+#### Ruby
 
 ```rb
 # Definition for singly-linked list.
@@ -299,24 +327,65 @@ public class Solution {
 # @param {ListNode} list2
 # @return {ListNode}
 def merge_two_lists(list1, list2)
-    dummy = ListNode.new()
-    cur = dummy
-    while list1 && list2
-        if list1.val <= list2.val
-            cur.next = list1
-            list1 = list1.next
-        else
-            cur.next = list2
-            list2 = list2.next
-        end
-        cur = cur.next
+    if list1.nil?
+        return list2
     end
-    cur.next = list1 || list2
-    dummy.next
+    if list2.nil?
+        return list1
+    end
+    if list1.val <= list2.val
+        list1.next = merge_two_lists(list1.next, list2)
+        return list1
+    else
+        list2.next = merge_two_lists(list1, list2.next)
+        return list2
+    end
 end
 ```
 
+#### PHP
+
+```php
+/**
+ * Definition for a singly-linked list.
+ * class ListNode {
+ *     public $val = 0;
+ *     public $next = null;
+ *     function __construct($val = 0, $next = null) {
+ *         $this->val = $val;
+ *         $this->next = $next;
+ *     }
+ * }
+ */
+class Solution {
+    /**
+     * @param ListNode $list1
+     * @param ListNode $list2
+     * @return ListNode
+     */
+    function mergeTwoLists($list1, $list2) {
+        if (is_null($list1)) {
+            return $list2;
+        }
+        if (is_null($list2)) {
+            return $list1;
+        }
+        if ($list1->val <= $list2->val) {
+            $list1->next = $this->mergeTwoLists($list1->next, $list2);
+            return $list1;
+        } else {
+            $list2->next = $this->mergeTwoLists($list1, $list2->next);
+            return $list2;
+        }
+    }
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### 方法二：迭代
 
@@ -329,6 +398,8 @@ end
 时间复杂度 $O(m + n)$，其中 $m$ 和 $n$ 分别为两个链表的长度。忽略答案链表的空间消耗，空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for singly-linked list.
@@ -353,6 +424,8 @@ class Solution:
         curr.next = list1 or list2
         return dummy.next
 ```
+
+#### Java
 
 ```java
 /**
@@ -384,6 +457,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 /**
@@ -417,6 +492,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for singly-linked list.
@@ -446,6 +523,8 @@ func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 	return dummy.Next
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -478,6 +557,8 @@ function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode
 }
 ```
 
+#### Rust
+
 ```rust
 // Definition for singly-linked list.
 // #[derive(PartialEq, Eq, Clone, Debug)]
@@ -498,7 +579,7 @@ function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode
 impl Solution {
     pub fn merge_two_lists(
         mut list1: Option<Box<ListNode>>,
-        mut list2: Option<Box<ListNode>>
+        mut list2: Option<Box<ListNode>>,
     ) -> Option<Box<ListNode>> {
         let mut new_list = ListNode::new(0);
         let mut cur = &mut new_list;
@@ -520,6 +601,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -552,6 +635,116 @@ var mergeTwoLists = function (list1, list2) {
 };
 ```
 
+#### C#
+
+```cs
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int val=0, ListNode next=null) {
+ *         this.val = val;
+ *         this.next = next;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode MergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode dummy = new ListNode();
+        ListNode curr = dummy;
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
+                curr.next = list1;
+                list1 = list1.next;
+            } else {
+                curr.next = list2;
+                list2 = list2.next;
+            }
+            curr = curr.next;
+        }
+        curr.next = list1 == null ? list2 : list1;
+        return dummy.next;
+    }
+}
+```
+
+#### Ruby
+
+```rb
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val = 0, _next = nil)
+#         @val = val
+#         @next = _next
+#     end
+# end
+# @param {ListNode} list1
+# @param {ListNode} list2
+# @return {ListNode}
+def merge_two_lists(list1, list2)
+    dummy = ListNode.new()
+    cur = dummy
+    while list1 && list2
+        if list1.val <= list2.val
+            cur.next = list1
+            list1 = list1.next
+        else
+            cur.next = list2
+            list2 = list2.next
+        end
+        cur = cur.next
+    end
+    cur.next = list1 || list2
+    dummy.next
+end
+```
+
+#### PHP
+
+```php
+# Definition for singly-linked list.
+# class ListNode {
+#     public $val;
+#     public $next;
+#     public function __construct($val = 0, $next = null)
+#     {
+#         $this->val = $val;
+#         $this->next = $next;
+#     }
+# }
+class Solution {
+    /**
+     * @param ListNode $list1
+     * @param ListNode $list2
+     * @return ListNode
+     */
+    function mergeTwoLists($list1, $list2) {
+        $dummy = new ListNode(0);
+        $current = $dummy;
+        while ($list1 != null && $list2 != null) {
+            if ($list1->val <= $list2->val) {
+                $current->next = $list1;
+                $list1 = $list1->next;
+            } else {
+                $current->next = $list2;
+                $list2 = $list2->next;
+            }
+            $current = $current->next;
+        }
+        if ($list1 != null) {
+            $current->next = $list1;
+        } elseif ($list2 != null) {
+            $current->next = $list2;
+        }
+        return $dummy->next;
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

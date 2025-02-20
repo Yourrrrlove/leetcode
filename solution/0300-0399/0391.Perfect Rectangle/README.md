@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0391.Perfect%20Rectangle/README.md
+tags:
+    - 数组
+    - 扫描线
+---
+
+<!-- problem:start -->
+
 # [391. 完美矩形](https://leetcode.cn/problems/perfect-rectangle)
 
 [English Version](/solution/0300-0399/0391.Perfect%20Rectangle/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个数组 <code>rectangles</code> ，其中 <code>rectangles[i] = [x<sub>i</sub>, y<sub>i</sub>, a<sub>i</sub>, b<sub>i</sub>]</code> 表示一个坐标轴平行的矩形。这个矩形的左下顶点是 <code>(x<sub>i</sub>, y<sub>i</sub>)</code> ，右上顶点是 <code>(a<sub>i</sub>, b<sub>i</sub>)</code> 。</p>
 
@@ -40,14 +51,21 @@
 <ul>
 	<li><code>1 &lt;= rectangles.length &lt;= 2 * 10<sup>4</sup></code></li>
 	<li><code>rectangles[i].length == 4</code></li>
-	<li><code>-10<sup>5</sup> &lt;= x<sub>i</sub>, y<sub>i</sub>, a<sub>i</sub>, b<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
+	<li><code>-10<sup>5</sup> &lt;= x<sub>i</sub> &lt; a<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
+	<li><code>-10<sup>5</sup> &lt;= y<sub>i</sub> &lt; b<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -83,6 +101,8 @@ class Solution:
 
         return all(c == 2 or c == 4 for c in cnt.values())
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -151,6 +171,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -194,6 +216,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 type pair struct {
@@ -245,4 +269,6 @@ func isRectangleCover(rectangles [][]int) bool {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

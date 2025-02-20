@@ -1,10 +1,27 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2200-2299/2290.Minimum%20Obstacle%20Removal%20to%20Reach%20Corner/README.md
+rating: 2137
+source: 第 295 场周赛 Q4
+tags:
+    - 广度优先搜索
+    - 图
+    - 数组
+    - 矩阵
+    - 最短路
+    - 堆（优先队列）
+---
+
+<!-- problem:start -->
+
 # [2290. 到达角落需要移除障碍物的最小数目](https://leetcode.cn/problems/minimum-obstacle-removal-to-reach-corner)
 
 [English Version](/solution/2200-2299/2290.Minimum%20Obstacle%20Removal%20to%20Reach%20Corner/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个下标从 <strong>0</strong> 开始的二维整数数组 <code>grid</code> ，数组大小为 <code>m x n</code> 。每个单元格都是两个值之一：</p>
 
@@ -54,7 +71,11 @@
 	<li><code>grid[0][0] == grid[m - 1][n - 1] == 0</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：双端队列 BFS
 
@@ -66,9 +87,13 @@
 
 时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是网格的行数和列数。
 
-相似题目：[1368. 使网格图至少有一条有效路径的最小代价](/solution/1300-1399/1368.Minimum%20Cost%20to%20Make%20at%20Least%20One%20Valid%20Path%20in%20a%20Grid/README.md)
+相似题目：
+
+-   [1368. 使网格图至少有一条有效路径的最小代价](https://github.com/doocs/leetcode/blob/main/solution/1300-1399/1368.Minimum%20Cost%20to%20Make%20at%20Least%20One%20Valid%20Path%20in%20a%20Grid/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -92,6 +117,8 @@ class Solution:
                     else:
                         q.append((x, y, k + 1))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -126,6 +153,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -159,6 +188,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minimumObstacles(grid [][]int) int {
@@ -197,6 +228,8 @@ func minimumObstacles(grid [][]int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minimumObstacles(grid: number[][]): number {
     const m = grid.length,
@@ -227,4 +260,6 @@ function minimumObstacles(grid: number[][]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

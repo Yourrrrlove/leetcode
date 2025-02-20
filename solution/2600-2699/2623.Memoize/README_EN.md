@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2623.Memoize/README_EN.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
 # [2623. Memoize](https://leetcode.com/problems/memoize)
 
 [中文文档](/solution/2600-2699/2623.Memoize/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a function <code>fn</code>, return a&nbsp;<strong>memoized</strong>&nbsp;version of that function.</p>
 
@@ -11,7 +23,7 @@
 <p>You can assume there are&nbsp;<strong>3&nbsp;</strong>possible input functions:&nbsp;<code>sum</code><strong>, </strong><code>fib</code><strong>,&nbsp;</strong>and&nbsp;<code>factorial</code><strong>.</strong></p>
 
 <ul>
-	<li><code>sum</code><strong>&nbsp;</strong>accepts two integers&nbsp;<code>a</code> and <code>b</code> and returns <code>a + b</code>.</li>
+	<li><code>sum</code><strong>&nbsp;</strong>accepts two integers&nbsp;<code>a</code> and <code>b</code> and returns <code>a + b</code>.&nbsp;Assume that if a value has already been cached for the arguments <code>(b, a)</code> where <code>a != b</code>, it cannot be used for the arguments <code>(a, b)</code>. For example, if the arguments are <code>(3, 2)</code> and <code>(2, 3)</code>, two separate calls should be made.</li>
 	<li><code>fib</code><strong>&nbsp;</strong>accepts a&nbsp;single integer&nbsp;<code>n</code> and&nbsp;returns&nbsp;<code>1</code> if <font face="monospace"><code>n &lt;= 1</code> </font>or<font face="monospace">&nbsp;<code>fib(n - 1) + fib(n - 2)</code>&nbsp;</font>otherwise.</li>
 	<li><code>factorial</code>&nbsp;accepts a single integer&nbsp;<code>n</code> and returns <code>1</code>&nbsp;if&nbsp;<code>n &lt;= 1</code>&nbsp;or&nbsp;<code>factorial(n - 1) * n</code>&nbsp;otherwise.</li>
 </ul>
@@ -73,17 +85,23 @@ values = [[5],[]]
 <ul>
 	<li><code>0 &lt;= a, b &lt;= 10<sup>5</sup></code></li>
 	<li><code>1 &lt;= n &lt;= 10</code></li>
-	<li><code>0 &lt;= actions.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>1 &lt;= actions.length &lt;= 10<sup>5</sup></code></li>
 	<li><code>actions.length === values.length</code></li>
 	<li><code>actions[i]</code> is one of &quot;call&quot; and &quot;getCallCount&quot;</li>
 	<li><code>fnName</code> is one of &quot;sum&quot;, &quot;factorial&quot; and&nbsp;&quot;fib&quot;</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 type Fn = (...params: any) => any;
@@ -115,4 +133,6 @@ function memoize(fn: Fn): Fn {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

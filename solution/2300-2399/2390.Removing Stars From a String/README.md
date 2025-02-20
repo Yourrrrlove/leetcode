@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2390.Removing%20Stars%20From%20a%20String/README.md
+rating: 1347
+source: 第 308 场周赛 Q2
+tags:
+    - 栈
+    - 字符串
+    - 模拟
+---
+
+<!-- problem:start -->
+
 # [2390. 从字符串中移除星号](https://leetcode.cn/problems/removing-stars-from-a-string)
 
 [English Version](/solution/2300-2399/2390.Removing%20Stars%20From%20a%20String/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个包含若干星号 <code>*</code> 的字符串 <code>s</code> 。</p>
 
@@ -55,7 +69,11 @@
 	<li><code>s</code> 可以执行上述操作</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：栈模拟
 
@@ -63,9 +81,11 @@
 
 最后我们将栈中元素拼接成字符串返回即可。
 
-时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为字符串 $s$ 的长度。
+时间复杂度 $O(n)$，其中 $n$ 是字符串 $s$ 的长度。忽略答案字符串的空间消耗，空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -78,6 +98,8 @@ class Solution:
                 ans.append(c)
         return ''.join(ans)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -94,6 +116,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -112,6 +136,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func removeStars(s string) string {
 	ans := []rune{}
@@ -126,6 +152,8 @@ func removeStars(s string) string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function removeStars(s: string): string {
     const ans: string[] = [];
@@ -139,6 +167,8 @@ function removeStars(s: string): string {
     return ans.join('');
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -156,6 +186,8 @@ impl Solution {
 }
 ```
 
+#### PHP
+
 ```php
 class Solution {
     /**
@@ -163,19 +195,23 @@ class Solution {
      * @return String
      */
     function removeStars($s) {
-        $rs = [];
-        for ($i = 0; $i < strlen($s); $i++) {
-            if ($s[$i] == '*') {
-                array_pop($rs);
+        $ans = [];
+        $n = strlen($s);
+        for ($i = 0; $i < $n; $i++) {
+            $c = $s[$i];
+            if ($c === '*') {
+                array_pop($ans);
             } else {
-                array_push($rs, $s[$i]);
+                $ans[] = $c;
             }
         }
-        return join($rs);
+        return implode('', $ans);
     }
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

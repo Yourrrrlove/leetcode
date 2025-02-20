@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2726.Calculator%20with%20Method%20Chaining/README_EN.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
 # [2726. Calculator with Method Chaining](https://leetcode.com/problems/calculator-with-method-chaining)
 
 [中文文档](/solution/2700-2799/2726.Calculator%20with%20Method%20Chaining/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Design a <code>Calculator</code> class. The class should provide the&nbsp;mathematical operations of&nbsp;addition, subtraction, multiplication, division, and exponentiation. It should also allow consecutive operations to be performed using method chaining.&nbsp;The <code>Calculator</code> class constructor should accept a number&nbsp;which serves as the&nbsp;initial value of <code>result</code>.</p>
 
@@ -68,11 +80,17 @@ The error should be thrown because we cannot divide by zero.
 	<li>Last action is always &quot;getResult&quot;</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 class Calculator {
@@ -118,4 +136,6 @@ class Calculator {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

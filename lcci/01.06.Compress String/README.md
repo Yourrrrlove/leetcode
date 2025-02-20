@@ -1,10 +1,19 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/lcci/01.06.Compress%20String/README.md
+---
+
+<!-- problem:start -->
+
 # [面试题 01.06. 字符串压缩](https://leetcode.cn/problems/compress-string-lcci)
 
 [English Version](/lcci/01.06.Compress%20String/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
+
 <p>字符串压缩。利用字符重复出现的次数，编写一种方法，实现基本的字符串压缩功能。比如，字符串<code>aabcccccaaa</code>会变为<code>a2b1c5a3</code>。若“压缩”后的字符串没有变短，则返回原先的字符串。你可以假设字符串中只包含大小写英文字母（a至z）。</p>
 
 <p> <strong>示例1:</strong></p>
@@ -28,7 +37,11 @@
 <li>字符串长度在[0, 50000]范围内。</li>
 </ol>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：双指针
 
@@ -40,6 +53,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def compressString(self, S: str) -> str:
@@ -47,19 +62,7 @@ class Solution:
         return min(S, t, key=len)
 ```
 
-```python
-class Solution:
-    def compressString(self, S: str) -> str:
-        t = []
-        i, n = 0, len(S)
-        while i < n:
-            j = i + 1
-            while j < n and S[j] == S[i]:
-                j += 1
-            t.append(S[i] + str(j - i))
-            i = j
-        return min(S, "".join(t), key=len)
-```
+#### Java
 
 ```java
 class Solution {
@@ -79,6 +82,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -100,6 +105,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func compressString(S string) string {
 	n := len(S)
@@ -119,6 +126,8 @@ func compressString(S string) string {
 	return S
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -147,6 +156,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {string} S
@@ -167,6 +178,32 @@ var compressString = function (S) {
 };
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func compressString(_ S: String) -> String {
+        let n = S.count
+        var compressed = ""
+        var i = 0
+
+        while i < n {
+            var j = i
+            let currentChar = S[S.index(S.startIndex, offsetBy: i)]
+            while j < n && S[S.index(S.startIndex, offsetBy: j)] == currentChar {
+                j += 1
+            }
+            compressed += "\(currentChar)\(j - i)"
+            i = j
+        }
+
+        return compressed.count < n ? compressed : S
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

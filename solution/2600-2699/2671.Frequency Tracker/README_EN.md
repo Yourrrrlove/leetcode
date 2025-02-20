@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2671.Frequency%20Tracker/README_EN.md
+rating: 1509
+source: Weekly Contest 344 Q2
+tags:
+    - Design
+    - Hash Table
+---
+
+<!-- problem:start -->
+
 # [2671. Frequency Tracker](https://leetcode.com/problems/frequency-tracker)
 
 [中文文档](/solution/2600-2699/2671.Frequency%20Tracker/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Design a data structure that keeps track of the values in it and answers some queries regarding their frequencies.</p>
 
@@ -76,11 +91,27 @@ frequencyTracker.hasFrequency(1); // Returns true, because 3 occurs once
 	<li>At most, <code>2 *&nbsp;10<sup>5</sup></code>&nbsp;calls will be made to <code>add</code>, <code>deleteOne</code>, and <code>hasFrequency</code>&nbsp;in <strong>total</strong>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Hash Table
+
+We define two hash tables, where $cnt$ is used to record the occurrence count of each number, and $freq$ is used to record the count of numbers with each frequency.
+
+For the `add` operation, we directly decrement the value corresponding to $cnt[number]$ in the hash table $freq$, then increment $cnt[number]$, and finally increment the value corresponding to $cnt[number]$ in $freq$.
+
+For the `deleteOne` operation, we first check if $cnt[number]$ is greater than zero. If it is, we decrement the value corresponding to $cnt[number]$ in the hash table $freq$, then decrement $cnt[number]$, and finally increment the value corresponding to $cnt[number]$ in $freq$.
+
+For the `hasFrequency` operation, we directly return whether $freq[frequency]$ is greater than zero.
+
+In terms of time complexity, since we use hash tables, the time complexity of each operation is $O(1)$. The space complexity is $O(n)$, where $n$ is the number of distinct numbers.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class FrequencyTracker:
@@ -89,17 +120,15 @@ class FrequencyTracker:
         self.freq = defaultdict(int)
 
     def add(self, number: int) -> None:
-        if self.freq[self.cnt[number]] > 0:
-            self.freq[self.cnt[number]] -= 1
+        self.freq[self.cnt[number]] -= 1
         self.cnt[number] += 1
         self.freq[self.cnt[number]] += 1
 
     def deleteOne(self, number: int) -> None:
-        if self.cnt[number] == 0:
-            return
-        self.freq[self.cnt[number]] -= 1
-        self.cnt[number] -= 1
-        self.freq[self.cnt[number]] += 1
+        if self.cnt[number]:
+            self.freq[self.cnt[number]] -= 1
+            self.cnt[number] -= 1
+            self.freq[self.cnt[number]] += 1
 
     def hasFrequency(self, frequency: int) -> bool:
         return self.freq[frequency] > 0
@@ -112,6 +141,8 @@ class FrequencyTracker:
 # param_3 = obj.hasFrequency(frequency)
 ```
 
+#### Java
+
 ```java
 class FrequencyTracker {
     private Map<Integer, Integer> cnt = new HashMap<>();
@@ -121,22 +152,17 @@ class FrequencyTracker {
     }
 
     public void add(int number) {
-        int f = cnt.getOrDefault(number, 0);
-        if (freq.getOrDefault(f, 0) > 0) {
-            freq.merge(f, -1, Integer::sum);
-        }
+        freq.merge(cnt.getOrDefault(number, 0), -1, Integer::sum);
         cnt.merge(number, 1, Integer::sum);
-        freq.merge(f + 1, 1, Integer::sum);
+        freq.merge(cnt.get(number), 1, Integer::sum);
     }
 
     public void deleteOne(int number) {
-        int f = cnt.getOrDefault(number, 0);
-        if (f == 0) {
-            return;
+        if (cnt.getOrDefault(number, 0) > 0) {
+            freq.merge(cnt.get(number), -1, Integer::sum);
+            cnt.merge(number, -1, Integer::sum);
+            freq.merge(cnt.get(number), 1, Integer::sum);
         }
-        freq.merge(f, -1, Integer::sum);
-        cnt.merge(number, -1, Integer::sum);
-        freq.merge(f - 1, 1, Integer::sum);
     }
 
     public boolean hasFrequency(int frequency) {
@@ -153,6 +179,8 @@ class FrequencyTracker {
  */
 ```
 
+#### C++
+
 ```cpp
 class FrequencyTracker {
 public:
@@ -160,22 +188,17 @@ public:
     }
 
     void add(int number) {
-        int f = cnt[number];
-        if (f > 0) {
-            freq[f]--;
-        }
+        freq[cnt[number]]--;
         cnt[number]++;
-        freq[f + 1]++;
+        freq[cnt[number]]++;
     }
 
     void deleteOne(int number) {
-        int f = cnt[number];
-        if (f == 0) {
-            return;
+        if (cnt[number]) {
+            freq[cnt[number]]--;
+            cnt[number]--;
+            freq[cnt[number]]++;
         }
-        freq[f]--;
-        cnt[number]--;
-        freq[f - 1]++;
     }
 
     bool hasFrequency(int frequency) {
@@ -196,6 +219,8 @@ private:
  */
 ```
 
+#### Go
+
 ```go
 type FrequencyTracker struct {
 	cnt  map[int]int
@@ -207,22 +232,17 @@ func Constructor() FrequencyTracker {
 }
 
 func (this *FrequencyTracker) Add(number int) {
-	f := this.cnt[number]
-	if f > 0 {
-		this.freq[f]--
-	}
+	this.freq[this.cnt[number]]--
 	this.cnt[number]++
-	this.freq[f+1]++
+	this.freq[this.cnt[number]]++
 }
 
 func (this *FrequencyTracker) DeleteOne(number int) {
-	f := this.cnt[number]
-	if f == 0 {
-		return
+	if this.cnt[number] > 0 {
+		this.freq[this.cnt[number]]--
+		this.cnt[number]--
+		this.freq[this.cnt[number]]++
 	}
-	this.freq[f]--
-	this.cnt[number]--
-	this.freq[f-1]++
 }
 
 func (this *FrequencyTracker) HasFrequency(frequency int) bool {
@@ -238,6 +258,8 @@ func (this *FrequencyTracker) HasFrequency(frequency int) bool {
  */
 ```
 
+#### TypeScript
+
 ```ts
 class FrequencyTracker {
     private cnt: Map<number, number>;
@@ -250,21 +272,18 @@ class FrequencyTracker {
 
     add(number: number): void {
         const f = this.cnt.get(number) || 0;
-        if (f > 0) {
-            this.freq.set(f, (this.freq.get(f) || 0) - 1);
-        }
+        this.freq.set(f, (this.freq.get(f) || 0) - 1);
         this.cnt.set(number, f + 1);
         this.freq.set(f + 1, (this.freq.get(f + 1) || 0) + 1);
     }
 
     deleteOne(number: number): void {
         const f = this.cnt.get(number) || 0;
-        if (f === 0) {
-            return;
+        if (f > 0) {
+            this.freq.set(f, (this.freq.get(f) || 0) - 1);
+            this.cnt.set(number, f - 1);
+            this.freq.set(f - 1, (this.freq.get(f - 1) || 0) + 1);
         }
-        this.freq.set(f, (this.freq.get(f) || 0) - 1);
-        this.cnt.set(number, f - 1);
-        this.freq.set(f - 1, (this.freq.get(f - 1) || 0) + 1);
     }
 
     hasFrequency(frequency: number): boolean {
@@ -281,6 +300,59 @@ class FrequencyTracker {
  */
 ```
 
+#### Rust
+
+```rust
+use std::collections::HashMap;
+
+struct FrequencyTracker {
+    cnt: HashMap<i32, i32>,
+    freq: HashMap<i32, i32>,
+}
+
+/**
+ * `&self` means the method takes an immutable reference.
+ * If you need a mutable reference, change it to `&mut self` instead.
+ */
+impl FrequencyTracker {
+    fn new() -> Self {
+        FrequencyTracker {
+            cnt: HashMap::new(),
+            freq: HashMap::new(),
+        }
+    }
+
+    fn add(&mut self, number: i32) {
+        let count = self.cnt.entry(number).or_insert(0);
+        let prev_freq = self.freq.entry(*count).or_insert(0);
+        *prev_freq -= 1;
+        *count += 1;
+        let new_freq = self.freq.entry(*count).or_insert(0);
+        *new_freq += 1;
+    }
+
+    fn delete_one(&mut self, number: i32) {
+        if let Some(count) = self.cnt.get_mut(&number) {
+            if *count > 0 {
+                if let Some(prev_freq) = self.freq.get_mut(count) {
+                    *prev_freq -= 1;
+                }
+                *count -= 1;
+                if let Some(new_freq) = self.freq.get_mut(count) {
+                    *new_freq += 1;
+                }
+            }
+        }
+    }
+
+    fn has_frequency(&self, frequency: i32) -> bool {
+        self.freq.get(&frequency).map_or(false, |&freq| freq > 0)
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

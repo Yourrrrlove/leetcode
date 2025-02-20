@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1300-1399/1341.Movie%20Rating/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
 # [1341. Movie Rating](https://leetcode.com/problems/movie-rating)
 
 [中文文档](/solution/1300-1399/1341.Movie%20Rating/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table: <code>Movies</code></p>
 
@@ -29,9 +41,8 @@ title is the name of the movie.
 | name          | varchar |
 +---------------+---------+
 user_id is the primary key (column with unique values) for this table.
+The column &#39;name&#39; has unique values.
 </pre>
-
-<p>&nbsp;</p>
 
 <p>Table: <code>MovieRating</code></p>
 
@@ -44,7 +55,7 @@ user_id is the primary key (column with unique values) for this table.
 | rating        | int     |
 | created_at    | date    |
 +---------------+---------+
-(movie_id, user_id) is the primary key (column with unique values)&nbsp;for this table.
+(movie_id, user_id) is the primary key (column with unique values) for this table.
 This table contains the rating of a movie by a user in their review.
 created_at is the user&#39;s review date. 
 </pre>
@@ -108,11 +119,17 @@ Daniel and Monica have rated 3 movies (&quot;Avengers&quot;, &quot;Frozen 2&quot
 Frozen 2 and Joker have a rating average of 3.5 in February but Frozen 2 is smaller lexicographically.
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -140,4 +157,6 @@ UNION ALL
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

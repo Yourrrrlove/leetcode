@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1640.Check%20Array%20Formation%20Through%20Concatenation/README_EN.md
+rating: 1524
+source: Weekly Contest 213 Q1
+tags:
+    - Array
+    - Hash Table
+---
+
+<!-- problem:start -->
+
 # [1640. Check Array Formation Through Concatenation](https://leetcode.com/problems/check-array-formation-through-concatenation)
 
 [中文文档](/solution/1600-1699/1640.Check%20Array%20Formation%20Through%20Concatenation/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an array of <strong>distinct</strong> integers <code>arr</code> and an array of integer arrays <code>pieces</code>, where the integers in <code>pieces</code> are <strong>distinct</strong>. Your goal is to form <code>arr</code> by concatenating the arrays in <code>pieces</code> <strong>in any order</strong>. However, you are <strong>not</strong> allowed to reorder the integers in each array <code>pieces[i]</code>.</p>
 
@@ -45,11 +60,17 @@
 	<li>The integers in <code>pieces</code> are <strong>distinct</strong> (i.e., If we flatten pieces in a 1D array, all the integers in this array are distinct).</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -66,6 +87,8 @@ class Solution:
                 i, j = i + 1, j + 1
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -88,6 +111,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -112,6 +137,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func canFormArray(arr []int, pieces [][]int) bool {
 	for i := 0; i < len(arr); {
@@ -130,6 +157,8 @@ func canFormArray(arr []int, pieces [][]int) bool {
 	return true
 }
 ```
+
+#### TypeScript
 
 ```ts
 function canFormArray(arr: number[], pieces: number[][]): boolean {
@@ -151,6 +180,8 @@ function canFormArray(arr: number[], pieces: number[][]): boolean {
     return true;
 }
 ```
+
+#### Rust
 
 ```rust
 use std::collections::HashMap;
@@ -182,6 +213,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number[]} arr
@@ -210,9 +243,15 @@ var canFormArray = function (arr, pieces) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -228,6 +267,8 @@ class Solution:
             i += len(p)
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -251,6 +292,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -273,6 +316,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func canFormArray(arr []int, pieces [][]int) bool {
@@ -298,4 +343,6 @@ func canFormArray(arr []int, pieces [][]int) bool {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

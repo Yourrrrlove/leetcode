@@ -1,8 +1,20 @@
-# [2314. The First Day of the Maximum Recorded Degree in Each City](https://leetcode.com/problems/the-first-day-of-the-maximum-recorded-degree-in-each-city)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2314.The%20First%20Day%20of%20the%20Maximum%20Recorded%20Degree%20in%20Each%20City/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
+# [2314. The First Day of the Maximum Recorded Degree in Each City 🔒](https://leetcode.com/problems/the-first-day-of-the-maximum-recorded-degree-in-each-city)
 
 [中文文档](/solution/2300-2399/2314.The%20First%20Day%20of%20the%20Maximum%20Recorded%20Degree%20in%20Each%20City/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table: <code>Weather</code></p>
 
@@ -54,15 +66,21 @@ Weather table:
 +---------+------------+--------+
 <strong>Explanation:</strong> 
 For city 1, the maximum degree was recorded on 2022-07-07 with 24 degrees.
-For city 1, the maximum degree was recorded on 2022-08-07 and 2022-08-17 with 37 degrees. We choose the earlier date (2022-08-07).
+For city 2, the maximum degree was recorded on 2022-08-07 and 2022-08-17 with 37 degrees. We choose the earlier date (2022-08-07).
 For city 3, the maximum degree was recorded on 2022-12-07 with -6 degrees.
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -84,4 +102,6 @@ ORDER BY 1;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

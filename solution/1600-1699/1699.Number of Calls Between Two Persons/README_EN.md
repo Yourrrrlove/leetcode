@@ -1,8 +1,20 @@
-# [1699. Number of Calls Between Two Persons](https://leetcode.com/problems/number-of-calls-between-two-persons)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1699.Number%20of%20Calls%20Between%20Two%20Persons/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
+# [1699. Number of Calls Between Two Persons 🔒](https://leetcode.com/problems/number-of-calls-between-two-persons)
 
 [中文文档](/solution/1600-1699/1699.Number%20of%20Calls%20Between%20Two%20Persons/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table: <code>Calls</code></p>
 
@@ -58,13 +70,19 @@ Users 1 and 3 had 1 call and the total duration is 20.
 Users 3 and 4 had 4 calls and the total duration is 999 (100 + 200 + 200 + 499).
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Grouping and Summing
 
 We can use the `if` function or the `least` and `greatest` functions to convert `from_id` and `to_id` into `person1` and `person2`, and then group by `person1` and `person2` and sum the values.
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -77,11 +95,7 @@ FROM Calls
 GROUP BY 1, 2;
 ```
 
-<!-- tabs:end -->
-
-### Solution 2
-
-<!-- tabs:start -->
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -96,4 +110,6 @@ GROUP BY 1, 2;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

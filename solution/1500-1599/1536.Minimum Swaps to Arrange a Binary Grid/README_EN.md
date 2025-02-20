@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1500-1599/1536.Minimum%20Swaps%20to%20Arrange%20a%20Binary%20Grid/README_EN.md
+rating: 1880
+source: Weekly Contest 200 Q3
+tags:
+    - Greedy
+    - Array
+    - Matrix
+---
+
+<!-- problem:start -->
+
 # [1536. Minimum Swaps to Arrange a Binary Grid](https://leetcode.com/problems/minimum-swaps-to-arrange-a-binary-grid)
 
 [中文文档](/solution/1500-1599/1536.Minimum%20Swaps%20to%20Arrange%20a%20Binary%20Grid/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an <code>n x n</code> binary <code>grid</code>, in one step you can choose two <strong>adjacent rows</strong> of the grid and swap them.</p>
 
@@ -44,7 +60,11 @@
 	<li><code>grid[i][j]</code> is either <code>0</code> or <code>1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Greedy
 
@@ -53,6 +73,8 @@ We process row by row. For the $i$-th row, the position of the last '1' must be 
 The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ is the side length of the grid.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -79,6 +101,8 @@ class Solution:
                 k -= 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -118,6 +142,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -154,6 +180,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minSwaps(grid [][]int) (ans int) {
 	n := len(grid)
@@ -188,6 +216,8 @@ func minSwaps(grid [][]int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minSwaps(grid: number[][]): number {
@@ -224,4 +254,6 @@ function minSwaps(grid: number[][]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

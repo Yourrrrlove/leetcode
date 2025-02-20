@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1400-1499/1473.Paint%20House%20III/README.md
+rating: 2056
+source: 第 192 场周赛 Q4
+tags:
+    - 数组
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [1473. 粉刷房子 III](https://leetcode.cn/problems/paint-house-iii)
 
 [English Version](/solution/1400-1499/1473.Paint%20House%20III/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>在一个小城市里，有 <code>m</code> 个房子排成一排，你需要给每个房子涂上 <code>n</code> 种颜色之一（颜色编号为 <code>1</code> 到 <code>n</code> ）。有的房子去年夏天已经涂过颜色了，所以这些房子不可以被重新涂色。</p>
 
@@ -70,31 +83,37 @@
 	<li><code>1 <= cost[i][j] <= 10^4</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：动态规划
 
-我们定义 $f[i][j][k]$ 表示将下标 $[0,..i]$ 的房子涂上颜色，最后一个房子的颜色为 $j$，且恰好形成 $k$ 个街区的最小花费。那么答案就是 $f[m-1][j][target]$，其中 $j$ 的取值范围为 $[1,..n]$。初始时，我们判断下标为 $0$ 的房子是否已经涂色，如果未涂色，那么 $f[0][j][1] = cost[0][j - 1]$，其中 $j \in [1,..n]$。如果已经涂色，那么 $f[0][houses[0]][1] = 0$。其他的 $f[i][j][k]$ 的值都初始化为 $\infty$。
+我们定义 $f[i][j][k]$ 表示将下标 $[0,..i]$ 的房子涂上颜色，最后一个房子的颜色为 $j$，且恰好形成 $k$ 个街区的最小花费。那么答案就是 $f[m-1][j][\textit{target}]$，其中 $j$ 的取值范围为 $[1,..n]$。初始时，我们判断下标为 $0$ 的房子是否已经涂色，如果未涂色，那么 $f[0][j][1] = \textit{cost}[0][j - 1]$，其中 $j \in [1,..n]$。如果已经涂色，那么 $f[0][\textit{houses}[0]][1] = 0$。其他的 $f[i][j][k]$ 的值都初始化为 $\infty$。
 
 接下来，我们从下标 $i=1$ 开始遍历，对于每个 $i$，我们判断下标为 $i$ 的房子是否已经涂色：
 
-如果未涂色，那么我们可以将下标为 $i$ 的房子涂成颜色 $j$，我们枚举街区的数量 $k$，其中 $k \in [1,..min(target, i + 1)]$，并且枚举下标为 $i$ 的房子的前一个房子的颜色 $j_0$，其中 $j_0 \in [1,..n]$，那么我们可以得到状态转移方程：
+如果未涂色，那么我们可以将下标为 $i$ 的房子涂成颜色 $j$，我们枚举街区的数量 $k$，其中 $k \in [1,..\min(\textit{target}, i + 1)]$，并且枚举下标为 $i$ 的房子的前一个房子的颜色 $j_0$，其中 $j_0 \in [1,..n]$，那么我们可以得到状态转移方程：
 
 $$
-f[i][j][k] = \min_{j_0 \in [1,..n]} \{ f[i - 1][j_0][k - (j \neq j_0)] + cost[i][j - 1] \}
+f[i][j][k] = \min_{j_0 \in [1,..n]} \{ f[i - 1][j_0][k - (j \neq j_0)] + \textit{cost}[i][j - 1] \}
 $$
 
-如果已经涂色，那么我们可以将下标为 $i$ 的房子涂成颜色 $j$，我们枚举街区的数量 $k$，其中 $k \in [1,..min(target, i + 1)]$，并且枚举下标为 $i$ 的房子的前一个房子的颜色 $j_0$，其中 $j_0 \in [1,..n]$，那么我们可以得到状态转移方程：
+如果已经涂色，那么我们可以将下标为 $i$ 的房子涂成颜色 $j$，我们枚举街区的数量 $k$，其中 $k \in [1,..\min(\textit{target}, i + 1)]$，并且枚举下标为 $i$ 的房子的前一个房子的颜色 $j_0$，其中 $j_0 \in [1,..n]$，那么我们可以得到状态转移方程：
 
 $$
 f[i][j][k] = \min_{j_0 \in [1,..n]} \{ f[i - 1][j_0][k - (j \neq j_0)] \}
 $$
 
-最后，我们返回 $f[m - 1][j][target]$，其中 $j \in [1,..n]$，如果所有的 $f[m - 1][j][target]$ 的值都为 $\infty$，那么返回 $-1$。
+最后，我们返回 $f[m - 1][j][\textit{target}]$，其中 $j \in [1,..n]$，如果所有的 $f[m - 1][j][\textit{target}]$ 的值都为 $\infty$，那么返回 $-1$。
 
-时间复杂度 $O(m \times n^2 \times target)$，空间复杂度 $O(m \times n \times target)$。其中 $m$, $n$, $target$ 分别为房子的数量，颜色的数量，街区的数量。
+时间复杂度 $O(m \times n^2 \times \textit{target})$，空间复杂度 $O(m \times n \times \textit{target})$。其中 $m$, $n$, $\textit{target}$ 分别为房子的数量，颜色的数量，街区的数量。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -132,6 +151,8 @@ class Solution:
         ans = min(f[-1][j][target] for j in range(1, n + 1))
         return -1 if ans >= inf else ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -186,6 +207,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -233,6 +256,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minCost(houses []int, cost [][]int, m int, n int, target int) int {
@@ -291,6 +316,8 @@ func minCost(houses []int, cost [][]int, m int, n int, target int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minCost(houses: number[], cost: number[][], m: number, n: number, target: number): number {
     const inf = 1 << 30;
@@ -340,4 +367,6 @@ function minCost(houses: number[], cost: number[][], m: number, n: number, targe
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

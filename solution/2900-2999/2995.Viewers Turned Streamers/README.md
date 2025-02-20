@@ -1,10 +1,20 @@
-# [2995. 观众变主播](https://leetcode.cn/problems/viewers-turned-streamers)
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2900-2999/2995.Viewers%20Turned%20Streamers/README.md
+tags:
+    - 数据库
+---
+
+<!-- problem:start -->
+
+# [2995. 观众变主播 🔒](https://leetcode.cn/problems/viewers-turned-streamers)
 
 [English Version](/solution/2900-2999/2995.Viewers%20Turned%20Streamers/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>表：&nbsp;<code>Sessions</code></p>
 
@@ -23,7 +33,7 @@ session_type 是一个 ENUM (枚举) 类型，包含(Viewer, Streamer)两个类�
 这张表包含 user id, session start, session end, session id 和 session type。
 </pre>
 
-<p>编写一个解决方案，找到&nbsp;<strong>首次会话&nbsp;</strong>为 <strong>观众</strong> 的用户的&nbsp;<strong>会话&nbsp;</strong>数量。</p>
+<p>编写一个解决方案，找到 <strong>首次会话</strong> 为 <strong>观众身份</strong> 的用户，其 <strong>主播会话</strong> 数量。</p>
 
 <p>按照会话数量和 <code>user_id</code> <strong>降序</strong> 排序返回结果表。</p>
 
@@ -61,13 +71,19 @@ Sessions table:
 输出表按照会话数量和 user_id 降序排序。
 </pre>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：窗口函数 + 等值连接
 
 我们可以用窗口函数 `RANK()` 按照 `user_id` 维度，对每个会话进行排名，记录在表 `T` 中，然后再将 `T` 与 `Sessions` 表按照 `user_id` 进行等值连接，并且筛选出 `T` 中排名为 1 的记录，并且 `session_type` 为 `Viewer`，`Sessions` 表中 `session_type` 为 `Streamer` 的记录，最后按照 `user_id` 进行分组求和即可。
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -93,4 +109,6 @@ ORDER BY 2 DESC, 1 DESC;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1500-1599/1513.Number%20of%20Substrings%20With%20Only%201s/README.md
+rating: 1351
+source: 第 197 场周赛 Q2
+tags:
+    - 数学
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [1513. 仅含 1 的子串数](https://leetcode.cn/problems/number-of-substrings-with-only-1s)
 
 [English Version](/solution/1500-1599/1513.Number%20of%20Substrings%20With%20Only%201s/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个二进制字符串 <code>s</code>（仅由 &#39;0&#39; 和 &#39;1&#39; 组成的字符串）。</p>
 
@@ -52,7 +65,11 @@
 	<li><code>1 &lt;= s.length &lt;= 10^5</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：遍历计数
 
@@ -64,10 +81,12 @@
 
 相似题目：
 
--   [413. 等差数列划分](/solution/0400-0499/0413.Arithmetic%20Slices/README.md)
--   [2348. 全 0 子数组的数目](/solution/2300-2399/2348.Number%20of%20Zero-Filled%20Subarrays/README.md)
+-   [413. 等差数列划分](https://github.com/doocs/leetcode/blob/main/solution/0400-0499/0413.Arithmetic%20Slices/README.md)
+-   [2348. 全 0 子数组的数目](https://github.com/doocs/leetcode/blob/main/solution/2300-2399/2348.Number%20of%20Zero-Filled%20Subarrays/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -81,6 +100,8 @@ class Solution:
             ans += cnt
         return ans % (10**9 + 7)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -96,6 +117,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -110,6 +133,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func numSub(s string) (ans int) {
@@ -127,6 +152,8 @@ func numSub(s string) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function numSub(s: string): number {
     const mod = 10 ** 9 + 7;
@@ -142,4 +169,6 @@ function numSub(s: string): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

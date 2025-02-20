@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1500-1599/1502.Can%20Make%20Arithmetic%20Progression%20From%20Sequence/README.md
+rating: 1154
+source: 第 196 场周赛 Q1
+tags:
+    - 数组
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [1502. 判断能否形成等差数列](https://leetcode.cn/problems/can-make-arithmetic-progression-from-sequence)
 
 [English Version](/solution/1500-1599/1502.Can%20Make%20Arithmetic%20Progression%20From%20Sequence/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个数字数组 <code>arr</code> 。</p>
 
@@ -37,7 +50,11 @@
 	<li><code>-10^6 &lt;= arr[i] &lt;= 10^6</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序 + 遍历
 
@@ -47,6 +64,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def canMakeArithmeticProgression(self, arr: List[int]) -> bool:
@@ -54,6 +73,8 @@ class Solution:
         d = arr[1] - arr[0]
         return all(b - a == d for a, b in pairwise(arr))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -69,6 +90,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -86,6 +109,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func canMakeArithmeticProgression(arr []int) bool {
 	sort.Ints(arr)
@@ -99,6 +124,8 @@ func canMakeArithmeticProgression(arr []int) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function canMakeArithmeticProgression(arr: number[]): boolean {
     arr.sort((a, b) => a - b);
@@ -111,6 +138,8 @@ function canMakeArithmeticProgression(arr: number[]): boolean {
     return true;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -127,6 +156,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number[]} arr
@@ -142,6 +173,8 @@ var canMakeArithmeticProgression = function (arr) {
     return true;
 };
 ```
+
+#### C
 
 ```c
 int cmp(const void* a, const void* b) {
@@ -161,6 +194,10 @@ bool canMakeArithmeticProgression(int* arr, int arrSize) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：哈希表 + 数学
 
 我们先找出数组 $arr$ 中的最小值 $a$ 和最大值 $b$，如果数组 $arr$ 可以重排成等差数列，那么公差 $d = \frac{b - a}{n - 1}$ 必须为整数。
@@ -170,6 +207,8 @@ bool canMakeArithmeticProgression(int* arr, int arrSize) {
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 `arr` 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -183,6 +222,8 @@ class Solution:
         s = set(arr)
         return all(a + d * i in s for i in range(n))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -209,6 +250,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -230,6 +273,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func canMakeArithmeticProgression(arr []int) bool {
 	a, b := slices.Min(arr), slices.Max(arr)
@@ -250,6 +295,8 @@ func canMakeArithmeticProgression(arr []int) bool {
 	return true
 }
 ```
+
+#### TypeScript
 
 ```ts
 function canMakeArithmeticProgression(arr: number[]): boolean {
@@ -277,6 +324,8 @@ function canMakeArithmeticProgression(arr: number[]): boolean {
     return true;
 }
 ```
+
+#### Rust
 
 ```rust
 use std::collections::HashMap;
@@ -312,4 +361,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

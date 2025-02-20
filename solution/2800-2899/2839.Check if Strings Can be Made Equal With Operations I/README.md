@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2839.Check%20if%20Strings%20Can%20be%20Made%20Equal%20With%20Operations%20I/README.md
+rating: 1285
+source: 第 112 场双周赛 Q1
+tags:
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [2839. 判断通过操作能否让字符串相等 I](https://leetcode.cn/problems/check-if-strings-can-be-made-equal-with-operations-i)
 
 [English Version](/solution/2800-2899/2839.Check%20if%20Strings%20Can%20be%20Made%20Equal%20With%20Operations%20I/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你两个字符串&nbsp;<code>s1</code> 和&nbsp;<code>s2</code>&nbsp;，两个字符串的长度都为&nbsp;<code>4</code>&nbsp;，且只包含 <strong>小写</strong> 英文字母。</p>
 
@@ -45,7 +57,11 @@
 	<li><code>s1</code> 和&nbsp;<code>s2</code>&nbsp;只包含小写英文字母。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：计数
 
@@ -57,9 +73,11 @@
 
 相似题目：
 
--   [2840. 判断通过操作能否让字符串相等 II](/solution/2800-2899/2840.Check%20if%20Strings%20Can%20be%20Made%20Equal%20With%20Operations%20II/README.md)
+-   [2840. 判断通过操作能否让字符串相等 II](https://github.com/doocs/leetcode/blob/main/solution/2800-2899/2840.Check%20if%20Strings%20Can%20be%20Made%20Equal%20With%20Operations%20II/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -68,6 +86,8 @@ class Solution:
             s2[1::2]
         )
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -86,6 +106,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -106,6 +128,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func canBeEqual(s1 string, s2 string) bool {
 	cnt := [2][26]int{}
@@ -121,6 +145,8 @@ func canBeEqual(s1 string, s2 string) bool {
 	return true
 }
 ```
+
+#### TypeScript
 
 ```ts
 function canBeEqual(s1: string, s2: string): boolean {
@@ -140,4 +166,6 @@ function canBeEqual(s1: string, s2: string): boolean {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

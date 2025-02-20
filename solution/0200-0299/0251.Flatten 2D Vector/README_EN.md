@@ -1,8 +1,23 @@
-# [251. Flatten 2D Vector](https://leetcode.com/problems/flatten-2d-vector)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0251.Flatten%202D%20Vector/README_EN.md
+tags:
+    - Design
+    - Array
+    - Two Pointers
+    - Iterator
+---
+
+<!-- problem:start -->
+
+# [251. Flatten 2D Vector 🔒](https://leetcode.com/problems/flatten-2d-vector)
 
 [中文文档](/solution/0200-0299/0251.Flatten%202D%20Vector/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Design an iterator to flatten a 2D vector. It should support the <code>next</code> and <code>hasNext</code> operations.</p>
 
@@ -48,11 +63,17 @@ vector2D.hasNext(); // return False
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> As an added challenge, try to code it using only <a href="http://www.cplusplus.com/reference/iterator/iterator/" target="_blank">iterators in C++</a> or <a href="http://docs.oracle.com/javase/7/docs/api/java/util/Iterator.html" target="_blank">iterators in Java</a>.</p>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Vector2D:
@@ -82,6 +103,8 @@ class Vector2D:
 # param_1 = obj.next()
 # param_2 = obj.hasNext()
 ```
+
+#### Java
 
 ```java
 class Vector2D {
@@ -118,6 +141,8 @@ class Vector2D {
  * boolean param_2 = obj.hasNext();
  */
 ```
+
+#### C++
 
 ```cpp
 class Vector2D {
@@ -157,6 +182,8 @@ private:
  */
 ```
 
+#### Go
+
 ```go
 type Vector2D struct {
 	i, j int
@@ -193,6 +220,8 @@ func (this *Vector2D) forward() {
  * param_2 := obj.HasNext();
  */
 ```
+
+#### TypeScript
 
 ```ts
 class Vector2D {
@@ -234,4 +263,6 @@ class Vector2D {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

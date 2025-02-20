@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2000-2099/2064.Minimized%20Maximum%20of%20Products%20Distributed%20to%20Any%20Store/README_EN.md
+rating: 1885
+source: Weekly Contest 266 Q3
+tags:
+    - Greedy
+    - Array
+    - Binary Search
+---
+
+<!-- problem:start -->
+
 # [2064. Minimized Maximum of Products Distributed to Any Store](https://leetcode.com/problems/minimized-maximum-of-products-distributed-to-any-store)
 
 [中文文档](/solution/2000-2099/2064.Minimized%20Maximum%20of%20Products%20Distributed%20to%20Any%20Store/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an integer <code>n</code> indicating there are <code>n</code> specialty retail stores. There are <code>m</code> product types of varying amounts, which are given as a <strong>0-indexed</strong> integer array <code>quantities</code>, where <code>quantities[i]</code> represents the number of products of the <code>i<sup>th</sup></code> product type.</p>
 
@@ -58,11 +74,17 @@ The maximum number of products given to any store is max(100000) = 100000.
 	<li><code>1 &lt;= quantities[i] &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,6 +94,8 @@ class Solution:
 
         return 1 + bisect_left(range(1, 10**6), True, key=check)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -93,6 +117,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -116,6 +142,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minimizedMaximum(n int, quantities []int) int {
 	return 1 + sort.Search(1e5, func(x int) bool {
@@ -128,6 +156,8 @@ func minimizedMaximum(n int, quantities []int) int {
 	})
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minimizedMaximum(n: number, quantities: number[]): number {
@@ -151,4 +181,6 @@ function minimizedMaximum(n: number, quantities: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

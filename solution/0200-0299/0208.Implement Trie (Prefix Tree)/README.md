@@ -1,12 +1,25 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0208.Implement%20Trie%20%28Prefix%20Tree%29/README.md
+tags:
+    - 设计
+    - 字典树
+    - 哈希表
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [208. 实现 Trie (前缀树)](https://leetcode.cn/problems/implement-trie-prefix-tree)
 
 [English Version](/solution/0200-0299/0208.Implement%20Trie%20%28Prefix%20Tree%29/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p><strong><a href="https://baike.baidu.com/item/字典树/9825209?fr=aladdin" target="_blank">Trie</a></strong>（发音类似 "try"）或者说 <strong>前缀树</strong> 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补完和拼写检查。</p>
+<p><strong><a href="https://baike.baidu.com/item/字典树/9825209?fr=aladdin" target="_blank">Trie</a></strong>（发音类似 "try"）或者说 <strong>前缀树</strong> 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补全和拼写检查。</p>
 
 <p>请你实现 Trie 类：</p>
 
@@ -14,10 +27,10 @@
 	<li><code>Trie()</code> 初始化前缀树对象。</li>
 	<li><code>void insert(String word)</code> 向前缀树中插入字符串 <code>word</code> 。</li>
 	<li><code>boolean search(String word)</code> 如果字符串 <code>word</code> 在前缀树中，返回 <code>true</code>（即，在检索之前已经插入）；否则，返回 <code>false</code> 。</li>
-	<li><code>boolean startsWith(String prefix)</code> 如果之前已经插入的字符串 <code>word</code> 的前缀之一为 <code>prefix</code> ，返回 <code>true</code> ；否则，返回 <code>false</code> 。</li>
+	<li><code>boolean startsWith(String prefix)</code> 如果之前已经插入的字符串&nbsp;<code>word</code> 的前缀之一为 <code>prefix</code> ，返回 <code>true</code> ；否则，返回 <code>false</code> 。</li>
 </ul>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>示例：</strong></p>
 
@@ -38,17 +51,21 @@ trie.insert("app");
 trie.search("app");     // 返回 True
 </pre>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>提示：</strong></p>
 
 <ul>
-	<li><code>1 <= word.length, prefix.length <= 2000</code></li>
+	<li><code>1 &lt;= word.length, prefix.length &lt;= 2000</code></li>
 	<li><code>word</code> 和 <code>prefix</code> 仅由小写英文字母组成</li>
 	<li><code>insert</code>、<code>search</code> 和 <code>startsWith</code> 调用次数 <strong>总计</strong> 不超过 <code>3 * 10<sup>4</sup></code> 次</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：前缀树
 
@@ -78,6 +95,8 @@ trie.search("app");     // 返回 True
 若搜索到了前缀的末尾，就说明字典树中存在该前缀。此外，若前缀末尾对应节点的 $isEnd$ 为真，则说明字典树中存在该字符串。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Trie:
@@ -118,6 +137,8 @@ class Trie:
 # param_2 = obj.search(word)
 # param_3 = obj.startsWith(prefix)
 ```
+
+#### Java
 
 ```java
 class Trie {
@@ -172,6 +193,8 @@ class Trie {
  */
 ```
 
+#### C++
+
 ```cpp
 class Trie {
 private:
@@ -222,6 +245,8 @@ public:
  * bool param_3 = obj->startsWith(prefix);
  */
 ```
+
+#### Go
 
 ```go
 type Trie struct {
@@ -276,6 +301,8 @@ func (this *Trie) SearchPrefix(s string) *Trie {
  */
 ```
 
+#### TypeScript
+
 ```ts
 class TrieNode {
     children;
@@ -325,8 +352,10 @@ class Trie {
 }
 ```
 
+#### Rust
+
 ```rust
-use std::{ rc::Rc, cell::RefCell, collections::HashMap };
+use std::{cell::RefCell, collections::HashMap, rc::Rc};
 
 struct TrieNode {
     pub val: Option<char>,
@@ -375,7 +404,9 @@ impl Trie {
         for c in &char_vec {
             if !root.borrow().child.contains_key(c) {
                 // We need to manually create the entry
-                root.borrow_mut().child.insert(*c, Rc::new(RefCell::new(TrieNode::new())));
+                root.borrow_mut()
+                    .child
+                    .insert(*c, Rc::new(RefCell::new(TrieNode::new())));
             }
             // Get the child node
             let root_clone = Rc::clone(root.borrow().child.get(c).unwrap());
@@ -418,6 +449,8 @@ impl Trie {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -480,6 +513,8 @@ Trie.prototype.startsWith = function (prefix) {
  */
 ```
 
+#### C#
+
 ```cs
 public class Trie {
     bool isEnd;
@@ -536,4 +571,6 @@ public class Trie {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1800-1899/1829.Maximum%20XOR%20for%20Each%20Query/README_EN.md
+rating: 1523
+source: Biweekly Contest 50 Q3
+tags:
+    - Bit Manipulation
+    - Array
+    - Prefix Sum
+---
+
+<!-- problem:start -->
+
 # [1829. Maximum XOR for Each Query](https://leetcode.com/problems/maximum-xor-for-each-query)
 
 [中文文档](/solution/1800-1899/1829.Maximum%20XOR%20for%20Each%20Query/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>sorted</strong> array <code>nums</code> of <code>n</code> non-negative integers and an integer <code>maximumBit</code>. You want to perform the following query <code>n</code> <strong>times</strong>:</p>
 
@@ -56,7 +72,11 @@
 	<li><code>nums</code>​​​ is sorted in <strong>ascending</strong> order.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Bitwise Operation + Enumeration
 
@@ -69,6 +89,8 @@ That is to say, we start from the $maximumBit - 1$ bit of $xs$ and enumerate to 
 The time complexity is $O(n \times m)$, where $n$ and $m$ are the values of the array `nums` and `maximumBit` respectively. Ignoring the space consumption of the answer, the space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -84,6 +106,8 @@ class Solution:
             xs ^= x
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -109,6 +133,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -136,6 +162,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func getMaximumXor(nums []int, maximumBit int) (ans []int) {
 	xs := 0
@@ -156,6 +184,8 @@ func getMaximumXor(nums []int, maximumBit int) (ans []int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function getMaximumXor(nums: number[], maximumBit: number): number[] {
@@ -179,6 +209,8 @@ function getMaximumXor(nums: number[], maximumBit: number): number[] {
     return ans;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -207,6 +239,8 @@ var getMaximumXor = function (nums, maximumBit) {
     return ans;
 };
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -235,6 +269,10 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Enumeration Optimization
 
 Similar to Solution 1, we first preprocess the XOR sum $xs$ of the array `nums`, i.e., $xs=nums[0] \oplus nums[1] \oplus \cdots \oplus nums[n-1]$.
@@ -244,6 +282,8 @@ Next, we calculate $2^{maximumBit} - 1$, which is $2^{maximumBit}$ minus $1$, de
 The time complexity is $O(n)$, where $n$ is the length of the array `nums`. Ignoring the space consumption of the answer, the space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -257,6 +297,8 @@ class Solution:
             xs ^= x
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -278,6 +320,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -301,6 +345,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func getMaximumXor(nums []int, maximumBit int) (ans []int) {
 	xs := 0
@@ -317,6 +363,8 @@ func getMaximumXor(nums []int, maximumBit int) (ans []int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function getMaximumXor(nums: number[], maximumBit: number): number[] {
@@ -336,6 +384,8 @@ function getMaximumXor(nums: number[], maximumBit: number): number[] {
     return ans;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -361,6 +411,8 @@ var getMaximumXor = function (nums, maximumBit) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public int[] GetMaximumXor(int[] nums, int maximumBit) {
@@ -384,4 +436,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

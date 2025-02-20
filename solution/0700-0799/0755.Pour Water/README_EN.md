@@ -1,8 +1,21 @@
-# [755. Pour Water](https://leetcode.com/problems/pour-water)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0755.Pour%20Water/README_EN.md
+tags:
+    - Array
+    - Simulation
+---
+
+<!-- problem:start -->
+
+# [755. Pour Water 🔒](https://leetcode.com/problems/pour-water)
 
 [中文文档](/solution/0700-0799/0755.Pour%20Water/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an elevation map represents as an integer array <code>heights</code> where <code>heights[i]</code> representing the height of the terrain at index <code>i</code>. The width at each index is <code>1</code>. You are also given two integers <code>volume</code> and <code>k</code>. <code>volume</code> units of water will fall at index <code>k</code>.</p>
 
@@ -61,11 +74,21 @@ Finally, the fourth droplet falls at index k = 3. Since moving left would not ev
 	<li><code>0 &lt;= k &lt; heights.length</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Simulation
+
+We can simulate the process of each unit of water dropping. Each time a drop falls, we first try to move left. If it can move to a lower height, it moves to the lowest height; if it cannot move to a lower height, we try to move right. If it can move to a lower height, it moves to the lowest height; if it cannot move to a lower height, it rises at the current position.
+
+The time complexity is $O(v \times n)$, and the space complexity is $O(1)$, where $v$ and $n$ are the number of water drops and the length of the height array, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -84,6 +107,8 @@ class Solution:
                 heights[k] += 1
         return heights
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -111,6 +136,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -140,6 +167,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func pourWater(heights []int, volume int, k int) []int {
 	for ; volume > 0; volume-- {
@@ -168,4 +197,6 @@ func pourWater(heights []int, volume int, k int) []int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

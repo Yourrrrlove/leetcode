@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2900-2999/2960.Count%20Tested%20Devices%20After%20Test%20Operations/README.md
+rating: 1169
+source: 第 375 场周赛 Q1
+tags:
+    - 数组
+    - 计数
+    - 模拟
+---
+
+<!-- problem:start -->
+
 # [2960. 统计已测试设备](https://leetcode.cn/problems/count-tested-devices-after-test-operations)
 
 [English Version](/solution/2900-2999/2960.Count%20Tested%20Devices%20After%20Test%20Operations/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个长度为 <code>n</code> 、下标从<strong> 0 </strong>开始的整数数组 <code>batteryPercentages</code> ，表示 <code>n</code> 个设备的电池百分比。</p>
 
@@ -12,6 +26,7 @@
 
 <ul>
 	<li>如果 <code>batteryPercentages[i]</code> <strong>大于</strong> <code>0</code>：
+
     <ul>
     	<li><strong>增加</strong> 已测试设备的计数。</li>
     	<li>将下标在 <code>[i + 1, n - 1]</code> 的所有设备的电池百分比减少 <code>1</code>，确保它们的电池百分比<strong> 不会低于</strong> <code>0</code> ，即 <code>batteryPercentages[j] = max(0, batteryPercentages[j] - 1)</code>。</li>
@@ -19,6 +34,7 @@
     </ul>
     </li>
     <li>否则，移动到下一个设备而不执行任何测试。</li>
+
 </ul>
 
 <p>返回一个整数，表示按顺序执行测试操作后 <strong>已测试设备</strong> 的数量。</p>
@@ -60,7 +76,11 @@
 	<li><code>0 &lt;= batteryPercentages[i] &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：模拟
 
@@ -72,30 +92,32 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def countTestedDevices(self, batteryPercentages: List[int]) -> int:
         ans = 0
         for x in batteryPercentages:
-            x -= ans
-            ans += x > 0
+            ans += x > ans
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
     public int countTestedDevices(int[] batteryPercentages) {
         int ans = 0;
         for (int x : batteryPercentages) {
-            x -= ans;
-            if (x > 0) {
-                ++ans;
-            }
+            ans += x > ans ? 1 : 0;
         }
         return ans;
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -103,21 +125,19 @@ public:
     int countTestedDevices(vector<int>& batteryPercentages) {
         int ans = 0;
         for (int x : batteryPercentages) {
-            x -= ans;
-            if (x > 0) {
-                ++ans;
-            }
+            ans += x > ans;
         }
         return ans;
     }
 };
 ```
 
+#### Go
+
 ```go
 func countTestedDevices(batteryPercentages []int) (ans int) {
 	for _, x := range batteryPercentages {
-		x -= ans
-		if x > 0 {
+		if x > ans {
 			ans++
 		}
 	}
@@ -125,19 +145,34 @@ func countTestedDevices(batteryPercentages []int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function countTestedDevices(batteryPercentages: number[]): number {
     let ans = 0;
-    for (let x of batteryPercentages) {
-        x -= ans;
-        if (x > 0) {
-            ++ans;
-        }
+    for (const x of batteryPercentages) {
+        ans += x > ans ? 1 : 0;
     }
     return ans;
 }
 ```
 
+#### Rust
+
+```rust
+impl Solution {
+    pub fn count_tested_devices(battery_percentages: Vec<i32>) -> i32 {
+        let mut ans = 0;
+        for x in battery_percentages {
+            ans += if x > ans { 1 } else { 0 };
+        }
+        ans
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

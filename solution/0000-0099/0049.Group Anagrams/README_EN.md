@@ -1,24 +1,59 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0049.Group%20Anagrams/README_EN.md
+tags:
+    - Array
+    - Hash Table
+    - String
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [49. Group Anagrams](https://leetcode.com/problems/group-anagrams)
 
 [中文文档](/solution/0000-0099/0049.Group%20Anagrams/README.md)
 
 ## Description
 
-<p>Given an array of strings <code>strs</code>, group <strong>the anagrams</strong> together. You can return the answer in <strong>any order</strong>.</p>
+<!-- description:start -->
 
-<p>An <strong>Anagram</strong> is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.</p>
+<p>Given an array of strings <code>strs</code>, group the <span data-keyword="anagram">anagrams</span> together. You can return the answer in <strong>any order</strong>.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
-<pre><strong>Input:</strong> strs = ["eat","tea","tan","ate","nat","bat"]
-<strong>Output:</strong> [["bat"],["nat","tan"],["ate","eat","tea"]]
-</pre><p><strong class="example">Example 2:</strong></p>
-<pre><strong>Input:</strong> strs = [""]
-<strong>Output:</strong> [[""]]
-</pre><p><strong class="example">Example 3:</strong></p>
-<pre><strong>Input:</strong> strs = ["a"]
-<strong>Output:</strong> [["a"]]
-</pre>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">strs = [&quot;eat&quot;,&quot;tea&quot;,&quot;tan&quot;,&quot;ate&quot;,&quot;nat&quot;,&quot;bat&quot;]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[[&quot;bat&quot;],[&quot;nat&quot;,&quot;tan&quot;],[&quot;ate&quot;,&quot;eat&quot;,&quot;tea&quot;]]</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<ul>
+	<li>There is no string in strs that can be rearranged to form <code>&quot;bat&quot;</code>.</li>
+	<li>The strings <code>&quot;nat&quot;</code> and <code>&quot;tan&quot;</code> are anagrams as they can be rearranged to form each other.</li>
+	<li>The strings <code>&quot;ate&quot;</code>, <code>&quot;eat&quot;</code>, and <code>&quot;tea&quot;</code> are anagrams as they can be rearranged to form each other.</li>
+</ul>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">strs = [&quot;&quot;]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[[&quot;&quot;]]</span></p>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">strs = [&quot;a&quot;]</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[[&quot;a&quot;]]</span></p>
+</div>
+
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
@@ -28,7 +63,11 @@
 	<li><code>strs[i]</code> consists of lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hash Table
 
@@ -50,6 +89,8 @@ The time complexity is $O(n\times k\times \log k)$, where $n$ and $k$ are the le
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
@@ -59,6 +100,8 @@ class Solution:
             d[k].append(s)
         return list(d.values())
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -74,6 +117,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -92,6 +137,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func groupAnagrams(strs []string) (ans [][]string) {
 	d := map[string][]string{}
@@ -108,6 +155,8 @@ func groupAnagrams(strs []string) (ans [][]string) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function groupAnagrams(strs: string[]): string[][] {
     const d: Map<string, string[]> = new Map();
@@ -121,6 +170,8 @@ function groupAnagrams(strs: string[]): string[][] {
     return Array.from(d.values());
 }
 ```
+
+#### Rust
 
 ```rust
 use std::collections::HashMap;
@@ -137,12 +188,12 @@ impl Solution {
             let val = map.entry(key).or_insert(vec![]);
             val.push(s);
         }
-        map.into_iter()
-            .map(|(_, v)| v)
-            .collect()
+        map.into_iter().map(|(_, v)| v).collect()
     }
 }
 ```
+
+#### C#
 
 ```cs
 using System.Collections.Generic;
@@ -204,6 +255,10 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Counting
 
 We can also change the sorting part in Solution 1 to counting, that is, use the characters in each string $s$ and their occurrence times as `key`, and use the string $s$ as `value` to store in the hash table.
@@ -211,6 +266,8 @@ We can also change the sorting part in Solution 1 to counting, that is, use the 
 The time complexity is $O(n\times (k + C))$, where $n$ and $k$ are the lengths of the string array and the maximum length of the string, respectively, and $C$ is the size of the character set. In this problem, $C = 26$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -223,6 +280,8 @@ class Solution:
             d[tuple(cnt)].append(s)
         return list(d.values())
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -246,6 +305,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -271,6 +332,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func groupAnagrams(strs []string) (ans [][]string) {
 	d := map[[26]int][]string{}
@@ -288,6 +351,8 @@ func groupAnagrams(strs []string) (ans [][]string) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function groupAnagrams(strs: string[]): string[][] {
     const map = new Map<string, string[]>();
@@ -301,4 +366,6 @@ function groupAnagrams(strs: string[]): string[][] {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

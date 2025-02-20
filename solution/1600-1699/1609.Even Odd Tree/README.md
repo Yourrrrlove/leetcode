@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1609.Even%20Odd%20Tree/README.md
+rating: 1438
+source: 第 209 场周赛 Q2
+tags:
+    - 树
+    - 广度优先搜索
+    - 二叉树
+---
+
+<!-- problem:start -->
+
 # [1609. 奇偶树](https://leetcode.cn/problems/even-odd-tree)
 
 [English Version](/solution/1600-1699/1609.Even%20Odd%20Tree/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>如果一棵二叉树满足下述几个条件，则可以称为 <strong>奇偶树</strong> ：</p>
 
@@ -80,7 +94,11 @@
 	<li><code>1 <= Node.val <= 10<sup>6</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：BFS
 
@@ -89,6 +107,8 @@ BFS 逐层遍历，每层按照奇偶性判断，每层的节点值都是偶数�
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是二叉树的节点数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -118,6 +138,8 @@ class Solution:
         return True
 ```
 
+#### Java
+
 ```java
 /**
  * Definition for a binary tree node.
@@ -140,7 +162,7 @@ class Solution {
         Deque<TreeNode> q = new ArrayDeque<>();
         q.offer(root);
         while (!q.isEmpty()) {
-            int prev = even ? 0 : 1000000;
+            int prev = even ? 0 : 1000001;
             for (int n = q.size(); n > 0; --n) {
                 root = q.pollFirst();
                 if (even && (root.val % 2 == 0 || prev >= root.val)) {
@@ -164,6 +186,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -182,15 +206,23 @@ public:
         int even = 1;
         queue<TreeNode*> q{{root}};
         while (!q.empty()) {
-            int prev = even ? 0 : 1e6;
+            int prev = even ? 0 : 1e7;
             for (int n = q.size(); n; --n) {
                 root = q.front();
                 q.pop();
-                if (even && (root->val % 2 == 0 || prev >= root->val)) return false;
-                if (!even && (root->val % 2 == 1 || prev <= root->val)) return false;
+                if (even && (root->val % 2 == 0 || prev >= root->val)) {
+                    return false;
+                }
+                if (!even && (root->val % 2 == 1 || prev <= root->val)) {
+                    return false;
+                }
                 prev = root->val;
-                if (root->left) q.push(root->left);
-                if (root->right) q.push(root->right);
+                if (root->left) {
+                    q.push(root->left);
+                }
+                if (root->right) {
+                    q.push(root->right);
+                }
             }
             even ^= 1;
         }
@@ -198,6 +230,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -212,7 +246,7 @@ func isEvenOddTree(root *TreeNode) bool {
 	even := true
 	q := []*TreeNode{root}
 	for len(q) > 0 {
-		var prev int = 1e6
+		var prev int = 1e7
 		if even {
 			prev = 0
 		}
@@ -241,6 +275,10 @@ func isEvenOddTree(root *TreeNode) bool {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：DFS
 
 DFS 先序遍历二叉树，同样根据节点所在层的奇偶性判断是否满足条件，遍历过程中用哈希表记录每一层最近访问到的节点值。
@@ -248,6 +286,8 @@ DFS 先序遍历二叉树，同样根据节点所在层的奇偶性判断是否�
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是二叉树的节点数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -273,6 +313,8 @@ class Solution:
         d = {}
         return dfs(root, 0)
 ```
+
+#### Java
 
 ```java
 /**
@@ -302,7 +344,7 @@ class Solution {
             return true;
         }
         boolean even = i % 2 == 0;
-        int prev = d.getOrDefault(i, even ? 0 : 1000000);
+        int prev = d.getOrDefault(i, even ? 0 : 1000001);
         if (even && (root.val % 2 == 0 || prev >= root.val)) {
             return false;
         }
@@ -314,6 +356,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 /**
@@ -336,16 +380,24 @@ public:
     }
 
     bool dfs(TreeNode* root, int i) {
-        if (!root) return true;
+        if (!root) {
+            return true;
+        }
         int even = i % 2 == 0;
-        int prev = d.count(i) ? d[i] : (even ? 0 : 1e6);
-        if (even && (root->val % 2 == 0 || prev >= root->val)) return false;
-        if (!even && (root->val % 2 == 1 || prev <= root->val)) return false;
+        int prev = d.count(i) ? d[i] : (even ? 0 : 1e7);
+        if (even && (root->val % 2 == 0 || prev >= root->val)) {
+            return false;
+        }
+        if (!even && (root->val % 2 == 1 || prev <= root->val)) {
+            return false;
+        }
         d[i] = root->val;
         return dfs(root->left, i + 1) && dfs(root->right, i + 1);
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -369,7 +421,7 @@ func isEvenOddTree(root *TreeNode) bool {
 			if even {
 				prev = 0
 			} else {
-				prev = 1000000
+				prev = 10000000
 			}
 		}
 		if even && (root.Val%2 == 0 || prev >= root.Val) {
@@ -387,4 +439,6 @@ func isEvenOddTree(root *TreeNode) bool {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

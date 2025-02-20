@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0330.Patching%20Array/README_EN.md
+tags:
+    - Greedy
+    - Array
+---
+
+<!-- problem:start -->
+
 # [330. Patching Array](https://leetcode.com/problems/patching-array)
 
 [中文文档](/solution/0300-0399/0330.Patching%20Array/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a sorted integer array <code>nums</code> and an integer <code>n</code>, add/patch elements to the array such that any number in the range <code>[1, n]</code> inclusive can be formed by the sum of some elements in the array.</p>
 
@@ -46,11 +59,36 @@ Explanation: The two patches can be [2, 4].
 	<li><code>1 &lt;= n &lt;= 2<sup>31</sup> - 1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Greedy
+
+Let's assume that the number $x$ is the smallest positive integer that cannot be represented. Then all the numbers in $[1,..x-1]$ can be represented. In order to represent the number $x$, we need to add a number that is less than or equal to $x$:
+
+-   If the added number equals $x$, since all numbers in $[1,..x-1]$ can be represented, after adding $x$, all numbers in the range $[1,..2x-1]$ can be represented, and the smallest positive integer that cannot be represented becomes $2x$.
+-   If the added number is less than $x$, let's assume it's $x'$, since all numbers in $[1,..x-1]$ can be represented, after adding $x'$, all numbers in the range $[1,..x+x'-1]$ can be represented, and the smallest positive integer that cannot be represented becomes $x+x' \lt 2x$.
+
+Therefore, we should greedily add the number $x$ to cover a larger range.
+
+We use a variable $x$ to record the current smallest positive integer that cannot be represented, initialized to $1$. At this time, $[1,..x-1]$ is empty, indicating that no number can be covered; we use a variable $i$ to record the current index of the array being traversed.
+
+We perform the following operations in a loop:
+
+-   If $i$ is within the range of the array and $nums[i] \le x$, it means that the current number can be covered, so we add the value of $nums[i]$ to $x$, and increment $i$ by $1$.
+-   Otherwise, it means that $x$ is not covered, so we need to supplement a number $x$ in the array, and then update $x$ to $2x$.
+-   Repeat the above operations until the value of $x$ is greater than $n$.
+
+The final answer is the number of supplemented numbers.
+
+The time complexity is $O(m + \log n)$, where $m$ is the length of the array $nums$. The space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -66,6 +104,8 @@ class Solution:
                 x <<= 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -84,6 +124,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -104,6 +146,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minPatches(nums []int, n int) (ans int) {
 	x := 1
@@ -119,6 +163,8 @@ func minPatches(nums []int, n int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minPatches(nums: number[], n: number): number {
@@ -138,4 +184,6 @@ function minPatches(nums: number[], n: number): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

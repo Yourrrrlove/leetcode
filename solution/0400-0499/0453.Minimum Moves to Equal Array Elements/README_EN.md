@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0400-0499/0453.Minimum%20Moves%20to%20Equal%20Array%20Elements/README_EN.md
+tags:
+    - Array
+    - Math
+---
+
+<!-- problem:start -->
+
 # [453. Minimum Moves to Equal Array Elements](https://leetcode.com/problems/minimum-moves-to-equal-array-elements)
 
 [中文文档](/solution/0400-0499/0453.Minimum%20Moves%20to%20Equal%20Array%20Elements/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>nums</code> of size <code>n</code>, return <em>the minimum number of moves required to make all array elements equal</em>.</p>
 
@@ -35,17 +48,50 @@
 	<li>The answer is guaranteed to fit in a <strong>32-bit</strong> integer.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Mathematics
+
+Let the minimum value of the array $\textit{nums}$ be $\textit{mi}$, the sum of the array be $\textit{s}$, and the length of the array be $\textit{n}$.
+
+Assume the minimum number of operations is $\textit{k}$, and the final value of all elements in the array is $\textit{x}$. Then we have:
+
+$$
+\begin{aligned}
+\textit{s} + (\textit{n} - 1) \times \textit{k} &= \textit{n} \times \textit{x} \\
+\textit{x} &= \textit{mi} + \textit{k} \\
+\end{aligned}
+$$
+
+Substituting the second equation into the first equation, we get:
+
+$$
+\begin{aligned}
+\textit{s} + (\textit{n} - 1) \times \textit{k} &= \textit{n} \times (\textit{mi} + \textit{k}) \\
+\textit{s} + (\textit{n} - 1) \times \textit{k} &= \textit{n} \times \textit{mi} + \textit{n} \times \textit{k} \\
+\textit{k} &= \textit{s} - \textit{n} \times \textit{mi} \\
+\end{aligned}
+$$
+
+Therefore, the minimum number of operations is $\textit{s} - \textit{n} \times \textit{mi}$.
+
+The time complexity is $O(n)$, and the space complexity is $O(1)$. Here, $n$ is the length of the array.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def minMoves(self, nums: List[int]) -> int:
         return sum(nums) - min(nums) * len(nums)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -54,6 +100,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -70,6 +118,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minMoves(nums []int) int {
 	mi := 1 << 30
@@ -83,6 +133,8 @@ func minMoves(nums []int) int {
 	return s - mi*len(nums)
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minMoves(nums: number[]): number {
@@ -98,24 +150,6 @@ function minMoves(nums: number[]): number {
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```java
-class Solution {
-    public int minMoves(int[] nums) {
-        int s = 0;
-        int mi = 1 << 30;
-        for (int x : nums) {
-            s += x;
-            mi = Math.min(mi, x);
-        }
-        return s - mi * nums.length;
-    }
-}
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

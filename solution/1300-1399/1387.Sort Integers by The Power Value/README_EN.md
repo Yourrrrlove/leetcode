@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1300-1399/1387.Sort%20Integers%20by%20The%20Power%20Value/README_EN.md
+rating: 1506
+source: Biweekly Contest 22 Q3
+tags:
+    - Memoization
+    - Dynamic Programming
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [1387. Sort Integers by The Power Value](https://leetcode.com/problems/sort-integers-by-the-power-value)
 
 [中文文档](/solution/1300-1399/1387.Sort%20Integers%20by%20The%20Power%20Value/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>The power of an integer <code>x</code> is defined as the number of steps needed to transform <code>x</code> into <code>1</code> using the following steps:</p>
 
@@ -51,19 +67,25 @@ The fourth number in the sorted array is 7.
 	<li><code>1 &lt;= k &lt;= hi - lo + 1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Custom Sorting
 
-First, we define a function $f(x)$, which represents the number of steps required to change the number $x$ to $1$, i.e., the weight of the number $x$.
+First, we define a function $\textit{f}(x)$, which represents the number of steps required to transform the number $x$ into $1$, i.e., the power value of the number $x$.
 
-Then, we sort all the numbers in the interval $[lo, hi]$ in ascending order of weight. If the weights are the same, we sort them in ascending order of the numbers themselves.
+Then, we sort all the numbers in the interval $[\textit{lo}, \textit{hi}]$ in ascending order based on their power values. If the power values are the same, we sort them in ascending order based on the numbers themselves.
 
-Finally, we return the $k$-th number after sorting.
+Finally, we return the $k$-th number in the sorted list.
 
-The time complexity is $O(n \times \log n \times M)$, and the space complexity is $O(n)$. Where $n$ is the number of numbers in the interval $[lo, hi]$, and $M$ is the maximum value of $f(x)$. In this problem, the maximum value of $M$ is $178$.
+The time complexity is $O(n \times \log n \times M)$, and the space complexity is $O(n)$. Here, $n$ is the number of numbers in the interval $[\textit{lo}, \textit{hi}]$, and $M$ is the maximum value of $f(x)$, which is at most $178$ in this problem.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 @cache
@@ -82,6 +104,8 @@ class Solution:
     def getKth(self, lo: int, hi: int, k: int) -> int:
         return sorted(range(lo, hi + 1), key=f)[k - 1]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -110,6 +134,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -143,6 +169,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func getKth(lo int, hi int, k int) int {
 	f := func(x int) (ans int) {
@@ -170,6 +198,8 @@ func getKth(lo int, hi int, k int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function getKth(lo: number, hi: number, k: number): number {
     const f = (x: number): number => {
@@ -193,6 +223,33 @@ function getKth(lo: number, hi: number, k: number): number {
 }
 ```
 
+#### Rust
+
+```rust
+impl Solution {
+    pub fn get_kth(lo: i32, hi: i32, k: i32) -> i32 {
+        let f = |mut x: i32| -> i32 {
+            let mut ans = 0;
+            while x != 1 {
+                if x % 2 == 0 {
+                    x /= 2;
+                } else {
+                    x = 3 * x + 1;
+                }
+                ans += 1;
+            }
+            ans
+        };
+
+        let mut nums: Vec<i32> = (lo..=hi).collect();
+        nums.sort_by(|&x, &y| f(x).cmp(&f(y)));
+        nums[(k - 1) as usize]
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

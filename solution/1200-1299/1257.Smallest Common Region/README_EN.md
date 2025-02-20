@@ -1,8 +1,27 @@
-# [1257. Smallest Common Region](https://leetcode.com/problems/smallest-common-region)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1257.Smallest%20Common%20Region/README_EN.md
+rating: 1654
+source: Biweekly Contest 13 Q2
+tags:
+    - Tree
+    - Depth-First Search
+    - Breadth-First Search
+    - Array
+    - Hash Table
+    - String
+---
+
+<!-- problem:start -->
+
+# [1257. Smallest Common Region 🔒](https://leetcode.com/problems/smallest-common-region)
 
 [中文文档](/solution/1200-1299/1257.Smallest%20Common%20Region/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given some lists of <code>regions</code> where the first region of each list includes all other regions in that list.</p>
 
@@ -45,13 +64,20 @@ region2 = &quot;New York&quot;
 	<li><code>1 &lt;= regions[i][j].length, region1.length, region2.length &lt;= 20</code></li>
 	<li><code>region1 != region2</code></li>
 	<li><code>regions[i][j]</code>, <code>region1</code>, and <code>region2</code> consist of English letters.</li>
+	<li>The input is generated such that there exists a region which contains all the other regions, either directly or indirectly.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,6 +98,8 @@ class Solution:
             region2 = m[region2]
         return region1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -98,6 +126,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -119,6 +149,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findSmallestRegion(regions [][]string, region1 string, region2 string) string {
@@ -145,4 +177,6 @@ func findSmallestRegion(regions [][]string, region1 string, region2 string) stri
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

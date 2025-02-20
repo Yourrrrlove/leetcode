@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0808.Soup%20Servings/README_EN.md
+tags:
+    - Math
+    - Dynamic Programming
+    - Probability and Statistics
+---
+
+<!-- problem:start -->
+
 # [808. Soup Servings](https://leetcode.com/problems/soup-servings)
 
 [中文文档](/solution/0800-0899/0808.Soup%20Servings/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There are two types of soup: <strong>type A</strong> and <strong>type B</strong>. Initially, we have <code>n</code> ml of each type of soup. There are four kinds of operations:</p>
 
@@ -45,11 +59,42 @@ So the total probability of A becoming empty first plus half the probability tha
 	<li><code>0 &lt;= n &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Memoization Search
+
+In this problem, since each operation is a multiple of $25$, we can consider every $25ml$ of soup as one unit. This reduces the data scale to $\left \lceil \frac{n}{25} \right \rceil$.
+
+We design a function $dfs(i, j)$, which represents the probability result when there are $i$ units of soup $A$ and $j$ units of soup $B$ remaining.
+
+When $i \leq 0$ and $j \leq 0$, it means both soups are finished, and we should return $0.5$. When $i \leq 0$, it means soup $A$ is finished first, and we should return $1$. When $j \leq 0$, it means soup $B$ is finished first, and we should return $0$.
+
+Next, for each operation, we have four choices:
+
+-   Take $4$ units from soup $A$ and $0$ units from soup $B$;
+-   Take $3$ units from soup $A$ and $1$ unit from soup $B$;
+-   Take $2$ units from soup $A$ and $2$ units from soup $B$;
+-   Take $1$ unit from soup $A$ and $3$ units from soup $B$.
+
+Each choice has a probability of $0.25$, so we can derive:
+
+$$
+dfs(i, j) = 0.25 \times (dfs(i - 4, j) + dfs(i - 3, j - 1) + dfs(i - 2, j - 2) + dfs(i - 1, j - 3))
+$$
+
+We use memoization to store the results of the function.
+
+Additionally, we find that when $n=4800$, the result is $0.999994994426$, and the required precision is $10^{-5}$. As $n$ increases, the result gets closer to $1$. Therefore, when $n \gt 4800$, we can directly return $1$.
+
+The time complexity is $O(C^2)$, and the space complexity is $O(C^2)$. In this problem, $C=200$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -71,6 +116,8 @@ class Solution:
 
         return 1 if n > 4800 else dfs((n + 24) // 25, (n + 24) // 25)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -101,6 +148,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -119,6 +168,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func soupServings(n int) float64 {
@@ -148,6 +199,8 @@ func soupServings(n int) float64 {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function soupServings(n: number): number {
     const f = new Array(200).fill(0).map(() => new Array(200).fill(-1));
@@ -174,4 +227,6 @@ function soupServings(n: number): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

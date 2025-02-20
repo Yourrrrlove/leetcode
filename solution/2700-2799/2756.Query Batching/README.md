@@ -1,10 +1,20 @@
-# [2756. 批处理查询](https://leetcode.cn/problems/query-batching)
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2756.Query%20Batching/README.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
+# [2756. 批处理查询 🔒](https://leetcode.cn/problems/query-batching)
 
 [English Version](/solution/2700-2799/2756.Query%20Batching/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>将多个小查询批处理为单个大查询可以是一种有用的优化。请编写一个名为&nbsp;<code>QueryBatcher</code>&nbsp;的类来实现这个功能。</p>
 
@@ -126,6 +136,24 @@ calls = [
 	<li>所有的键值都是唯一的</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
 
-<!-- end -->
+<!-- solution:start -->
+
+### 方法一
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

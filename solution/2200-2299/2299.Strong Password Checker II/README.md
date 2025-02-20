@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2200-2299/2299.Strong%20Password%20Checker%20II/README.md
+rating: 1241
+source: 第 80 场双周赛 Q1
+tags:
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [2299. 强密码检验器 II](https://leetcode.cn/problems/strong-password-checker-ii)
 
 [English Version](/solution/2200-2299/2299.Strong%20Password%20Checker%20II/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>如果一个密码满足以下所有条件，我们称它是一个 <strong>强</strong>&nbsp;密码：</p>
 
@@ -50,19 +62,25 @@
 	<li><code>password</code>&nbsp;包含字母，数字和&nbsp;<code>"!@#$%^&amp;*()-+"</code>&nbsp;这些特殊字符。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：模拟 + 位运算
 
 根据题目描述，我们可以模拟检查密码是否满足题目要求的过程。
 
-首先，我们检查密码的长度是否小于 $8$，如果是，则返回 `false`。
+首先，我们检查密码的长度是否小于 $8$，如果是，则返回 $\textit{false}$。
 
-接下来，我们用一个掩码 `mask` 来记录密码是否包含小写字母、大写字母、数字和特殊字符。我们遍历密码，每次遍历到一个字符，先判断它是否和前一个字符相同，如果是，则返回 `false`。然后，根据字符的类型更新掩码 `mask`。最后，我们检查掩码 `mask` 是否为 $15$，如果是，则返回 `true`，否则返回 `false`。
+接下来，我们用一个掩码 $\textit{mask}$ 来记录密码是否包含小写字母、大写字母、数字和特殊字符。我们遍历密码，每次遍历到一个字符，先判断它是否和前一个字符相同，如果是，则返回 $\textit{false}$。然后，根据字符的类型更新掩码 $\textit{mask}$。最后，我们检查掩码 $\textit{mask}$ 是否为 $15$，如果是，则返回 $\textit{true}$，否则返回 $\textit{false}$。
 
 时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为密码的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -83,6 +101,8 @@ class Solution:
                 mask |= 8
         return mask == 15
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -110,6 +130,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -139,6 +161,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func strongPasswordCheckerII(password string) bool {
 	if len(password) < 8 {
@@ -162,6 +186,8 @@ func strongPasswordCheckerII(password string) bool {
 	return mask == 15
 }
 ```
+
+#### TypeScript
 
 ```ts
 function strongPasswordCheckerII(password: string): boolean {
@@ -187,6 +213,8 @@ function strongPasswordCheckerII(password: string): boolean {
     return mask == 15;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -218,6 +246,8 @@ impl Solution {
 }
 ```
 
+#### C
+
 ```c
 bool strongPasswordCheckerII(char* password) {
     int n = strlen(password);
@@ -247,4 +277,6 @@ bool strongPasswordCheckerII(char* password) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

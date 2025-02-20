@@ -1,10 +1,24 @@
-# [2083. 求以相同字母开头和结尾的子串总数](https://leetcode.cn/problems/substrings-that-begin-and-end-with-the-same-letter)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2000-2099/2083.Substrings%20That%20Begin%20and%20End%20With%20the%20Same%20Letter/README.md
+tags:
+    - 哈希表
+    - 数学
+    - 字符串
+    - 计数
+    - 前缀和
+---
+
+<!-- problem:start -->
+
+# [2083. 求以相同字母开头和结尾的子串总数 🔒](https://leetcode.cn/problems/substrings-that-begin-and-end-with-the-same-letter)
 
 [English Version](/solution/2000-2099/2083.Substrings%20That%20Begin%20and%20End%20With%20the%20Same%20Letter/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个仅由小写英文字母组成的，&nbsp; 下标从 <code>0</code> 开始的字符串 <code>s</code> 。返回 <code>s</code> 中以相同字符开头和结尾的子字符串总数。</p>
 
@@ -52,15 +66,25 @@
 	<li><code>s</code> 仅包含小写英文字母。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：数组或哈希表
 
-我们可以用数组或哈希表统计字符串中每个字母出现的次数，然后遍历字符串，对于每个字母，其出现的次数即为以该字母开头和结尾的子串的个数，将所有字母的出现次数相加即为答案。
+我们可以用哈希表或者一个长度为 $26$ 的数组 $\textit{cnt}$ 来记录每个字符出现的次数。
 
-时间复杂度 $O(n)$，空间复杂度 $O(C)$。其中 $n$ 为字符串的长度，而 $C$ 为字符集的大小。本题中 $C = 26$。
+遍历字符串 $\textit{s}$，对于每个字符 $\textit{c}$，我们将 $\textit{cnt}[c]$ 的值加 $1$，然后将 $\textit{cnt}[c]$ 的值加到答案中。
+
+最后返回答案即可。
+
+时间复杂度 $O(n)$，其中 $n$ 是字符串 $\textit{s}$ 的长度。空间复杂度 $O(|\Sigma|)$，其中 $\Sigma$ 是字符集，这里是小写英文字母，所以 $|\Sigma|=26$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -73,20 +97,22 @@ class Solution:
         return ans
 ```
 
+#### Java
+
 ```java
 class Solution {
     public long numberOfSubstrings(String s) {
         int[] cnt = new int[26];
         long ans = 0;
-        for (int i = 0; i < s.length(); ++i) {
-            int j = s.charAt(i) - 'a';
-            ++cnt[j];
-            ans += cnt[j];
+        for (char c : s.toCharArray()) {
+            ans += ++cnt[c - 'a'];
         }
         return ans;
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -102,6 +128,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numberOfSubstrings(s string) (ans int64) {
 	cnt := [26]int{}
@@ -114,6 +142,57 @@ func numberOfSubstrings(s string) (ans int64) {
 }
 ```
 
+#### TypeScript
+
+```ts
+function numberOfSubstrings(s: string): number {
+    const cnt: Record<string, number> = {};
+    let ans = 0;
+    for (const c of s) {
+        cnt[c] = (cnt[c] || 0) + 1;
+        ans += cnt[c];
+    }
+    return ans;
+}
+```
+
+#### Rust
+
+```rust
+impl Solution {
+    pub fn number_of_substrings(s: String) -> i64 {
+        let mut cnt = [0; 26];
+        let mut ans = 0_i64;
+        for c in s.chars() {
+            let idx = (c as u8 - b'a') as usize;
+            cnt[idx] += 1;
+            ans += cnt[idx];
+        }
+        ans
+    }
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var numberOfSubstrings = function (s) {
+    const cnt = {};
+    let ans = 0;
+    for (const c of s) {
+        cnt[c] = (cnt[c] || 0) + 1;
+        ans += cnt[c];
+    }
+    return ans;
+};
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

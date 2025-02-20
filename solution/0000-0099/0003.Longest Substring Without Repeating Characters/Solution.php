@@ -1,24 +1,17 @@
 class Solution {
-    /**
-     * @param String $s
-     * @return Integer
-     */
     function lengthOfLongestSubstring($s) {
-        $max = 0;
-        for ($i = 0; $i < strlen($s); $i++) {
-            $chars = [];
-            $sub = '';
-            for ($j = $i; $j < strlen($s); $j++) {
-                if (in_array($s[$j], $chars)) {
-                    break;
-                }
-                $sub .= $s[$j];
-                $chars[] = $s[$j];
+        $n = strlen($s);
+        $ans = 0;
+        $cnt = array_fill(0, 128, 0);
+        $l = 0;
+        for ($r = 0; $r < $n; ++$r) {
+            $cnt[ord($s[$r])]++;
+            while ($cnt[ord($s[$r])] > 1) {
+                $cnt[ord($s[$l])]--;
+                $l++;
             }
-            if (strlen($sub) > $max) {
-                $max = strlen($sub);
-            }
+            $ans = max($ans, $r - $l + 1);
         }
-        return $max;
+        return $ans;
     }
 }

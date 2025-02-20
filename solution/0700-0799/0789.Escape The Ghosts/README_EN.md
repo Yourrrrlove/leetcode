@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0789.Escape%20The%20Ghosts/README_EN.md
+tags:
+    - Array
+    - Math
+---
+
+<!-- problem:start -->
+
 # [789. Escape The Ghosts](https://leetcode.com/problems/escape-the-ghosts)
 
 [中文文档](/solution/0700-0799/0789.Escape%20The%20Ghosts/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are playing a simplified PAC-MAN game on an infinite 2-D grid. You start at the point <code>[0, 0]</code>, and you are given a destination point <code>target = [x<sub>target</sub>, y<sub>target</sub>]</code> that you are trying to get to. There are several ghosts on the map with their starting positions given as a 2D array <code>ghosts</code>, where <code>ghosts[i] = [x<sub>i</sub>, y<sub>i</sub>]</code> represents the starting position of the <code>i<sup>th</sup></code> ghost. All inputs are <strong>integral coordinates</strong>.</p>
 
@@ -49,11 +62,17 @@
 	<li><code>-10<sup>4</sup> &lt;= x<sub>target</sub>, y<sub>target</sub> &lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -61,6 +80,8 @@ class Solution:
         tx, ty = target
         return all(abs(tx - x) + abs(ty - y) > abs(tx) + abs(ty) for x, y in ghosts)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -77,6 +98,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -92,6 +115,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func escapeGhosts(ghosts [][]int, target []int) bool {
@@ -113,6 +138,8 @@ func abs(x int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function escapeGhosts(ghosts: number[][], target: number[]): boolean {
     const [tx, ty] = target;
@@ -127,4 +154,6 @@ function escapeGhosts(ghosts: number[][], target: number[]): boolean {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

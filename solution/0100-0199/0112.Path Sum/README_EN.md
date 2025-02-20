@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0112.Path%20Sum/README_EN.md
+tags:
+    - Tree
+    - Depth-First Search
+    - Breadth-First Search
+    - Binary Tree
+---
+
+<!-- problem:start -->
+
 # [112. Path Sum](https://leetcode.com/problems/path-sum)
 
 [中文文档](/solution/0100-0199/0112.Path%20Sum/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given the <code>root</code> of a binary tree and an integer <code>targetSum</code>, return <code>true</code> if the tree has a <strong>root-to-leaf</strong> path such that adding up all the values along the path equals <code>targetSum</code>.</p>
 
@@ -22,7 +37,7 @@
 <pre>
 <strong>Input:</strong> root = [1,2,3], targetSum = 5
 <strong>Output:</strong> false
-<strong>Explanation:</strong> There two root-to-leaf paths in the tree:
+<strong>Explanation:</strong> There are two root-to-leaf paths in the tree:
 (1 --&gt; 2): The sum is 3.
 (1 --&gt; 3): The sum is 4.
 There is no root-to-leaf path with sum = 5.
@@ -45,7 +60,11 @@ There is no root-to-leaf path with sum = 5.
 	<li><code>-1000 &lt;= targetSum &lt;= 1000</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Recursion
 
@@ -54,6 +73,8 @@ Starting from the root node, recursively traverse the tree and update the value 
 The time complexity is $O(n)$, where $n$ is the number of nodes in the binary tree. Each node is visited once.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -74,6 +95,8 @@ class Solution:
 
         return dfs(root, 0)
 ```
+
+#### Java
 
 ```java
 /**
@@ -109,6 +132,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -135,6 +160,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -159,6 +186,8 @@ func hasPathSum(root *TreeNode, targetSum int) bool {
 	return dfs(root, 0)
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -187,6 +216,8 @@ function hasPathSum(root: TreeNode | null, targetSum: number): boolean {
 }
 ```
 
+#### Rust
+
 ```rust
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
@@ -206,8 +237,8 @@ function hasPathSum(root: TreeNode | null, targetSum: number): boolean {
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn has_path_sum(root: Option<Rc<RefCell<TreeNode>>>, target_sum: i32) -> bool {
         match root {
@@ -219,13 +250,15 @@ impl Solution {
                     return target_sum - node.val == 0;
                 }
                 let val = node.val;
-                Self::has_path_sum(node.left.take(), target_sum - val) ||
-                    Self::has_path_sum(node.right.take(), target_sum - val)
+                Self::has_path_sum(node.left.take(), target_sum - val)
+                    || Self::has_path_sum(node.right.take(), target_sum - val)
             }
         }
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -254,4 +287,6 @@ var hasPathSum = function (root, targetSum) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

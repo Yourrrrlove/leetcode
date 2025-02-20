@@ -1,8 +1,15 @@
+---
+comments: true
+edit_url: https://github.com/doocs/leetcode/edit/main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20101.%20%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E4%B8%B2/README.md
+---
+
+<!-- problem:start -->
+
 # [剑指 Offer II 101. 分割等和子串](https://leetcode.cn/problems/NUPfPr)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个非空的正整数数组 <code>nums</code> ，请判断能否将这些数字分成元素和相等的两部分。</p>
 
@@ -38,11 +45,17 @@
 
 <p><meta charset="UTF-8" />注意：本题与主站 416&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/partition-equal-subset-sum/">https://leetcode.cn/problems/partition-equal-subset-sum/</a></p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -65,6 +78,8 @@ class Solution:
                     dp[i][j] = dp[i - 1][j - nums[i]]
         return dp[-1][-1]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -92,6 +107,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -112,6 +129,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func canPartition(nums []int) bool {
@@ -137,11 +156,39 @@ func canPartition(nums []int) bool {
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func canPartition(_ nums: [Int]) -> Bool {
+        let s = nums.reduce(0, +)
+        if s % 2 != 0 { return false }
+        let target = s / 2
+        var dp = Array(repeating: false, count: target + 1)
+        dp[0] = true
+
+        for num in nums {
+            for j in stride(from: target, through: num, by: -1) {
+                dp[j] = dp[j] || dp[j - num]
+            }
+        }
+
+        return dp[target]
+    }
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start-->
 
 ### 方法二
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -164,9 +211,15 @@ class Solution:
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start-->
+
 ### 方法三
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -190,4 +243,6 @@ class Solution:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

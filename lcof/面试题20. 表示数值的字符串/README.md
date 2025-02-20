@@ -1,8 +1,16 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9820.%20%E8%A1%A8%E7%A4%BA%E6%95%B0%E5%80%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/README.md
+---
+
+<!-- problem:start -->
+
 # [面试题 20. 表示数值的字符串](https://leetcode.cn/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>请实现一个函数用来判断字符串是否表示<strong>数值</strong>（包括整数和小数）。</p>
 
@@ -85,7 +93,11 @@
 	<li><code>s</code> 仅含英文字母（大写和小写），数字（<code>0-9</code>），加号 <code>'+'</code> ，减号 <code>'-'</code> ，空格 <code>' '</code> 或者点 <code>'.'</code> 。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：分类讨论
 
@@ -99,7 +111,7 @@
 
 遍历 $s[i,..j]$ 范围内的每个字符，根据字符的类型进行分类讨论：
 
--   如果当前字符是 `+` 或者 `-`，那么该字符的前一个字符必须是 `e` 或者 `E`，或者空格，否则返回 `false`。
+-   如果当前字符是 `+` 或者 `-`，那么该字符必须是第一个有效字符（即空格后的第一个非空字符），或者该字符的前一个字符必须是 `e` 或者 `E`，否则返回 `false`。
 -   如果当前字符是数字，那么我们将 `digit` 置为 `true`。
 -   如果当前字符是 `.`，那么该字符之前不能出现过 `.` 或者 `e`/`E`，否则返回 `false`，否则我们将 `dot` 置为 `true`。
 -   如果当前字符是 `e` 或者 `E`，那么该字符之前不能出现过 `e`/`E`，并且必须出现过数字，否则返回 `false`，否则我们将 `e` 置为 `true`，并且将 `digit` 置为 `false`，表示 `e` 之后必须出现数字。
@@ -110,6 +122,8 @@
 时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为字符串 $s$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -141,6 +155,8 @@ class Solution:
             i += 1
         return digit
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -186,6 +202,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -228,6 +246,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isNumber(s string) bool {
 	i, j := 0, len(s)-1
@@ -265,6 +285,8 @@ func isNumber(s string) bool {
 	return digit
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -307,6 +329,61 @@ public class Solution {
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func isNumber(_ s: String) -> Bool {
+        let chars = Array(s)
+        var i = 0, j = chars.count - 1
+
+        // Trim leading spaces
+        while i <= j && chars[i] == " " {
+            i += 1
+        }
+        // Trim trailing spaces
+        while i <= j && chars[j] == " " {
+            j -= 1
+        }
+        if i > j {
+            return false
+        }
+
+        var digit = false
+        var dot = false
+        var e = false
+
+        while i <= j {
+            let char = chars[i]
+            if char == "+" || char == "-" {
+                if i > 0 && chars[i - 1] != " " && chars[i - 1] != "e" && chars[i - 1] != "E" {
+                    return false
+                }
+            } else if char.isWholeNumber {
+                digit = true
+            } else if char == "." {
+                if dot || e {
+                    return false
+                }
+                dot = true
+            } else if char == "e" || char == "E" {
+                if !digit || e {
+                    return false
+                }
+                e = true
+                digit = false
+            } else {
+                return false
+            }
+            i += 1
+        }
+        return digit
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

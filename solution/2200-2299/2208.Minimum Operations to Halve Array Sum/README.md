@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2200-2299/2208.Minimum%20Operations%20to%20Halve%20Array%20Sum/README.md
+rating: 1550
+source: 第 74 场双周赛 Q3
+tags:
+    - 贪心
+    - 数组
+    - 堆（优先队列）
+---
+
+<!-- problem:start -->
+
 # [2208. 将数组和减半的最少操作次数](https://leetcode.cn/problems/minimum-operations-to-halve-array-sum)
 
 [English Version](/solution/2200-2299/2208.Minimum%20Operations%20to%20Halve%20Array%20Sum/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个正整数数组&nbsp;<code>nums</code>&nbsp;。每一次操作中，你可以从&nbsp;<code>nums</code>&nbsp;中选择 <strong>任意</strong>&nbsp;一个数并将它减小到 <strong>恰好</strong>&nbsp;一半。（注意，在后续操作中你可以对减半过的数继续执行操作）</p>
 
@@ -53,7 +67,11 @@ nums 的和减小了 31 - 14.5 = 16.5 ，减小的部分超过了初始数组和
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>7</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：贪心 + 优先队列（大根堆）
 
@@ -65,37 +83,41 @@ nums 的和减小了 31 - 14.5 = 16.5 ，减小的部分超过了初始数组和
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def halveArray(self, nums: List[int]) -> int:
         s = sum(nums) / 2
-        h = []
-        for v in nums:
-            heappush(h, -v)
+        pq = []
+        for x in nums:
+            heappush(pq, -x)
         ans = 0
         while s > 0:
-            t = -heappop(h) / 2
+            t = -heappop(pq) / 2
             s -= t
-            heappush(h, -t)
+            heappush(pq, -t)
             ans += 1
         return ans
 ```
 
+#### Java
+
 ```java
 class Solution {
     public int halveArray(int[] nums) {
+        PriorityQueue<Double> pq = new PriorityQueue<>(Collections.reverseOrder());
         double s = 0;
-        PriorityQueue<Double> q = new PriorityQueue<>(Collections.reverseOrder());
-        for (int v : nums) {
-            q.offer(v * 1.0);
-            s += v;
+        for (int x : nums) {
+            s += x;
+            pq.offer((double) x);
         }
         s /= 2.0;
         int ans = 0;
         while (s > 0) {
-            double t = q.poll();
-            s -= t / 2.0;
-            q.offer(t / 2.0);
+            double t = pq.poll() / 2.0;
+            s -= t;
+            pq.offer(t);
             ++ans;
         }
         return ans;
@@ -103,23 +125,25 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     int halveArray(vector<int>& nums) {
-        priority_queue<double> q;
+        priority_queue<double> pq;
         double s = 0;
-        for (int& v : nums) {
-            s += v;
-            q.push(v);
+        for (int x : nums) {
+            s += x;
+            pq.push((double) x);
         }
         s /= 2.0;
         int ans = 0;
         while (s > 0) {
-            double t = q.top() / 2;
-            q.pop();
+            double t = pq.top() / 2.0;
+            pq.pop();
             s -= t;
-            q.push(t);
+            pq.push(t);
             ++ans;
         }
         return ans;
@@ -127,20 +151,22 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func halveArray(nums []int) (ans int) {
 	var s float64
-	q := hp{}
+	pq := &hp{}
 	for _, x := range nums {
 		s += float64(x)
-		heap.Push(&q, float64(x))
+		heap.Push(pq, float64(x))
 	}
 	s /= 2
 	for s > 0 {
-		x := heap.Pop(&q).(float64)
+		t := heap.Pop(pq).(float64) / 2
+		s -= t
 		ans++
-		s -= x / 2
-		heap.Push(&q, x/2)
+		heap.Push(pq, t)
 	}
 	return
 }
@@ -157,20 +183,21 @@ func (h *hp) Pop() any {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function halveArray(nums: number[]): number {
     let s: number = nums.reduce((a, b) => a + b) / 2;
-    const h = new MaxPriorityQueue();
-    for (const v of nums) {
-        h.enqueue(v, v);
+    const pq = new MaxPriorityQueue();
+    for (const x of nums) {
+        pq.enqueue(x, x);
     }
-    let ans: number = 0;
+    let ans = 0;
     while (s > 0) {
-        let { element: t } = h.dequeue();
-        t /= 2;
+        const t = pq.dequeue().element / 2;
         s -= t;
-        h.enqueue(t, t);
-        ans += 1;
+        ++ans;
+        pq.enqueue(t, t);
     }
     return ans;
 }
@@ -178,34 +205,6 @@ function halveArray(nums: number[]): number {
 
 <!-- tabs:end -->
 
-### 方法二
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```go
-func halveArray(nums []int) (ans int) {
-	half := 0
-	for i := range nums {
-		nums[i] <<= 20
-		half += nums[i]
-	}
-	h := hp{nums}
-	heap.Init(&h)
-	for half >>= 1; half > 0; ans++ {
-		half -= h.IntSlice[0] >> 1
-		h.IntSlice[0] >>= 1
-		heap.Fix(&h, 0)
-	}
-	return
-}
-
-type hp struct{ sort.IntSlice }
-
-func (h hp) Less(i, j int) bool { return h.IntSlice[i] > h.IntSlice[j] }
-func (hp) Push(any)             {}
-func (hp) Pop() (_ any)         { return }
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

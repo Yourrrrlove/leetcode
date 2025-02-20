@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2750.Ways%20to%20Split%20Array%20Into%20Good%20Subarrays/README.md
+rating: 1597
+source: 第 351 场周赛 Q3
+tags:
+    - 数组
+    - 数学
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [2750. 将数组划分成若干好子数组的方式](https://leetcode.cn/problems/ways-to-split-array-into-good-subarrays)
 
 [English Version](/solution/2700-2799/2750.Ways%20to%20Split%20Array%20Into%20Good%20Subarrays/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个二元数组 <code>nums</code> 。</p>
 
@@ -43,7 +57,11 @@
 	<li><code>0 &lt;= nums[i] &lt;= 1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：乘法原理
 
@@ -52,6 +70,8 @@
 时间复杂度 $O(n)$，其中 $n$ 为数组长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -66,6 +86,8 @@ class Solution:
             j = i
         return 0 if j == -1 else ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -85,6 +107,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -106,6 +130,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numberOfGoodSubarraySplits(nums []int) int {
 	const mod int = 1e9 + 7
@@ -126,6 +152,8 @@ func numberOfGoodSubarraySplits(nums []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function numberOfGoodSubarraySplits(nums: number[]): number {
     let ans = 1;
@@ -144,6 +172,8 @@ function numberOfGoodSubarraySplits(nums: number[]): number {
     return j === -1 ? 0 : ans;
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -167,4 +197,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

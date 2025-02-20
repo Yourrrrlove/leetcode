@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2200-2299/2299.Strong%20Password%20Checker%20II/README_EN.md
+rating: 1241
+source: Biweekly Contest 80 Q1
+tags:
+    - String
+---
+
+<!-- problem:start -->
+
 # [2299. Strong Password Checker II](https://leetcode.com/problems/strong-password-checker-ii)
 
 [中文文档](/solution/2200-2299/2299.Strong%20Password%20Checker%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>A password is said to be <strong>strong</strong> if it satisfies all the following criteria:</p>
 
@@ -49,11 +63,25 @@
 	<li><code>password</code> consists of letters, digits, and special characters: <code>&quot;!@#$%^&amp;*()-+&quot;</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Simulation + Bit Manipulation
+
+According to the problem description, we can simulate the process of checking whether the password meets the requirements.
+
+First, we check if the length of the password is less than $8$. If it is, we return $\textit{false}$.
+
+Next, we use a mask $\textit{mask}$ to record whether the password contains lowercase letters, uppercase letters, digits, and special characters. We traverse the password, and for each character, we first check if it is the same as the previous character. If it is, we return $\textit{false}$. Then, we update the mask $\textit{mask}$ based on the character type. Finally, we check if the mask $\textit{mask}$ is $15$. If it is, we return $\textit{true}$; otherwise, we return $\textit{false}$.
+
+The time complexity is $O(n)$, and the space complexity is $O(1)$. Here, $n$ is the length of the password.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -74,6 +102,8 @@ class Solution:
                 mask |= 8
         return mask == 15
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -101,6 +131,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -130,6 +162,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func strongPasswordCheckerII(password string) bool {
 	if len(password) < 8 {
@@ -153,6 +187,8 @@ func strongPasswordCheckerII(password string) bool {
 	return mask == 15
 }
 ```
+
+#### TypeScript
 
 ```ts
 function strongPasswordCheckerII(password: string): boolean {
@@ -178,6 +214,8 @@ function strongPasswordCheckerII(password: string): boolean {
     return mask == 15;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -209,6 +247,8 @@ impl Solution {
 }
 ```
 
+#### C
+
 ```c
 bool strongPasswordCheckerII(char* password) {
     int n = strlen(password);
@@ -238,4 +278,6 @@ bool strongPasswordCheckerII(char* password) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

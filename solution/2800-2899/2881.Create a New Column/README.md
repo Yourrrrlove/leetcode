@@ -1,10 +1,20 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2881.Create%20a%20New%20Column/README.md
+tags:
+    - Pandas
+---
+
+<!-- problem:start -->
+
 # [2881. 创建新列](https://leetcode.cn/problems/create-a-new-column)
 
 [English Version](/solution/2800-2899/2881.Create%20a%20New%20Column/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <pre>
 DataFrame <code>employees</code>
@@ -53,11 +63,21 @@ DataFrame employees
 <b>解释：</b>
 通过将 salary 列中的值加倍创建了一个新的 bonus 列。</pre>
 
+<!-- description:end -->
+
 ## 解法
 
-### 方法一
+<!-- solution:start -->
+
+### 方法一：直接计算
+
+我们可以直接计算 `salary` 的两倍，然后将结果存入 `bonus` 列。
+
+时间复杂度 $O(1)$，空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 import pandas as pd
@@ -70,4 +90,6 @@ def createBonusColumn(employees: pd.DataFrame) -> pd.DataFrame:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

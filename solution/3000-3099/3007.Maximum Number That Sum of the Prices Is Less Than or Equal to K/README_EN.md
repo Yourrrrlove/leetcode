@@ -1,46 +1,239 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/3000-3099/3007.Maximum%20Number%20That%20Sum%20of%20the%20Prices%20Is%20Less%20Than%20or%20Equal%20to%20K/README_EN.md
+rating: 2258
+source: Weekly Contest 380 Q3
+tags:
+    - Bit Manipulation
+    - Binary Search
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [3007. Maximum Number That Sum of the Prices Is Less Than or Equal to K](https://leetcode.com/problems/maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k)
 
 [中文文档](/solution/3000-3099/3007.Maximum%20Number%20That%20Sum%20of%20the%20Prices%20Is%20Less%20Than%20or%20Equal%20to%20K/README.md)
 
 ## Description
 
-<p>You are given an integer <code>k</code> and an integer <code>x</code>.</p>
+<!-- description:start -->
 
-<p>Consider <code>s</code> is the <strong>1-indexed </strong>binary representation of an integer <code>num</code>. The <strong>price</strong> of a number <code>num</code> is the number of <code>i</code>&#39;s such that <code>i % x == 0</code> and <code><font face="monospace">s[i]</font></code> is a <strong>set bit</strong>.</p>
+<p>You are given an integer <code>k</code> and an integer <code>x</code>. The price of a number&nbsp;<code>num</code> is calculated by the count of <span data-keyword="set-bit">set bits</span> at positions <code>x</code>, <code>2x</code>, <code>3x</code>, etc., in its binary representation, starting from the least significant bit. The following table contains examples of how price is calculated.</p>
 
-<p>Return <em>the <b>greatest</b> integer </em><code>num</code><em> such that the sum of <strong>prices</strong> of all numbers from </em><code>1</code><em> to </em><code>num</code><em> is less than or equal to </em><code>k</code><em>.</em></p>
+<table border="1">
+	<tbody>
+		<tr>
+			<th>x</th>
+			<th>num</th>
+			<th>Binary Representation</th>
+			<th>Price</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>13</td>
+			<td><u>0</u><u>0</u><u>0</u><u>0</u><u>0</u><strong><u>1</u></strong><strong><u>1</u></strong><u>0</u><strong><u>1</u></strong></td>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>13</td>
+			<td>0<u>0</u>0<u>0</u>0<strong><u>1</u></strong>1<u>0</u>1</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>233</td>
+			<td>0<strong><u>1</u></strong>1<strong><u>1</u></strong>0<strong><u>1</u></strong>0<u>0</u>1</td>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>13</td>
+			<td><u>0</u>00<u>0</u>01<strong><u>1</u></strong>01</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>362</td>
+			<td><strong><u>1</u></strong>01<strong><u>1</u></strong>01<u>0</u>10</td>
+			<td>2</td>
+		</tr>
+	</tbody>
+</table>
 
-<p><strong>Note</strong>:</p>
+<p>The&nbsp;<strong>accumulated price</strong>&nbsp;of&nbsp;<code>num</code>&nbsp;is the <b>total</b>&nbsp;price of&nbsp;numbers from <code>1</code> to <code>num</code>. <code>num</code>&nbsp;is considered&nbsp;<strong>cheap</strong>&nbsp;if its accumulated price&nbsp;is less than or equal to <code>k</code>.</p>
 
-<ul>
-	<li>In the binary representation of a number <strong>set bit</strong> is a bit of value <code>1</code>.</li>
-	<li>The binary representation of a number will be indexed from right to left. For example, if <code>s == 11100</code>, <code>s[4] == 1</code> and <code>s[2] == 0</code>.</li>
-</ul>
+<p>Return the <b>greatest</b>&nbsp;cheap number.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre>
-<strong>Input:</strong> k = 9, x = 1
-<strong>Output:</strong> 6
-<strong>Explanation:</strong> The numbers 1, 2, 3, 4, 5, and 6 can be written in binary representation as &quot;1&quot;, &quot;10&quot;, &quot;11&quot;, &quot;100&quot;, &quot;101&quot;, and &quot;110&quot; respectively.
-Since x is equal to 1, the price of each number is the number of its set bits.
-The number of set bits in these numbers is 9. So the sum of the prices of the first 6 numbers is 9.
-So the answer is 6.</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">k = 9, x = 1</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">6</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>As shown in the table below, <code>6</code> is the greatest cheap number.</p>
+
+<table border="1">
+	<tbody>
+		<tr>
+			<th>x</th>
+			<th>num</th>
+			<th>Binary Representation</th>
+			<th>Price</th>
+			<th>Accumulated Price</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>1</td>
+			<td><u>0</u><u>0</u><strong><u>1</u></strong></td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>2</td>
+			<td><u>0</u><strong><u>1</u></strong><u>0</u></td>
+			<td>1</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>3</td>
+			<td><u>0</u><strong><u>1</u></strong><strong><u>1</u></strong></td>
+			<td>2</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>4</td>
+			<td><strong><u>1</u></strong><u>0</u><u>0</u></td>
+			<td>1</td>
+			<td>5</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>5</td>
+			<td><strong><u>1</u></strong><u>0</u><strong><u>1</u></strong></td>
+			<td>2</td>
+			<td>7</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>6</td>
+			<td><strong><u>1</u></strong><strong><u>1</u></strong><u>0</u></td>
+			<td>2</td>
+			<td>9</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>7</td>
+			<td><strong><u>1</u></strong><strong><u>1</u></strong><strong><u>1</u></strong></td>
+			<td>3</td>
+			<td>12</td>
+		</tr>
+	</tbody>
+</table>
+</div>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre>
-<strong>Input:</strong> k = 7, x = 2
-<strong>Output:</strong> 9
-<strong>Explanation:</strong> Since x is equal to 2, we should just check even<sup>th</sup> bits.
-The second bit of binary representation of numbers 2 and 3 is a set bit. So the sum of their prices is 2.
-The second bit of binary representation of numbers 6 and 7 is a set bit. So the sum of their prices is 2.
-The fourth bit of binary representation of numbers 8 and 9 is a set bit but their second bit is not. So the sum of their prices is 2.
-Numbers 1, 4, and 5 don&#39;t have set bits in their even<sup>th</sup> bits in their binary representation. So the sum of their prices is 0.
-The second and the fourth bit of the binary representation of the number 10 are a set bit. So its price is 2.
-The sum of the prices of the first 9 numbers is 6.
-Because the sum of the prices of the first 10 numbers is 8, the answer is 9.</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">k = 7, x = 2</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">9</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>As shown in the table below, <code>9</code> is the greatest cheap number.</p>
+
+<table border="1">
+	<tbody>
+		<tr>
+			<th>x</th>
+			<th>num</th>
+			<th>Binary Representation</th>
+			<th>Price</th>
+			<th>Accumulated Price</th>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>1</td>
+			<td><u>0</u>0<u>0</u>1</td>
+			<td>0</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>2</td>
+			<td><u>0</u>0<strong><u>1</u></strong>0</td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>3</td>
+			<td><u>0</u>0<strong><u>1</u></strong>1</td>
+			<td>1</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>4</td>
+			<td><u>0</u>1<u>0</u>0</td>
+			<td>0</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>5</td>
+			<td><u>0</u>1<u>0</u>1</td>
+			<td>0</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>6</td>
+			<td><u>0</u>1<strong><u>1</u></strong>0</td>
+			<td>1</td>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>7</td>
+			<td><u>0</u>1<strong><u>1</u></strong>1</td>
+			<td>1</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>8</td>
+			<td><strong><u>1</u></strong>0<u>0</u>0</td>
+			<td>1</td>
+			<td>5</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>9</td>
+			<td><strong><u>1</u></strong>0<u>0</u>1</td>
+			<td>1</td>
+			<td>6</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>10</td>
+			<td><strong><u>1</u></strong>0<strong><u>1</u></strong>0</td>
+			<td>2</td>
+			<td>8</td>
+		</tr>
+	</tbody>
+</table>
+</div>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
@@ -50,11 +243,27 @@ Because the sum of the prices of the first 10 numbers is 8, the answer is 9.</pr
 	<li><code>1 &lt;= x &lt;= 8</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Binary Search + Digit DP
+
+We notice that if $\textit{num}$ increases, the total value from $1$ to $\textit{num}$ also increases. Therefore, we can use a binary search method to find the largest cheap number.
+
+We define the left boundary of the binary search as $l = 1$. Since there is at least one valuable number in every $2^x + 1$ numbers, and the total value does not exceed $10^{15}$, we can set the right boundary of the binary search as $r = 10^{18}$.
+
+Next, we perform a binary search. For each $\textit{mid}$, we use the digit DP method to calculate the total value from $1$ to $\textit{mid}$. If the total value does not exceed $k$, it means $\textit{mid}$ is a cheap number, and we update the left boundary $l$ to $\textit{mid}$. Otherwise, we update the right boundary $r$ to $\textit{mid} - 1$.
+
+Finally, we return the left boundary $l$.
+
+The time complexity is $O(\log^2 k)$, and the space complexity is $O(\log k)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -81,6 +290,8 @@ class Solution:
                 r = mid - 1
         return l
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -125,6 +336,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -133,7 +346,7 @@ public:
         ll l = 1, r = 1e17;
         ll num = 0;
         ll f[65][65];
-        function<ll(int, int, bool)> dfs = [&](int pos, int cnt, bool limit) -> ll {
+        auto dfs = [&](this auto&& dfs, int pos, int cnt, bool limit) -> ll {
             if (pos == 0) {
                 return cnt;
             }
@@ -165,6 +378,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findMaximumNumber(k int64, x int) int64 {
@@ -215,6 +430,58 @@ func findMaximumNumber(k int64, x int) int64 {
 }
 ```
 
+#### TypeScript
+
+```ts
+function findMaximumNumber(k: number, x: number): number {
+    let [l, r] = [1n, 10n ** 17n];
+    let num: bigint;
+    const f: bigint[][] = Array.from({ length: 65 }, () => Array(65).fill(-1n));
+
+    const dfs = (pos: number, cnt: number, limit: boolean): bigint => {
+        if (pos === 0) {
+            return BigInt(cnt);
+        }
+        if (!limit && f[pos][cnt] !== -1n) {
+            return f[pos][cnt];
+        }
+        let ans: bigint = 0n;
+        let up: number = 1;
+        if (limit) {
+            up = Number((num >> BigInt(pos - 1)) & 1n);
+        }
+        for (let i = 0; i <= up; i++) {
+            let v: number = cnt;
+            if (i === 1 && pos % x === 0) {
+                v++;
+            }
+            ans += dfs(pos - 1, v, limit && i === up);
+        }
+        if (!limit) {
+            f[pos][cnt] = ans;
+        }
+        return ans;
+    };
+
+    while (l < r) {
+        let mid: bigint = (l + r + 1n) >> 1n;
+        num = mid;
+        let m: number = num.toString(2).length;
+        for (let i = 0; i < f.length; i++) {
+            f[i].fill(-1n);
+        }
+        if (dfs(m, 0, true) <= BigInt(k)) {
+            l = mid;
+        } else {
+            r = mid - 1n;
+        }
+    }
+    return Number(l);
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

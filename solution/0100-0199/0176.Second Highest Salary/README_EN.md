@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0176.Second%20Highest%20Salary/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
 # [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary)
 
 [中文文档](/solution/0100-0199/0176.Second%20Highest%20Salary/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table: <code>Employee</code></p>
 
@@ -19,7 +31,7 @@ Each row of this table contains information about the salary of an employee.
 
 <p>&nbsp;</p>
 
-<p>Write a solution to find&nbsp;the second highest salary from the <code>Employee</code> table. If there is no second highest salary,&nbsp;return&nbsp;<code>null (return&nbsp;None in Pandas)</code>.</p>
+<p>Write a solution to find&nbsp;the second highest <strong>distinct</strong> salary from the <code>Employee</code> table. If there is no second highest salary,&nbsp;return&nbsp;<code>null (return&nbsp;None in Pandas)</code>.</p>
 
 <p>The result format is in the following example.</p>
 
@@ -62,11 +74,17 @@ Employee table:
 +---------------------+
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Use Sub Query and LIMIT
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 import pandas as pd
@@ -91,6 +109,8 @@ def second_highest_salary(employee: pd.DataFrame) -> pd.DataFrame:
     return result_df
 ```
 
+#### MySQL
+
 ```sql
 # Write your MySQL query statement below
 SELECT
@@ -104,9 +124,15 @@ SELECT
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Use `MAX()` function
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -117,9 +143,15 @@ WHERE salary < (SELECT MAX(salary) FROM Employee);
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 3: Use `IFNULL()` and window function
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -129,4 +161,6 @@ SELECT (SELECT DISTINCT salary FROM T WHERE rk = 2) AS SecondHighestSalary;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

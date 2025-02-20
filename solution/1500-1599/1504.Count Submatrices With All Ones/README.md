@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1500-1599/1504.Count%20Submatrices%20With%20All%20Ones/README.md
+rating: 1845
+source: 第 196 场周赛 Q3
+tags:
+    - 栈
+    - 数组
+    - 动态规划
+    - 矩阵
+    - 单调栈
+---
+
+<!-- problem:start -->
+
 # [1504. 统计全 1 子矩形](https://leetcode.cn/problems/count-submatrices-with-all-ones)
 
 [English Version](/solution/1500-1599/1504.Count%20Submatrices%20With%20All%20Ones/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个&nbsp;<code>m x n</code>&nbsp;的二进制矩阵&nbsp;<code>mat</code>&nbsp;，请你返回有多少个&nbsp;<strong>子矩形</strong>&nbsp;的元素全部都是 1 。</p>
 
@@ -54,7 +70,11 @@
 	<li><code>mat[i][j]</code>&nbsp;仅包含&nbsp;<code>0</code>&nbsp;或&nbsp;<code>1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：枚举 + 前缀和
 
@@ -65,6 +85,8 @@
 时间复杂度 $O(m^2 \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是矩阵的行数和列数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -84,6 +106,8 @@ class Solution:
                     ans += col
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -112,6 +136,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -139,6 +165,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func numSubmat(mat [][]int) (ans int) {
@@ -169,6 +197,39 @@ func numSubmat(mat [][]int) (ans int) {
 }
 ```
 
+#### TypeScript
+
+```ts
+function numSubmat(mat: number[][]): number {
+    const m = mat.length;
+    const n = mat[0].length;
+    const g: number[][] = Array.from({ length: m }, () => Array(n).fill(0));
+
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (mat[i][j]) {
+                g[i][j] = j === 0 ? 1 : 1 + g[i][j - 1];
+            }
+        }
+    }
+
+    let ans = 0;
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            let col = Infinity;
+            for (let k = i; k >= 0; k--) {
+                col = Math.min(col, g[k][j]);
+                ans += col;
+            }
+        }
+    }
+
+    return ans;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

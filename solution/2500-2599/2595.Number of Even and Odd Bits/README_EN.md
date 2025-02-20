@@ -1,37 +1,61 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2595.Number%20of%20Even%20and%20Odd%20Bits/README_EN.md
+rating: 1206
+source: Weekly Contest 337 Q1
+tags:
+    - Bit Manipulation
+---
+
+<!-- problem:start -->
+
 # [2595. Number of Even and Odd Bits](https://leetcode.com/problems/number-of-even-and-odd-bits)
 
 [中文文档](/solution/2500-2599/2595.Number%20of%20Even%20and%20Odd%20Bits/README.md)
 
 ## Description
 
+<!-- description:start -->
+
 <p>You are given a <strong>positive</strong> integer <code>n</code>.</p>
 
-<p>Let <code>even</code> denote the number of even indices in the binary representation of <code>n</code> (<strong>0-indexed</strong>) with value <code>1</code>.</p>
+<p>Let <code>even</code> denote the number of even indices in the binary representation of <code>n</code> with value 1.</p>
 
-<p>Let <code>odd</code> denote the number of odd indices in the binary representation of <code>n</code> (<strong>0-indexed</strong>) with value <code>1</code>.</p>
+<p>Let <code>odd</code> denote the number of odd indices in the binary representation of <code>n</code> with value 1.</p>
 
-<p>Return <em>an integer array </em><code>answer</code><em> where </em><code>answer = [even, odd]</code>.</p>
+<p>Note that bits are indexed from <strong>right to left</strong> in the binary representation of a number.</p>
+
+<p>Return the array <code>[even, odd]</code>.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre>
-<strong>Input:</strong> n = 17
-<strong>Output:</strong> [2,0]
-<strong>Explanation:</strong> The binary representation of 17 is 10001. 
-It contains 1 on the 0<sup>th</sup> and 4<sup>th</sup> indices. 
-There are 2 even and 0 odd indices.
-</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">n = 50</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[1,2]</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The binary representation of 50 is <code>110010</code>.</p>
+
+<p>It contains 1 on indices 1, 4, and 5.</p>
+</div>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre>
-<strong>Input:</strong> n = 2
-<strong>Output:</strong> [0,1]
-<strong>Explanation:</strong> The binary representation of 2 is 10.
-It contains 1 on the 1<sup>st</sup> index. 
-There are 0 even and 1 odd indices.
-</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">n = 2</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">[0,1]</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The binary representation of 2 is <code>10</code>.</p>
+
+<p>It contains 1 only on index 1.</p>
+</div>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
@@ -40,7 +64,11 @@ There are 0 even and 1 odd indices.
 	<li><code>1 &lt;= n &lt;= 1000</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Enumerate
 
@@ -49,6 +77,8 @@ According to the problem description, enumerate the binary representation of $n$
 The time complexity is $O(\log n)$ and the space complexity is $O(1)$. Where $n$ is the given integer.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -62,6 +92,8 @@ class Solution:
         return ans
 ```
 
+#### Java
+
 ```java
 class Solution {
     public int[] evenOddBit(int n) {
@@ -73,6 +105,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -87,6 +121,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func evenOddBit(n int) []int {
 	ans := make([]int, 2)
@@ -97,15 +133,19 @@ func evenOddBit(n int) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function evenOddBit(n: number): number[] {
-    const ans = new Array(2).fill(0);
+    const ans = Array(2).fill(0);
     for (let i = 0; n > 0; n >>= 1, i ^= 1) {
         ans[i] += n & 1;
     }
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -127,9 +167,19 @@ impl Solution {
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 2: Bit Manipulation
+
+We can define a mask $\textit{mask} = \text{0x5555}$, which is represented in binary as $\text{0101 0101 0101 0101}_2$. Then, performing a bitwise AND operation between $n$ and $\textit{mask}$ will give us the bits at even indices in the binary representation of $n$. Performing a bitwise AND operation between $n$ and the complement of $\textit{mask}$ will give us the bits at odd indices in the binary representation of $n$. We can count the number of 1s in these two results.
+
+The time complexity is $O(1)$, and the space complexity is $O(1)$. Here, $n$ is the given integer.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -139,6 +189,8 @@ class Solution:
         odd = (n & ~mask).bit_count()
         return [even, odd]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -150,6 +202,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -163,6 +217,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func evenOddBit(n int) []int {
 	mask := 0x5555
@@ -171,6 +227,8 @@ func evenOddBit(n int) []int {
 	return []int{even, odd}
 }
 ```
+
+#### TypeScript
 
 ```ts
 function evenOddBit(n: number): number[] {
@@ -190,6 +248,8 @@ function bitCount(i: number): number {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn even_odd_bit(n: i32) -> Vec<i32> {
@@ -203,4 +263,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

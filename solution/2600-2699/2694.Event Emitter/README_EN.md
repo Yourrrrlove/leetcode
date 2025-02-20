@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2694.Event%20Emitter/README_EN.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
 # [2694. Event Emitter](https://leetcode.com/problems/event-emitter)
 
 [中文文档](/solution/2600-2699/2694.Event%20Emitter/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Design an <code>EventEmitter</code> class. This interface&nbsp;is similar (but with some differences) to the one found in Node.js or the Event Target interface of the DOM. The <code>EventEmitter</code> should allow for subscribing to events and emitting them.</p>
 
@@ -21,7 +33,7 @@
 <pre>
 <strong>Input:</strong> 
 actions = [&quot;EventEmitter&quot;, &quot;emit&quot;, &quot;subscribe&quot;, &quot;subscribe&quot;, &quot;emit&quot;], 
-values = [[], [&quot;firstEvent&quot;, &quot;function cb1() { return 5; }&quot;],  [&quot;firstEvent&quot;, &quot;function cb1() { return 6; }&quot;], [&quot;firstEvent&quot;]]
+values = [[], [&quot;firstEvent&quot;], [&quot;firstEvent&quot;, &quot;function cb1() { return 5; }&quot;],&nbsp; [&quot;firstEvent&quot;, &quot;function cb1() { return 6; }&quot;], [&quot;firstEvent&quot;]]
 <strong>Output:</strong> [[],[&quot;emitted&quot;,[]],[&quot;subscribed&quot;],[&quot;subscribed&quot;],[&quot;emitted&quot;,[5,6]]]
 <strong>Explanation:</strong> 
 const emitter = new EventEmitter();
@@ -67,7 +79,7 @@ emitter.emit(&quot;firstEvent&quot;, [4, 5, 6]); // [], there are no subscriptio
 <strong>Input:</strong> 
 actions = [&quot;EventEmitter&quot;, &quot;subscribe&quot;, &quot;subscribe&quot;, &quot;unsubscribe&quot;, &quot;emit&quot;], 
 values = [[], [&quot;firstEvent&quot;, &quot;x =&gt; x + 1&quot;], [&quot;firstEvent&quot;, &quot;x =&gt; x + 2&quot;], [0], [&quot;firstEvent&quot;, [5]]]
-<strong>Output:</strong> [[],[&quot;subscribed&quot;],[&quot;emitted&quot;,[&quot;1,2,3&quot;]],[&quot;unsubscribed&quot;,0],[&quot;emitted&quot;,[7]]]
+<strong>Output:</strong> [[],[&quot;subscribed&quot;],[&quot;subscribed&quot;],[&quot;unsubscribed&quot;,0],[&quot;emitted&quot;,[7]]]
 <strong>Explanation:</strong>
 const emitter = new EventEmitter();
 const sub1 = emitter.subscribe(&quot;firstEvent&quot;, x =&gt; x + 1);
@@ -89,11 +101,17 @@ emitter.emit(&quot;firstEvent&quot;, [5]); // [7]</pre>
 	<li>The <code>unsubscribe</code>&nbsp;action takes one argument, which is the 0-indexed order of the subscription made before.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 type Callback = (...args: any[]) => any;
@@ -137,4 +155,6 @@ class EventEmitter {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

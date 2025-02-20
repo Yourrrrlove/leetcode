@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2860.Happy%20Students/README.md
+rating: 1625
+source: 第 363 场周赛 Q2
+tags:
+    - 数组
+    - 枚举
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [2860. 让所有学生保持开心的分组方法数](https://leetcode.cn/problems/happy-students)
 
 [English Version](/solution/2800-2899/2860.Happy%20Students/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个下标从 <strong>0</strong> 开始、长度为 <code>n</code> 的整数数组 <code>nums</code> ，其中 <code>n</code> 是班级中学生的总数。班主任希望能够在让所有学生保持开心的情况下选出一组学生：</p>
 
@@ -52,7 +66,11 @@
 	<li><code>0 &lt;= nums[i] &lt; nums.length</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序 + 枚举
 
@@ -72,6 +90,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def countWays(self, nums: List[int]) -> int:
@@ -83,8 +103,11 @@ class Solution:
                 continue
             if i < n and nums[i] <= i:
                 continue
+            ans += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -101,6 +124,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -120,6 +145,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func countWays(nums []int) (ans int) {
 	sort.Ints(nums)
@@ -133,6 +160,8 @@ func countWays(nums []int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function countWays(nums: number[]): number {
@@ -151,4 +180,6 @@ function countWays(nums: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

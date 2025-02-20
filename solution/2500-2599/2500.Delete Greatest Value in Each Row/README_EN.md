@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2500.Delete%20Greatest%20Value%20in%20Each%20Row/README_EN.md
+rating: 1309
+source: Weekly Contest 323 Q1
+tags:
+    - Array
+    - Matrix
+    - Sorting
+    - Simulation
+    - Heap (Priority Queue)
+---
+
+<!-- problem:start -->
+
 # [2500. Delete Greatest Value in Each Row](https://leetcode.com/problems/delete-greatest-value-in-each-row)
 
 [中文文档](/solution/2500-2599/2500.Delete%20Greatest%20Value%20in%20Each%20Row/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an <code>m x n</code> matrix <code>grid</code> consisting of positive integers.</p>
 
@@ -50,11 +68,23 @@ The final answer = 10.
 	<li><code>1 &lt;= grid[i][j] &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Sorting
+
+Since each operation involves removing the maximum value from each row and then adding the maximum value to the answer, we can first sort each row.
+
+Next, we traverse each column, take the maximum value from each column, and add it to the answer.
+
+The time complexity is $O(m \times n \times \log n)$, and the space complexity is $O(\log n)$. Here, $m$ and $n$ are the number of rows and columns of the matrix, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -63,6 +93,8 @@ class Solution:
             row.sort()
         return sum(max(col) for col in zip(*grid))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -83,11 +115,15 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     int deleteGreatestValue(vector<vector<int>>& grid) {
-        for (auto& row : grid) sort(row.begin(), row.end());
+        for (auto& row : grid) {
+            ranges::sort(row);
+        }
         int ans = 0;
         for (int j = 0; j < grid[0].size(); ++j) {
             int t = 0;
@@ -100,6 +136,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func deleteGreatestValue(grid [][]int) (ans int) {
@@ -119,6 +157,8 @@ func deleteGreatestValue(grid [][]int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function deleteGreatestValue(grid: number[][]): number {
     for (const row of grid) {
@@ -137,6 +177,8 @@ function deleteGreatestValue(grid: number[][]): number {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -166,4 +208,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

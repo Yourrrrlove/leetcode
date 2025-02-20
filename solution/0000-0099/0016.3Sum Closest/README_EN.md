@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0016.3Sum%20Closest/README_EN.md
+tags:
+    - Array
+    - Two Pointers
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [16. 3Sum Closest](https://leetcode.com/problems/3sum-closest)
 
 [中文文档](/solution/0000-0099/0016.3Sum%20Closest/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>nums</code> of length <code>n</code> and an integer <code>target</code>, find three integers in <code>nums</code> such that the sum is closest to <code>target</code>.</p>
 
@@ -36,7 +50,11 @@
 	<li><code>-10<sup>4</sup> &lt;= target &lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Sorting + Two Pointers
 
@@ -45,6 +63,8 @@ We sort the array first, then traverse the array. For each element $nums[i]$, we
 The time complexity is $O(n^2)$, and the space complexity is $O(\log n)$. Here, $n$ is the length of the array.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -66,6 +86,8 @@ class Solution:
                     j += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -95,6 +117,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -118,6 +142,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func threeSumClosest(nums []int, target int) int {
@@ -152,6 +178,8 @@ func abs(x int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function threeSumClosest(nums: number[], target: number): number {
     nums.sort((a, b) => a - b);
@@ -178,6 +206,8 @@ function threeSumClosest(nums: number[], target: number): number {
     return ans;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -211,6 +241,81 @@ var threeSumClosest = function (nums, target) {
 };
 ```
 
+#### C#
+
+```cs
+public class Solution {
+    public int ThreeSumClosest(int[] nums, int target) {
+        Array.Sort(nums);
+        int ans = 1 << 30;
+        int n = nums.Length;
+        for (int i = 0; i < n; ++i) {
+            int j = i + 1, k = n - 1;
+            while (j < k) {
+                int t = nums[i] + nums[j] + nums[k];
+                if (t == target) {
+                    return t;
+                }
+                if (Math.Abs(t - target) < Math.Abs(ans - target)) {
+                    ans = t;
+                }
+                if (t > target) {
+                    --k;
+                } else {
+                    ++j;
+                }
+            }
+        }
+        return ans;
+    }
+}
+```
+
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param int[] $nums
+     * @param int $target
+     * @return int
+     */
+
+    function threeSumClosest($nums, $target) {
+        $n = count($nums);
+        $closestSum = $nums[0] + $nums[1] + $nums[2];
+        $minDiff = abs($closestSum - $target);
+
+        sort($nums);
+
+        for ($i = 0; $i < $n - 2; $i++) {
+            $left = $i + 1;
+            $right = $n - 1;
+
+            while ($left < $right) {
+                $sum = $nums[$i] + $nums[$left] + $nums[$right];
+                $diff = abs($sum - $target);
+
+                if ($diff < $minDiff) {
+                    $minDiff = $diff;
+                    $closestSum = $sum;
+                } elseif ($sum < $target) {
+                    $left++;
+                } elseif ($sum > $target) {
+                    $right--;
+                } else {
+                    return $sum;
+                }
+            }
+        }
+
+        return $closestSum;
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

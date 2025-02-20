@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0900-0999/0966.Vowel%20Spellchecker/README.md
+tags:
+    - 数组
+    - 哈希表
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [966. 元音拼写检查器](https://leetcode.cn/problems/vowel-spellchecker)
 
 [English Version](/solution/0900-0999/0966.Vowel%20Spellchecker/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>在给定单词列表&nbsp;<code>wordlist</code>&nbsp;的情况下，我们希望实现一个拼写检查器，将查询单词转换为正确的单词。</p>
 
@@ -65,19 +77,25 @@
 	<li><code>wordlist[i]</code>&nbsp;和&nbsp;<code>queries[i]</code>&nbsp;只包含英文字母</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：哈希表
 
-遍历 `wordlist`，将单词按照大小写不敏感、元音不敏感的规则分别存入哈希表 `low` 和 `pat` 中，其中 `low` 的键为单词的小写形式，`pat` 的键为将单词的元音字母替换为 `*` 后的字符串，值为单词本身。用哈希表 `s` 存储 `wordlist` 中的单词。
+我们遍历 $\textit{wordlist}$，将单词按照大小写不敏感、元音不敏感的规则分别存入哈希表 $\textit{low}$ 和 $\textit{pat}$ 中，其中 $\textit{low}$ 的键为单词的小写形式，$\textit{pat}$ 的键为将单词的元音字母替换为 `*` 后的字符串，值为单词本身。用哈希表 $\textit{s}$ 存储 $\textit{wordlist}$ 中的单词。
 
-遍历 `queries`，对于每个单词 `q`，如果 `q` 在 `s` 中，说明 `q` 在 `wordlist` 中，直接将 `q` 加入答案数组 `ans` 中；否则，如果 `q` 的小写形式在 `low` 中，说明 `q` 在 `wordlist` 中，且大小写不敏感，将 `low[q.lower()]` 加入答案数组 `ans` 中；否则，如果将 `q` 的元音字母替换为 `*` 后的字符串在 `pat` 中，说明 `q` 在 `wordlist` 中，且元音不敏感，将 `pat[f(q)]` 加入答案数组 `ans` 中；否则，说明 `q` 在 `wordlist` 中，且大小写和元音都不敏感，将空字符串加入答案数组 `ans` 中。
+遍历 $\textit{queries}$，对于每个单词 $\textit{q}$，如果 $\textit{q}$ 在 $\textit{s}$ 中，说明 $\textit{q}$ 在 $\textit{wordlist}$ 中，直接将 $\textit{q}$ 加入答案数组 $\textit{ans}$ 中；否则，如果 $\textit{q}$ 的小写形式在 $\textit{low}$ 中，说明 $\textit{q}$ 在 $\textit{wordlist}$ 中，且大小写不敏感，将 $\textit{low}[q.\text{lower}()]$ 加入答案数组 $\textit{ans}$ 中；否则，如果将 $\textit{q}$ 的元音字母替换为 `*` 后的字符串在 $\textit{pat}$ 中，说明 $\textit{q}$ 在 $\textit{wordlist}$ 中，且元音不敏感，将 $\textit{pat}[f(q)]$ 加入答案数组 $\textit{ans}$ 中；否则，说明 $\textit{q}$ 在 $\textit{wordlist}$ 中，且大小写和元音都不敏感，将空字符串加入答案数组 $\textit{ans}$ 中。
 
-最后返回答案数组 `ans` 即可。
+最后返回答案数组 $\textit{ans}$ 即可。
 
-时间复杂度 $O(n+m)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别为 `wordlist` 和 `queries` 的长度。
+时间复杂度 $O(n + m)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别为 $\textit{wordlist}$ 和 $\textit{queries}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -111,6 +129,8 @@ class Solution:
             ans.append("")
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -159,6 +179,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -212,6 +234,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func spellchecker(wordlist []string, queries []string) (ans []string) {
 	s := map[string]bool{}
@@ -259,4 +283,6 @@ func spellchecker(wordlist []string, queries []string) (ans []string) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

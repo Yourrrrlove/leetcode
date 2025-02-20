@@ -16,39 +16,37 @@
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
-impl Solution {
-    fn dfs(root: &Option<Rc<RefCell<TreeNode>>>, sub_root: &Option<Rc<RefCell<TreeNode>>>) -> bool {
-        if root.is_none() && sub_root.is_none() {
-            return true;
-        }
-        if root.is_none() || sub_root.is_none() {
-            return false;
-        }
-        let root = root.as_ref().unwrap().borrow();
-        let sub_root = sub_root.as_ref().unwrap().borrow();
-        root.val == sub_root.val &&
-            Self::dfs(&root.left, &sub_root.left) &&
-            Self::dfs(&root.right, &sub_root.right)
-    }
+use std::rc::Rc;
 
-    fn help(
-        root: &Option<Rc<RefCell<TreeNode>>>,
-        sub_root: &Option<Rc<RefCell<TreeNode>>>
+impl Solution {
+    pub fn is_subtree(
+        root: Option<Rc<RefCell<TreeNode>>>,
+        sub_root: Option<Rc<RefCell<TreeNode>>>,
     ) -> bool {
         if root.is_none() {
             return false;
         }
-        Self::dfs(root, sub_root) ||
-            Self::help(&root.as_ref().unwrap().borrow().left, sub_root) ||
-            Self::help(&root.as_ref().unwrap().borrow().right, sub_root)
+        Self::same(&root, &sub_root)
+            || Self::is_subtree(
+                root.as_ref().unwrap().borrow().left.clone(),
+                sub_root.clone(),
+            )
+            || Self::is_subtree(
+                root.as_ref().unwrap().borrow().right.clone(),
+                sub_root.clone(),
+            )
     }
 
-    pub fn is_subtree(
-        root: Option<Rc<RefCell<TreeNode>>>,
-        sub_root: Option<Rc<RefCell<TreeNode>>>
-    ) -> bool {
-        Self::help(&root, &sub_root)
+    fn same(p: &Option<Rc<RefCell<TreeNode>>>, q: &Option<Rc<RefCell<TreeNode>>>) -> bool {
+        match (p, q) {
+            (None, None) => true,
+            (Some(p), Some(q)) => {
+                let p = p.borrow();
+                let q = q.borrow();
+                p.val == q.val && Self::same(&p.left, &q.left) && Self::same(&p.right, &q.right)
+            }
+            _ => false,
+        }
     }
 }

@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1400-1499/1473.Paint%20House%20III/README_EN.md
+rating: 2056
+source: Weekly Contest 192 Q4
+tags:
+    - Array
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [1473. Paint House III](https://leetcode.com/problems/paint-house-iii)
 
 [中文文档](/solution/1400-1499/1473.Paint%20House%20III/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There is a row of <code>m</code> houses in a small city, each house must be painted with one of the <code>n</code> colors (labeled from <code>1</code> to <code>n</code>), some houses that have been painted last summer should not be painted again.</p>
 
@@ -63,11 +78,37 @@ Cost of paint the first and last house (10 + 1) = 11.
 	<li><code>1 &lt;= cost[i][j] &lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Dynamic Programming
+
+We define $f[i][j][k]$ to represent the minimum cost to paint houses from index $0$ to $i$, with the last house painted in color $j$, and exactly forming $k$ blocks. The answer is $f[m-1][j][\textit{target}]$, where $j$ ranges from $1$ to $n$. Initially, we check if the house at index $0$ is already painted. If it is not painted, then $f[0][j][1] = \textit{cost}[0][j - 1]$, where $j \in [1,..n]$. If it is already painted, then $f[0][\textit{houses}[0]][1] = 0$. All other values of $f[i][j][k]$ are initialized to $\infty$.
+
+Next, we start iterating from index $i=1$. For each $i$, we check if the house at index $i$ is already painted:
+
+If it is not painted, we can paint the house at index $i$ with color $j$. We enumerate the number of blocks $k$, where $k \in [1,..\min(\textit{target}, i + 1)]$, and enumerate the color of the previous house $j_0$, where $j_0 \in [1,..n]$. Then we can derive the state transition equation:
+
+$$
+f[i][j][k] = \min_{j_0 \in [1,..n]} \{ f[i - 1][j_0][k - (j \neq j_0)] + \textit{cost}[i][j - 1] \}
+$$
+
+If it is already painted, we can paint the house at index $i$ with color $j$. We enumerate the number of blocks $k$, where $k \in [1,..\min(\textit{target}, i + 1)]$, and enumerate the color of the previous house $j_0$, where $j_0 \in [1,..n]$. Then we can derive the state transition equation:
+
+$$
+f[i][j][k] = \min_{j_0 \in [1,..n]} \{ f[i - 1][j_0][k - (j \neq j_0)] \}
+$$
+
+Finally, we return $f[m - 1][j][\textit{target}]$, where $j \in [1,..n]$. If all values of $f[m - 1][j][\textit{target}]$ are $\infty$, then return $-1$.
+
+The time complexity is $O(m \times n^2 \times \textit{target})$, and the space complexity is $O(m \times n \times \textit{target})$. Here, $m$, $n$, and $\textit{target}$ represent the number of houses, the number of colors, and the number of blocks, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -105,6 +146,8 @@ class Solution:
         ans = min(f[-1][j][target] for j in range(1, n + 1))
         return -1 if ans >= inf else ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -159,6 +202,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -206,6 +251,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minCost(houses []int, cost [][]int, m int, n int, target int) int {
@@ -264,6 +311,8 @@ func minCost(houses []int, cost [][]int, m int, n int, target int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minCost(houses: number[], cost: number[][], m: number, n: number, target: number): number {
     const inf = 1 << 30;
@@ -313,4 +362,6 @@ function minCost(houses: number[], cost: number[][], m: number, n: number, targe
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

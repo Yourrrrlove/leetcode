@@ -1,8 +1,16 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/lcp/LCP%2052.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%9F%93%E8%89%B2/README.md
+---
+
+<!-- problem:start -->
+
 # [LCP 52. 二叉搜索树染色](https://leetcode.cn/problems/QO5KpG)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 欢迎各位勇者来到力扣城，本次试炼主题为「二叉搜索树染色」。
 
@@ -28,7 +36,7 @@
 > 第 1 次操作，将值为 1、2、3 的节点染红；
 > 第 2 次操作，将值为 3、4、5 的节点染蓝；
 > 因此，最终值为 1、2 的节点为红色节点，返回数量 2
-> ![image.png](https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2052.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%9F%93%E8%89%B2/images/1649833948-arSlXd-image.png)
+> ![image.png](https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2052.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%9F%93%E8%89%B2/images/1649833948-arSlXd-image.png){:width=230px}
 
 **示例 2：**
 
@@ -42,7 +50,7 @@
 > 第 2 次操作，将值为 4、5 的节点染蓝；
 > 第 3 次操作，将值为 5、6、7 的节点染红；
 > 因此，最终值为 1、2、5、6、7 的节点为红色节点，返回数量 5
-> ![image.png](https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2052.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%9F%93%E8%89%B2/images/1649833763-BljEbP-image.png)
+> ![image.png](https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2052.%20%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E6%9F%93%E8%89%B2/images/1649833763-BljEbP-image.png){:width=230px}
 
 **提示：**
 
@@ -53,7 +61,11 @@
 -   `0 <= ops[i][1] <= ops[i][2] <= 10^9`
 -   `0 <= 节点值 <= 10^9`
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：有序集合 + 倒序遍历
 
@@ -67,6 +79,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 # Definition for a binary tree node.
 # class TreeNode:
@@ -74,9 +88,6 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
-from sortedcontainers import SortedList
-
 
 class Solution:
     def getNumber(self, root: Optional[TreeNode], ops: List[List[int]]) -> int:
@@ -97,6 +108,8 @@ class Solution:
                 ans += t == 1
         return ans
 ```
+
+#### Java
 
 ```java
 /**
@@ -138,6 +151,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -176,6 +191,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -209,6 +226,8 @@ func getNumber(root *TreeNode, ops [][]int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -740,6 +759,65 @@ class TreeSet<T = number> {
 }
 ```
 
+#### Swift
+
+```swift
+/* public class TreeNode {
+*     public var val: Int
+*     public var left: TreeNode?
+*     public var right: TreeNode?
+*     public init() { self.val = 0; self.left = nil; self.right = nil; }
+*     public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
+*     public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
+*         self.val = val
+*         self.left = left
+*         self.right = right
+*     }
+* }
+*/
+
+class Solution {
+    private var treeValues: [Int] = []
+
+    func getNumber(_ root: TreeNode?, _ ops: [[Int]]) -> Int {
+        collectValues(root)
+
+        treeValues.sort()
+
+        var ans = 0
+        for op in ops.reversed() {
+            let t = op[0]
+            let x = op[1]
+            let y = op[2]
+            var indicesToRemove: [Int] = []
+
+            for i in 0..<treeValues.count {
+                let val = treeValues[i]
+                if val >= x && val <= y {
+                    indicesToRemove.append(i)
+                    ans += t
+                }
+            }
+
+            for index in indicesToRemove.reversed() {
+                treeValues.remove(at: index)
+            }
+        }
+
+        return ans
+    }
+
+    private func collectValues(_ root: TreeNode?) {
+        guard let root = root else { return }
+        treeValues.append(root.val)
+        collectValues(root.left)
+        collectValues(root.right)
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

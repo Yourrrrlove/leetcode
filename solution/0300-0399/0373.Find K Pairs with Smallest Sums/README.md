@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0373.Find%20K%20Pairs%20with%20Smallest%20Sums/README.md
+tags:
+    - 数组
+    - 堆（优先队列）
+---
+
+<!-- problem:start -->
+
 # [373. 查找和最小的 K 对数字](https://leetcode.cn/problems/find-k-pairs-with-smallest-sums)
 
 [English Version](/solution/0300-0399/0373.Find%20K%20Pairs%20with%20Smallest%20Sums/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定两个以 <strong>非递减顺序排列</strong> 的整数数组 <code>nums1</code> 和<strong> </strong><code>nums2</code><strong>&nbsp;</strong>,&nbsp;以及一个整数 <code>k</code><strong>&nbsp;</strong>。</p>
 
@@ -32,14 +43,6 @@
 &nbsp;    [1,1],[1,1],[1,2],[2,1],[1,2],[2,2],[1,3],[1,3],[2,3]
 </pre>
 
-<p><strong class="example">示例 3:</strong></p>
-
-<pre>
-<strong>输入: </strong>nums1 = [1,2], nums2 = [3], k = 3 
-<strong>输出:</strong> [1,3],[2,3]
-<strong>解释: </strong>也可能序列中所有的数对都被返回:[1,3],[2,3]
-</pre>
-
 <p>&nbsp;</p>
 
 <p><strong>提示:</strong></p>
@@ -52,11 +55,17 @@
 	<li><code>k &lt;=&nbsp;nums1.length *&nbsp;nums2.length</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -74,6 +83,8 @@ class Solution:
                 heappush(q, [nums1[i] + nums2[j + 1], i, j + 1])
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -95,6 +106,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -122,6 +135,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func kSmallestPairs(nums1, nums2 []int, k int) (ans [][]int) {
@@ -159,4 +174,6 @@ func (h *hp) Pop() any     { a := h.data; v := a[len(a)-1]; h.data = a[:len(a)-1
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2200-2299/2206.Divide%20Array%20Into%20Equal%20Pairs/README.md
+rating: 1223
+source: 第 74 场双周赛 Q1
+tags:
+    - 位运算
+    - 数组
+    - 哈希表
+    - 计数
+---
+
+<!-- problem:start -->
+
 # [2206. 将数组划分成相等数对](https://leetcode.cn/problems/divide-array-into-equal-pairs)
 
 [English Version](/solution/2200-2299/2206.Divide%20Array%20Into%20Equal%20Pairs/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个整数数组&nbsp;<code>nums</code>&nbsp;，它包含&nbsp;<code>2 * n</code>&nbsp;个整数。</p>
 
@@ -48,11 +63,23 @@ nums 可以划分成 (2, 2) ，(3, 3) 和 (2, 2) ，满足所有要求。
 	<li><code>1 &lt;= nums[i] &lt;= 500</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
 
-### 方法一
+<!-- solution:start -->
+
+### 方法一：计数
+
+根据题目描述，只要数组中每个元素出现的次数都是偶数次，就可以将数组划分成 $n$ 个数对。
+
+因此，我们可以用一个哈希表或者数组 $\textit{cnt}$ 记录每个元素出现的次数，然后遍历 $\textit{cnt}$，如果有任何一个元素出现的次数是奇数次，就返回 $\textit{false}$，否则返回 $\textit{true}$。
+
+时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $\textit{nums}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -60,6 +87,8 @@ class Solution:
         cnt = Counter(nums)
         return all(v % 2 == 0 for v in cnt.values())
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -78,28 +107,36 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     bool divideArray(vector<int>& nums) {
-        vector<int> cnt(510);
-        for (int& v : nums) ++cnt[v];
-        for (int& v : cnt)
-            if (v % 2)
+        int cnt[510]{};
+        for (int x : nums) {
+            ++cnt[x];
+        }
+        for (int i = 1; i <= 500; ++i) {
+            if (cnt[i] % 2) {
                 return false;
+            }
+        }
         return true;
     }
 };
 ```
 
+#### Go
+
 ```go
 func divideArray(nums []int) bool {
-	cnt := make([]int, 510)
-	for _, v := range nums {
-		cnt[v]++
+	cnt := [510]int{}
+	for _, x := range nums {
+		cnt[x]++
 	}
 	for _, v := range cnt {
-		if v%2 == 1 {
+		if v%2 != 0 {
 			return false
 		}
 	}
@@ -107,6 +144,52 @@ func divideArray(nums []int) bool {
 }
 ```
 
+#### TypeScript
+
+```ts
+function divideArray(nums: number[]): boolean {
+    const cnt: Record<number, number> = {};
+    for (const x of nums) {
+        cnt[x] = (cnt[x] || 0) + 1;
+    }
+    return Object.values(cnt).every(x => x % 2 === 0);
+}
+```
+
+#### Rust
+
+```rust
+use std::collections::HashMap;
+
+impl Solution {
+    pub fn divide_array(nums: Vec<i32>) -> bool {
+        let mut cnt = HashMap::new();
+        for x in nums {
+            *cnt.entry(x).or_insert(0) += 1;
+        }
+        cnt.values().all(|&v| v % 2 == 0)
+    }
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var divideArray = function (nums) {
+    const cnt = {};
+    for (const x of nums) {
+        cnt[x] = (cnt[x] || 0) + 1;
+    }
+    return Object.values(cnt).every(x => x % 2 === 0);
+};
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0152.Maximum%20Product%20Subarray/README_EN.md
+tags:
+    - Array
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [152. Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray)
 
 [中文文档](/solution/0100-0199/0152.Maximum%20Product%20Subarray/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>nums</code>, find a <span data-keyword="subarray-nonempty">subarray</span> that has the largest product, and return <em>the product</em>.</p>
 
@@ -31,14 +44,20 @@
 <ul>
 	<li><code>1 &lt;= nums.length &lt;= 2 * 10<sup>4</sup></code></li>
 	<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
-	<li>The product of any prefix or suffix of <code>nums</code> is <strong>guaranteed</strong> to fit in a <strong>32-bit</strong> integer.</li>
+	<li>The product of any subarray of <code>nums</code> is <strong>guaranteed</strong> to fit in a <strong>32-bit</strong> integer.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -51,6 +70,8 @@ class Solution:
             ans = max(ans, f)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -66,6 +87,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -83,6 +106,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxProduct(nums []int) int {
 	f, g, ans := nums[0], nums[0], nums[0]
@@ -96,6 +121,8 @@ func maxProduct(nums []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function maxProduct(nums: number[]): number {
     let [f, g, ans] = [nums[0], nums[0], nums[0]];
@@ -108,6 +135,8 @@ function maxProduct(nums: number[]): number {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -126,6 +155,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number[]} nums
@@ -142,6 +173,8 @@ var maxProduct = function (nums) {
     return ans;
 };
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -160,4 +193,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

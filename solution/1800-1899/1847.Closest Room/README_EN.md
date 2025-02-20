@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1800-1899/1847.Closest%20Room/README_EN.md
+rating: 2081
+source: Biweekly Contest 51 Q4
+tags:
+    - Array
+    - Binary Search
+    - Ordered Set
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [1847. Closest Room](https://leetcode.com/problems/closest-room)
 
 [中文文档](/solution/1800-1899/1847.Closest%20Room/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There is a hotel with <code>n</code> rooms. The rooms are represented by a 2D integer array <code>rooms</code> where <code>rooms[i] = [roomId<sub>i</sub>, size<sub>i</sub>]</code> denotes that there is a room with room number <code>roomId<sub>i</sub></code> and size equal to <code>size<sub>i</sub></code>. Each <code>roomId<sub>i</sub></code> is guaranteed to be <strong>unique</strong>.</p>
 
@@ -50,7 +67,11 @@ Query = [2,5]: Room number 3 is the only room with a size of at least 5. The ans
 	<li><code>1 &lt;= size<sub>i</sub>, minSize<sub>j</sub> &lt;= 10<sup>7</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Offline Query + Ordered Set + Binary Search
 
@@ -64,10 +85,9 @@ The time complexity is $O(n \times \log n + k \times \log k)$, and the space com
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedList
-
-
 class Solution:
     def closestRoom(
         self, rooms: List[List[int]], queries: List[List[int]]
@@ -92,6 +112,8 @@ class Solution:
                 ans[j] = sl[p - 1]
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -135,6 +157,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -180,6 +204,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func closestRoom(rooms [][]int, queries [][]int) []int {
@@ -234,4 +260,6 @@ func closestRoom(rooms [][]int, queries [][]int) []int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

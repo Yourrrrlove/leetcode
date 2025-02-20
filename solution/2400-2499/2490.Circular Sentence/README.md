@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2400-2499/2490.Circular%20Sentence/README.md
+rating: 1262
+source: 第 322 场周赛 Q1
+tags:
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [2490. 回环句](https://leetcode.cn/problems/circular-sentence)
 
 [English Version](/solution/2400-2499/2490.Circular%20Sentence/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p><strong>句子</strong> 是由单个空格分隔的一组单词，且不含前导或尾随空格。</p>
 
@@ -17,7 +29,7 @@
 <p>如果句子满足下述全部条件，则认为它是一个 <strong>回环句</strong> ：</p>
 
 <ul>
-	<li>单词的最后一个字符和下一个单词的第一个字符相等。</li>
+	<li>句子中每个单词的最后一个字符等于下一个单词的第一个字符。</li>
 	<li>最后一个单词的最后一个字符和第一个单词的第一个字符相等。</li>
 </ul>
 
@@ -68,7 +80,11 @@
 	<li>不含任何前导或尾随空格</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：模拟
 
@@ -78,6 +94,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def isCircularSentence(self, sentence: str) -> bool:
@@ -85,6 +103,8 @@ class Solution:
         n = len(ss)
         return all(s[-1] == ss[(i + 1) % n][0] for i, s in enumerate(ss))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -100,6 +120,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -127,6 +149,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isCircularSentence(sentence string) bool {
 	ss := strings.Split(sentence, " ")
@@ -140,6 +164,8 @@ func isCircularSentence(sentence string) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function isCircularSentence(sentence: string): boolean {
     const ss = sentence.split(' ');
@@ -152,6 +178,8 @@ function isCircularSentence(sentence: string): boolean {
     return true;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -167,6 +195,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -187,6 +217,10 @@ var isCircularSentence = function (sentence) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：模拟（空间优化）
 
 我们可以先判断字符串的第一个字符和最后一个字符是否相等，如果不相等则返回 `false`，否则遍历字符串，如果当前字符是空格，则判断前一个字符和后一个字符是否相等，如果不相等则返回 `false`，否则遍历完所有字符后返回 `true`。
@@ -195,6 +229,8 @@ var isCircularSentence = function (sentence) {
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def isCircularSentence(self, s: str) -> bool:
@@ -202,6 +238,8 @@ class Solution:
             c != " " or s[i - 1] == s[i + 1] for i, c in enumerate(s)
         )
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -219,6 +257,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -238,6 +278,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isCircularSentence(s string) bool {
 	n := len(s)
@@ -253,6 +295,8 @@ func isCircularSentence(s string) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function isCircularSentence(s: string): boolean {
     const n = s.length;
@@ -267,6 +311,8 @@ function isCircularSentence(s: string): boolean {
     return true;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -289,6 +335,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {string} s
@@ -310,4 +358,6 @@ var isCircularSentence = function (s) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

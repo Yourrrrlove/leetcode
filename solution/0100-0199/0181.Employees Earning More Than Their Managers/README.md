@@ -1,10 +1,20 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0181.Employees%20Earning%20More%20Than%20Their%20Managers/README.md
+tags:
+    - 数据库
+---
+
+<!-- problem:start -->
+
 # [181. 超过经理收入的员工](https://leetcode.cn/problems/employees-earning-more-than-their-managers)
 
 [English Version](/solution/0100-0199/0181.Employees%20Earning%20More%20Than%20Their%20Managers/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>表：<code>Employee</code>&nbsp;</p>
 
@@ -52,50 +62,46 @@ Employee 表:
 +----------+
 <strong>解释:</strong> Joe 是唯一挣得比经理多的雇员。</pre>
 
+<!-- description:end -->
+
 ## 解法
 
-### 方法一
+<!-- solution:start -->
+
+### 方法一：自连接 + 条件筛选
+
+我们可以通过自连接 `Employee` 表，找出员工的工资以及其经理的工资，然后筛选出工资比经理高的员工。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 import pandas as pd
 
 
 def find_employees(employee: pd.DataFrame) -> pd.DataFrame:
-    df = employee.merge(right=employee, how="left", left_on="managerId", right_on="id")
-    emp = df[df["salary_x"] > df["salary_y"]]["name_x"]
-
-    return pd.DataFrame({"Employee": emp})
+    merged = employee.merge(
+        employee, left_on="managerId", right_on="id", suffixes=("", "_manager")
+    )
+    result = merged[merged["salary"] > merged["salary_manager"]][["name"]]
+    result.columns = ["Employee"]
+    return result
 ```
 
-```sql
-SELECT Name AS Employee
-FROM Employee AS Curr
-WHERE
-    Salary > (
-        SELECT Salary
-        FROM Employee
-        WHERE Id = Curr.ManagerId
-    );
-```
-
-<!-- tabs:end -->
-
-### 方法二
-
-<!-- tabs:start -->
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
-SELECT
-    e1.name AS Employee
+SELECT e1.name Employee
 FROM
-    Employee AS e1
-    JOIN Employee AS e2 ON e1.managerId = e2.id
+    Employee e1
+    JOIN Employee e2 ON e1.managerId = e2.id
 WHERE e1.salary > e2.salary;
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

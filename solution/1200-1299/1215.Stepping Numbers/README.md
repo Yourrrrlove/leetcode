@@ -1,23 +1,45 @@
-# [1215. 步进数](https://leetcode.cn/problems/stepping-numbers)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1215.Stepping%20Numbers/README.md
+rating: 1674
+source: 第 10 场双周赛 Q3
+tags:
+    - 广度优先搜索
+    - 数学
+    - 回溯
+---
+
+<!-- problem:start -->
+
+# [1215. 步进数 🔒](https://leetcode.cn/problems/stepping-numbers)
 
 [English Version](/solution/1200-1299/1215.Stepping%20Numbers/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>如果一个整数上的每一位数字与其相邻位上的数字的绝对差都是 <code>1</code>，那么这个数就是一个「步进数」。</p>
+<p>如果一个整数上的每一位数字与其相邻位上的数字的绝对差都是 <code>1</code>，那么这个数就是一个「<strong>步进数</strong>」。</p>
 
-<p>例如，<code>321</code>&nbsp;是一个步进数，而&nbsp;<code>421</code>&nbsp;不是。</p>
+<p>例如，<code>321</code>&nbsp;是一个 <strong>步进数</strong>，而&nbsp;<code>421</code>&nbsp;不是。</p>
 
-<p>给你两个整数，<code>low</code>&nbsp;和&nbsp;<code>high</code>，请你找出在&nbsp;<code>[low, high]</code>&nbsp;范围内的所有步进数，并返回&nbsp;<strong>排序后</strong> 的结果。</p>
+<p>给你两个整数，<code>low</code>&nbsp;和&nbsp;<code>high</code>，请你找出在&nbsp;<code>[low, high]</code>&nbsp;范围内的所有 <strong>步进数</strong>，并返回&nbsp;<strong>排序后</strong> 的结果。</p>
 
 <p>&nbsp;</p>
 
-<p><strong>示例：</strong></p>
+<p><strong>示例 1：</strong></p>
 
-<pre><strong>输入：</strong>low = 0, high = 21
+<pre>
+<strong>输入：</strong>low = 0, high = 21
 <strong>输出：</strong>[0,1,2,3,4,5,6,7,8,9,10,12,21]
+</pre>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<pre>
+<b>输入：</b>low = 10, high = 15
+<b>输出：</b>[10,12]
 </pre>
 
 <p>&nbsp;</p>
@@ -25,10 +47,14 @@
 <p><strong>提示：</strong></p>
 
 <ul>
-	<li><code>0 &lt;= low &lt;= high &lt;= 2 * 10^9</code></li>
+	<li><code>0 &lt;= low &lt;= high &lt;= 2 * 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：BFS
 
@@ -39,6 +65,8 @@
 时间复杂度 $O(10 \times 2^{\log M})$，空间复杂度 $O(2^{\log M})$，其中 $M$ 为 $high$ 的位数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -60,6 +88,8 @@ class Solution:
                 q.append(v * 10 + x + 1)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -92,6 +122,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -127,6 +159,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func countSteppingNumbers(low int, high int) []int {
 	ans := []int{}
@@ -154,6 +188,8 @@ func countSteppingNumbers(low int, high int) []int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function countSteppingNumbers(low: number, high: number): number[] {
@@ -187,4 +223,6 @@ function countSteppingNumbers(low: number, high: number): number[] {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

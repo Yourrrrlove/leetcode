@@ -1,32 +1,58 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0217.Contains%20Duplicate/README.md
+tags:
+    - 数组
+    - 哈希表
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [217. 存在重复元素](https://leetcode.cn/problems/contains-duplicate)
 
 [English Version](/solution/0200-0299/0217.Contains%20Duplicate/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 给你一个整数数组 <code>nums</code> 。如果任一值在数组中出现 <strong>至少两次</strong> ，返回 <code>true</code> ；如果数组中每个元素互不相同，返回 <code>false</code> 。
 
 <p>&nbsp;</p>
 
-<p><strong>示例 1：</strong></p>
+<p><strong class="example">示例 1：</strong></p>
 
-<pre>
-<strong>输入：</strong>nums = [1,2,3,1]
-<strong>输出：</strong>true</pre>
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>nums = [1,2,3,1]</span></p>
 
-<p><strong>示例 2：</strong></p>
+<p><span class="example-io"><b>输出：</b>true</span></p>
 
-<pre>
-<strong>输入：</strong>nums = [1,2,3,4]
-<strong>输出：</strong>false</pre>
+<p><strong>解释：</strong></p>
 
-<p><strong>示例&nbsp;3：</strong></p>
+<p>元素 1 在下标 0 和 3 出现。</p>
+</div>
 
-<pre>
-<strong>输入：</strong>nums = [1,1,1,3,3,4,3,2,4,2]
-<strong>输出：</strong>true</pre>
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>nums = [1,2,3,4]</span></p>
+
+<p><span class="example-io"><b>输出：</b>false</span></p>
+
+<p><strong>解释：</strong></p>
+
+<p>所有元素都不同。</p>
+</div>
+
+<p><strong class="example">示例 3：</strong></p>
+
+<div class="example-block">
+<p><span class="example-io"><b>输入：</b>nums = [1,1,1,3,3,4,3,2,4,2]</span></p>
+
+<p><span class="example-io"><b>输出：</b>true</span></p>
+</div>
 
 <p>&nbsp;</p>
 
@@ -37,7 +63,11 @@
 	<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序
 
@@ -51,11 +81,15 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         return any(a == b for a, b in pairwise(sorted(nums)))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -70,6 +104,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -86,6 +122,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func containsDuplicate(nums []int) bool {
 	sort.Ints(nums)
@@ -97,6 +135,8 @@ func containsDuplicate(nums []int) bool {
 	return false
 }
 ```
+
+#### TypeScript
 
 ```ts
 function containsDuplicate(nums: number[]): boolean {
@@ -110,6 +150,8 @@ function containsDuplicate(nums: number[]): boolean {
     return false;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -126,6 +168,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number[]} nums
@@ -136,6 +180,8 @@ var containsDuplicate = function (nums) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public bool ContainsDuplicate(int[] nums) {
@@ -143,6 +189,8 @@ public class Solution {
     }
 }
 ```
+
+#### PHP
 
 ```php
 class Solution {
@@ -156,6 +204,8 @@ class Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 int cmp(const void* a, const void* b) {
@@ -175,6 +225,10 @@ bool containsDuplicate(int* nums, int numsSize) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：哈希表
 
 遍历数组，将出现过的元素记录在哈希表 $s$ 中。若元素第二次出现时，说明数组中存在重复元素，直接返回 `true`。
@@ -183,11 +237,15 @@ bool containsDuplicate(int* nums, int numsSize) {
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         return len(set(nums)) < len(nums)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -203,6 +261,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -212,6 +272,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func containsDuplicate(nums []int) bool {
@@ -226,11 +288,15 @@ func containsDuplicate(nums []int) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function containsDuplicate(nums: number[]): boolean {
     return new Set<number>(nums).size !== nums.length;
 }
 ```
+
+#### Rust
 
 ```rust
 use std::collections::HashSet;
@@ -243,4 +309,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

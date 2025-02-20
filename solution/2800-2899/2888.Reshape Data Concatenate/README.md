@@ -1,10 +1,20 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2888.Reshape%20Data%20Concatenate/README.md
+tags:
+    - Pandas
+---
+
+<!-- problem:start -->
+
 # [2888. 重塑数据：连结](https://leetcode.cn/problems/reshape-data-concatenate)
 
 [English Version](/solution/2800-2899/2888.Reshape%20Data%20Concatenate/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <pre>
 DataFrame <code>df1</code>
@@ -67,11 +77,17 @@ df1</strong>
 <strong>解释：
 </strong>两个 DataFrame 被垂直堆叠，它们的行被合并。</pre>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 import pandas as pd
@@ -83,4 +99,6 @@ def concatenateTables(df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

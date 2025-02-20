@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2400-2499/2472.Maximum%20Number%20of%20Non-overlapping%20Palindrome%20Substrings/README_EN.md
+rating: 2013
+source: Weekly Contest 319 Q4
+tags:
+    - Greedy
+    - Two Pointers
+    - String
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [2472. Maximum Number of Non-overlapping Palindrome Substrings](https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings)
 
 [中文文档](/solution/2400-2499/2472.Maximum%20Number%20of%20Non-overlapping%20Palindrome%20Substrings/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a string <code>s</code> and a <strong>positive</strong> integer <code>k</code>.</p>
 
@@ -43,7 +60,11 @@ It can be shown that we cannot find a selection with more than two valid substri
 	<li><code>s</code> consists of lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Preprocessing + Memoization Search
 
@@ -63,6 +84,8 @@ $$
 The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Here, $n$ is the length of the string $s$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -86,6 +109,8 @@ class Solution:
         dfs.cache_clear()
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -132,6 +157,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -160,6 +187,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func maxPalindromes(s string, k int) int {
@@ -201,4 +230,6 @@ func maxPalindromes(s string, k int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

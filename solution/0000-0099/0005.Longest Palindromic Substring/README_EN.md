@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0005.Longest%20Palindromic%20Substring/README_EN.md
+tags:
+    - Two Pointers
+    - String
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring)
 
 [中文文档](/solution/0000-0099/0005.Longest%20Palindromic%20Substring/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a string <code>s</code>, return <em>the longest</em> <span data-keyword="palindromic-string"><em>palindromic</em></span> <span data-keyword="substring-nonempty"><em>substring</em></span> in <code>s</code>.</p>
 
@@ -30,7 +44,11 @@
 	<li><code>s</code> consist of only digits and English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Dynamic Programming
 
@@ -45,6 +63,8 @@ Since $f[i][j]$ depends on $f[i + 1][j - 1]$, we need to ensure that $i + 1$ is 
 The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Here, $n$ is the length of the string $s$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -61,6 +81,8 @@ class Solution:
                         k, mx = i, j - i + 1
         return s[k : k + mx]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -88,6 +110,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -111,6 +135,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func longestPalindrome(s string) string {
@@ -139,6 +165,8 @@ func longestPalindrome(s string) string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function longestPalindrome(s: string): string {
     const n = s.length;
@@ -163,6 +191,8 @@ function longestPalindrome(s: string): string {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn longest_palindrome(s: String) -> String {
@@ -184,6 +214,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -213,6 +245,8 @@ var longestPalindrome = function (s) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public string LongestPalindrome(string s) {
@@ -241,6 +275,8 @@ public class Solution {
 }
 ```
 
+#### Nim
+
 ```nim
 import std/sequtils
 
@@ -267,6 +303,10 @@ proc longestPalindrome(s: string): string =
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Enumerate Palindrome Midpoint
 
 We can enumerate the midpoint of the palindrome, spread to both sides, and find the longest palindrome.
@@ -274,6 +314,8 @@ We can enumerate the midpoint of the palindrome, spread to both sides, and find 
 The time complexity is $O(n^2)$, and the space complexity is $O(1)$. Here, $n$ is the length of the string $s$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -294,6 +336,8 @@ class Solution:
                 start = i - ((t - 1) >> 1)
         return s[start : start + mx]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -326,6 +370,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -352,6 +398,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func longestPalindrome(s string) string {
 	n := len(s)
@@ -373,6 +421,8 @@ func longestPalindrome(s string) string {
 	return s[start : start+mx]
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -404,6 +454,79 @@ impl Solution {
 }
 ```
 
+#### C#
+
+```cs
+public class Solution {
+    private string s;
+    private int n;
+
+    public String LongestPalindrome(string s) {
+        this.s = s;
+        n = s.Length;
+        int start = 0, mx = 1;
+        for (int i = 0; i < n; ++i) {
+            int a = F(i, i);
+            int b = F(i, i + 1);
+            int t = Math.Max(a, b);
+            if (mx < t) {
+                mx = t;
+                start = i - ((t - 1) >> 1);
+            }
+        }
+        return s.Substring(start, start + mx);
+    }
+
+    private int F(int l, int r) {
+        while (l >= 0 && r < n && s[l] == s[r]) {
+            --l;
+            ++r;
+        }
+        return r - l - 1;
+    }
+}
+```
+
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param string $s
+     * @return string
+     */
+    function longestPalindrome($s) {
+        $start = 0;
+        $maxLength = 0;
+
+        for ($i = 0; $i < strlen($s); $i++) {
+            $len1 = $this->expandFromCenter($s, $i, $i);
+            $len2 = $this->expandFromCenter($s, $i, $i + 1);
+
+            $len = max($len1, $len2);
+
+            if ($len > $maxLength) {
+                $start = $i - intval(($len - 1) / 2);
+                $maxLength = $len;
+            }
+        }
+
+        return substr($s, $start, $maxLength);
+    }
+
+    function expandFromCenter($s, $left, $right) {
+        while ($left >= 0 && $right < strlen($s) && $s[$left] === $s[$right]) {
+            $left--;
+            $right++;
+        }
+
+        return $right - $left - 1;
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

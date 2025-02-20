@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1000-1099/1096.Brace%20Expansion%20II/README.md
+rating: 2348
+source: 第 142 场周赛 Q4
+tags:
+    - 栈
+    - 广度优先搜索
+    - 字符串
+    - 回溯
+---
+
+<!-- problem:start -->
+
 # [1096. 花括号展开 II](https://leetcode.cn/problems/brace-expansion-ii)
 
 [English Version](/solution/1000-1099/1096.Brace%20Expansion%20II/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>如果你熟悉 Shell 编程，那么一定了解过花括号展开，它可以用来生成任意字符串。</p>
 
@@ -12,6 +27,7 @@
 
 <ul>
 	<li>如果只给出单一的元素&nbsp;<code>x</code>，那么表达式表示的字符串就只有&nbsp;<code>"x"</code>。<code>R(x) = {x}</code>
+
     <ul>
     	<li>例如，表达式 <code>"a"</code> 表示字符串 <code>"a"</code>。</li>
     	<li>而表达式 <code>"w"</code> 就表示字符串 <code>"w"</code>。</li>
@@ -67,7 +83,11 @@
 	<li>给出的表达式&nbsp;<code>expression</code>&nbsp;用以表示一组基于题目描述中语法构造的字符串</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：递归
 
@@ -82,6 +102,8 @@
 时间复杂度约为 $O(n \times 2^{n / 4})$，其中 $n$ 为表达式 $expression$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -100,6 +122,8 @@ class Solution:
         dfs(expression)
         return sorted(s)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -125,6 +149,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -155,6 +181,8 @@ private:
 };
 ```
 
+#### Go
+
 ```go
 func braceExpansionII(expression string) []string {
 	s := map[string]struct{}{}
@@ -181,6 +209,8 @@ func braceExpansionII(expression string) []string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function braceExpansionII(expression: string): string[] {
     const dfs = (exp: string) => {
@@ -204,4 +234,6 @@ function braceExpansionII(expression: string): string[] {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

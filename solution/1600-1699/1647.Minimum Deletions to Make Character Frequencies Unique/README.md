@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1647.Minimum%20Deletions%20to%20Make%20Character%20Frequencies%20Unique/README.md
+rating: 1509
+source: 第 214 场周赛 Q2
+tags:
+    - 贪心
+    - 哈希表
+    - 字符串
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [1647. 字符频次唯一的最小删除次数](https://leetcode.cn/problems/minimum-deletions-to-make-character-frequencies-unique)
 
 [English Version](/solution/1600-1699/1647.Minimum%20Deletions%20to%20Make%20Character%20Frequencies%20Unique/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>如果字符串 <code>s</code> 中 <strong>不存在</strong> 两个不同字符 <strong>频次</strong> 相同的情况，就称 <code>s</code> 是 <strong>优质字符串</strong> 。</p>
 
@@ -48,21 +63,27 @@
 	<li><code>s</code> 仅含小写英文字母</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：数组 + 排序
 
-我们先用一个长度为 $26$ 的数组 `cnt` 统计字符串 $s$ 中每个字母出现的次数。
+我们先用一个长度为 $26$ 的数组 $\textit{cnt}$ 统计字符串 $s$ 中每个字母出现的次数。
 
-然后我们对数组 `cnt` 进行倒序排序。定义一个变量 `pre` 记录当前字母的出现次数。
+然后我们对数组 $\textit{cnt}$ 进行倒序排序。定义一个变量 $\textit{pre}$ 记录当前字母的出现次数。
 
-接下来，遍历数组 `cnt` 每个元素 $v$，如果当前 `pre` 等于 $0$，我们直接将答案加上 $v$；否则，如果 $v \geq pre$，我们将答案加上 $v-pre+1$，并且将 `pre` 减去 $1$，否则，我们直接将 `pre` 更新为 $v$。然后继续遍历下个元素。
+接下来，遍历数组 $\textit{cnt}$ 每个元素 $v$，如果当前 $\textit{pre}$ 等于 $0$，我们直接将答案加上 $v$；否则，如果 $v \geq \textit{pre}$，我们将答案加上 $v-\textit{pre}+1$，并且将 $\textit{pre}$ 减去 $1$，否则，我们直接将 $\textit{pre}$ 更新为 $v$。然后继续遍历下个元素。
 
 遍历结束，返回答案即可。
 
-时间复杂度 $O(n + C \times \log C)$，空间复杂度 $O(C)$。其中 $n$ 是字符串 $s$ 的长度，而 $C$ 为字母集的大小。本题中 $C=26$。
+时间复杂度 $O(n + |\Sigma| \times \log |\Sigma|)$，空间复杂度 $O(|\Sigma|)$。其中 $n$ 是字符串 $s$ 的长度，而 $|\Sigma|$ 为字母集的大小。本题中 $|\Sigma|=26$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -79,6 +100,8 @@ class Solution:
                 pre = v
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -100,6 +123,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -119,6 +144,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minDeletions(s string) (ans int) {
 	cnt := make([]int, 26)
@@ -135,6 +162,8 @@ func minDeletions(s string) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minDeletions(s: string): number {
@@ -155,6 +184,8 @@ function minDeletions(s: string): number {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     #[allow(dead_code)]
@@ -166,7 +197,7 @@ impl Solution {
             cnt[((c as u8) - ('a' as u8)) as usize] += 1;
         }
 
-        cnt.sort_by(|&lhs, &rhs| { rhs.cmp(&lhs) });
+        cnt.sort_by(|&lhs, &rhs| rhs.cmp(&lhs));
 
         for i in 1..26 {
             while cnt[i] >= cnt[i - 1] && cnt[i] > 0 {
@@ -182,9 +213,15 @@ impl Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -198,6 +235,8 @@ class Solution:
                 ans += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -224,6 +263,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -246,6 +287,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minDeletions(s string) (ans int) {
@@ -271,4 +314,6 @@ func minDeletions(s string) (ans int) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

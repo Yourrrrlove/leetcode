@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2586.Count%20the%20Number%20of%20Vowel%20Strings%20in%20Range/README.md
+rating: 1178
+source: 第 336 场周赛 Q1
+tags:
+    - 数组
+    - 字符串
+    - 计数
+---
+
+<!-- problem:start -->
+
 # [2586. 统计范围内的元音字符串数](https://leetcode.cn/problems/count-the-number-of-vowel-strings-in-range)
 
 [English Version](/solution/2500-2599/2586.Count%20the%20Number%20of%20Vowel%20Strings%20in%20Range/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个下标从 <strong>0</strong> 开始的字符串数组 <code>words</code> 和两个整数：<code>left</code> 和 <code>right</code> 。</p>
 
@@ -50,7 +64,11 @@
 	<li><code>0 &lt;= left &lt;= right &lt; words.length</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：模拟
 
@@ -62,6 +80,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def vowelStrings(self, words: List[str], left: int, right: int) -> int:
@@ -69,6 +89,8 @@ class Solution:
             w[0] in 'aeiou' and w[-1] in 'aeiou' for w in words[left : right + 1]
         )
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -89,6 +111,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -106,6 +130,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func vowelStrings(words []string, left int, right int) (ans int) {
 	check := func(c byte) bool {
@@ -119,6 +145,8 @@ func vowelStrings(words []string, left int, right int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function vowelStrings(words: string[], left: number, right: number): number {
@@ -134,12 +162,13 @@ function vowelStrings(words: string[], left: number, right: number): number {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn vowel_strings(words: Vec<String>, left: i32, right: i32) -> i32 {
-        let check = |c: u8| -> bool {
-            c == b'a' || c == b'e' || c == b'i' || c == b'o' || c == b'u'
-        };
+        let check =
+            |c: u8| -> bool { c == b'a' || c == b'e' || c == b'i' || c == b'o' || c == b'u' };
 
         let mut ans = 0;
         for i in left..=right {
@@ -156,4 +185,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

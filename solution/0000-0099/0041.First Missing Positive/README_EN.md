@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0041.First%20Missing%20Positive/README_EN.md
+tags:
+    - Array
+    - Hash Table
+---
+
+<!-- problem:start -->
+
 # [41. First Missing Positive](https://leetcode.com/problems/first-missing-positive)
 
 [中文文档](/solution/0000-0099/0041.First%20Missing%20Positive/README.md)
 
 ## Description
 
-<p>Given an unsorted integer array <code>nums</code>, return the smallest missing positive integer.</p>
+<!-- description:start -->
+
+<p>Given an unsorted integer array <code>nums</code>. Return the <em>smallest positive integer</em> that is <em>not present</em> in <code>nums</code>.</p>
 
 <p>You must implement an algorithm that runs in <code>O(n)</code> time and uses <code>O(1)</code> auxiliary space.</p>
 
@@ -41,7 +54,11 @@
 	<li><code>-2<sup>31</sup> &lt;= nums[i] &lt;= 2<sup>31</sup> - 1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: In-place Swap
 
@@ -53,33 +70,35 @@ The time complexity is $O(n)$, where $n$ is the length of the array. The space c
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
-        def swap(i, j):
-            nums[i], nums[j] = nums[j], nums[i]
-
         n = len(nums)
         for i in range(n):
             while 1 <= nums[i] <= n and nums[i] != nums[nums[i] - 1]:
-                swap(i, nums[i] - 1)
+                j = nums[i] - 1
+                nums[i], nums[j] = nums[j], nums[i]
         for i in range(n):
-            if i + 1 != nums[i]:
+            if nums[i] != i + 1:
                 return i + 1
         return n + 1
 ```
+
+#### Java
 
 ```java
 class Solution {
     public int firstMissingPositive(int[] nums) {
         int n = nums.length;
         for (int i = 0; i < n; ++i) {
-            while (nums[i] >= 1 && nums[i] <= n && nums[i] != nums[nums[i] - 1]) {
+            while (nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i] - 1]) {
                 swap(nums, i, nums[i] - 1);
             }
         }
         for (int i = 0; i < n; ++i) {
-            if (i + 1 != nums[i]) {
+            if (nums[i] != i + 1) {
                 return i + 1;
             }
         }
@@ -94,14 +113,98 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
         int n = nums.size();
         for (int i = 0; i < n; ++i) {
-            while (nums[i] >= 1 && nums[i] <= n && nums[i] != nums[nums[i] - 1]) {
+            while (nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i] - 1]) {
                 swap(nums[i], nums[nums[i] - 1]);
+            }
+        }
+        for (int i = 0; i < n; ++i) {
+            if (nums[i] != i + 1) {
+                return i + 1;
+            }
+        }
+        return n + 1;
+    }
+};
+```
+
+#### Go
+
+```go
+func firstMissingPositive(nums []int) int {
+	n := len(nums)
+	for i := range nums {
+		for 0 < nums[i] && nums[i] <= n && nums[i] != nums[nums[i]-1] {
+			nums[i], nums[nums[i]-1] = nums[nums[i]-1], nums[i]
+		}
+	}
+	for i, x := range nums {
+		if x != i+1 {
+			return i + 1
+		}
+	}
+	return n + 1
+}
+```
+
+#### TypeScript
+
+```ts
+function firstMissingPositive(nums: number[]): number {
+    const n = nums.length;
+    for (let i = 0; i < n; i++) {
+        while (nums[i] >= 1 && nums[i] <= n && nums[i] !== nums[nums[i] - 1]) {
+            const j = nums[i] - 1;
+            [nums[i], nums[j]] = [nums[j], nums[i]];
+        }
+    }
+    for (let i = 0; i < n; i++) {
+        if (nums[i] !== i + 1) {
+            return i + 1;
+        }
+    }
+    return n + 1;
+}
+```
+
+#### Rust
+
+```rust
+impl Solution {
+    pub fn first_missing_positive(mut nums: Vec<i32>) -> i32 {
+        let n = nums.len();
+        for i in 0..n {
+            while nums[i] > 0 && nums[i] <= n as i32 && nums[i] != nums[nums[i] as usize - 1] {
+                let j = nums[i] as usize - 1;
+                nums.swap(i, j);
+            }
+        }
+        for i in 0..n {
+            if nums[i] != (i + 1) as i32 {
+                return (i + 1) as i32;
+            }
+        }
+        return (n + 1) as i32;
+    }
+}
+```
+
+#### C#
+
+```cs
+public class Solution {
+    public int FirstMissingPositive(int[] nums) {
+        int n = nums.Length;
+        for (int i = 0; i < n; ++i) {
+            while (nums[i] >= 1 && nums[i] <= n && nums[i] != nums[nums[i] - 1]) {
+                Swap(nums, i, nums[i] - 1);
             }
         }
         for (int i = 0; i < n; ++i) {
@@ -111,148 +214,66 @@ public:
         }
         return n + 1;
     }
-};
-```
 
-```go
-func firstMissingPositive(nums []int) int {
-	n := len(nums)
-	for i := range nums {
-		for nums[i] >= 1 && nums[i] <= n && nums[i] != nums[nums[i]-1] {
-			nums[i], nums[nums[i]-1] = nums[nums[i]-1], nums[i]
-		}
-	}
-	for i, v := range nums {
-		if i+1 != v {
-			return i + 1
-		}
-	}
-	return n + 1
-}
-```
-
-```ts
-function firstMissingPositive(nums: number[]): number {
-    const n = nums.length;
-    let i = 0;
-    while (i < n) {
-        const j = nums[i] - 1;
-        if (j === i || j < 0 || j >= n || nums[i] === nums[j]) {
-            i++;
-        } else {
-            [nums[i], nums[j]] = [nums[j], nums[i]];
-        }
-    }
-
-    const res = nums.findIndex((v, i) => v !== i + 1);
-    return (res === -1 ? n : res) + 1;
-}
-```
-
-```rust
-impl Solution {
-    pub fn first_missing_positive(mut nums: Vec<i32>) -> i32 {
-        let n = nums.len();
-        let mut i = 0;
-        while i < n {
-            let j = nums[i] - 1;
-            if (i as i32) == j || j < 0 || j >= (n as i32) || nums[i] == nums[j as usize] {
-                i += 1;
-            } else {
-                nums.swap(i, j as usize);
-            }
-        }
-        (
-            nums
-                .iter()
-                .enumerate()
-                .position(|(i, &v)| (v as usize) != i + 1)
-                .unwrap_or(n) as i32
-        ) + 1
+    private void Swap(int[] nums, int i, int j) {
+        int t = nums[i];
+        nums[i] = nums[j];
+        nums[j] = t;
     }
 }
 ```
 
-```cs
-public class Solution {
-    public int FirstMissingPositive(int[] nums) {
-        var i = 0;
-        while (i < nums.Length)
-        {
-            if (nums[i] > 0 && nums[i] <= nums.Length)
-            {
-                var index = nums[i] -1;
-                if (index != i && nums[index] != nums[i])
-                {
-                    var temp = nums[i];
-                    nums[i] = nums[index];
-                    nums[index] = temp;
-                }
-                else
-                {
-                    ++i;
-                }
-            }
-            else
-            {
-                ++i;
-            }
-        }
-
-        for (i = 0; i < nums.Length; ++i)
-        {
-            if (nums[i] != i + 1)
-            {
-                return i + 1;
-            }
-        }
-        return nums.Length + 1;
-    }
-}
-```
+#### C
 
 ```c
 int firstMissingPositive(int* nums, int numsSize) {
-
-    int Max = nums[0], i, *Count;
-
-    for (i = 1; i < numsSize; i++) {
-        Max = (Max < nums[i]) ? nums[i] : Max;
-    }
-
-    Count = (int*) calloc(Max + 1, sizeof(int));
-    for (i = 0; i < numsSize; i++) {
-        if (nums[i] > 0) {
-            Count[nums[i]]++;
+    for (int i = 0; i < numsSize; ++i) {
+        while (nums[i] > 0 && nums[i] <= numsSize && nums[i] != nums[nums[i] - 1]) {
+            int j = nums[i] - 1;
+            int t = nums[i];
+            nums[i] = nums[j];
+            nums[j] = t;
         }
     }
-
-    i = 1;
-    while (Count[i] != 0) {
-        i++;
+    for (int i = 0; i < numsSize; ++i) {
+        if (nums[i] != i + 1) {
+            return i + 1;
+        }
     }
+    return numsSize + 1;
+}
+```
 
-    return i;
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param Integer[] $nums
+     * @return Integer
+     */
+    function firstMissingPositive($nums) {
+        $n = count($nums);
+        for ($i = 0; $i < $n; $i++) {
+            while ($nums[$i] >= 1 && $nums[$i] <= $n && $nums[$i] != $nums[$nums[$i] - 1]) {
+                $j = $nums[$i] - 1;
+                $t = $nums[$i];
+                $nums[$i] = $nums[$j];
+                $nums[$j] = $t;
+            }
+        }
+        for ($i = 0; $i < $n; $i++) {
+            if ($nums[$i] != $i + 1) {
+                return $i + 1;
+            }
+        }
+        return $n + 1;
+    }
 }
 ```
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```ts
-function firstMissingPositive(nums: number[]): number {
-    const set = new Set(nums);
-    let ans = 1;
-    while (true) {
-        if (!set.has(ans)) return ans;
-        ans++;
-    }
-}
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

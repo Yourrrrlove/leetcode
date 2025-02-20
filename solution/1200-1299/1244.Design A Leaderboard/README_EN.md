@@ -1,8 +1,24 @@
-# [1244. Design A Leaderboard](https://leetcode.com/problems/design-a-leaderboard)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1244.Design%20A%20Leaderboard/README_EN.md
+rating: 1354
+source: Biweekly Contest 12 Q1
+tags:
+    - Design
+    - Hash Table
+    - Sorting
+---
+
+<!-- problem:start -->
+
+# [1244. Design A Leaderboard 🔒](https://leetcode.com/problems/design-a-leaderboard)
 
 [中文文档](/solution/1200-1299/1244.Design%20A%20Leaderboard/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Design a Leaderboard class, which has 3 functions:</p>
 
@@ -48,7 +64,11 @@ leaderboard.top(3);           // returns 141 = 51 + 51 + 39;
 	<li>There will be at most <code>1000</code>&nbsp;function calls.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hash Table + Ordered List
 
@@ -64,10 +84,9 @@ The space complexity is $O(n)$, where $n$ is the number of players.
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedList
-
-
 class Leaderboard:
     def __init__(self):
         self.d = defaultdict(int)
@@ -95,6 +114,8 @@ class Leaderboard:
 # param_2 = obj.top(K)
 # obj.reset(playerId)
 ```
+
+#### Java
 
 ```java
 class Leaderboard {
@@ -144,6 +165,8 @@ class Leaderboard {
  */
 ```
 
+#### C++
+
 ```cpp
 class Leaderboard {
 public:
@@ -190,6 +213,8 @@ private:
  */
 ```
 
+#### Rust
+
 ```rust
 use std::collections::BTreeMap;
 
@@ -211,7 +236,8 @@ impl Leaderboard {
     fn add_score(&mut self, player_id: i32, score: i32) {
         if self.record_map.contains_key(&player_id) {
             // The player exists, just add the score
-            self.record_map.insert(player_id, self.record_map.get(&player_id).unwrap() + score);
+            self.record_map
+                .insert(player_id, self.record_map.get(&player_id).unwrap() + score);
         } else {
             // Add the new player to the map
             self.record_map.insert(player_id, score);
@@ -220,11 +246,8 @@ impl Leaderboard {
 
     #[allow(dead_code)]
     fn top(&self, k: i32) -> i32 {
-        let mut cur_vec: Vec<(i32, i32)> = self.record_map
-            .iter()
-            .map(|(k, v)| (*k, *v))
-            .collect();
-        cur_vec.sort_by(|lhs, rhs| { rhs.1.cmp(&lhs.1) });
+        let mut cur_vec: Vec<(i32, i32)> = self.record_map.iter().map(|(k, v)| (*k, *v)).collect();
+        cur_vec.sort_by(|lhs, rhs| rhs.1.cmp(&lhs.1));
         // Iterate reversely for K
         let mut sum = 0;
         let mut i = 0;
@@ -250,4 +273,6 @@ impl Leaderboard {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

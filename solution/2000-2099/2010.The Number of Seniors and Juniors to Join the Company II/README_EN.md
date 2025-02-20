@@ -1,8 +1,20 @@
-# [2010. The Number of Seniors and Juniors to Join the Company II](https://leetcode.com/problems/the-number-of-seniors-and-juniors-to-join-the-company-ii)
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2000-2099/2010.The%20Number%20of%20Seniors%20and%20Juniors%20to%20Join%20the%20Company%20II/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
+# [2010. The Number of Seniors and Juniors to Join the Company II 🔒](https://leetcode.com/problems/the-number-of-seniors-and-juniors-to-join-the-company-ii)
 
 [中文文档](/solution/2000-2099/2010.The%20Number%20of%20Seniors%20and%20Juniors%20to%20Join%20the%20Company%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table: <code>Candidates</code></p>
 
@@ -21,7 +33,7 @@ The salary of each candidate is guaranteed to be <strong>unique</strong>.</pre>
 
 <p>&nbsp;</p>
 
-<p>A company wants to hire new employees. The budget of the company for the salaries is <code>70000</code>. The company&#39;s criteria for hiring are:</p>
+<p>A company wants to hire new employees. The budget of the company for the salaries is <code>$70000</code>. The company&#39;s criteria for hiring are:</p>
 
 <ol>
 	<li>Keep hiring the senior with the smallest salary until you cannot hire any more seniors.</li>
@@ -93,11 +105,17 @@ We cannot hire any seniors with the current budget as we need at least $80000 to
 We can hire all three juniors with the remaining budget.
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -135,4 +153,6 @@ WHERE cur <= 70000;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

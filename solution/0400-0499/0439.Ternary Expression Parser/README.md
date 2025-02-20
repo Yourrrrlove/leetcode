@@ -1,16 +1,28 @@
-# [439. 三元表达式解析器](https://leetcode.cn/problems/ternary-expression-parser)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0400-0499/0439.Ternary%20Expression%20Parser/README.md
+tags:
+    - 栈
+    - 递归
+    - 字符串
+---
+
+<!-- problem:start -->
+
+# [439. 三元表达式解析器 🔒](https://leetcode.cn/problems/ternary-expression-parser)
 
 [English Version](/solution/0400-0499/0439.Ternary%20Expression%20Parser/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个表示任意嵌套三元表达式的字符串&nbsp;<code>expression</code>&nbsp;，求值并返回其结果。</p>
 
 <p>你可以总是假设给定的表达式是有效的，并且只包含数字，&nbsp;<code>'?'</code>&nbsp;，&nbsp;&nbsp;<code>':'</code>&nbsp;，&nbsp;&nbsp;<code>'T'</code>&nbsp;和 <code>'F'</code> ，其中 <code>'T'</code> 为真， <code>'F'</code> 为假。表达式中的所有数字都是 <strong>一位</strong> 数(即在 <strong>[0,9] </strong>范围内)。</p>
 
-<p>条件表达式从右到左分组(大多数语言中都是这样)，表达式的结果总是为数字 <code>'T'</code> 或 <code>'F'</code> 。</p>
+<p>条件表达式从右到左分组(大多数语言中都是这样)，表达式的结果总是为数字，<code>'T'</code> 或 <code>'F'</code> 。</p>
 
 <p>&nbsp;</p>
 
@@ -51,7 +63,11 @@ or "(F ? 1 : (T ? 4 : 5))" --&gt; "(T ? 4 : 5)" --&gt; "4"
 	<li><strong>保证&nbsp;</strong>了表达式是一个有效的三元表达式，并且每个数字都是 <strong>一位数</strong>&nbsp;</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：栈
 
@@ -67,6 +83,8 @@ or "(F ? 1 : (T ? 4 : 5))" --&gt; "(T ? 4 : 5)" --&gt; "4"
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为字符串 `expression` 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -91,6 +109,8 @@ class Solution:
                     stk.append(c)
         return stk[0]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -123,6 +143,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -158,6 +180,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func parseTernary(expression string) string {
 	stk := []byte{}
@@ -190,4 +214,6 @@ func parseTernary(expression string) string {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

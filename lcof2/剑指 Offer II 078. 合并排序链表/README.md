@@ -1,8 +1,15 @@
+---
+comments: true
+edit_url: https://github.com/doocs/leetcode/edit/main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20078.%20%E5%90%88%E5%B9%B6%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8/README.md
+---
+
+<!-- problem:start -->
+
 # [剑指 Offer II 078. 合并排序链表](https://leetcode.cn/problems/vvXgSW)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个链表数组，每个链表都已经按升序排列。</p>
 
@@ -56,11 +63,17 @@
 
 <p><meta charset="UTF-8" />注意：本题与主站 23&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/merge-k-sorted-lists/">https://leetcode.cn/problems/merge-k-sorted-lists/</a></p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for singly-linked list.
@@ -91,6 +104,8 @@ class Solution:
         cur.next = l1 or l2
         return dummy.next
 ```
+
+#### Java
 
 ```java
 /**
@@ -134,6 +149,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for singly-linked list.
@@ -173,6 +190,8 @@ private:
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -215,6 +234,8 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * Definition for singly-linked list.
@@ -255,6 +276,8 @@ function mergeTwoLists(l1, l2) {
     return dummy.next;
 }
 ```
+
+#### C#
 
 ```cs
 /**
@@ -299,6 +322,8 @@ public class Solution {
 }
 ```
 
+#### Ruby
+
 ```rb
 # Definition for singly-linked list.
 # class ListNode
@@ -338,6 +363,56 @@ def merge_two_lists(l1, l2)
 end
 ```
 
+#### Swift
+
+```swift
+/** class ListNode {
+*    var val: Int
+*    var next: ListNode?
+*    init() { self.val = 0; self.next = nil }
+*    init(_ val: Int) { self.val = val; self.next = nil }
+*    init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next }
+* }
+*/
+
+class Solution {
+    func mergeKLists(_ lists: [ListNode?]) -> ListNode? {
+        let n = lists.count
+        if n == 0 {
+            return nil
+        }
+
+        var mergedList: ListNode? = lists[0]
+        for i in 1..<n {
+            mergedList = mergeLists(mergedList, lists[i])
+        }
+        return mergedList
+    }
+
+    private func mergeLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        let dummy = ListNode()
+        var cur = dummy
+        var l1 = l1
+        var l2 = l2
+
+        while let node1 = l1, let node2 = l2 {
+            if node1.val <= node2.val {
+                cur.next = node1
+                l1 = node1.next
+            } else {
+                cur.next = node2
+                l2 = node2.next
+            }
+            cur = cur.next!
+        }
+        cur.next = l1 ?? l2
+        return dummy.next
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

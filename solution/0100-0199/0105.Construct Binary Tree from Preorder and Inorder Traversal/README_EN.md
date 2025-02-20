@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0105.Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/README_EN.md
+tags:
+    - Tree
+    - Array
+    - Hash Table
+    - Divide and Conquer
+    - Binary Tree
+---
+
+<!-- problem:start -->
+
 # [105. Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal)
 
 [中文文档](/solution/0100-0199/0105.Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given two integer arrays <code>preorder</code> and <code>inorder</code> where <code>preorder</code> is the preorder traversal of a binary tree and <code>inorder</code> is the inorder traversal of the same tree, construct and return <em>the binary tree</em>.</p>
 
@@ -34,23 +50,32 @@
 	<li><code>inorder</code> is <strong>guaranteed</strong> to be the inorder traversal of the tree.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1: Recursion
+<!-- solution:start -->
 
-The first node $preorder[0]$ in the preorder sequence is the root node. We find the position $i$ of the root node in the inorder sequence, which divides the inorder sequence into the left subtree $inorder[0..i]$ and the right subtree $inorder[i+1..]$.
+### Solution 1: Hash Table + Recursion
 
-Through the intervals of the left and right subtrees, we can calculate the number of nodes in the left and right subtrees, assumed to be $m$ and $n$ respectively. Then in the preorder nodes, the $m$ nodes following the root node are the left subtree, and the $n$ nodes after that are the right subtree.
+The first node $preorder[0]$ in the pre-order sequence is the root node. We find the position $k$ of the root node in the in-order sequence, which can divide the in-order sequence into the left subtree $inorder[0..k]$ and the right subtree $inorder[k+1..]$.
 
-We can solve this recursively.
+Through the intervals of the left and right subtrees, we can calculate the number of nodes in the left and right subtrees, assumed to be $a$ and $b$. Then in the pre-order nodes, the $a$ nodes after the root node are the left subtree, and the $b$ nodes after that are the right subtree.
 
-> Preorder traversal: traverse the root node first, then traverse the left and right subtrees; Inorder traversal: traverse the left subtree first, then traverse the root node, and finally traverse the right subtree.
+Therefore, we design a function $dfs(i, j, n)$, where $i$ and $j$ represent the starting positions of the pre-order sequence and the in-order sequence, respectively, and $n$ represents the number of nodes. The return value of the function is the binary tree constructed with $preorder[i..i+n-1]$ as the pre-order sequence and $inorder[j..j+n-1]$ as the in-order sequence.
+
+The execution process of the function $dfs(i, j, n)$ is as follows:
+
+-   If $n \leq 0$, it means there are no nodes, return a null node.
+-   Take out the first node $v = preorder[i]$ of the pre-order sequence as the root node, and then use the hash table $d$ to find the position $k$ of the root node in the in-order sequence. Then the number of nodes in the left subtree is $k - j$, and the number of nodes in the right subtree is $n - k + j - 1$.
+-   Recursively construct the left subtree $l = dfs(i + 1, j, k - j)$ and the right subtree $r = dfs(i + 1 + k - j, k + 1, n - k + j - 1)$.
+-   Finally, return the binary tree with $v$ as the root node and $l$ and $r$ as the left and right subtrees, respectively.
 
 The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes in the binary tree.
 
-If the node values given in the problem have duplicates, then we only need to record all the positions where each node value appears, and then recursively construct the tree.
-
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -61,7 +86,7 @@ If the node values given in the problem have duplicates, then we only need to re
 #         self.right = right
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-        def dfs(i: int, j: int, n: int):
+        def dfs(i: int, j: int, n: int) -> Optional[TreeNode]:
             if n <= 0:
                 return None
             v = preorder[i]
@@ -73,6 +98,8 @@ class Solution:
         d = {v: i for i, v in enumerate(inorder)}
         return dfs(0, 0, len(preorder))
 ```
+
+#### Java
 
 ```java
 /**
@@ -92,13 +119,11 @@ class Solution:
  */
 class Solution {
     private int[] preorder;
-    private int[] inorder;
     private Map<Integer, Integer> d = new HashMap<>();
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         int n = preorder.length;
         this.preorder = preorder;
-        this.inorder = inorder;
         for (int i = 0; i < n; ++i) {
             d.put(inorder[i], i);
         }
@@ -117,6 +142,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 /**
@@ -153,6 +180,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -181,6 +210,8 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 	return dfs(0, 0, len(preorder))
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -217,6 +248,8 @@ function buildTree(preorder: number[], inorder: number[]): TreeNode | null {
 }
 ```
 
+#### Rust
+
 ```rust
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
@@ -236,9 +269,9 @@ function buildTree(preorder: number[], inorder: number[]): TreeNode | null {
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::HashMap;
+use std::rc::Rc;
 impl Solution {
     pub fn build_tree(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
         let mut d = HashMap::new();
@@ -253,7 +286,7 @@ impl Solution {
         d: &HashMap<i32, usize>,
         i: usize,
         j: usize,
-        n: usize
+        n: usize,
     ) -> Option<Rc<RefCell<TreeNode>>> {
         if n <= 0 {
             return None;
@@ -267,6 +300,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -304,9 +339,11 @@ var buildTree = function (preorder, inorder) {
 
 <!-- tabs:end -->
 
-### Solution 2
+If the node values given in the problem have duplicates, then we only need to record all the positions where each node value appears, and then recursively construct the tree.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -328,6 +365,8 @@ class Solution:
             d[x].append(i)
         return dfs(0, 0, len(preOrder))
 ```
+
+#### Java
 
 ```java
 /**
@@ -370,6 +409,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 /**
@@ -416,6 +457,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func getBinaryTrees(preOrder []int, inOrder []int) []*TreeNode {
 	n := len(preOrder)
@@ -450,4 +493,6 @@ func getBinaryTrees(preOrder []int, inOrder []int) []*TreeNode {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

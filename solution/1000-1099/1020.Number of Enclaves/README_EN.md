@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1000-1099/1020.Number%20of%20Enclaves/README_EN.md
+rating: 1615
+source: Weekly Contest 130 Q4
+tags:
+    - Depth-First Search
+    - Breadth-First Search
+    - Union Find
+    - Array
+    - Matrix
+---
+
+<!-- problem:start -->
+
 # [1020. Number of Enclaves](https://leetcode.com/problems/number-of-enclaves)
 
 [中文文档](/solution/1000-1099/1020.Number%20of%20Enclaves/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an <code>m x n</code> binary matrix <code>grid</code>, where <code>0</code> represents a sea cell and <code>1</code> represents a land cell.</p>
 
@@ -37,16 +55,22 @@
 	<li><code>grid[i][j]</code> is either <code>0</code> or <code>1</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def numEnclaves(self, grid: List[List[int]]) -> int:
-        def dfs(i, j):
+        def dfs(i: int, j: int):
             grid[i][j] = 0
             for a, b in pairwise(dirs):
                 x, y = i + a, j + b
@@ -55,34 +79,48 @@ class Solution:
 
         m, n = len(grid), len(grid[0])
         dirs = (-1, 0, 1, 0, -1)
+        for j in range(n):
+            if grid[0][j]:
+                dfs(0, j)
+            if grid[m - 1][j]:
+                dfs(m - 1, j)
         for i in range(m):
-            for j in range(n):
-                if grid[i][j] and (i == 0 or i == m - 1 or j == 0 or j == n - 1):
-                    dfs(i, j)
-        return sum(v for row in grid for v in row)
+            if grid[i][0]:
+                dfs(i, 0)
+            if grid[i][n - 1]:
+                dfs(i, n - 1)
+        return sum(sum(row) for row in grid)
 ```
+
+#### Java
 
 ```java
 class Solution {
-    private int m;
-    private int n;
     private int[][] grid;
 
     public int numEnclaves(int[][] grid) {
         this.grid = grid;
-        m = grid.length;
-        n = grid[0].length;
-        for (int i = 0; i < m; ++i) {
-            for (int j = 0; j < n; ++j) {
-                if (grid[i][j] == 1 && (i == 0 || i == m - 1 || j == 0 || j == n - 1)) {
-                    dfs(i, j);
-                }
+        int m = grid.length, n = grid[0].length;
+        for (int j = 0; j < n; j++) {
+            if (grid[0][j] == 1) {
+                dfs(0, j);
+            }
+            if (grid[m - 1][j] == 1) {
+                dfs(m - 1, j);
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            if (grid[i][0] == 1) {
+                dfs(i, 0);
+            }
+            if (grid[i][n - 1] == 1) {
+                dfs(i, n - 1);
             }
         }
         int ans = 0;
         for (var row : grid) {
-            for (var v : row) {
-                ans += v;
+            for (int x : row) {
+                ans += x;
             }
         }
         return ans;
@@ -90,16 +128,18 @@ class Solution {
 
     private void dfs(int i, int j) {
         grid[i][j] = 0;
-        int[] dirs = {-1, 0, 1, 0, -1};
-        for (int k = 0; k < 4; ++k) {
+        final int[] dirs = {-1, 0, 1, 0, -1};
+        for (int k = 0; k < 4; k++) {
             int x = i + dirs[k], y = j + dirs[k + 1];
-            if (x >= 0 && x < m && y >= 0 && y < n && grid[x][y] == 1) {
+            if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length && grid[x][y] == 1) {
                 dfs(x, y);
             }
         }
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -134,6 +174,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numEnclaves(grid [][]int) (ans int) {
 	m, n := len(grid), len(grid[0])
@@ -163,6 +205,8 @@ func numEnclaves(grid [][]int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function numEnclaves(grid: number[][]): number {
@@ -195,6 +239,8 @@ function numEnclaves(grid: number[][]): number {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -238,9 +284,15 @@ impl Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -262,6 +314,8 @@ class Solution:
                     grid[x][y] = 0
         return sum(v for row in grid for v in row)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -298,6 +352,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -336,6 +392,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numEnclaves(grid [][]int) (ans int) {
 	m, n := len(grid), len(grid[0])
@@ -368,6 +426,8 @@ func numEnclaves(grid [][]int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function numEnclaves(grid: number[][]): number {
@@ -406,9 +466,15 @@ function numEnclaves(grid: number[][]): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 3
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class UnionFind:
@@ -453,6 +519,8 @@ class Solution:
             for j in range(n)
         )
 ```
+
+#### Java
 
 ```java
 class UnionFind {
@@ -524,6 +592,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class UnionFind {
 public:
@@ -589,6 +659,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 type unionFind struct {
@@ -658,4 +730,6 @@ func numEnclaves(grid [][]int) (ans int) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

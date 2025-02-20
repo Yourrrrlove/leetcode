@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0119.Pascal%27s%20Triangle%20II/README_EN.md
+tags:
+    - Array
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [119. Pascal's Triangle II](https://leetcode.com/problems/pascals-triangle-ii)
 
 [中文文档](/solution/0100-0199/0119.Pascal%27s%20Triangle%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer <code>rowIndex</code>, return the <code>rowIndex<sup>th</sup></code> (<strong>0-indexed</strong>) row of the <strong>Pascal&#39;s triangle</strong>.</p>
 
@@ -29,7 +42,11 @@
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> Could you optimize your algorithm to use only <code>O(rowIndex)</code> extra space?</p>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Recursion
 
@@ -43,6 +60,8 @@ The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ i
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def getRow(self, rowIndex: int) -> List[int]:
@@ -52,6 +71,8 @@ class Solution:
                 f[j] += f[j - 1]
         return f
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -70,6 +91,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -84,6 +107,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func getRow(rowIndex int) []int {
@@ -100,6 +125,8 @@ func getRow(rowIndex int) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function getRow(rowIndex: number): number[] {
     const f: number[] = Array(rowIndex + 1).fill(1);
@@ -111,6 +138,8 @@ function getRow(rowIndex: number): number[] {
     return f;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -127,6 +156,26 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {number} rowIndex
+ * @return {number[]}
+ */
+var getRow = function (rowIndex) {
+    const f = Array(rowIndex + 1).fill(1);
+    for (let i = 2; i < rowIndex + 1; ++i) {
+        for (let j = i - 1; j; --j) {
+            f[j] += f[j - 1];
+        }
+    }
+    return f;
+};
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

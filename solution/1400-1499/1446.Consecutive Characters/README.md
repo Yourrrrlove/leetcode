@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1400-1499/1446.Consecutive%20Characters/README.md
+rating: 1165
+source: 第 26 场双周赛 Q1
+tags:
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [1446. 连续字符](https://leetcode.cn/problems/consecutive-characters)
 
 [English Version](/solution/1400-1499/1446.Consecutive%20Characters/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个字符串&nbsp;<code>s</code>&nbsp;，字符串的<strong>「能量」</strong>定义为：只包含一种字符的最长非空子字符串的长度。</p>
 
@@ -37,19 +49,25 @@
 	<li><code>s</code>&nbsp;只包含小写英文字母。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：遍历计数
 
-我们定义一个变量 $t$，表示当前连续字符的长度，初始时 $t=1$。
+我们定义一个变量 $\textit{t}$，表示当前连续字符的长度，初始时 $\textit{t}=1$。
 
-接下来，我们从字符串 $s$ 的第二个字符开始遍历，如果当前字符与上一个字符相同，那么 $t = t + 1$，然后更新答案 $ans = \max(ans, t)$；否则，$t = 1$。
+接下来，我们从字符串 $s$ 的第二个字符开始遍历，如果当前字符与上一个字符相同，那么 $\textit{t} = \textit{t} + 1$，然后更新答案 $\textit{ans} = \max(\textit{ans}, \textit{t})$；否则 $\textit{t} = 1$。
 
-最后返回答案 $ans$ 即可。
+最后返回答案 $\textit{ans}$ 即可。
 
 时间复杂度 $O(n)$，其中 $n$ 是字符串 $s$ 的长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -63,6 +81,8 @@ class Solution:
                 t = 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -79,6 +99,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -97,6 +119,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxPower(s string) int {
 	ans, t := 1, 1
@@ -111,6 +135,8 @@ func maxPower(s string) int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function maxPower(s: string): number {
@@ -129,4 +155,6 @@ function maxPower(s: string): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

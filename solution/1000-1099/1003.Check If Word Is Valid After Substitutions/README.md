@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1000-1099/1003.Check%20If%20Word%20Is%20Valid%20After%20Substitutions/README.md
+rating: 1426
+source: 第 126 场周赛 Q2
+tags:
+    - 栈
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [1003. 检查替换后的词是否有效](https://leetcode.cn/problems/check-if-word-is-valid-after-substitutions)
 
 [English Version](/solution/1000-1099/1003.Check%20If%20Word%20Is%20Valid%20After%20Substitutions/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 给你一个字符串 <code>s</code> ，请你判断它是否 <strong>有效</strong> 。
 
@@ -52,19 +65,25 @@
 	<li><code>s</code> 由字母 <code>'a'</code>、<code>'b'</code> 和 <code>'c'</code> 组成</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：栈
 
-我们观察题目中的操作，可以发现，每一次都会在字符串的任意位置插入字符串 `"abc"`，所以每次插入操作之后，字符串的长度都会增加 $3$。如果字符串 $s$ 有效，那么它的长度一定是 $3$ 的倍数。因此，我们先对字符串 $s$ 的长度进行判断，如果不是 $3$ 的倍数，那么 $s$ 一定无效，可以直接返回 `false`。
+我们观察题目中的操作，可以发现，每一次都会在字符串的任意位置插入字符串 $\textit{"abc"}$，所以每次插入操作之后，字符串的长度都会增加 $3$。如果字符串 $s$ 有效，那么它的长度一定是 $3$ 的倍数。因此，我们先对字符串 $s$ 的长度进行判断，如果不是 $3$ 的倍数，那么 $s$ 一定无效，可以直接返回 $\textit{false}$。
 
-接下来我们遍历字符串 $s$ 的每个字符 $c$，我们先将字符 $c$ 压入栈 $t$ 中。如果此时栈 $t$ 的长度大于等于 $3$，并且栈顶的三个元素组成了字符串 `"abc"`，那么我们就将栈顶的三个元素弹出。然后继续遍历字符串 $s$ 的下一个字符。
+接下来我们遍历字符串 $s$ 的每个字符 $c$，我们先将字符 $c$ 压入栈 $t$ 中。如果此时栈 $t$ 的长度大于等于 $3$，并且栈顶的三个元素组成了字符串 $\textit{"abc"}$，那么我们就将栈顶的三个元素弹出。然后继续遍历字符串 $s$ 的下一个字符。
 
-遍历结束之后，如果栈 $t$ 为空，那么说明字符串 $s$ 有效，返回 `true`，否则返回 `false`。
+遍历结束之后，如果栈 $t$ 为空，那么说明字符串 $s$ 有效，返回 $\textit{true}$；否则，返回 $\textit{false}$。
 
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是字符串 $s$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -78,6 +97,8 @@ class Solution:
                 t[-3:] = []
         return not t
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -96,6 +117,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -116,6 +139,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isValid(s string) bool {
 	if len(s)%3 > 0 {
@@ -131,6 +156,8 @@ func isValid(s string) bool {
 	return len(t) == 0
 }
 ```
+
+#### TypeScript
 
 ```ts
 function isValid(s: string): boolean {
@@ -150,4 +177,6 @@ function isValid(s: string): boolean {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

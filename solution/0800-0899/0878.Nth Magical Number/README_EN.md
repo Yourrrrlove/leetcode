@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0878.Nth%20Magical%20Number/README_EN.md
+tags:
+    - Math
+    - Binary Search
+---
+
+<!-- problem:start -->
+
 # [878. Nth Magical Number](https://leetcode.com/problems/nth-magical-number)
 
 [中文文档](/solution/0800-0899/0878.Nth%20Magical%20Number/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>A positive integer is <em>magical</em> if it is divisible by either <code>a</code> or <code>b</code>.</p>
 
@@ -31,11 +44,17 @@
 	<li><code>2 &lt;= a, b &lt;= 4 * 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -45,6 +64,8 @@ class Solution:
         r = (a + b) * n
         return bisect_left(range(r), x=n, key=lambda x: x // a + x // b - x // c) % mod
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -70,6 +91,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 using ll = long long;
 
@@ -92,6 +115,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func nthMagicalNumber(n int, a int, b int) int {
 	c := a * b / gcd(a, b)
@@ -110,4 +135,6 @@ func gcd(a, b int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

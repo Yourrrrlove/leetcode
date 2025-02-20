@@ -13,31 +13,31 @@
  */
 
 function replaceValueInTree(root: TreeNode | null): TreeNode | null {
-    root.val = 0;
-    let q: TreeNode[] = [root];
+    let q = [root];
+    let [sum, nextSum] = [0, root.val];
+
     while (q.length) {
-        const p: TreeNode[] = q;
-        q = [];
-        let s: number = 0;
-        for (const { left, right } of p) {
-            if (left) {
-                q.push(left);
-                s += left.val;
+        const qNext: TreeNode[] = [];
+        [sum, nextSum] = [nextSum, 0];
+
+        for (const node of q) {
+            const x = (node.left?.val ?? 0) + (node.right?.val ?? 0);
+            node.val = sum - node.val;
+            nextSum += x;
+
+            if (node.left) {
+                node.left.val = x;
+                qNext.push(node.left);
             }
-            if (right) {
-                q.push(right);
-                s += right.val;
-            }
-        }
-        for (const { left, right } of p) {
-            const t: number = (left?.val ?? 0) + (right?.val ?? 0);
-            if (left) {
-                left.val = s - t;
-            }
-            if (right) {
-                right.val = s - t;
+
+            if (node.right) {
+                node.right.val = x;
+                qNext.push(node.right);
             }
         }
+
+        q = qNext;
     }
+
     return root;
 }

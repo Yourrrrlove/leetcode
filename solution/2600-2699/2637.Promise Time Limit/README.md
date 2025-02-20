@@ -1,10 +1,20 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2637.Promise%20Time%20Limit/README.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
 # [2637. 有时间限制的 Promise 对象](https://leetcode.cn/problems/promise-time-limit)
 
 [English Version](/solution/2600-2699/2637.Promise%20Time%20Limit/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>请你编写一个函数，它接受一个异步函数 <code>fn</code>&nbsp;和一个以毫秒为单位的时间 <code>t</code>。它应根据限时函数返回一个有 <strong>限时</strong> 效果的函数。函数 <code>fn</code> 接受提供给 <strong>限时</strong> 函数的参数。</p>
 
@@ -96,11 +106,17 @@ t = 1000
 	<li><code>fn</code> 返回一个 Promise 对象</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 type Fn = (...params: any[]) => Promise<any>;
@@ -122,4 +138,6 @@ function timeLimit(fn: Fn, t: number): Fn {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,20 @@
-# [1454. 活跃用户](https://leetcode.cn/problems/active-users)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1400-1499/1454.Active%20Users/README.md
+tags:
+    - 数据库
+---
+
+<!-- problem:start -->
+
+# [1454. 活跃用户 🔒](https://leetcode.cn/problems/active-users)
 
 [English Version](/solution/1400-1499/1454.Active%20Users/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>表 <code>Accounts</code>:</p>
 
@@ -88,28 +98,54 @@ id = 7 的用户 Jonathon 在不同的 6 天内登录了 7 次, , 6 天中有 5 
 <p><strong>进阶问题:</strong><br />
 如果活跃用户是那些至少连续&nbsp;<code>n</code>&nbsp;天登录账户的用户,&nbsp;你能否写出通用的解决方案?</p>
 
+<!-- description:end -->
+
 ## 解法
 
-### 方法一
+<!-- solution:start -->
+
+### 方法一: 使用窗口函数
+
+我们先将 `Logins` 表和 `Accounts` 表连接起来，并且去重，得到临时表 `T`。
+
+然后我们使用窗口函数 `ROW_NUMBER()`，计算出每个用户 `id` 的登录日期的基准日期 `g`，如果用户连续登录 5 天，那么他们的 `g` 值是相同的。
+
+最后，我们按照 `id` 和 `g` 进行分组，统计每个用户的登录次数，如果登录次数大于等于 5，那么这个用户就是活跃用户。
 
 <!-- tabs:start -->
 
+#### MySQL
+
 ```sql
 # Write your MySQL query statement below
-WITH t AS
-    (SELECT *,
-		 SUM(id) over(partition by id
-    ORDER BY  login_date range interval 4 day preceding)/id cnt
-    FROM
-        (SELECT DISTINCT *
-        FROM Accounts
-        JOIN Logins using(id) ) tt )
-    SELECT DISTINCT id,
-		 name
-FROM t
-WHERE cnt=5;
+WITH
+    T AS (
+        SELECT DISTINCT *
+        FROM
+            Logins
+            JOIN Accounts USING (id)
+    ),
+    P AS (
+        SELECT
+            *,
+            DATE_SUB(
+                login_date,
+                INTERVAL ROW_NUMBER() OVER (
+                    PARTITION BY id
+                    ORDER BY login_date
+                ) DAY
+            ) g
+        FROM T
+    )
+SELECT DISTINCT id, name
+FROM P
+GROUP BY id, g
+HAVING COUNT(*) >= 5
+ORDER BY 1;
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

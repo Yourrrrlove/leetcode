@@ -1,8 +1,23 @@
-# [1820. Maximum Number of Accepted Invitations](https://leetcode.com/problems/maximum-number-of-accepted-invitations)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1800-1899/1820.Maximum%20Number%20of%20Accepted%20Invitations/README_EN.md
+tags:
+    - Depth-First Search
+    - Graph
+    - Array
+    - Matrix
+---
+
+<!-- problem:start -->
+
+# [1820. Maximum Number of Accepted Invitations 🔒](https://leetcode.com/problems/maximum-number-of-accepted-invitations)
 
 [中文文档](/solution/1800-1899/1820.Maximum%20Number%20of%20Accepted%20Invitations/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There are <code>m</code> boys and <code>n</code> girls in a class attending an upcoming party.</p>
 
@@ -47,7 +62,11 @@ Explanation:</strong> The invitations are sent as follows:
 	<li><code>grid[i][j]</code> is either <code>0</code> or <code>1</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hungarian Algorithm
 
@@ -58,6 +77,8 @@ The core idea of the Hungarian algorithm is to continuously start from unmatched
 The time complexity is $O(m \times n)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -79,6 +100,8 @@ class Solution:
             ans += find(i)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -119,6 +142,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -148,6 +173,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func maximumInvitations(grid [][]int) int {
@@ -183,4 +210,6 @@ func maximumInvitations(grid [][]int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

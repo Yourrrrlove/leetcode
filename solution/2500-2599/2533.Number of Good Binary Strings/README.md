@@ -1,12 +1,22 @@
-# [2533. 好二进制字符串的数量](https://leetcode.cn/problems/number-of-good-binary-strings)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2533.Number%20of%20Good%20Binary%20Strings/README.md
+tags:
+    - 动态规划
+---
+
+<!-- problem:start -->
+
+# [2533. 好二进制字符串的数量 🔒](https://leetcode.cn/problems/number-of-good-binary-strings)
 
 [English Version](/solution/2500-2599/2533.Number%20of%20Good%20Binary%20Strings/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p><span style="">给你四个整数 </span><code>minLenght</code>、<code>maxLength</code>、<code>oneGroup</code><span style=""> 和 </span><code>zeroGroup</code><span style=""> 。</span></p>
+<p><span style="">给你四个整数 </span><code>minLength</code>、<code>maxLength</code>、<code>oneGroup</code><span style=""> 和 </span><code>zeroGroup</code><span style=""> 。</span></p>
 
 <p><strong>好 </strong>二进制字符串满足下述条件：</p>
 
@@ -56,7 +66,11 @@
 	<li><code>1 &lt;= oneGroup, zeroGroup &lt;= maxLength</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：动态规划
 
@@ -75,6 +89,8 @@ $$
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def goodBinaryStrings(
@@ -90,6 +106,8 @@ class Solution:
             f[i] %= mod
         return sum(f[minLength:]) % mod
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -113,6 +131,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -139,6 +159,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func goodBinaryStrings(minLength int, maxLength int, oneGroup int, zeroGroup int) (ans int) {
 	const mod int = 1e9 + 7
@@ -159,6 +181,8 @@ func goodBinaryStrings(minLength int, maxLength int, oneGroup int, zeroGroup int
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function goodBinaryStrings(
@@ -185,4 +209,6 @@ function goodBinaryStrings(
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

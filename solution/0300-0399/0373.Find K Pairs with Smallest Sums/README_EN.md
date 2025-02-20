@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0373.Find%20K%20Pairs%20with%20Smallest%20Sums/README_EN.md
+tags:
+    - Array
+    - Heap (Priority Queue)
+---
+
+<!-- problem:start -->
+
 # [373. Find K Pairs with Smallest Sums](https://leetcode.com/problems/find-k-pairs-with-smallest-sums)
 
 [中文文档](/solution/0300-0399/0373.Find%20K%20Pairs%20with%20Smallest%20Sums/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given two integer arrays <code>nums1</code> and <code>nums2</code> sorted in <strong>non-decreasing&nbsp;order</strong> and an integer <code>k</code>.</p>
 
@@ -27,14 +40,6 @@
 <strong>Explanation:</strong> The first 2 pairs are returned from the sequence: [1,1],[1,1],[1,2],[2,1],[1,2],[2,2],[1,3],[1,3],[2,3]
 </pre>
 
-<p><strong class="example">Example 3:</strong></p>
-
-<pre>
-<strong>Input:</strong> nums1 = [1,2], nums2 = [3], k = 3
-<strong>Output:</strong> [[1,3],[2,3]]
-<strong>Explanation:</strong> All possible pairs are returned from the sequence: [1,3],[2,3]
-</pre>
-
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
@@ -46,11 +51,17 @@
 	<li><code>k &lt;=&nbsp;nums1.length *&nbsp;nums2.length</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -68,6 +79,8 @@ class Solution:
                 heappush(q, [nums1[i] + nums2[j + 1], i, j + 1])
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -89,6 +102,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -116,6 +131,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func kSmallestPairs(nums1, nums2 []int, k int) (ans [][]int) {
@@ -153,4 +170,6 @@ func (h *hp) Pop() any     { a := h.data; v := a[len(a)-1]; h.data = a[:len(a)-1
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

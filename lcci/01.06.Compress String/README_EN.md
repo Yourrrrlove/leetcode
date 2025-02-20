@@ -1,8 +1,18 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/lcci/01.06.Compress%20String/README_EN.md
+---
+
+<!-- problem:start -->
+
 # [01.06. Compress String](https://leetcode.cn/problems/compress-string-lcci)
 
 [中文文档](/lcci/01.06.Compress%20String/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Implement a method to perform basic string compression using the counts of repeated characters. For example, the string aabcccccaaa would become a2blc5a3. If the &quot;compressed&quot; string would not become smaller than the original string, your method should return the original string. You can assume the string has only uppercase and lowercase letters (a - z).</p>
 
@@ -34,7 +44,11 @@ The compressed string is &quot;a1b2c2d1&quot;, which is longer than the original
 
 -   `0 <= S.length <= 50000`
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Two Pointers
 
@@ -46,6 +60,8 @@ The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is 
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def compressString(self, S: str) -> str:
@@ -53,19 +69,7 @@ class Solution:
         return min(S, t, key=len)
 ```
 
-```python
-class Solution:
-    def compressString(self, S: str) -> str:
-        t = []
-        i, n = 0, len(S)
-        while i < n:
-            j = i + 1
-            while j < n and S[j] == S[i]:
-                j += 1
-            t.append(S[i] + str(j - i))
-            i = j
-        return min(S, "".join(t), key=len)
-```
+#### Java
 
 ```java
 class Solution {
@@ -85,6 +89,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -106,6 +112,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func compressString(S string) string {
 	n := len(S)
@@ -125,6 +133,8 @@ func compressString(S string) string {
 	return S
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -153,6 +163,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {string} S
@@ -173,6 +185,32 @@ var compressString = function (S) {
 };
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func compressString(_ S: String) -> String {
+        let n = S.count
+        var compressed = ""
+        var i = 0
+
+        while i < n {
+            var j = i
+            let currentChar = S[S.index(S.startIndex, offsetBy: i)]
+            while j < n && S[S.index(S.startIndex, offsetBy: j)] == currentChar {
+                j += 1
+            }
+            compressed += "\(currentChar)\(j - i)"
+            i = j
+        }
+
+        return compressed.count < n ? compressed : S
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

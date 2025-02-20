@@ -1,21 +1,30 @@
-# [2992. 自整除排列的数量](https://leetcode.cn/problems/number-of-self-divisible-permutations)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2900-2999/2992.Number%20of%20Self-Divisible%20Permutations/README.md
+tags:
+    - 位运算
+    - 数组
+    - 动态规划
+    - 回溯
+    - 状态压缩
+---
+
+<!-- problem:start -->
+
+# [2992. 自整除排列的数量 🔒](https://leetcode.cn/problems/number-of-self-divisible-permutations)
 
 [English Version](/solution/2900-2999/2992.Number%20of%20Self-Divisible%20Permutations/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给定一个整数 <code>n</code>，返回 <strong>下标从 1 开始</strong> 的数组 <code>nums = [1, 2, ..., n]</code>的 <strong>排列数</strong>，使其满足 <strong>自整除</strong> 条件。</p>
+<p>给定一个整数 <code>n</code>，返回 <strong>下标从 1 开始</strong> 的数组 <code>nums = [1, 2, ..., n]</code>的 <strong>可能的排列组合数量</strong>，使其满足 <strong>自整除</strong> 条件。</p>
 
-<p>如果对于每个 <code>1 &lt;= i &lt;= n</code>，<strong>至少</strong> 满足以下条件之一，数组 <code>nums</code> 就是 <strong>自整除</strong> 的：</p>
+<p>如果对于每个 <code>1 &lt;= i &lt;= n</code>，满足 <code>gcd(a[i], i) == 1</code>，数组 <code>nums</code> 就是 <strong>自整除</strong> 的。</p>
 
-<ul>
-	<li><code>nums[i] % i == 0</code></li>
-	<li><code>i % nums[i] == 0</code></li>
-</ul>
-
-<p>数组的 <strong>排列</strong> 是对数组元素的重新排列的数量，例如，下面是数组 <code>[1, 2, 3]</code>&nbsp;的所有排列：</p>
+<p>数组的 <strong>排列</strong>&nbsp;是对数组元素的重新排列组合，例如，下面是数组 <code>[1, 2, 3]</code>&nbsp;的所有排列组合：</p>
 
 <ul>
 	<li><code>[1, 2, 3]</code></li>
@@ -40,10 +49,10 @@
 
 <pre>
 <b>输入：</b>n = 2
-<b>输出：</b>2
-<b>解释：</b>数组 [1,2] 有 2 个排列，都是自整除的：
-nums = [1,2]：这是自整除的，因为 nums[1] % 1 == 0 和 nums[2] % 2 == 0。
-nums = [2,1]：这是自整除的，因为 nums[1] % 1 == 0 和 2 % nums[2] == 0。
+<b>输出：1</b>
+<b>解释：</b>数组 [1,2] 有 2 个排列，但只有其中一个是自整除的：
+nums = [1,2]：这不是自整除的，因为 gcd(nums[2], 2) != 1。
+nums = [2,1]：这是自整除的，因为 gcd(nums[1], 1) == 1 并且 gcd(nums[2], 2) == 1。
 </pre>
 
 <p><b>示例 3：</b></p>
@@ -60,10 +69,14 @@ nums = [2,1]：这是自整除的，因为 nums[1] % 1 == 0 和 2 % nums[2] == 0
 <p><b>提示：</b></p>
 
 <ul>
-	<li><code>1 &lt;= n &lt;= 15</code></li>
+	<li><code>1 &lt;= n &lt;= 12</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：状态压缩 + 记忆化搜索
 
@@ -83,6 +96,8 @@ nums = [2,1]：这是自整除的，因为 nums[1] % 1 == 0 和 2 % nums[2] == 0
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def selfDivisiblePermutationCount(self, n: int) -> int:
@@ -99,6 +114,8 @@ class Solution:
 
         return dfs(0)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -130,6 +147,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -157,6 +176,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func selfDivisiblePermutationCount(n int) int {
 	f := make([]int, 1<<(n+1))
@@ -183,6 +204,8 @@ func selfDivisiblePermutationCount(n int) int {
 	return dfs(0)
 }
 ```
+
+#### TypeScript
 
 ```ts
 function selfDivisiblePermutationCount(n: number): number {
@@ -218,6 +241,10 @@ function bitCount(i: number): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：状态压缩 + 动态规划
 
 我们可以将方法一中的记忆化搜索改写为动态规划的形式，定义 $f[mask]$ 表示当前排列的状态为 $mask$，且满足题目要求的排列的数量。初始时 $f[0]=1$，其余值均为 $0$。
@@ -229,6 +256,8 @@ function bitCount(i: number): number {
 时间复杂度 $O(n \times 2^n)$，空间复杂度 $O(2^n)$。其中 $n$ 为排列的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -242,6 +271,8 @@ class Solution:
                     f[mask] += f[mask ^ (1 << (j - 1))]
         return f[-1]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -260,6 +291,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -281,6 +314,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func selfDivisiblePermutationCount(n int) int {
 	f := make([]int, 1<<n)
@@ -296,6 +331,8 @@ func selfDivisiblePermutationCount(n int) int {
 	return f[(1<<n)-1]
 }
 ```
+
+#### TypeScript
 
 ```ts
 function selfDivisiblePermutationCount(n: number): number {
@@ -324,4 +361,6 @@ function bitCount(i: number): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

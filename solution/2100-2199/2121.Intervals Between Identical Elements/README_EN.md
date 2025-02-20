@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2100-2199/2121.Intervals%20Between%20Identical%20Elements/README_EN.md
+rating: 1760
+source: Weekly Contest 273 Q3
+tags:
+    - Array
+    - Hash Table
+    - Prefix Sum
+---
+
+<!-- problem:start -->
+
 # [2121. Intervals Between Identical Elements](https://leetcode.com/problems/intervals-between-identical-elements)
 
 [中文文档](/solution/2100-2199/2121.Intervals%20Between%20Identical%20Elements/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> array of <code>n</code> integers <code>arr</code>.</p>
 
@@ -49,11 +65,20 @@
 	<li><code>1 &lt;= arr[i] &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<p>&nbsp;</p>
+<p><strong>Note:</strong> This question is the same as <a href="https://leetcode.com/problems/sum-of-distances/description/" target="_blank"> 2615: Sum of Distances.</a></p>
+
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,6 +97,8 @@ class Solution:
                 ans[p] = val
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -100,6 +127,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -124,6 +153,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func getDistances(arr []int) []int64 {
@@ -155,4 +186,6 @@ func getDistances(arr []int) []int64 {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

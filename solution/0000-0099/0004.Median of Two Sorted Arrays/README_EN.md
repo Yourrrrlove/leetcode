@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0004.Median%20of%20Two%20Sorted%20Arrays/README_EN.md
+tags:
+    - Array
+    - Binary Search
+    - Divide and Conquer
+---
+
+<!-- problem:start -->
+
 # [4. Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays)
 
 [中文文档](/solution/0000-0099/0004.Median%20of%20Two%20Sorted%20Arrays/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given two sorted arrays <code>nums1</code> and <code>nums2</code> of size <code>m</code> and <code>n</code> respectively, return <strong>the median</strong> of the two sorted arrays.</p>
 
@@ -37,7 +51,11 @@
 	<li><code>-10<sup>6</sup> &lt;= nums1[i], nums2[i] &lt;= 10<sup>6</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Divide and Conquer
 
@@ -60,6 +78,8 @@ The time complexity is $O(\log(m + n))$, and the space complexity is $O(\log(m +
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
@@ -80,6 +100,8 @@ class Solution:
         b = f(0, 0, (m + n + 2) // 2)
         return (a + b) / 2
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -116,6 +138,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -142,6 +166,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
@@ -175,6 +201,8 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
     const m = nums1.length;
@@ -199,6 +227,8 @@ function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
     return (a + b) / 2;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -229,6 +259,8 @@ var findMedianSortedArrays = function (nums1, nums2) {
     return (a + b) / 2;
 };
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -265,6 +297,32 @@ public class Solution {
 }
 ```
 
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param int[] $nums1
+     * @param int[] $nums2
+     * @return float
+     */
+
+    function findMedianSortedArrays($nums1, $nums2) {
+        $arr = array_merge($nums1, $nums2);
+        sort($arr);
+        $cnt_arr = count($arr);
+
+        if ($cnt_arr % 2) {
+            return $arr[$cnt_arr / 2];
+        } else {
+            return ($arr[intdiv($cnt_arr, 2) - 1] + $arr[intdiv($cnt_arr, 2)]) / 2;
+        }
+    }
+}
+```
+
+#### Nim
+
 ```nim
 import std/[algorithm, sequtils]
 
@@ -290,4 +348,6 @@ proc medianOfTwoSortedArrays(nums1: seq[int], nums2: seq[int]): float =
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

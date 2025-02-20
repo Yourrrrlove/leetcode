@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1800-1899/1850.Minimum%20Adjacent%20Swaps%20to%20Reach%20the%20Kth%20Smallest%20Number/README_EN.md
+rating: 2073
+source: Weekly Contest 239 Q3
+tags:
+    - Greedy
+    - Two Pointers
+    - String
+---
+
+<!-- problem:start -->
+
 # [1850. Minimum Adjacent Swaps to Reach the Kth Smallest Number](https://leetcode.com/problems/minimum-adjacent-swaps-to-reach-the-kth-smallest-number)
 
 [中文文档](/solution/1800-1899/1850.Minimum%20Adjacent%20Swaps%20to%20Reach%20the%20Kth%20Smallest%20Number/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a string <code>num</code>, representing a large integer, and an integer <code>k</code>.</p>
 
@@ -10,6 +26,7 @@
 
 <ul>
 	<li>For example, when <code>num = &quot;5489355142&quot;</code>:
+
     <ul>
     	<li>The 1<sup>st</sup> smallest wonderful integer is <code>&quot;5489355214&quot;</code>.</li>
     	<li>The 2<sup>nd</sup> smallest wonderful integer is <code>&quot;5489355241&quot;</code>.</li>
@@ -17,6 +34,7 @@
     	<li>The 4<sup>th</sup> smallest wonderful integer is <code>&quot;5489355421&quot;</code>.</li>
     </ul>
     </li>
+
 </ul>
 
 <p>Return <em>the <strong>minimum number of adjacent digit swaps</strong> that needs to be applied to </em><code>num</code><em> to reach the </em><code>k<sup>th</sup></code><em><strong> smallest wonderful</strong> integer</em>.</p>
@@ -64,7 +82,11 @@
 	<li><code>num</code> only consists of digits.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Find Next Permutation + Inversion Pairs
 
@@ -93,6 +115,8 @@ Finally, we can directly use a double loop to calculate the number of inversion 
 The time complexity is $O(n \times (k + n))$, and the space complexity is $O(n)$. Where $n$ is the length of $num$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -127,6 +151,8 @@ class Solution:
             idx[j] += 1
         return sum(arr[j] > arr[i] for i in range(n) for j in range(i))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -185,6 +211,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -215,6 +243,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func getMinSwaps(num string, k int) (ans int) {
@@ -266,6 +296,8 @@ func nextPermutation(nums []byte) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function getMinSwaps(num: string, k: number): number {
     const n = num.length;
@@ -316,4 +348,6 @@ function nextPermutation(nums: string[]): boolean {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

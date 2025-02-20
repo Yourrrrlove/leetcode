@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1100-1199/1130.Minimum%20Cost%20Tree%20From%20Leaf%20Values/README_EN.md
+rating: 1919
+source: Weekly Contest 146 Q3
+tags:
+    - Stack
+    - Greedy
+    - Array
+    - Dynamic Programming
+    - Monotonic Stack
+---
+
+<!-- problem:start -->
+
 # [1130. Minimum Cost Tree From Leaf Values](https://leetcode.com/problems/minimum-cost-tree-from-leaf-values)
 
 [中文文档](/solution/1100-1199/1130.Minimum%20Cost%20Tree%20From%20Leaf%20Values/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an array <code>arr</code> of positive integers, consider all binary trees such that:</p>
 
@@ -42,7 +60,11 @@ The first has a non-leaf node sum 36, and the second has non-leaf node sum 32.
 	<li>It is guaranteed that the answer fits into a <strong>32-bit</strong> signed integer (i.e., it is less than 2<sup>31</sup>).</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Memoization Search
 
@@ -59,8 +81,8 @@ In summary, we can get:
 
 $$
 dfs(i, j) = \begin{cases}
-0, & \text{if } i = j \\
-\min_{i \leq k < j} \{dfs(i, k) + dfs(k + 1, j) + \max_{i \leq t \leq k} \{arr[t]\} \max_{k < t \leq j} \{arr[t]\}\}, & \text{if } i < j
+0, & \textit{if } i = j \\
+\min_{i \leq k < j} \{dfs(i, k) + dfs(k + 1, j) + \max_{i \leq t \leq k} \{arr[t]\} \max_{k < t \leq j} \{arr[t]\}\}, & \textit{if } i < j
 \end{cases}
 $$
 
@@ -68,8 +90,8 @@ In the above recursive process, we can use the method of memoization search to a
 
 $$
 dfs(i, j) = \begin{cases}
-0, & \text{if } i = j \\
-\min_{i \leq k < j} \{dfs(i, k) + dfs(k + 1, j) + g[i][k] \cdot g[k + 1][j]\}, & \text{if } i < j
+0, & \textit{if } i = j \\
+\min_{i \leq k < j} \{dfs(i, k) + dfs(k + 1, j) + g[i][k] \cdot g[k + 1][j]\}, & \textit{if } i < j
 \end{cases}
 $$
 
@@ -78,6 +100,8 @@ Finally, we return $dfs(0, n - 1)$.
 The time complexity is $O(n^3)$, and the space complexity is $O(n^2)$. Here, $n$ is the length of the array $arr$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -98,6 +122,8 @@ class Solution:
 
         return dfs(0, len(arr) - 1)[0]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -133,6 +159,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -165,6 +193,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func mctFromLeafValues(arr []int) int {
 	n := len(arr)
@@ -196,6 +226,8 @@ func mctFromLeafValues(arr []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function mctFromLeafValues(arr: number[]): number {
     const n = arr.length;
@@ -226,6 +258,10 @@ function mctFromLeafValues(arr: number[]): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Dynamic Programming
 
 We can change the memoization search in Solution 1 to dynamic programming.
@@ -234,8 +270,8 @@ Define $f[i][j]$ to represent the minimum possible sum of all non-leaf node valu
 
 $$
 f[i][j] = \begin{cases}
-0, & \text{if } i = j \\
-\min_{i \leq k < j} \{f[i][k] + f[k + 1][j] + g[i][k] \cdot g[k + 1][j]\}, & \text{if } i < j
+0, & \textit{if } i = j \\
+\min_{i \leq k < j} \{f[i][k] + f[k + 1][j] + g[i][k] \cdot g[k + 1][j]\}, & \textit{if } i < j
 \end{cases}
 $$
 
@@ -244,6 +280,8 @@ Finally, we return $f[0][n - 1]$.
 The time complexity is $O(n^3)$, and the space complexity is $O(n^2)$. Here, $n$ is the length of the array $arr$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -265,6 +303,8 @@ class Solution:
         return dfs(0, n - 1)
 ```
 
+#### Java
+
 ```java
 class Solution {
     public int mctFromLeafValues(int[] arr) {
@@ -285,6 +325,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -309,6 +351,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func mctFromLeafValues(arr []int) int {
 	n := len(arr)
@@ -332,6 +376,8 @@ func mctFromLeafValues(arr []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function mctFromLeafValues(arr: number[]): number {
     const n = arr.length;
@@ -353,9 +399,15 @@ function mctFromLeafValues(arr: number[]): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 3
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -375,4 +427,6 @@ class Solution:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1615.Maximal%20Network%20Rank/README.md
+rating: 1521
+source: 第 210 场周赛 Q2
+tags:
+    - 图
+---
+
+<!-- problem:start -->
+
 # [1615. 最大网络秩](https://leetcode.cn/problems/maximal-network-rank)
 
 [English Version](/solution/1600-1699/1615.Maximal%20Network%20Rank/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p><code>n</code> 座城市和一些连接这些城市的道路 <code>roads</code> 共同组成一个基础设施网络。每个 <code>roads[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> 都表示在城市 <code>a<sub>i</sub></code> 和 <code>b<sub>i</sub></code> 之间有一条双向道路。</p>
 
@@ -57,32 +69,37 @@
 	<li>每对城市之间 <strong>最多只有一条</strong> 道路相连</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：计数
 
-我们可以用一维数组 $cnt$ 记录每个城市的度，用二维数组 $g$ 记录每对城市之间是否有道路相连，如果城市 $a$ 和城市 $b$ 之间有道路相连，则 $g[a][b] = g[b][a] = 1$，否则 $g[a][b] = g[b][a] = 0$。
+我们可以用一维数组 $\textit{cnt}$ 记录每个城市的度，用二维数组 $\textit{g}$ 记录每对城市之间是否有道路相连，如果城市 $a$ 和城市 $b$ 之间有道路相连，则 $\textit{g}[a][b] = \textit{g}[b][a] = 1$，否则 $\textit{g}[a][b] = \textit{g}[b][a] = 0$。
 
-接下来，我们枚举每对城市 $(a, b)$，其中 $a \lt b$，计算它们的网络秩，即 $cnt[a] + cnt[b] - g[a][b]$，取其中的最大值即为答案。
+接下来，我们枚举每对城市 $(a, b)$，其中 $a \lt b$，计算它们的网络秩，即 $\textit{cnt}[a] + \textit{cnt}[b] - \textit{g}[a][b]$，取其中的最大值即为答案。
 
 时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 是城市的数量。
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def maximalNetworkRank(self, n: int, roads: List[List[int]]) -> int:
-        g = defaultdict(set)
+        g = [[0] * n for _ in range(n)]
+        cnt = [0] * n
         for a, b in roads:
-            g[a].add(b)
-            g[b].add(a)
-        ans = 0
-        for a in range(n):
-            for b in range(a + 1, n):
-                if (t := len(g[a]) + len(g[b]) - (a in g[b])) > ans:
-                    ans = t
-        return ans
+            g[a][b] = g[b][a] = 1
+            cnt[a] += 1
+            cnt[b] += 1
+        return max(cnt[a] + cnt[b] - g[a][b] for a in range(n) for b in range(a + 1, n))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -106,6 +123,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -132,6 +151,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maximalNetworkRank(n int, roads [][]int) (ans int) {
 	g := make([][]int, n)
@@ -154,10 +175,12 @@ func maximalNetworkRank(n int, roads [][]int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function maximalNetworkRank(n: number, roads: number[][]): number {
-    const g: number[][] = Array.from(new Array(n), () => new Array(n).fill(0));
-    const cnt: number[] = new Array(n).fill(0);
+    const g: number[][] = Array.from({ length: n }, () => Array(n).fill(0));
+    const cnt: number[] = Array(n).fill(0);
     for (const [a, b] of roads) {
         g[a][b] = 1;
         g[b][a] = 1;
@@ -176,22 +199,6 @@ function maximalNetworkRank(n: number, roads: number[][]): number {
 
 <!-- tabs:end -->
 
-### 方法二
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```python
-class Solution:
-    def maximalNetworkRank(self, n: int, roads: List[List[int]]) -> int:
-        g = [[0] * n for _ in range(n)]
-        cnt = [0] * n
-        for a, b in roads:
-            g[a][b] = g[b][a] = 1
-            cnt[a] += 1
-            cnt[b] += 1
-        return max(cnt[a] + cnt[b] - g[a][b] for a in range(n) for b in range(a + 1, n))
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

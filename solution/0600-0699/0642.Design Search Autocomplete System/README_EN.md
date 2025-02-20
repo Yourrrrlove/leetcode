@@ -1,8 +1,26 @@
-# [642. Design Search Autocomplete System](https://leetcode.com/problems/design-search-autocomplete-system)
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0600-0699/0642.Design%20Search%20Autocomplete%20System/README_EN.md
+tags:
+    - Depth-First Search
+    - Design
+    - Trie
+    - String
+    - Data Stream
+    - Sorting
+    - Heap (Priority Queue)
+---
+
+<!-- problem:start -->
+
+# [642. Design Search Autocomplete System 🔒](https://leetcode.com/problems/design-search-autocomplete-system)
 
 [中文文档](/solution/0600-0699/0642.Design%20Search%20Autocomplete%20System/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Design a search autocomplete system for a search engine. Users may input a sentence (at least one word and end with a special character <code>&#39;#&#39;</code>).</p>
 
@@ -63,11 +81,17 @@ obj.input(&quot;#&quot;); // return []. The user finished the input, the sentenc
 	<li>At most <code>5000</code> calls will be made to <code>input</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Trie:
@@ -132,6 +156,8 @@ class AutocompleteSystem:
 # obj = AutocompleteSystem(sentences, times)
 # param_1 = obj.input(c)
 ```
+
+#### Java
 
 ```java
 class Trie {
@@ -222,4 +248,6 @@ class AutocompleteSystem {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

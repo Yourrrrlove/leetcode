@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0400-0499/0459.Repeated%20Substring%20Pattern/README_EN.md
+tags:
+    - String
+    - String Matching
+---
+
+<!-- problem:start -->
+
 # [459. Repeated Substring Pattern](https://leetcode.com/problems/repeated-substring-pattern)
 
 [中文文档](/solution/0400-0499/0459.Repeated%20Substring%20Pattern/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a string <code>s</code>, check if it can be constructed by taking a substring of it and appending multiple copies of the substring together.</p>
 
@@ -38,17 +51,25 @@
 	<li><code>s</code> consists of lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def repeatedSubstringPattern(self, s: str) -> bool:
         return (s + s).index(s, 1) < len(s)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -59,6 +80,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -68,17 +91,23 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func repeatedSubstringPattern(s string) bool {
 	return strings.Index(s[1:]+s, s) < len(s)-1
 }
 ```
 
+#### TypeScript
+
 ```ts
 function repeatedSubstringPattern(s: string): boolean {
     return (s + s).slice(1, (s.length << 1) - 1).includes(s);
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -90,33 +119,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```ts
-function repeatedSubstringPattern(s: string): boolean {
-    const n = s.length;
-    for (let i = 0; i < n >> 1; i++) {
-        const len = i + 1;
-        if (n % len !== 0) {
-            continue;
-        }
-        const t = s.slice(0, len);
-        let j: number;
-        for (j = len; j < n; j += len) {
-            if (s.slice(j, j + len) !== t) {
-                break;
-            }
-        }
-        if (j === n) {
-            return true;
-        }
-    }
-    return false;
-}
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

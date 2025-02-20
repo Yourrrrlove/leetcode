@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2553.Separate%20the%20Digits%20in%20an%20Array/README_EN.md
+rating: 1216
+source: Biweekly Contest 97 Q1
+tags:
+    - Array
+    - Simulation
+---
+
+<!-- problem:start -->
+
 # [2553. Separate the Digits in an Array](https://leetcode.com/problems/separate-the-digits-in-an-array)
 
 [中文文档](/solution/2500-2599/2553.Separate%20the%20Digits%20in%20an%20Array/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an array of positive integers <code>nums</code>, return <em>an array </em><code>answer</code><em> that consists of the digits of each integer in </em><code>nums</code><em> after separating them in <strong>the same order</strong> they appear in </em><code>nums</code>.</p>
 
@@ -43,7 +58,11 @@ answer = [7,1,3,9].
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Simulation
 
@@ -52,6 +71,8 @@ Split each number in the array into digits, then put the split numbers into the 
 The time complexity is $O(n \times \log_{10} M)$, and the space complexity is $O(n \times \log_{10} M)$. Where $n$ is the length of the array $nums$, and $M$ is the maximum value in the array $nums$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -65,6 +86,8 @@ class Solution:
             ans.extend(t[::-1])
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -87,6 +110,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -107,6 +132,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func separateDigits(nums []int) (ans []int) {
 	for _, x := range nums {
@@ -123,6 +150,8 @@ func separateDigits(nums []int) (ans []int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function separateDigits(nums: number[]): number[] {
     const ans: number[] = [];
@@ -138,6 +167,8 @@ function separateDigits(nums: number[]): number[] {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn separate_digits(nums: Vec<i32>) -> Vec<i32> {
@@ -149,14 +180,14 @@ impl Solution {
                 t.push(num % 10);
                 num /= 10;
             }
-            t.into_iter()
-                .rev()
-                .for_each(|v| ans.push(v));
+            t.into_iter().rev().for_each(|v| ans.push(v));
         }
         ans
     }
 }
 ```
+
+#### C
 
 ```c
 /**
@@ -186,9 +217,15 @@ int* separateDigits(int* nums, int numsSize, int* returnSize) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -216,4 +253,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

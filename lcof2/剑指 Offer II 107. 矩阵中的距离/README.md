@@ -1,8 +1,15 @@
+---
+comments: true
+edit_url: https://github.com/doocs/leetcode/edit/main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20107.%20%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%B7%9D%E7%A6%BB/README.md
+---
+
+<!-- problem:start -->
+
 # [剑指 Offer II 107. 矩阵中的距离](https://leetcode.cn/problems/2bCMpM)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个由 <code>0</code> 和 <code>1</code> 组成的矩阵 <code>mat</code>&nbsp;，请输出一个大小相同的矩阵，其中每一个格子是 <code>mat</code> 中对应位置元素到最近的 <code>0</code> 的距离。</p>
 
@@ -45,7 +52,11 @@
 
 <p><meta charset="UTF-8" />注意：本题与主站 542&nbsp;题相同：<a href="https://leetcode.cn/problems/01-matrix/">https://leetcode.cn/problems/01-matrix/</a></p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：多源 BFS
 
@@ -54,6 +65,8 @@
 循环弹出队列 q 的元素 `p(i, j)`，检查邻居四个点。对于邻居 `(x, y)`，如果 `ans[x][y] = -1`，则更新 `ans[x][y] = ans[i][j] + 1`。同时将 `(x, y)` 入队。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -76,6 +89,8 @@ class Solution:
                     q.append((x, y))
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -112,6 +127,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -144,6 +161,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func updateMatrix(mat [][]int) [][]int {
@@ -181,6 +200,46 @@ func updateMatrix(mat [][]int) [][]int {
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func updateMatrix(_ mat: [[Int]]) -> [[Int]] {
+        let m = mat.count
+        let n = mat[0].count
+        var ans = Array(repeating: Array(repeating: -1, count: n), count: m)
+        var queue = [(Int, Int)]()
+
+        for i in 0..<m {
+            for j in 0..<n {
+                if mat[i][j] == 0 {
+                    ans[i][j] = 0
+                    queue.append((i, j))
+                }
+            }
+        }
+
+        let dirs = [-1, 0, 1, 0, -1]
+
+        while !queue.isEmpty {
+            let (i, j) = queue.removeFirst()
+            for d in 0..<4 {
+                let x = i + dirs[d]
+                let y = j + dirs[d + 1]
+                if x >= 0 && x < m && y >= 0 && y < n && ans[x][y] == -1 {
+                    ans[x][y] = ans[i][j] + 1
+                    queue.append((x, y))
+                }
+            }
+        }
+
+        return ans
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

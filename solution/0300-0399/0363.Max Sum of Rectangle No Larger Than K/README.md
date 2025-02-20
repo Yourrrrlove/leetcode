@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0363.Max%20Sum%20of%20Rectangle%20No%20Larger%20Than%20K/README.md
+tags:
+    - 数组
+    - 二分查找
+    - 矩阵
+    - 有序集合
+    - 前缀和
+---
+
+<!-- problem:start -->
+
 # [363. 矩形区域不超过 K 的最大数值和](https://leetcode.cn/problems/max-sum-of-rectangle-no-larger-than-k)
 
 [English Version](/solution/0300-0399/0363.Max%20Sum%20of%20Rectangle%20No%20Larger%20Than%20K/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个 <code>m x n</code> 的矩阵 <code>matrix</code> 和一个整数 <code>k</code> ，找出并返回矩阵内部矩形区域的不超过 <code>k</code> 的最大数值和。</p>
 
@@ -43,7 +57,11 @@
 
 <p><strong>进阶：</strong>如果行数远大于列数，该如何设计解决方案？</p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：枚举边界 + 有序集合
 
@@ -55,10 +73,9 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedSet
-
-
 class Solution:
     def maxSumSubmatrix(self, matrix: List[List[int]], k: int) -> int:
         m, n = len(matrix), len(matrix[0])
@@ -78,6 +95,8 @@ class Solution:
                     ts.add(s)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -110,6 +129,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -141,6 +162,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxSumSubmatrix(matrix [][]int, k int) int {
 	m, n := len(matrix), len(matrix[0])
@@ -168,6 +191,8 @@ func maxSumSubmatrix(matrix [][]int, k int) int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function maxSumSubmatrix(matrix: number[][], k: number): number {
@@ -839,4 +864,6 @@ class TreeMultiSet<T = number> {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

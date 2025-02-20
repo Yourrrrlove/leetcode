@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1626.Best%20Team%20With%20No%20Conflicts/README_EN.md
+rating: 2027
+source: Weekly Contest 211 Q3
+tags:
+    - Array
+    - Dynamic Programming
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [1626. Best Team With No Conflicts](https://leetcode.com/problems/best-team-with-no-conflicts)
 
 [中文文档](/solution/1600-1699/1626.Best%20Team%20With%20No%20Conflicts/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are the manager of a basketball team. For the upcoming tournament, you want to choose the team with the highest overall score. The score of the team is the <strong>sum</strong> of scores of all the players in the team.</p>
 
@@ -45,11 +61,17 @@
 	<li><code>1 &lt;= ages[i] &lt;= 1000</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -64,6 +86,8 @@ class Solution:
             f[i] += score
         return max(f)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -90,6 +114,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -113,6 +139,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func bestTeamScore(scores []int, ages []int) int {
@@ -138,6 +166,8 @@ func bestTeamScore(scores []int, ages []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function bestTeamScore(scores: number[], ages: number[]): number {
     const arr = ages.map((age, i) => [age, scores[i]]);
@@ -155,6 +185,8 @@ function bestTeamScore(scores: number[], ages: number[]): number {
     return Math.max(...f);
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -181,9 +213,15 @@ var bestTeamScore = function (scores, ages) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class BinaryIndexedTree:
@@ -212,6 +250,8 @@ class Solution:
             tree.update(age, score + tree.query(age))
         return tree.query(m)
 ```
+
+#### Java
 
 ```java
 class BinaryIndexedTree {
@@ -261,6 +301,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class BinaryIndexedTree {
 public:
@@ -307,6 +349,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 type BinaryIndexedTree struct {
@@ -357,4 +401,6 @@ func bestTeamScore(scores []int, ages []int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

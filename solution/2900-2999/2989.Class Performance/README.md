@@ -1,10 +1,20 @@
-# [2989. 班级表现](https://leetcode.cn/problems/class-performance)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2900-2999/2989.Class%20Performance/README.md
+tags:
+    - 数据库
+---
+
+<!-- problem:start -->
+
+# [2989. 班级表现 🔒](https://leetcode.cn/problems/class-performance)
 
 [English Version](/solution/2900-2999/2989.Class%20Performance/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>表：&nbsp;<code>Scores</code></p>
 
@@ -22,7 +32,7 @@ student_id 是这张表具有唯一值的列。
 该表包含 student_id, student_name, assignment1, assignment2,和 assignment3。
 </pre>
 
-<p>编写一个查询，计算学生获得的&nbsp;<strong>最高分&nbsp;</strong>和&nbsp;<strong>最低分&nbsp;</strong>之间的&nbsp;<strong>总分差</strong>（<code>3</code> 次作业的总和）。</p>
+<p>编写一个查询，计算学生获得的&nbsp;<strong>最高总分&nbsp;</strong>和&nbsp;<strong>最低总分&nbsp;</strong>之间的&nbsp;<strong>差</strong>（<code>3</code> 次作业的总和）。</p>
 
 <p>以 <em><strong>任意</strong> 顺序返回结果表。</em></p>
 
@@ -58,16 +68,22 @@ Scores 表：
 - student_id 423 的总分为 60 + 44 + 47 = 151。
 - student_id 896 的总分为 32 + 37 + 50 = 119。
 - student_id 235 的总分为 31 + 53 + 69 = 153。
-student_id 321 的最高分为 230，而 student_id 896 的最低分为 119。因此，它们之间的差异为 111。
+student_id 321 拥有最高分为 230，而 student_id 896 拥有最低分为 119。因此，它们之间的差异为 111。
 </pre>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：最大值最小值
 
 我们可以使用 `MAX` 和 `MIN` 函数来分别获取 `assignment1`、`assignment2`、`assignment3` 的和的最大值和最小值，然后相减即可。
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -80,4 +96,6 @@ FROM Scores;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

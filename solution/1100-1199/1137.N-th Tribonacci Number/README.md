@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1100-1199/1137.N-th%20Tribonacci%20Number/README.md
+rating: 1142
+source: 第 147 场周赛 Q1
+tags:
+    - 记忆化搜索
+    - 数学
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [1137. 第 N 个泰波那契数](https://leetcode.cn/problems/n-th-tribonacci-number)
 
 [English Version](/solution/1100-1199/1137.N-th%20Tribonacci%20Number/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>泰波那契序列&nbsp;T<sub>n</sub>&nbsp;定义如下：&nbsp;</p>
 
@@ -38,7 +52,11 @@ T_4 = 1 + 1 + 2 = 4
 	<li>答案保证是一个 32 位整数，即&nbsp;<code>answer &lt;= 2^31 - 1</code>。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：动态规划
 
@@ -52,6 +70,8 @@ T_4 = 1 + 1 + 2 = 4
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def tribonacci(self, n: int) -> int:
@@ -60,6 +80,8 @@ class Solution:
             a, b, c = b, c, a + b + c
         return a
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -75,6 +97,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -92,6 +116,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func tribonacci(n int) int {
 	a, b, c := 0, 1, 1
@@ -101,6 +127,8 @@ func tribonacci(n int) int {
 	return a
 }
 ```
+
+#### TypeScript
 
 ```ts
 function tribonacci(n: number): number {
@@ -144,6 +172,8 @@ function pow(a: number[][], n: number): number[][] {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number} n
@@ -162,6 +192,8 @@ var tribonacci = function (n) {
     return a;
 };
 ```
+
+#### PHP
 
 ```php
 class Solution {
@@ -185,6 +217,10 @@ class Solution {
 ```
 
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### 方法二：矩阵快速幂加速递推
 
@@ -214,34 +250,30 @@ $$
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
+import numpy as np
+
+
 class Solution:
     def tribonacci(self, n: int) -> int:
-        def mul(a: List[List[int]], b: List[List[int]]) -> List[List[int]]:
-            m, n = len(a), len(b[0])
-            c = [[0] * n for _ in range(m)]
-            for i in range(m):
-                for j in range(n):
-                    for k in range(len(a[0])):
-                        c[i][j] = c[i][j] + a[i][k] * b[k][j]
-            return c
-
-        def pow(a: List[List[int]], n: int) -> List[List[int]]:
-            res = [[1, 1, 0]]
-            while n:
-                if n & 1:
-                    res = mul(res, a)
-                n >>= 1
-                a = mul(a, a)
-            return res
-
         if n == 0:
             return 0
         if n < 3:
             return 1
-        a = [[1, 1, 0], [1, 0, 1], [1, 0, 0]]
-        return sum(pow(a, n - 3)[0])
+        factor = np.asmatrix([(1, 1, 0), (1, 0, 1), (1, 0, 0)], np.dtype("O"))
+        res = np.asmatrix([(1, 1, 0)], np.dtype("O"))
+        n -= 3
+        while n:
+            if n & 1:
+                res *= factor
+            factor *= factor
+            n >>= 1
+        return res.sum()
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -288,6 +320,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -331,6 +365,8 @@ private:
     }
 };
 ```
+
+#### Go
 
 ```go
 func tribonacci(n int) (ans int) {
@@ -376,6 +412,8 @@ func pow(a [][]int, n int) [][]int {
 	return res
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -425,31 +463,6 @@ function pow(a, n) {
 
 <!-- tabs:end -->
 
-### 方法三
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```python
-import numpy as np
-
-
-class Solution:
-    def tribonacci(self, n: int) -> int:
-        if n == 0:
-            return 0
-        if n < 3:
-            return 1
-        factor = np.mat([(1, 1, 0), (1, 0, 1), (1, 0, 0)], np.dtype("O"))
-        res = np.mat([(1, 1, 0)], np.dtype("O"))
-        n -= 3
-        while n:
-            if n & 1:
-                res *= factor
-            factor *= factor
-            n >>= 1
-        return res.sum()
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

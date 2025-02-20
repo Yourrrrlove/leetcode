@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1915.Number%20of%20Wonderful%20Substrings/README.md
+rating: 2234
+source: 第 247 场周赛 Q3
+tags:
+    - 位运算
+    - 哈希表
+    - 字符串
+    - 前缀和
+---
+
+<!-- problem:start -->
+
 # [1915. 最美子字符串的数目](https://leetcode.cn/problems/number-of-wonderful-substrings)
 
 [English Version](/solution/1900-1999/1915.Number%20of%20Wonderful%20Substrings/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>如果某个字符串中 <strong>至多一个</strong> 字母出现 <strong>奇数</strong> 次，则称其为 <strong>最美</strong> 字符串。</p>
 
@@ -66,7 +81,11 @@
 	<li><code>word</code> 由从 <code>'a'</code> 到 <code>'j'</code> 的小写英文字母组成</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：前缀异或 + 计数
 
@@ -80,9 +99,11 @@
 
 相似题目：
 
--   [1371. 每个元音包含偶数次的最长子字符串](/solution/1300-1399/1371.Find%20the%20Longest%20Substring%20Containing%20Vowels%20in%20Even%20Counts/README.md)
+-   [1371. 每个元音包含偶数次的最长子字符串](https://github.com/doocs/leetcode/blob/main/solution/1300-1399/1371.Find%20the%20Longest%20Substring%20Containing%20Vowels%20in%20Even%20Counts/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -97,6 +118,8 @@ class Solution:
             cnt[st] += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -118,6 +141,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -138,6 +163,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func wonderfulSubstrings(word string) (ans int64) {
 	cnt := [1024]int{1}
@@ -153,6 +180,8 @@ func wonderfulSubstrings(word string) (ans int64) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function wonderfulSubstrings(word: string): number {
@@ -171,6 +200,8 @@ function wonderfulSubstrings(word: string): number {
     return ans;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -196,4 +227,6 @@ var wonderfulSubstrings = function (word) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

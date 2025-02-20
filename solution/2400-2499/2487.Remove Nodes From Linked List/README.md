@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2400-2499/2487.Remove%20Nodes%20From%20Linked%20List/README.md
+rating: 1454
+source: 第 321 场周赛 Q3
+tags:
+    - 栈
+    - 递归
+    - 链表
+    - 单调栈
+---
+
+<!-- problem:start -->
+
 # [2487. 从链表中移除节点](https://leetcode.cn/problems/remove-nodes-from-linked-list)
 
 [English Version](/solution/2400-2499/2487.Remove%20Nodes%20From%20Linked%20List/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个链表的头节点 <code>head</code> 。</p>
 
@@ -44,7 +59,11 @@
 	<li><code>1 &lt;= Node.val &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：单调栈模拟
 
@@ -61,6 +80,8 @@
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是链表的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for singly-linked list.
@@ -86,6 +107,8 @@ class Solution:
             head = head.next
         return dummy.next
 ```
+
+#### Java
 
 ```java
 /**
@@ -122,6 +145,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 /**
@@ -160,6 +185,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for singly-linked list.
@@ -190,6 +217,8 @@ func removeNodes(head *ListNode) *ListNode {
 	return dummy.Next
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -228,9 +257,15 @@ function removeNodes(head: ListNode | null): ListNode | null {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for singly-linked list.
@@ -251,6 +286,8 @@ class Solution:
             cur = cur.next
         return dummy.next
 ```
+
+#### Java
 
 ```java
 /**
@@ -279,6 +316,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 /**
@@ -309,6 +348,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for singly-linked list.
@@ -330,6 +371,8 @@ func removeNodes(head *ListNode) *ListNode {
 	return dummy.Next
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -360,4 +403,6 @@ function removeNodes(head: ListNode | null): ListNode | null {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

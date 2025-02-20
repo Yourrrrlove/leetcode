@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1300-1399/1334.Find%20the%20City%20With%20the%20Smallest%20Number%20of%20Neighbors%20at%20a%20Threshold%20Distance/README_EN.md
+rating: 1854
+source: Weekly Contest 173 Q3
+tags:
+    - Graph
+    - Dynamic Programming
+    - Shortest Path
+---
+
+<!-- problem:start -->
+
 # [1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance](https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance)
 
 [中文文档](/solution/1300-1399/1334.Find%20the%20City%20With%20the%20Smallest%20Number%20of%20Neighbors%20at%20a%20Threshold%20Distance/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There are <code>n</code> cities numbered from <code>0</code> to <code>n-1</code>. Given the array <code>edges</code> where <code>edges[i] = [from<sub>i</sub>, to<sub>i</sub>, weight<sub>i</sub>]</code> represents a bidirectional and weighted edge between cities <code>from<sub>i</sub></code> and <code>to<sub>i</sub></code>, and given the integer <code>distanceThreshold</code>.</p>
 
@@ -12,7 +28,9 @@
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
-<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1334.Find%20the%20City%20With%20the%20Smallest%20Number%20of%20Neighbors%20at%20a%20Threshold%20Distance/images/find_the_city_01.png" style="width: 300px; height: 225px;" />
+
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1334.Find%20the%20City%20With%20the%20Smallest%20Number%20of%20Neighbors%20at%20a%20Threshold%20Distance/images/problem1334example1.png" style="width: 300px; height: 224px;" /></p>
+
 <pre>
 <strong>Input:</strong> n = 4, edges = [[0,1,3],[1,2,1],[1,3,4],[2,3,1]], distanceThreshold = 4
 <strong>Output:</strong> 3
@@ -26,7 +44,9 @@ Cities 0 and 3 have 2 neighboring cities at a distanceThreshold = 4, but we have
 </pre>
 
 <p><strong class="example">Example 2:</strong></p>
-<img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1334.Find%20the%20City%20With%20the%20Smallest%20Number%20of%20Neighbors%20at%20a%20Threshold%20Distance/images/find_the_city_02.png" style="width: 300px; height: 225px;" />
+
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1334.Find%20the%20City%20With%20the%20Smallest%20Number%20of%20Neighbors%20at%20a%20Threshold%20Distance/images/problem1334example0.png" style="width: 300px; height: 224px;" /></p>
+
 <pre>
 <strong>Input:</strong> n = 5, edges = [[0,1,2],[0,4,8],[1,2,3],[1,4,2],[2,3,1],[3,4,1]], distanceThreshold = 2
 <strong>Output:</strong> 0
@@ -52,11 +72,17 @@ The city 0 has 1 neighboring city at a distanceThreshold = 2.
 	<li>All pairs <code>(from<sub>i</sub>, to<sub>i</sub>)</code> are distinct.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -88,6 +114,8 @@ class Solution:
                 cnt, ans = t, i
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -150,6 +178,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -192,6 +222,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findTheCity(n int, edges [][]int, distanceThreshold int) int {
@@ -247,6 +279,8 @@ func findTheCity(n int, edges [][]int, distanceThreshold int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function findTheCity(n: number, edges: number[][], distanceThreshold: number): number {
     const g: number[][] = Array.from({ length: n }, () => Array(n).fill(Infinity));
@@ -289,11 +323,61 @@ function findTheCity(n: number, edges: number[][], distanceThreshold: number): n
 }
 ```
 
+#### JavaScript
+
+```js
+function findTheCity(n, edges, distanceThreshold) {
+    const g = Array.from({ length: n }, () => Array(n).fill(Infinity));
+    const dist = Array(n).fill(Infinity);
+    const vis = Array(n).fill(false);
+    for (const [f, t, w] of edges) {
+        g[f][t] = g[t][f] = w;
+    }
+
+    const dijkstra = u => {
+        dist.fill(Infinity);
+        vis.fill(false);
+        dist[u] = 0;
+        for (let i = 0; i < n; ++i) {
+            let k = -1;
+            for (let j = 0; j < n; ++j) {
+                if (!vis[j] && (k === -1 || dist[j] < dist[k])) {
+                    k = j;
+                }
+            }
+            vis[k] = true;
+            for (let j = 0; j < n; ++j) {
+                dist[j] = Math.min(dist[j], dist[k] + g[k][j]);
+            }
+        }
+        return dist.filter(d => d <= distanceThreshold).length;
+    };
+
+    let ans = n;
+    let cnt = Infinity;
+    for (let i = n - 1; i >= 0; --i) {
+        const t = dijkstra(i);
+        if (t < cnt) {
+            cnt = t;
+            ans = i;
+        }
+    }
+
+    return ans;
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -319,6 +403,8 @@ class Solution:
                 cnt, ans = t, i
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -359,6 +445,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -389,6 +477,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findTheCity(n int, edges [][]int, distanceThreshold int) int {
@@ -432,6 +522,8 @@ func findTheCity(n int, edges [][]int, distanceThreshold int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function findTheCity(n: number, edges: number[][], distanceThreshold: number): number {
     const g: number[][] = Array.from({ length: n }, () => Array(n).fill(Infinity));
@@ -460,6 +552,154 @@ function findTheCity(n: number, edges: number[][], distanceThreshold: number): n
 }
 ```
 
+#### JavaScript
+
+```js
+function findTheCity(n, edges, distanceThreshold) {
+    const g = Array.from({ length: n }, () => Array(n).fill(Infinity));
+    for (const [f, t, w] of edges) {
+        g[f][t] = g[t][f] = w;
+    }
+    for (let k = 0; k < n; ++k) {
+        g[k][k] = 0;
+        for (let i = 0; i < n; ++i) {
+            for (let j = 0; j < n; ++j) {
+                g[i][j] = Math.min(g[i][j], g[i][k] + g[k][j]);
+            }
+        }
+    }
+
+    let ans = n,
+        cnt = n + 1;
+    for (let i = n - 1; i >= 0; --i) {
+        const t = g[i].filter(x => x <= distanceThreshold).length;
+        if (t < cnt) {
+            cnt = t;
+            ans = i;
+        }
+    }
+    return ans;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 3
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function findTheCity(n: number, edges: number[][], distanceThreshold: number): number {
+    const MAX = Number.POSITIVE_INFINITY;
+    const g = Array.from({ length: n }, () => new Map<number, number>());
+    const dist: number[] = Array(n).fill(MAX);
+    const vis: boolean[] = Array(n).fill(false);
+    for (const [f, t, w] of edges) {
+        g[f].set(t, w);
+        g[t].set(f, w);
+    }
+
+    const dijkstra = (u: number): number => {
+        dist.fill(MAX);
+        vis.fill(false);
+        dist[u] = 0;
+        const pq = new MinPriorityQueue();
+        pq.enqueue(u, 0);
+
+        while (!pq.isEmpty()) {
+            const u = pq.dequeue().element;
+            if (vis[u]) continue;
+            vis[u] = true;
+
+            for (const [v, w] of g[u]) {
+                if (vis[v]) continue;
+
+                const wNext = dist[u] + w;
+                if (wNext < dist[v]) {
+                    dist[v] = wNext;
+                    pq.enqueue(v, dist[v]);
+                }
+            }
+        }
+
+        return dist.filter(d => d <= distanceThreshold).length;
+    };
+
+    let ans = n;
+    let cnt = MAX;
+    for (let i = n - 1; i >= 0; --i) {
+        const t = dijkstra(i);
+        if (t < cnt) {
+            cnt = t;
+            ans = i;
+        }
+    }
+
+    return ans;
+}
+```
+
+#### JavaScript
+
+```js
+export function findTheCity(n, edges, distanceThreshold) {
+    const MAX = Number.POSITIVE_INFINITY;
+    const g = Array.from({ length: n }, () => new Map());
+    const dist = Array(n).fill(MAX);
+    const vis = Array(n).fill(false);
+    for (const [f, t, w] of edges) {
+        g[f].set(t, w);
+        g[t].set(f, w);
+    }
+
+    const dijkstra = u => {
+        dist.fill(MAX);
+        vis.fill(false);
+        dist[u] = 0;
+        const pq = new MinPriorityQueue();
+        pq.enqueue(u, 0);
+
+        while (!pq.isEmpty()) {
+            const u = pq.dequeue().element;
+            if (vis[u]) continue;
+            vis[u] = true;
+
+            for (const [v, w] of g[u]) {
+                if (vis[v]) continue;
+
+                const wNext = dist[u] + w;
+                if (wNext < dist[v]) {
+                    dist[v] = wNext;
+                    pq.enqueue(v, dist[v]);
+                }
+            }
+        }
+
+        return dist.filter(d => d <= distanceThreshold).length;
+    };
+
+    let ans = n;
+    let cnt = MAX;
+    for (let i = n - 1; i >= 0; --i) {
+        const t = dijkstra(i);
+        if (t < cnt) {
+            cnt = t;
+            ans = i;
+        }
+    }
+
+    return ans;
+}
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

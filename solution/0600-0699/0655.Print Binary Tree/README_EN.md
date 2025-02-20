@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0600-0699/0655.Print%20Binary%20Tree/README_EN.md
+tags:
+    - Tree
+    - Depth-First Search
+    - Breadth-First Search
+    - Binary Tree
+---
+
+<!-- problem:start -->
+
 # [655. Print Binary Tree](https://leetcode.com/problems/print-binary-tree)
 
 [中文文档](/solution/0600-0699/0655.Print%20Binary%20Tree/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given the <code>root</code> of a binary tree, construct a <strong>0-indexed</strong> <code>m x n</code> string matrix <code>res</code> that represents a <strong>formatted layout</strong> of the tree. The formatted layout matrix should be constructed using the following rules:</p>
 
@@ -46,11 +61,17 @@
 	<li>The depth of the tree will be in the range <code>[1, 10]</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -79,6 +100,8 @@ class Solution:
         dfs(root, 0, (n - 1) // 2)
         return ans
 ```
+
+#### Java
 
 ```java
 /**
@@ -130,6 +153,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -165,6 +190,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -207,6 +234,8 @@ func printTree(root *TreeNode) [][]string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 /**
  * Definition for a binary tree node.
@@ -248,6 +277,8 @@ function printTree(root: TreeNode | null): string[][] {
 }
 ```
 
+#### Rust
+
 ```rust
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
@@ -267,8 +298,8 @@ function printTree(root: TreeNode | null): string[][] {
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     fn get_height(root: &Option<Rc<RefCell<TreeNode>>>, h: u32) -> u32 {
         if let Some(node) = root {
@@ -283,15 +314,27 @@ impl Solution {
         i: usize,
         j: usize,
         res: &mut Vec<Vec<String>>,
-        height: u32
+        height: u32,
     ) {
         if root.is_none() {
             return;
         }
         let node = root.as_ref().unwrap().borrow();
         res[i][j] = node.val.to_string();
-        Self::dfs(&node.left, i + 1, j - (2usize).pow(height - (i as u32) - 1), res, height);
-        Self::dfs(&node.right, i + 1, j + (2usize).pow(height - (i as u32) - 1), res, height);
+        Self::dfs(
+            &node.left,
+            i + 1,
+            j - (2usize).pow(height - (i as u32) - 1),
+            res,
+            height,
+        );
+        Self::dfs(
+            &node.right,
+            i + 1,
+            j + (2usize).pow(height - (i as u32) - 1),
+            res,
+            height,
+        );
     }
 
     pub fn print_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<String>> {
@@ -307,9 +350,15 @@ impl Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -346,6 +395,8 @@ class Solution:
                 q.append((node.right, r + 1, c + 2 ** (h - r - 1)))
         return ans
 ```
+
+#### Java
 
 ```java
 /**
@@ -425,6 +476,8 @@ class Tuple {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -473,6 +526,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -538,4 +593,6 @@ type tuple struct {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

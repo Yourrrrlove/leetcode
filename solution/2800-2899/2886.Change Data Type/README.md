@@ -1,10 +1,20 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2886.Change%20Data%20Type/README.md
+tags:
+    - Pandas
+---
+
+<!-- problem:start -->
+
 # [2886. 改变数据类型](https://leetcode.cn/problems/change-data-type)
 
 [English Version](/solution/2800-2899/2886.Change%20Data%20Type/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <pre>
 DataFrame <code>students</code>
@@ -47,11 +57,17 @@ DataFrame <code>students</code>
 <b>解释：</b>
 grade 列的数据类型已转换为整数。</pre>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 import pandas as pd
@@ -64,4 +80,6 @@ def changeDatatype(students: pd.DataFrame) -> pd.DataFrame:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

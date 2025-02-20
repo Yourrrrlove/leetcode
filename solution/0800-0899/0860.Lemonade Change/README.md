@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0860.Lemonade%20Change/README.md
+tags:
+    - 贪心
+    - 数组
+---
+
+<!-- problem:start -->
+
 # [860. 柠檬水找零](https://leetcode.cn/problems/lemonade-change)
 
 [English Version](/solution/0800-0899/0860.Lemonade%20Change/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>在柠檬水摊上，每一杯柠檬水的售价为&nbsp;<code>5</code>&nbsp;美元。顾客排队购买你的产品，（按账单 <code>bills</code> 支付的顺序）一次购买一杯。</p>
 
@@ -49,7 +60,11 @@
 	<li><code>bills[i]</code>&nbsp;不是&nbsp;<code>5</code>&nbsp;就是&nbsp;<code>10</code>&nbsp;或是&nbsp;<code>20</code>&nbsp;</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：贪心 + 模拟
 
@@ -65,6 +80,8 @@
 时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为账单数组 $bills$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -86,6 +103,8 @@ class Solution:
                 return False
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -116,6 +135,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -144,6 +165,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func lemonadeChange(bills []int) bool {
 	five, ten := 0, 0
@@ -169,12 +192,13 @@ func lemonadeChange(bills []int) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function lemonadeChange(bills: number[]): boolean {
-    let five = 0;
-    let ten = 0;
-    for (let bill of bills) {
-        switch (bill) {
+    let [five, ten] = [0, 0];
+    for (const x of bills) {
+        switch (x) {
             case 5:
                 five++;
                 break;
@@ -183,11 +207,12 @@ function lemonadeChange(bills: number[]): boolean {
                 ten++;
                 break;
             case 20:
-                if (ten !== 0) {
-                    ten -= 1;
-                    bill -= 10;
+                if (ten) {
+                    ten--;
+                    five--;
+                } else {
+                    five -= 3;
                 }
-                five -= bill / 5 - 1;
                 break;
         }
 
@@ -198,6 +223,40 @@ function lemonadeChange(bills: number[]): boolean {
     return true;
 }
 ```
+
+#### JavaScript
+
+```js
+function lemonadeChange(bills) {
+    let [five, ten] = [0, 0];
+    for (const x of bills) {
+        switch (x) {
+            case 5:
+                five++;
+                break;
+            case 10:
+                five--;
+                ten++;
+                break;
+            case 20:
+                if (ten) {
+                    ten--;
+                    five--;
+                } else {
+                    five -= 3;
+                }
+                break;
+        }
+
+        if (five < 0) {
+            return false;
+        }
+    }
+    return true;
+}
+```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -233,4 +292,44 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### 方法二：一行
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+const lemonadeChange = (bills: number[], f = 0, t = 0): boolean =>
+    bills.every(
+        x => (
+            (!(x ^ 5) && ++f) ||
+                (!(x ^ 10) && (--f, ++t)) ||
+                (!(x ^ 20) && (t ? (f--, t--) : (f -= 3), 1)),
+            f >= 0
+        ),
+    );
+```
+
+#### JavaScript
+
+```js
+const lemonadeChange = (bills, f = 0, t = 0) =>
+    bills.every(
+        x => (
+            (!(x ^ 5) && ++f) ||
+                (!(x ^ 10) && (--f, ++t)) ||
+                (!(x ^ 20) && (t ? (f--, t--) : (f -= 3), 1)),
+            f >= 0
+        ),
+    );
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

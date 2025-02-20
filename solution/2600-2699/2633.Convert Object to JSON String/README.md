@@ -1,10 +1,20 @@
-# [2633. 将对象转换为 JSON 字符串](https://leetcode.cn/problems/convert-object-to-json-string)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2633.Convert%20Object%20to%20JSON%20String/README.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
+# [2633. 将对象转换为 JSON 字符串 🔒](https://leetcode.cn/problems/convert-object-to-json-string)
 
 [English Version](/solution/2600-2699/2633.Convert%20Object%20to%20JSON%20String/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>现给定一个值，返回该值的有效 JSON 字符串。你可以假设这个值只包括字符串、整数、数组、对象、布尔值和 null。返回的字符串不能包含额外的空格。键的返回顺序应该与 <code>Object.keys()</code> 的顺序相同。</p>
 
@@ -58,11 +68,17 @@ JSON 的基本类型是字符串、数字型、布尔值和 null。
 	<li>所有字符串只包含字母数字字符</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 function jsonStringify(object: any): string {
@@ -89,4 +105,6 @@ function jsonStringify(object: any): string {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

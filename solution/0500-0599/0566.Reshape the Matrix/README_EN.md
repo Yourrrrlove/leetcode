@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0500-0599/0566.Reshape%20the%20Matrix/README_EN.md
+tags:
+    - Array
+    - Matrix
+    - Simulation
+---
+
+<!-- problem:start -->
+
 # [566. Reshape the Matrix](https://leetcode.com/problems/reshape-the-matrix)
 
 [中文文档](/solution/0500-0599/0566.Reshape%20the%20Matrix/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>In MATLAB, there is a handy function called <code>reshape</code> which can reshape an <code>m x n</code> matrix into a new one with a different size <code>r x c</code> keeping its original data.</p>
 
@@ -38,11 +52,25 @@
 	<li><code>1 &lt;= r, c &lt;= 300</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Simulation
+
+First, we get the number of rows and columns of the original matrix, denoted as $m$ and $n$ respectively. If $m \times n \neq r \times c$, then the matrix cannot be reshaped, and we return the original matrix directly.
+
+Otherwise, we create a new matrix with $r$ rows and $c$ columns. Starting from the first element of the original matrix, we traverse all elements in row-major order and place the traversed elements into the new matrix in order.
+
+After traversing all elements of the original matrix, we get the answer.
+
+The time complexity is $O(m \times n)$, where $m$ and $n$ are the number of rows and columns of the original matrix, respectively. Ignoring the space consumption of the answer, the space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -55,6 +83,8 @@ class Solution:
             ans[i // c][i % c] = mat[i // n][i % n]
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -71,6 +101,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -89,6 +121,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func matrixReshape(mat [][]int, r int, c int) [][]int {
 	m, n := len(mat), len(mat[0])
@@ -106,6 +140,8 @@ func matrixReshape(mat [][]int, r int, c int) [][]int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function matrixReshape(mat: number[][], r: number, c: number): number[][] {
     let m = mat.length,
@@ -122,6 +158,8 @@ function matrixReshape(mat: number[][], r: number, c: number): number[][] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -156,6 +194,8 @@ impl Solution {
 }
 ```
 
+#### C
+
 ```c
 /**
  * Return an array of arrays of size *returnSize.
@@ -184,9 +224,15 @@ int** matrixReshape(int** mat, int matSize, int* matColSize, int r, int c, int* 
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 function matrixReshape(mat: number[][], r: number, c: number): number[][] {
@@ -205,4 +251,6 @@ function matrixReshape(mat: number[][], r: number, c: number): number[][] {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

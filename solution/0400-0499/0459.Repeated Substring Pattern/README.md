@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0400-0499/0459.Repeated%20Substring%20Pattern/README.md
+tags:
+    - 字符串
+    - 字符串匹配
+---
+
+<!-- problem:start -->
+
 # [459. 重复的子字符串](https://leetcode.cn/problems/repeated-substring-pattern)
 
 [English Version](/solution/0400-0499/0459.Repeated%20Substring%20Pattern/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个非空的字符串<meta charset="UTF-8" />&nbsp;<code>s</code>&nbsp;，检查是否可以通过由它的一个子串重复多次构成。</p>
 
@@ -44,7 +55,11 @@
 	<li><code>s</code>&nbsp;由小写英文字母组成</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：双倍字符串
 
@@ -56,11 +71,15 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def repeatedSubstringPattern(self, s: str) -> bool:
         return (s + s).index(s, 1) < len(s)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -71,6 +90,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -80,17 +101,23 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func repeatedSubstringPattern(s string) bool {
 	return strings.Index(s[1:]+s, s) < len(s)-1
 }
 ```
 
+#### TypeScript
+
 ```ts
 function repeatedSubstringPattern(s: string): boolean {
     return (s + s).slice(1, (s.length << 1) - 1).includes(s);
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -102,33 +129,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-### 方法二
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```ts
-function repeatedSubstringPattern(s: string): boolean {
-    const n = s.length;
-    for (let i = 0; i < n >> 1; i++) {
-        const len = i + 1;
-        if (n % len !== 0) {
-            continue;
-        }
-        const t = s.slice(0, len);
-        let j: number;
-        for (j = len; j < n; j += len) {
-            if (s.slice(j, j + len) !== t) {
-                break;
-            }
-        }
-        if (j === n) {
-            return true;
-        }
-    }
-    return false;
-}
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

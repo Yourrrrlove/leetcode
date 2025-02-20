@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0033.Search%20in%20Rotated%20Sorted%20Array/README.md
+tags:
+    - 数组
+    - 二分查找
+---
+
+<!-- problem:start -->
+
 # [33. 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array)
 
 [English Version](/solution/0000-0099/0033.Search%20in%20Rotated%20Sorted%20Array/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>整数数组 <code>nums</code> 按升序排列，数组中的值 <strong>互不相同</strong> 。</p>
 
@@ -48,7 +59,11 @@
 	<li><code>-10<sup>4</sup> &lt;= target &lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：二分查找
 
@@ -69,6 +84,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -88,6 +105,8 @@ class Solution:
                     right = mid
         return left if nums[left] == target else -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -115,6 +134,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -139,6 +160,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func search(nums []int, target int) int {
@@ -167,6 +190,8 @@ func search(nums []int, target int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function search(nums: number[], target: number): number {
     const n = nums.length;
@@ -191,6 +216,8 @@ function search(nums: number[], target: number): number {
     return nums[left] == target ? left : -1;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -222,6 +249,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number[]} nums
@@ -252,6 +281,58 @@ var search = function (nums, target) {
 };
 ```
 
+#### C#
+
+```cs
+public class Solution {
+    public int Search(int[] nums, int target) {
+        int n = nums.Length;
+        int left = 0, right = n - 1;
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if (nums[0] <= nums[mid]) {
+                if (nums[0] <= target && target <= nums[mid]) {
+                    right = mid;
+                } else {
+                    left = mid + 1;
+                }
+            } else {
+                if (nums[mid] < target && target <= nums[n - 1]) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+        }
+        return nums[left] == target ? left : -1;
+    }
+}
+```
+
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param integer[] $nums
+     * @param integer $target
+     * @return integer
+     */
+
+    function search($nums, $target) {
+        $foundKey = -1;
+        foreach ($nums as $key => $value) {
+            if ($value === $target) {
+                $foundKey = $key;
+            }
+        }
+        return $foundKey;
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

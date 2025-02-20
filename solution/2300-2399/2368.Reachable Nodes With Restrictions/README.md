@@ -1,10 +1,28 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2368.Reachable%20Nodes%20With%20Restrictions/README.md
+rating: 1476
+source: 第 305 场周赛 Q2
+tags:
+    - 树
+    - 深度优先搜索
+    - 广度优先搜索
+    - 并查集
+    - 图
+    - 数组
+    - 哈希表
+---
+
+<!-- problem:start -->
+
 # [2368. 受限条件下可到达节点的数目](https://leetcode.cn/problems/reachable-nodes-with-restrictions)
 
 [English Version](/solution/2300-2399/2368.Reachable%20Nodes%20With%20Restrictions/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>现有一棵由 <code>n</code> 个节点组成的无向树，节点编号从 <code>0</code> 到 <code>n - 1</code> ，共有 <code>n - 1</code> 条边。</p>
 
@@ -47,107 +65,110 @@
 	<li><code>restricted</code> 中的所有值 <strong>互不相同</strong></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
 
-### 方法一：DFS/BFS
+<!-- solution:start -->
 
-建图，利用哈希表 $vis$ 记录有哪些受限的节点，然后 $DFS$ 或者 $BFS$ 搜索整个图，记录访问过的节点数目。
+### 方法一：DFS
 
-时间复杂度 $O(n)$，空间复杂度 $O(n)$。
+我们首先根据给定的边构建一个邻接表 $g$，其中 $g[i]$ 表示与节点 $i$ 相邻的节点列表。然后我们定义一个哈希表 $vis$，用于记录受限节点或者已经访问过的节点，初始时将受限节点加入到 $vis$ 中。
+
+接下来我们定义一个深度优先搜索函数 $dfs(i)$，表示从节点 $i$ 出发，可以到达的节点数。在 $dfs(i)$ 函数中，我们首先将节点 $i$ 加入到 $vis$ 中，然后遍历节点 $i$ 的相邻节点 $j$，如果 $j$ 不在 $vis$ 中，我们递归调用 $dfs(j)$，并将返回值加到结果中。
+
+最后我们返回 $dfs(0)$ 即可。
+
+时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为节点数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def reachableNodes(
         self, n: int, edges: List[List[int]], restricted: List[int]
     ) -> int:
+        def dfs(i: int) -> int:
+            vis.add(i)
+            return 1 + sum(j not in vis and dfs(j) for j in g[i])
+
         g = defaultdict(list)
-        vis = [False] * n
-        for v in restricted:
-            vis[v] = True
         for a, b in edges:
             g[a].append(b)
             g[b].append(a)
-
-        def dfs(u):
-            nonlocal ans
-            if vis[u]:
-                return
-            ans += 1
-            vis[u] = True
-            for v in g[u]:
-                dfs(v)
-
-        ans = 0
-        dfs(0)
-        return ans
+        vis = set(restricted)
+        return dfs(0)
 ```
+
+#### Java
 
 ```java
 class Solution {
     private List<Integer>[] g;
     private boolean[] vis;
-    private int ans;
 
     public int reachableNodes(int n, int[][] edges, int[] restricted) {
         g = new List[n];
-        Arrays.setAll(g, k -> new ArrayList<>());
         vis = new boolean[n];
-        for (int v : restricted) {
-            vis[v] = true;
-        }
-        for (int[] e : edges) {
+        Arrays.setAll(g, k -> new ArrayList<>());
+        for (var e : edges) {
             int a = e[0], b = e[1];
             g[a].add(b);
             g[b].add(a);
         }
-
-        ans = 0;
-        dfs(0);
-        return ans;
+        for (int i : restricted) {
+            vis[i] = true;
+        }
+        return dfs(0);
     }
 
-    private void dfs(int u) {
-        if (vis[u]) {
-            return;
+    private int dfs(int i) {
+        vis[i] = true;
+        int ans = 1;
+        for (int j : g[i]) {
+            if (!vis[j]) {
+                ans += dfs(j);
+            }
         }
-        ++ans;
-        vis[u] = true;
-        for (int v : g[u]) {
-            dfs(v);
-        }
+        return ans;
     }
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
-    int ans;
-
     int reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted) {
-        vector<vector<int>> g(n);
+        vector<int> g[n];
+        vector<int> vis(n);
         for (auto& e : edges) {
             int a = e[0], b = e[1];
-            g[a].push_back(b);
-            g[b].push_back(a);
+            g[a].emplace_back(b);
+            g[b].emplace_back(a);
         }
-        vector<bool> vis(n);
-        for (int v : restricted) vis[v] = true;
-        ans = 0;
-        dfs(0, g, vis);
-        return ans;
-    }
-
-    void dfs(int u, vector<vector<int>>& g, vector<bool>& vis) {
-        if (vis[u]) return;
-        vis[u] = true;
-        ++ans;
-        for (int v : g[u]) dfs(v, g, vis);
+        for (int i : restricted) {
+            vis[i] = true;
+        }
+        function<int(int)> dfs = [&](int i) {
+            vis[i] = true;
+            int ans = 1;
+            for (int j : g[i]) {
+                if (!vis[j]) {
+                    ans += dfs(j);
+                }
+            }
+            return ans;
+        };
+        return dfs(0);
     }
 };
 ```
+
+#### Go
 
 ```go
 func reachableNodes(n int, edges [][]int, restricted []int) int {
@@ -178,86 +199,100 @@ func reachableNodes(n int, edges [][]int, restricted []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function reachableNodes(n: number, edges: number[][], restricted: number[]): number {
-    let res = 0;
-    const vis = new Array(n).fill(false);
-    const map = new Map<number, number[]>();
-    for (const [start, end] of edges) {
-        map.set(start, [...(map.get(start) ?? []), end]);
-        map.set(end, [...(map.get(end) ?? []), start]);
+    const vis: boolean[] = Array(n).fill(false);
+    const g: number[][] = Array.from({ length: n }, () => []);
+    for (const [a, b] of edges) {
+        g[a].push(b);
+        g[b].push(a);
     }
-    const dfs = (cur: number) => {
-        if (restricted.includes(cur) || vis[cur]) {
-            return;
+    for (const i of restricted) {
+        vis[i] = true;
+    }
+    const dfs = (i: number): number => {
+        vis[i] = true;
+        let ans = 1;
+        for (const j of g[i]) {
+            if (!vis[j]) {
+                ans += dfs(j);
+            }
         }
-        res++;
-        vis[cur] = true;
-        for (const item of map.get(cur) ?? []) {
-            dfs(item);
-        }
+        return ans;
     };
-    dfs(0);
-
-    return res;
+    return dfs(0);
 }
 ```
 
 <!-- tabs:end -->
 
-### 方法二
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### 方法二：BFS
+
+与方法一类似，我们首先根据给定的边构建一个邻接表 $g$，然后定义一个哈希表 $vis$，用于记录受限节点或者已经访问过的节点，初始时将受限节点加入到 $vis$ 中。
+
+接下来我们使用广度优先搜索遍历整个图，统计可以到达的节点数。我们定义一个队列 $q$，初始时将节点 $0$ 加入到 $q$ 中，并且将节点 $0$ 加入到 $vis$ 中。然后我们不断从 $q$ 中取出节点 $i$，累加答案，并将节点 $i$ 的相邻节点中未访问过的节点加入到 $q$ 中，并将这些节点加入到 $vis$ 中。
+
+遍历结束后，返回答案即可。
+
+时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为节点数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def reachableNodes(
         self, n: int, edges: List[List[int]], restricted: List[int]
     ) -> int:
-        s = set(restricted)
         g = defaultdict(list)
         for a, b in edges:
             g[a].append(b)
             g[b].append(a)
+        vis = set(restricted + [0])
         q = deque([0])
-        vis = [False] * n
-        for v in restricted:
-            vis[v] = True
         ans = 0
         while q:
             i = q.popleft()
             ans += 1
-            vis[i] = True
             for j in g[i]:
-                if not vis[j]:
+                if j not in vis:
                     q.append(j)
+                    vis.add(j)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
     public int reachableNodes(int n, int[][] edges, int[] restricted) {
         List<Integer>[] g = new List[n];
+        boolean[] vis = new boolean[n];
         Arrays.setAll(g, k -> new ArrayList<>());
-        for (int[] e : edges) {
+        for (var e : edges) {
             int a = e[0], b = e[1];
             g[a].add(b);
             g[b].add(a);
         }
-        boolean[] vis = new boolean[n];
         for (int v : restricted) {
             vis[v] = true;
         }
         Deque<Integer> q = new ArrayDeque<>();
         q.offer(0);
         int ans = 0;
-        while (!q.isEmpty()) {
+        for (vis[0] = true; !q.isEmpty(); ++ans) {
             int i = q.pollFirst();
-            ++ans;
-            vis[i] = true;
             for (int j : g[i]) {
                 if (!vis[j]) {
                     q.offer(j);
+                    vis[j] = true;
                 }
             }
         }
@@ -266,35 +301,43 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     int reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted) {
-        vector<vector<int>> g(n);
-        vector<bool> vis(n);
+        vector<int> g[n];
+        vector<int> vis(n);
         for (auto& e : edges) {
             int a = e[0], b = e[1];
-            g[a].push_back(b);
-            g[b].push_back(a);
+            g[a].emplace_back(b);
+            g[b].emplace_back(a);
         }
-        for (int v : restricted) vis[v] = true;
+        for (int i : restricted) {
+            vis[i] = true;
+        }
         queue<int> q{{0}};
         int ans = 0;
-        while (!q.empty()) {
+        for (vis[0] = true; !q.empty(); ++ans) {
             int i = q.front();
             q.pop();
-            ++ans;
-            vis[i] = true;
-            for (int j : g[i])
-                if (!vis[j]) q.push(j);
+            for (int j : g[i]) {
+                if (!vis[j]) {
+                    vis[j] = true;
+                    q.push(j);
+                }
+            }
         }
         return ans;
     }
 };
 ```
 
+#### Go
+
 ```go
-func reachableNodes(n int, edges [][]int, restricted []int) int {
+func reachableNodes(n int, edges [][]int, restricted []int) (ans int) {
 	g := make([][]int, n)
 	vis := make([]bool, n)
 	for _, e := range edges {
@@ -302,45 +345,44 @@ func reachableNodes(n int, edges [][]int, restricted []int) int {
 		g[a] = append(g[a], b)
 		g[b] = append(g[b], a)
 	}
-	for _, v := range restricted {
-		vis[v] = true
+	for _, i := range restricted {
+		vis[i] = true
 	}
 	q := []int{0}
-	ans := 0
-	for len(q) > 0 {
+	for vis[0] = true; len(q) > 0; ans++ {
 		i := q[0]
 		q = q[1:]
-		ans++
-		vis[i] = true
 		for _, j := range g[i] {
 			if !vis[j] {
+				vis[j] = true
 				q = append(q, j)
 			}
 		}
 	}
-	return ans
+	return
 }
 ```
 
+#### TypeScript
+
 ```ts
 function reachableNodes(n: number, edges: number[][], restricted: number[]): number {
-    const g = Array.from({ length: n }, () => []);
-    const vis = new Array(n).fill(false);
+    const vis: boolean[] = Array(n).fill(false);
+    const g: number[][] = Array.from({ length: n }, () => []);
     for (const [a, b] of edges) {
         g[a].push(b);
         g[b].push(a);
     }
-    for (const v of restricted) {
-        vis[v] = true;
-    }
-    const q = [0];
-    let ans = 0;
-    while (q.length) {
-        const i = q.shift();
-        ++ans;
+    for (const i of restricted) {
         vis[i] = true;
+    }
+    const q: number[] = [0];
+    let ans = 0;
+    for (vis[0] = true; q.length; ++ans) {
+        const i = q.pop()!;
         for (const j of g[i]) {
             if (!vis[j]) {
+                vis[j] = true;
                 q.push(j);
             }
         }
@@ -351,4 +393,6 @@ function reachableNodes(n: number, edges: number[][], restricted: number[]): num
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

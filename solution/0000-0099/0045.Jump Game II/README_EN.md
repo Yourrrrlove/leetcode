@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0045.Jump%20Game%20II/README_EN.md
+tags:
+    - Greedy
+    - Array
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [45. Jump Game II](https://leetcode.com/problems/jump-game-ii)
 
 [中文文档](/solution/0000-0099/0045.Jump%20Game%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> array of integers <code>nums</code> of length <code>n</code>. You are initially positioned at <code>nums[0]</code>.</p>
 
@@ -40,7 +54,11 @@
 	<li>It&#39;s guaranteed that you can reach <code>nums[n - 1]</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Greedy Algorithm
 
@@ -54,11 +72,13 @@ The time complexity is $O(n)$, where $n$ is the length of the array. The space c
 
 Similar problems:
 
--   [55. Jump Game](/solution/0000-0099/0055.Jump%20Game/README_EN.md)
--   [1024. Video Stitching](/solution/1000-1099/1024.Video%20Stitching/README_EN.md)
--   [1326. Minimum Number of Taps to Open to Water a Garden](/solution/1300-1399/1326.Minimum%20Number%20of%20Taps%20to%20Open%20to%20Water%20a%20Garden/README_EN.md)
+-   [55. Jump Game](https://github.com/doocs/leetcode/blob/main/solution/0000-0099/0055.Jump%20Game/README_EN.md)
+-   [1024. Video Stitching](https://github.com/doocs/leetcode/blob/main/solution/1000-1099/1024.Video%20Stitching/README_EN.md)
+-   [1326. Minimum Number of Taps to Open to Water a Garden](https://github.com/doocs/leetcode/blob/main/solution/1300-1399/1326.Minimum%20Number%20of%20Taps%20to%20Open%20to%20Water%20a%20Garden/README_EN.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -71,6 +91,8 @@ class Solution:
                 last = mx
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -87,6 +109,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -105,6 +129,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func jump(nums []int) (ans int) {
 	mx, last := 0, 0
@@ -118,6 +144,8 @@ func jump(nums []int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function jump(nums: number[]): number {
@@ -133,24 +161,27 @@ function jump(nums: number[]): number {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn jump(nums: Vec<i32>) -> i32 {
-        let n = nums.len();
-        let mut dp = vec![i32::MAX; n];
-        dp[0] = 0;
-        for i in 0..n - 1 {
-            for j in 1..=nums[i] as usize {
-                if i + j >= n {
-                    break;
-                }
-                dp[i + j] = dp[i + j].min(dp[i] + 1);
+        let mut ans = 0;
+        let mut mx = 0;
+        let mut last = 0;
+        for i in 0..(nums.len() - 1) {
+            mx = mx.max(i as i32 + nums[i]);
+            if last == i as i32 {
+                ans += 1;
+                last = mx;
             }
         }
-        dp[n - 1]
+        ans
     }
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -168,23 +199,52 @@ public class Solution {
 }
 ```
 
+#### C
+
 ```c
-#define min(a, b) a < b ? a : b
 int jump(int* nums, int numsSize) {
-    int dp[numsSize];
-    for (int i = 0; i < numsSize; i++) {
-        dp[i] = numsSize;
-    }
-    dp[0] = 0;
-    for (int i = 0; i < numsSize - 1; i++) {
-        for (int j = i + 1; j < (min(i + nums[i] + 1, numsSize)); j++) {
-            dp[j] = min(dp[j], dp[i] + 1);
+    int ans = 0;
+    int mx = 0;
+    int last = 0;
+    for (int i = 0; i < numsSize - 1; ++i) {
+        mx = (mx > i + nums[i]) ? mx : (i + nums[i]);
+        if (last == i) {
+            ++ans;
+            last = mx;
         }
     }
-    return dp[numsSize - 1];
+    return ans;
+}
+```
+
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param Integer[] $nums
+     * @return Integer
+     */
+    function jump($nums) {
+        $ans = 0;
+        $mx = 0;
+        $last = 0;
+
+        for ($i = 0; $i < count($nums) - 1; $i++) {
+            $mx = max($mx, $i + $nums[$i]);
+            if ($last == $i) {
+                $ans++;
+                $last = $mx;
+            }
+        }
+
+        return $ans;
+    }
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

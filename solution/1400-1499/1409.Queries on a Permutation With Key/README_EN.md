@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1400-1499/1409.Queries%20on%20a%20Permutation%20With%20Key/README_EN.md
+rating: 1334
+source: Weekly Contest 184 Q2
+tags:
+    - Binary Indexed Tree
+    - Array
+    - Simulation
+---
+
+<!-- problem:start -->
+
 # [1409. Queries on a Permutation With Key](https://leetcode.com/problems/queries-on-a-permutation-with-key)
 
 [中文文档](/solution/1400-1499/1409.Queries%20on%20a%20Permutation%20With%20Key/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given the array <code>queries</code> of positive integers between <code>1</code> and <code>m</code>, you have to process all <code>queries[i]</code> (from <code>i=0</code> to <code>i=queries.length-1</code>) according to the following rules:</p>
 
@@ -50,11 +66,19 @@ Therefore, the array containing the result is [2,1,2,1].
 	<li><code>1 &lt;= queries[i] &lt;= m</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Simulation
+
+The problem's data scale is not large, so we can directly simulate it.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -68,6 +92,8 @@ class Solution:
             p.insert(0, v)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -88,6 +114,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -112,6 +140,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func processQueries(queries []int, m int) []int {
@@ -138,9 +168,28 @@ func processQueries(queries []int, m int) []int {
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 2: Binary Indexed Tree
+
+The Binary Indexed Tree (BIT), also known as the Fenwick Tree, efficiently supports the following two operations:
+
+1. **Point Update** `update(x, delta)`: Adds a value `delta` to the element at position `x` in the sequence.
+2. **Prefix Sum Query** `query(x)`: Queries the sum of the sequence over the interval `[1,...,x]`, i.e., the prefix sum at position `x`.
+
+Both operations have a time complexity of $O(\log n)$.
+
+The fundamental functionality of the Binary Indexed Tree is to count the number of elements smaller than a given element `x`. This comparison is abstract and can refer to size, coordinate, mass, etc.
+
+For example, given the array `a[5] = {2, 5, 3, 4, 1}`, the task is to compute `b[i] = the number of elements to the left of position i that are less than or equal to a[i]`. For this example, `b[5] = {0, 1, 1, 2, 0}`.
+
+The solution is to traverse the array, first calculating `query(a[i])` for each position, and then updating the Binary Indexed Tree with `update(a[i], 1)`. When the range of numbers is large, discretization is necessary, which involves removing duplicates, sorting, and then assigning an index to each number.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class BinaryIndexedTree:
@@ -183,6 +232,8 @@ class Solution:
             tree.update(n - i, 1)
         return ans
 ```
+
+#### Java
 
 ```java
 class BinaryIndexedTree {
@@ -239,6 +290,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class BinaryIndexedTree {
 public:
@@ -294,6 +347,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 type BinaryIndexedTree struct {
 	n int
@@ -347,4 +402,6 @@ func processQueries(queries []int, m int) []int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

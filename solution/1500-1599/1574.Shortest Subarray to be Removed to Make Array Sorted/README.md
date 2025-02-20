@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1500-1599/1574.Shortest%20Subarray%20to%20be%20Removed%20to%20Make%20Array%20Sorted/README.md
+rating: 1931
+source: 第 34 场双周赛 Q3
+tags:
+    - 栈
+    - 数组
+    - 双指针
+    - 二分查找
+    - 单调栈
+---
+
+<!-- problem:start -->
+
 # [1574. 删除最短的子数组使剩余数组有序](https://leetcode.cn/problems/shortest-subarray-to-be-removed-to-make-array-sorted)
 
 [English Version](/solution/1500-1599/1574.Shortest%20Subarray%20to%20be%20Removed%20to%20Make%20Array%20Sorted/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个整数数组 <code>arr</code>&nbsp;，请你删除一个子数组（可以为空），使得 <code>arr</code>&nbsp;中剩下的元素是 <strong>非递减</strong> 的。</p>
 
@@ -54,21 +70,27 @@
 	<li><code>0 &lt;= arr[i] &lt;= 10^9</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：双指针 + 二分查找
 
-我们先找出数组的最长非递减前缀和最长非递减后缀，分别记为 $nums[0..i]$ 和 $nums[j..n-1]$。
+我们先找出数组的最长非递减前缀和最长非递减后缀，分别记为 $\textit{nums}[0..i]$ 和 $\textit{nums}[j..n-1]$。
 
 如果 $i \geq j$，说明数组本身就是非递减的，返回 $0$。
 
-否则，我们可以选择删除右侧后缀，也可以选择删除左侧前缀，因此初始时答案为 $min(n - i - 1, j)$。
+否则，我们可以选择删除右侧后缀，也可以选择删除左侧前缀，因此初始时答案为 $\min(n - i - 1, j)$。
 
-接下来，我们枚举左侧前缀的最右端点 $l$，对于每个 $l$，我们可以通过二分查找，在 $nums[j..n-1]$ 中找到第一个大于等于 $nums[l]$ 的位置，记为 $r$，此时我们可以删除 $nums[l+1..r-1]$，并且更新答案 $ans = min(ans, r - l - 1)$。继续枚举 $l$，最终得到答案。
+接下来，我们枚举左侧前缀的最右端点 $l$，对于每个 $l$，我们可以通过二分查找，在 $\textit{nums}[j..n-1]$ 中找到第一个大于等于 $\textit{nums}[l]$ 的位置，记为 $r$，此时我们可以删除 $\textit{nums}[l+1..r-1]$，并且更新答案 $\textit{ans} = \min(\textit{ans}, r - l - 1)$。继续枚举 $l$，最终得到答案。
 
-时间复杂度 $O(n \times \log n)$，空间复杂度 $O(1)$。其中 $n$ 为数组长度。
+时间复杂度 $O(n \times \log n)$，其中 $n$ 为数组长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -87,6 +109,8 @@ class Solution:
             ans = min(ans, r - l - 1)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -125,6 +149,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -150,6 +176,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func findLengthOfShortestSubarray(arr []int) int {
 	n := len(arr)
@@ -174,19 +202,25 @@ func findLengthOfShortestSubarray(arr []int) int {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：双指针
 
-与方法一类似，我们先找出数组的最长非递减前缀和最长非递减后缀，分别记为 $nums[0..i]$ 和 $nums[j..n-1]$。
+与方法一类似，我们先找出数组的最长非递减前缀和最长非递减后缀，分别记为 $\textit{nums}[0..i]$ 和 $\textit{nums}[j..n-1]$。
 
 如果 $i \geq j$，说明数组本身就是非递减的，返回 $0$。
 
-否则，我们可以选择删除右侧后缀，也可以选择删除左侧前缀，因此初始时答案为 $min(n - i - 1, j)$。
+否则，我们可以选择删除右侧后缀，也可以选择删除左侧前缀，因此初始时答案为 $\min(n - i - 1, j)$。
 
-接下来，我们枚举左侧前缀的最右端点 $l$，对于每个 $l$，我们直接利用双指针找到第一个大于等于 $nums[l]$ 的位置，记为 $r$，此时我们可以删除 $nums[l+1..r-1]$，并且更新答案 $ans = min(ans, r - l - 1)$。继续枚举 $l$，最终得到答案。
+接下来，我们枚举左侧前缀的最右端点 $l$，对于每个 $l$，我们直接利用双指针找到第一个大于等于 $\textit{nums}[l]$ 的位置，记为 $r$，此时我们可以删除 $\textit{nums}[l+1..r-1]$，并且更新答案 $\textit{ans} = \min(\textit{ans}, r - l - 1)$。继续枚举 $l$，最终得到答案。
 
-时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为数组长度。
+时间复杂度 $O(n)$，其中 $n$ 为数组长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -207,6 +241,8 @@ class Solution:
             ans = min(ans, r - l - 1)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -234,6 +270,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -261,6 +299,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func findLengthOfShortestSubarray(arr []int) int {
 	n := len(arr)
@@ -286,6 +326,48 @@ func findLengthOfShortestSubarray(arr []int) int {
 }
 ```
 
+#### TypeScript
+
+```ts
+function findLengthOfShortestSubarray(arr: number[]): number {
+    let [l, r, n] = [0, arr.length - 1, arr.length];
+
+    while (r && arr[r - 1] <= arr[r]) r--;
+    if (r === 0) return 0;
+
+    let ans = r;
+    while (l < r && (!l || arr[l - 1] <= arr[l])) {
+        while (r < n && arr[l] > arr[r]) r++;
+        ans = Math.min(ans, r - l - 1);
+        l++;
+    }
+
+    return ans;
+}
+```
+
+#### JavaScript
+
+```js
+function findLengthOfShortestSubarray(arr) {
+    let [l, r, n] = [0, arr.length - 1, arr.length];
+
+    while (r && arr[r - 1] <= arr[r]) r--;
+    if (r === 0) return 0;
+
+    let ans = r;
+    while (l < r && (!l || arr[l - 1] <= arr[l])) {
+        while (r < n && arr[l] > arr[r]) r++;
+        ans = Math.min(ans, r - l - 1);
+        l++;
+    }
+
+    return ans;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

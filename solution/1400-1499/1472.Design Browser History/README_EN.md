@@ -1,8 +1,27 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1400-1499/1472.Design%20Browser%20History/README_EN.md
+rating: 1453
+source: Weekly Contest 192 Q3
+tags:
+    - Stack
+    - Design
+    - Array
+    - Linked List
+    - Data Stream
+    - Doubly-Linked List
+---
+
+<!-- problem:start -->
+
 # [1472. Design Browser History](https://leetcode.com/problems/design-browser-history)
 
 [中文文档](/solution/1400-1499/1472.Design%20Browser%20History/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You have a <strong>browser</strong> of one tab where you start on the <code>homepage</code> and you can visit another <code>url</code>, get back in the history number of <code>steps</code> or move forward in the history number of <code>steps</code>.</p>
 
@@ -50,11 +69,27 @@ browserHistory.back(7);                   // You are in &quot;google.com&quot;, 
 	<li>At most <code>5000</code>&nbsp;calls will be made to <code>visit</code>, <code>back</code>, and <code>forward</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Two Stacks
+
+We can use two stacks, $\textit{stk1}$ and $\textit{stk2}$, to store the back and forward pages, respectively. Initially, $\textit{stk1}$ contains the $\textit{homepage}$, and $\textit{stk2}$ is empty.
+
+When calling $\text{visit}(url)$, we add $\textit{url}$ to $\textit{stk1}$ and clear $\textit{stk2}$. The time complexity is $O(1)$.
+
+When calling $\text{back}(steps)$, we pop the top element from $\textit{stk1}$ and push it to $\textit{stk2}$. We repeat this operation $steps$ times until the length of $\textit{stk1}$ is $1$ or $steps$ is $0$. Finally, we return the top element of $\textit{stk1}$. The time complexity is $O(\textit{steps})$.
+
+When calling $\text{forward}(steps)$, we pop the top element from $\textit{stk2}$ and push it to $\textit{stk1}$. We repeat this operation $steps$ times until $\textit{stk2}$ is empty or $steps$ is $0$. Finally, we return the top element of $\textit{stk1}$. The time complexity is $O(\textit{steps})$.
+
+The space complexity is $O(n)$, where $n$ is the length of the browsing history.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class BrowserHistory:
@@ -86,6 +121,8 @@ class BrowserHistory:
 # param_2 = obj.back(steps)
 # param_3 = obj.forward(steps)
 ```
+
+#### Java
 
 ```java
 class BrowserHistory {
@@ -124,6 +161,8 @@ class BrowserHistory {
  * String param_3 = obj.forward(steps);
  */
 ```
+
+#### C++
 
 ```cpp
 class BrowserHistory {
@@ -165,6 +204,8 @@ public:
  * string param_3 = obj->forward(steps);
  */
 ```
+
+#### Go
 
 ```go
 type BrowserHistory struct {
@@ -210,4 +251,6 @@ func (this *BrowserHistory) Forward(steps int) string {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

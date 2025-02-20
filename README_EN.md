@@ -18,10 +18,9 @@ This project contains solutions for problems from LeetCode, "Coding Interviews (
 
 [中文文档](/README.md)
 
-## Sites
+## Site
 
--   Vercel: https://doocs-leetcode.vercel.app
--   GitHub Pages: https://doocs.github.io/leetcode
+https://doocs.github.io/leetcode/en
 
 ## Solutions
 
@@ -32,8 +31,8 @@ This project contains solutions for problems from LeetCode, "Coding Interviews (
 
 ## JavaScript & Database Practice
 
--   [JavaScript Practice](/solution/JAVASCRIPT_README_EN.md)
--   [Database Practice](/solution/DATABASE_README_EN.md)
+-   [JavaScript](/solution/JAVASCRIPT_README_EN.md)
+-   [Database](/solution/DATABASE_README_EN.md)
 
 ## Topics
 
@@ -91,7 +90,7 @@ This project contains solutions for problems from LeetCode, "Coding Interviews (
 -   [Shortest Path Visiting All Nodes](/solution/0800-0899/0847.Shortest%20Path%20Visiting%20All%20Nodes/README_EN.md) - `BFS`, `Minimum steps model`, `A* search`
 -   [Cut Off Trees for Golf Event](/solution/0600-0699/0675.Cut%20Off%20Trees%20for%20Golf%20Event/README_EN.md) - `BFS`, `A* search`
 -   [Minimum Cost to Make at Least One Valid Path in a Grid](/solution/1300-1399/1368.Minimum%20Cost%20to%20Make%20at%20Least%20One%20Valid%20Path%20in%20a%20Grid/README_EN.md) - `BFS using deque`
--   [Minimum Cost to Make at Least One Valid Path in a Grid](/solution/2200-2299/2290.Minimum%20Obstacle%20Removal%20to%20Reach%20Corner/README_EN.md) - `BFS using deque`
+-   [Minimum Obstacle Removal to Reach Corner](/solution/2200-2299/2290.Minimum%20Obstacle%20Removal%20to%20Reach%20Corner/README_EN.md) - `BFS using deque`
 -   [The Maze](/solution/0400-0499/0490.The%20Maze/README_EN.md) - `DFS, Flood fill`
 -   [Word Search](/solution/0000-0099/0079.Word%20Search/README_EN.md) - `DFS`, `Backtracking`
 -   [Path with Maximum Gold](/solution/1200-1299/1219.Path%20with%20Maximum%20Gold/README_EN.md) - `DFS`, `Backtracking`
@@ -192,11 +191,14 @@ I'm looking for long-term contributors/partners to this repo! Send me [PRs](http
 
 ## Stargazers over time
 
-<!-- <a href="https://github.com/doocs/leetcode/stargazers" target="_blank"><img src="https://starchart.cc/doocs/leetcode.svg" alt="Stargazers over time" /></a> -->
-
-<!-- [![Star History Chart](https://api.star-history.com/svg?repos=doocs/leetcode&type=Date)](https://star-history.com/#doocs/leetcode) -->
-
 <a href="https://github.com/doocs/leetcode/stargazers" target="_blank"><img src="./images/starcharts.svg" alt="Stargazers over time" /></a>
+
+<a href="https://next.ossinsight.io/widgets/official/analyze-repo-stars-map?repo_id=149001365&activity=stars" target="_blank" style="display: block" align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/analyze-repo-stars-map/thumbnail.png?repo_id=149001365&activity=stars&image_size=auto&color_scheme=dark" width="721" height="auto">
+    <img alt="Star Geographical Distribution of doocs/leetcode" src="https://next.ossinsight.io/widgets/official/analyze-repo-stars-map/thumbnail.png?repo_id=149001365&activity=stars&image_size=auto&color_scheme=light" width="721" height="auto">
+  </picture>
+</a>
 
 ## Our Top Contributors
 

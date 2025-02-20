@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2389.Longest%20Subsequence%20With%20Limited%20Sum/README.md
+rating: 1387
+source: 第 308 场周赛 Q1
+tags:
+    - 贪心
+    - 数组
+    - 二分查找
+    - 前缀和
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [2389. 和有限的最长子序列](https://leetcode.cn/problems/longest-subsequence-with-limited-sum)
 
 [English Version](/solution/2300-2399/2389.Longest%20Subsequence%20With%20Limited%20Sum/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个长度为 <code>n</code>&nbsp;的整数数组 <code>nums</code> ，和一个长度为 <code>m</code> 的整数数组 <code>queries</code> 。</p>
 
@@ -43,17 +59,23 @@
 	<li><code>1 &lt;= nums[i], queries[i] &lt;= 10<sup>6</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序 + 前缀和 + 二分查找
 
-根据题目描述，对于每个 $queries[i]$，我们需要找到一个子序列，使得该子序列的元素和不超过 $queries[i]$，且该子序列的长度最大化。显然，我们应该选择尽可能小的元素，这样才能使得子序列的长度最大化。
+根据题目描述，对于每个 $\textit{queries[i]}$，我们需要找到一个子序列，使得该子序列的元素和不超过 $\textit{queries[i]}$，且该子序列的长度最大化。显然，我们应该选择尽可能小的元素，这样才能使得子序列的长度最大化。
 
-因此，我们可以先将数组 $nums$ 进行升序排序，然后对于每个 $queries[i]$，我们可以使用二分查找，找到最小的下标 $j$，使得 $nums[0] + nums[1] + \cdots + nums[j] \gt queries[i]$。此时 $nums[0] + nums[1] + \cdots + nums[j - 1]$ 就是满足条件的子序列的元素和，且该子序列的长度为 $j$。因此，我们可以将 $j$ 加入答案数组中。
+因此，我们可以先将数组 $\textit{nums}$ 进行升序排序，然后对于每个 $\textit{queries[i]}$，我们可以使用二分查找，找到最小的下标 $j$，使得 $\textit{nums}[0] + \textit{nums}[1] + \cdots + \textit{nums}[j] > \textit{queries[i]}$。此时 $\textit{nums}[0] + \textit{nums}[1] + \cdots + \textit{nums}[j - 1]$ 就是满足条件的子序列的元素和，且该子序列的长度为 $j$。因此，我们可以将 $j$ 加入答案数组中。
 
-时间复杂度 $O((n + m) \times \log n)$，空间复杂度 $O(n)$ 或 $O(\log n)$。其中 $n$ 和 $m$ 分别是数组 $nums$ 和 $queries$ 的长度。
+时间复杂度 $O((n + m) \times \log n)$，空间复杂度 $O(n)$ 或 $O(\log n)$。其中 $n$ 和 $m$ 分别是数组 $\textit{nums}$ 和 $\textit{queries}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -62,6 +84,8 @@ class Solution:
         s = list(accumulate(nums))
         return [bisect_right(s, q) for q in queries]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -73,42 +97,34 @@ class Solution {
         int m = queries.length;
         int[] ans = new int[m];
         for (int i = 0; i < m; ++i) {
-            ans[i] = search(nums, queries[i]);
+            int j = Arrays.binarySearch(nums, queries[i] + 1);
+            ans[i] = j < 0 ? -j - 1 : j;
         }
         return ans;
     }
-
-    private int search(int[] nums, int x) {
-        int l = 0, r = nums.length;
-        while (l < r) {
-            int mid = (l + r) >> 1;
-            if (nums[mid] > x) {
-                r = mid;
-            } else {
-                l = mid + 1;
-            }
-        }
-        return l;
-    }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
 public:
     vector<int> answerQueries(vector<int>& nums, vector<int>& queries) {
-        sort(nums.begin(), nums.end());
+        ranges::sort(nums);
         for (int i = 1; i < nums.size(); i++) {
             nums[i] += nums[i - 1];
         }
         vector<int> ans;
-        for (auto& q : queries) {
-            ans.push_back(upper_bound(nums.begin(), nums.end(), q) - nums.begin());
+        for (const auto& q : queries) {
+            ans.emplace_back(upper_bound(nums.begin(), nums.end(), q) - nums.begin());
         }
         return ans;
     }
 };
 ```
+
+#### Go
 
 ```go
 func answerQueries(nums []int, queries []int) (ans []int) {
@@ -123,81 +139,81 @@ func answerQueries(nums []int, queries []int) (ans []int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function answerQueries(nums: number[], queries: number[]): number[] {
     nums.sort((a, b) => a - b);
     for (let i = 1; i < nums.length; i++) {
         nums[i] += nums[i - 1];
     }
-    const ans: number[] = [];
-    const search = (nums: number[], x: number) => {
-        let l = 0;
-        let r = nums.length;
-        while (l < r) {
-            const mid = (l + r) >> 1;
-            if (nums[mid] > x) {
-                r = mid;
-            } else {
-                l = mid + 1;
-            }
-        }
-        return l;
-    };
-    for (const q of queries) {
-        ans.push(search(nums, q));
-    }
-    return ans;
+    return queries.map(q => _.sortedIndex(nums, q + 1));
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
     pub fn answer_queries(mut nums: Vec<i32>, queries: Vec<i32>) -> Vec<i32> {
-        let n = nums.len();
         nums.sort();
-        queries
-            .into_iter()
-            .map(|query| {
-                let mut sum = 0;
-                for i in 0..n {
-                    sum += nums[i];
-                    if sum > query {
-                        return i as i32;
-                    }
-                }
-                n as i32
-            })
-            .collect()
+
+        for i in 1..nums.len() {
+            nums[i] += nums[i - 1];
+        }
+
+        queries.iter().map(|&q| {
+            match nums.binary_search(&q) {
+                Ok(idx) => idx as i32 + 1,
+                Err(idx) => idx as i32,
+            }
+        }).collect()
     }
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number[]} queries
+ * @return {number[]}
+ */
+var answerQueries = function (nums, queries) {
+    nums.sort((a, b) => a - b);
+    for (let i = 1; i < nums.length; i++) {
+        nums[i] += nums[i - 1];
+    }
+    return queries.map(q => _.sortedIndex(nums, q + 1));
+};
+```
+
+#### C#
+
 ```cs
 public class Solution {
     public int[] AnswerQueries(int[] nums, int[] queries) {
-        int[] result = new int[queries.Length];
         Array.Sort(nums);
-        for (int i = 0; i < queries.Length; i++) {
-            result[i] = getSubsequent(nums, queries[i]);
+        for (int i = 1; i < nums.Length; ++i) {
+            nums[i] += nums[i - 1];
         }
-        return result;
-
-    }
-
-    public int getSubsequent(int[] nums,int query) {
-        int sum = 0;
-        for (int i = 0; i < nums.Length; i++) {
-            sum += nums[i];
-            if (sum > query) {
-                return i;
-            }
+        int m = queries.Length;
+        int[] ans = new int[m];
+        for (int i = 0; i < m; ++i) {
+            int j = Array.BinarySearch(nums, queries[i] + 1);
+            ans[i] = j < 0 ? -j - 1 : j;
         }
-        return nums.Length;
+        return ans;
     }
 }
 ```
 
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### 方法二：排序 + 离线查询 + 双指针
 
@@ -215,6 +231,8 @@ public class Solution {
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def answerQueries(self, nums: List[int], queries: List[int]) -> List[int]:
@@ -230,6 +248,8 @@ class Solution:
             ans[i] = j
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -253,6 +273,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -278,6 +300,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func answerQueries(nums []int, queries []int) (ans []int) {
 	sort.Ints(nums)
@@ -299,6 +323,8 @@ func answerQueries(nums []int, queries []int) (ans []int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function answerQueries(nums: number[], queries: number[]): number[] {
@@ -324,4 +350,6 @@ function answerQueries(nums: number[], queries: number[]): number[] {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

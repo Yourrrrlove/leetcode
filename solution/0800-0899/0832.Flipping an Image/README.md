@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0832.Flipping%20an%20Image/README.md
+tags:
+    - 位运算
+    - 数组
+    - 双指针
+    - 矩阵
+    - 模拟
+---
+
+<!-- problem:start -->
+
 # [832. 翻转图像](https://leetcode.cn/problems/flipping-an-image)
 
 [English Version](/solution/0800-0899/0832.Flipping%20an%20Image/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个<meta charset="UTF-8" />&nbsp;<code>n x n</code>&nbsp;的二进制矩阵&nbsp;<code>image</code>&nbsp;，先 <strong>水平</strong> 翻转图像，然后&nbsp;<strong>反转&nbsp;</strong>图像并返回&nbsp;<em>结果</em>&nbsp;。</p>
 
@@ -53,19 +67,23 @@
 	<li><code>images[i][j]</code>&nbsp;==&nbsp;<code>0</code>&nbsp;或&nbsp;<code>1</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：双指针
 
-我们可以遍历矩阵，对于遍历到的每一行 $row$：
+我们可以遍历矩阵，对于遍历到的每一行 $\textit{row}$，我们使用双指针 $i$ 和 $j$ 分别指向该行的首尾元素，如果 $\textit{row}[i] = \textit{row}[j]$，交换后两者的值仍然保持不变，因此，我们只需要对 $\textit{row}[i]$ 和 $\textit{row}[j]$ 进行异或反转即可，然后将 $i$ 和 $j$ 分别向中间移动一位，直到 $i \geq j$。如果 $\textit{row}[i] \neq \textit{row}[j]$，此时交换后再反转两者的值，仍然保持不变，因此，可以不进行任何操作。
 
-我们使用双指针 $i$ 和 $j$ 分别指向该行的首尾元素，如果 $row[i] = row[j]$，交换后两者的值仍然保持不变，因此，我们只需要对 $row[i]$ 和 $row[j]$ 进行异或反转即可，然后将 $i$ 和 $j$ 分别向中间移动一位，直到 $i \geq j$。如果 $row[i] \neq row[j]$，此时交换后再反转两者的值，仍然保持不变，因此，可以不进行任何操作。
-
-最后，如果 $i = j$，我们直接对 $row[i]$ 进行反转即可。
+最后，如果 $i = j$，我们直接对 $\textit{row}[i]$ 进行反转即可。
 
 时间复杂度 $O(n^2)$，其中 $n$ 是矩阵的行数或列数。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -82,6 +100,8 @@ class Solution:
                 row[i] ^= 1
         return image
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -102,6 +122,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -124,6 +146,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func flipAndInvertImage(image [][]int) [][]int {
 	for _, row := range image {
@@ -141,6 +165,8 @@ func flipAndInvertImage(image [][]int) [][]int {
 	return image
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -167,4 +193,6 @@ var flipAndInvertImage = function (image) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1250.Check%20If%20It%20Is%20a%20Good%20Array/README_EN.md
+rating: 1983
+source: Weekly Contest 161 Q4
+tags:
+    - Array
+    - Math
+    - Number Theory
+---
+
+<!-- problem:start -->
+
 # [1250. Check If It Is a Good Array](https://leetcode.com/problems/check-if-it-is-a-good-array)
 
 [中文文档](/solution/1200-1299/1250.Check%20If%20It%20Is%20a%20Good%20Array/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an array <code>nums</code> of&nbsp;positive integers. Your task is to select some subset of <code>nums</code>, multiply each element by an integer and add all these numbers.&nbsp;The array is said to be&nbsp;<strong>good&nbsp;</strong>if you can obtain a sum of&nbsp;<code>1</code>&nbsp;from the array by any possible subset and multiplicand.</p>
 
@@ -42,7 +58,11 @@
 	<li><code>1 &lt;= nums[i] &lt;= 10^9</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Mathematics (Bézout's Identity)
 
@@ -58,11 +78,15 @@ The time complexity is $O(n + \log m)$, and the space complexity is $O(1)$. Wher
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def isGoodArray(self, nums: List[int]) -> bool:
         return reduce(gcd, nums) == 1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -80,6 +104,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -92,6 +118,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func isGoodArray(nums []int) bool {
@@ -110,6 +138,20 @@ func gcd(a, b int) int {
 }
 ```
 
+#### TypeScript
+
+```ts
+function isGoodArray(nums: number[]): boolean {
+    return nums.reduce(gcd) === 1;
+}
+
+function gcd(a: number, b: number): number {
+    return b === 0 ? a : gcd(b, a % b);
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

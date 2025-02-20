@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0400-0499/0415.Add%20Strings/README_EN.md
+tags:
+    - Math
+    - String
+    - Simulation
+---
+
+<!-- problem:start -->
+
 # [415. Add Strings](https://leetcode.com/problems/add-strings)
 
 [中文文档](/solution/0400-0499/0415.Add%20Strings/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given two non-negative integers, <code>num1</code> and <code>num2</code> represented as string, return <em>the sum of</em> <code>num1</code> <em>and</em> <code>num2</code> <em>as a string</em>.</p>
 
@@ -39,7 +53,11 @@
 	<li><code>num1</code> and <code>num2</code> don&#39;t have any leading zeros except for the zero itself.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Two Pointers
 
@@ -52,6 +70,8 @@ The time complexity is $O(\max(m, n))$, where $m$ and $n$ are the lengths of the
 The following code also implements string subtraction, refer to the `subStrings(num1, num2)` function.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -86,6 +106,8 @@ class Solution:
             ans.append('-')
         return ''.join(ans[::-1])
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -128,6 +150,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -169,6 +193,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func addStrings(num1 string, num2 string) string {
@@ -223,6 +249,8 @@ func subStrings(num1 string, num2 string) string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function addStrings(num1: string, num2: string): string {
     let i = num1.length - 1;
@@ -264,6 +292,8 @@ function subStrings(num1: string, num2: string): string {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn add_strings(num1: String, num2: String) -> String {
@@ -289,6 +319,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -341,6 +373,34 @@ var subStrings = function (num1, num2) {
 };
 ```
 
+#### Kotlin
+
+```kotlin
+class Solution {
+    fun addStrings(num1: String, num2: String): String {
+        val result = mutableListOf<Int>()
+
+        val chars_1 = num1.toCharArray()
+        val chars_2 = num2.toCharArray()
+        var over = 0
+        var i = num1.length
+        var j = num2.length
+
+        while (i > 0 || j > 0 || over > 0) {
+            val a = if (i > 0) chars_1[--i] - '0' else 0
+            val b = if (j > 0) chars_2[--j] - '0' else 0
+            val sum = a + b + over
+            over = sum / 10
+            result.add(sum % 10)
+        }
+
+        return result.reversed().joinToString("")
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

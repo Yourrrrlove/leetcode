@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2347.Best%20Poker%20Hand/README.md
+rating: 1241
+source: 第 83 场双周赛 Q1
+tags:
+    - 数组
+    - 哈希表
+    - 计数
+---
+
+<!-- problem:start -->
+
 # [2347. 最好的扑克手牌](https://leetcode.cn/problems/best-poker-hand)
 
 [English Version](/solution/2300-2399/2347.Best%20Poker%20Hand/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个整数数组&nbsp;<code>ranks</code>&nbsp;和一个字符数组&nbsp;<code>suit</code>&nbsp;。你有&nbsp;<code>5</code>&nbsp;张扑克牌，第&nbsp;<code>i</code>&nbsp;张牌大小为&nbsp;<code>ranks[i]</code>&nbsp;，花色为&nbsp;<code>suits[i]</code>&nbsp;。</p>
 
@@ -57,21 +71,27 @@
 	<li>任意两张扑克牌不会同时有相同的大小和花色。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：计数
 
-我们可以先遍历数组 $suits$，判断相邻两个元素是否均相等，如果是，则返回 `"Flush"`。
+我们可以先遍历数组 $\textit{suits}$，判断相邻两个元素是否均相等，如果是，则返回 `"Flush"`。
 
-接下来，我们用哈希表或数组 $cnt$ 统计每张牌的数量：
+接下来，我们用哈希表或数组 $\textit{cnt}$ 统计每张牌的数量：
 
 -   如果有任意一张牌的数量等于 $3$，返回 `"Three of a Kind"`；
 -   否则，如果有任意一张牌的数量等于 $2$，返回 `"Pair"`；
 -   否则，返回 `"High Card"`。
 
-时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $ranks$ 的长度。
+时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $\textit{ranks}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -86,6 +106,8 @@ class Solution:
             return 'Pair'
         return 'High Card'
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -110,6 +132,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -133,6 +157,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func bestHand(ranks []int, suits []byte) string {
@@ -159,6 +185,8 @@ func bestHand(ranks []int, suits []byte) string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function bestHand(ranks: number[], suits: string[]): string {
     if (suits.every(v => v === suits[0])) {
@@ -178,6 +206,8 @@ function bestHand(ranks: number[], suits: string[]): string {
     return 'High Card';
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -199,6 +229,8 @@ impl Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 char* bestHand(int* ranks, int ranksSize, char* suits, int suitsSize) {
@@ -229,4 +261,6 @@ char* bestHand(int* ranks, int ranksSize, char* suits, int suitsSize) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

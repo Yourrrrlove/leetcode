@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1300-1399/1395.Count%20Number%20of%20Teams/README_EN.md
+rating: 1343
+source: Weekly Contest 182 Q2
+tags:
+    - Binary Indexed Tree
+    - Segment Tree
+    - Array
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [1395. Count Number of Teams](https://leetcode.com/problems/count-number-of-teams)
 
 [中文文档](/solution/1300-1399/1395.Count%20Number%20of%20Teams/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There are <code>n</code> soldiers standing in a line. Each soldier is assigned a <strong>unique</strong> <code>rating</code> value.</p>
 
@@ -49,7 +66,11 @@
 	<li>All the integers in <code>rating</code> are <strong>unique</strong>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Enumerate Middle Element
 
@@ -58,6 +79,8 @@ We can enumerate each element $rating[i]$ in the array $rating$ as the middle el
 The time complexity is $O(n^2)$, and the space complexity is $O(1)$. Where $n$ is the length of the array $rating$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -70,6 +93,8 @@ class Solution:
             ans += (i - l) * (n - i - 1 - r)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -95,6 +120,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -122,6 +149,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numTeams(rating []int) (ans int) {
 	n := len(rating)
@@ -143,6 +172,8 @@ func numTeams(rating []int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function numTeams(rating: number[]): number {
@@ -170,6 +201,10 @@ function numTeams(rating: number[]): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Binary Indexed Tree
 
 We can use two binary indexed trees to maintain the number of elements $l$ that are smaller than each element on the left in the array $rating$, and the number of elements $r$ that are larger than it on the right. Then count the number of combat units with this element as the middle element as $l \times r + (i - l) \times (n - i - 1 - r)$, and add this to the answer.
@@ -177,6 +212,8 @@ We can use two binary indexed trees to maintain the number of elements $l$ that 
 The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$. Where $n$ is the length of the array $rating$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class BinaryIndexedTree:
@@ -218,6 +255,8 @@ class Solution:
             ans += (i - l) * (n - i - 1 - r)
         return ans
 ```
+
+#### Java
 
 ```java
 class BinaryIndexedTree {
@@ -292,6 +331,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class BinaryIndexedTree {
 public:
@@ -348,6 +389,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 type BinaryIndexedTree struct {
@@ -406,6 +449,8 @@ func numTeams(rating []int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 class BinaryIndexedTree {
@@ -479,4 +524,110 @@ function numTeams(rating: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 3: Recursion + Memoization
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function numTeams(rating: number[]): number {
+    const n = rating.length;
+    const f: Record<Type, number[][]> = {
+        asc: Array.from({ length: n }, () => Array(3).fill(-1)),
+        desc: Array.from({ length: n }, () => Array(3).fill(-1)),
+    };
+
+    const fn = (i: number, available: number, type: Type) => {
+        if (!available) {
+            return 1;
+        }
+        if (f[type][i][available] !== -1) {
+            return f[type][i][available];
+        }
+
+        let ans = 0;
+        for (let j = i + 1; j < n; j++) {
+            if (rating[j] > rating[i]) {
+                if (type === 'asc') {
+                    ans += fn(j, available - 1, 'asc');
+                }
+            } else {
+                if (type === 'desc') {
+                    ans += fn(j, available - 1, 'desc');
+                }
+            }
+        }
+        f[type][i][available] = ans;
+
+        return ans;
+    };
+
+    let ans = 0;
+    for (let i = 0; i < n; i++) {
+        ans += fn(i, 2, 'asc') + fn(i, 2, 'desc');
+    }
+
+    return ans;
+}
+
+type Type = 'asc' | 'desc';
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {number[]} rating
+ * @return {number}
+ */
+var numTeams = function (rating) {
+    const n = rating.length;
+    const f = {
+        asc: Array.from({ length: n }, () => Array(3).fill(-1)),
+        desc: Array.from({ length: n }, () => Array(3).fill(-1)),
+    };
+
+    const fn = (i, available, type) => {
+        if (!available) {
+            return 1;
+        }
+        if (f[type][i][available] !== -1) {
+            return f[type][i][available];
+        }
+
+        let ans = 0;
+        for (let j = i + 1; j < n; j++) {
+            if (rating[j] > rating[i]) {
+                if (type === 'asc') {
+                    ans += fn(j, available - 1, 'asc');
+                }
+            } else {
+                if (type === 'desc') {
+                    ans += fn(j, available - 1, 'desc');
+                }
+            }
+        }
+        f[type][i][available] = ans;
+
+        return ans;
+    };
+
+    let ans = 0;
+    for (let i = 0; i < n; i++) {
+        ans += fn(i, 2, 'asc') + fn(i, 2, 'desc');
+    }
+
+    return ans;
+};
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,15 @@
+---
+comments: true
+edit_url: https://github.com/doocs/leetcode/edit/main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20119.%20%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97/README.md
+---
+
+<!-- problem:start -->
+
 # [剑指 Offer II 119. 最长连续序列](https://leetcode.cn/problems/WhsWhI)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个未排序的整数数组 <code>nums</code> ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。</p>
 
@@ -39,7 +46,11 @@
 
 <p><meta charset="UTF-8" />注意：本题与主站 128&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/longest-consecutive-sequence/">https://leetcode.cn/problems/longest-consecutive-sequence/</a></p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序
 
@@ -56,6 +67,8 @@
 时间复杂度 $O(n \times \log n)$，空间复杂度 $O(\log n)$。其中 $n$ 是数组的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -75,6 +88,8 @@ class Solution:
                 t = 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -99,6 +114,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -125,6 +142,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func longestConsecutive(nums []int) int {
 	n := len(nums)
@@ -148,6 +167,8 @@ func longestConsecutive(nums []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function longestConsecutive(nums: number[]): number {
     const n = nums.length;
@@ -170,6 +191,8 @@ function longestConsecutive(nums: number[]): number {
     return ans;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -198,7 +221,39 @@ var longestConsecutive = function (nums) {
 };
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func longestConsecutive(_ nums: [Int]) -> Int {
+        let n = nums.count
+        if n < 2 {
+            return n
+        }
+
+        let sortedNums = Array(Set(nums)).sorted()
+        var ans = 1
+        var currentStreak = 1
+
+        for i in 1..<sortedNums.count {
+            if sortedNums[i] == sortedNums[i - 1] + 1 {
+                currentStreak += 1
+                ans = max(ans, currentStreak)
+            } else {
+                currentStreak = 1
+            }
+        }
+
+        return ans
+    }
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start-->
 
 ### 方法二：哈希表
 
@@ -207,6 +262,8 @@ var longestConsecutive = function (nums) {
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是数组的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -221,6 +278,8 @@ class Solution:
                 ans = max(ans, y - x)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -244,6 +303,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -264,6 +325,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func longestConsecutive(nums []int) (ans int) {
 	s := map[int]bool{}
@@ -283,6 +346,8 @@ func longestConsecutive(nums []int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function longestConsecutive(nums: number[]): number {
     const s: Set<number> = new Set(nums);
@@ -299,6 +364,8 @@ function longestConsecutive(nums: number[]): number {
     return ans;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -321,6 +388,35 @@ var longestConsecutive = function (nums) {
 };
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func longestConsecutive(_ nums: [Int]) -> Int {
+        let numSet: Set<Int> = Set(nums)
+        var longestStreak = 0
+
+        for num in nums {
+            if !numSet.contains(num - 1) {
+                var currentNum = num
+                var currentStreak = 1
+
+                while numSet.contains(currentNum + 1) {
+                    currentNum += 1
+                    currentStreak += 1
+                }
+
+                longestStreak = max(longestStreak, currentStreak)
+            }
+        }
+
+        return longestStreak
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,20 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2631.Group%20By/README.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
 # [2631. 分组](https://leetcode.cn/problems/group-by)
 
 [English Version](/solution/2600-2699/2631.Group%20By/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>请你编写一段可应用于所有数组的代码，使任何数组调用 <code>array. groupBy(fn)</code> 方法时，它返回对该数组 <strong>分组后</strong> 的结果。</p>
 
@@ -92,11 +102,17 @@ fn = function (n) {
 	<li><code>fn 返回一个字符串</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 declare global {
@@ -124,4 +140,6 @@ Array.prototype.groupBy = function (fn) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->
