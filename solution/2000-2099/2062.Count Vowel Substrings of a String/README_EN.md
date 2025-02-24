@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2000-2099/2062.Count%20Vowel%20Substrings%20of%20a%20String/README_EN.md
+rating: 1458
+source: Weekly Contest 266 Q1
+tags:
+    - Hash Table
+    - String
+---
+
+<!-- problem:start -->
+
 # [2062. Count Vowel Substrings of a String](https://leetcode.com/problems/count-vowel-substrings-of-a-string)
 
 [中文文档](/solution/2000-2099/2062.Count%20Vowel%20Substrings%20of%20a%20String/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>A <strong>substring</strong> is a contiguous (non-empty) sequence of characters within a string.</p>
 
@@ -52,19 +67,38 @@
 	<li><code>word</code> consists of lowercase English letters only.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Brute Force Enumeration + Hash Table
+
+We can enumerate the left endpoint $i$ of the substring. For the current left endpoint, maintain a hash table to record the vowels that appear in the current substring. Then enumerate the right endpoint $j$. If the character at the current right endpoint is not a vowel, break the loop. Otherwise, add the character at the current right endpoint to the hash table. If the number of elements in the hash table is $5$, it means the current substring is a vowel substring, and increment the result by $1$.
+
+The time complexity is $O(n^2)$, and the space complexity is $O(C)$. Here, $n$ is the length of the string $word$, and $C$ is the size of the character set, which is $5$ in this problem.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def countVowelSubstrings(self, word: str) -> int:
-        n = len(word)
-        s = set('aeiou')
-        return sum(set(word[i:j]) == s for i in range(n) for j in range(i + 1, n + 1))
+        s = set("aeiou")
+        ans, n = 0, len(word)
+        for i in range(n):
+            t = set()
+            for c in word[i:]:
+                if c not in s:
+                    break
+                t.add(c)
+                ans += len(t) == 5
+        return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -93,6 +127,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -117,6 +153,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func countVowelSubstrings(word string) int {
 	ans, n := 0, len(word)
@@ -136,6 +174,8 @@ func countVowelSubstrings(word string) int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function countVowelSubstrings(word: string): number {
@@ -160,25 +200,6 @@ function countVowelSubstrings(word: string): number {
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```python
-class Solution:
-    def countVowelSubstrings(self, word: str) -> int:
-        s = set('aeiou')
-        ans, n = 0, len(word)
-        for i in range(n):
-            t = set()
-            for c in word[i:]:
-                if c not in s:
-                    break
-                t.add(c)
-                ans += len(t) == 5
-        return ans
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

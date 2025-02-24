@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0338.Counting%20Bits/README_EN.md
+tags:
+    - Bit Manipulation
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [338. Counting Bits](https://leetcode.com/problems/counting-bits)
 
 [中文文档](/solution/0300-0399/0338.Counting%20Bits/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer <code>n</code>, return <em>an array </em><code>ans</code><em> of length </em><code>n + 1</code><em> such that for each </em><code>i</code><em> </em>(<code>0 &lt;= i &lt;= n</code>)<em>, </em><code>ans[i]</code><em> is the <strong>number of </strong></em><code>1</code><em><strong>&#39;s</strong> in the binary representation of </em><code>i</code>.</p>
 
@@ -47,17 +60,25 @@
 	<li>Can you do it without using any built-in function (i.e., like <code>__builtin_popcount</code> in C++)?</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def countBits(self, n: int) -> List[int]:
         return [i.bit_count() for i in range(n + 1)]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -70,6 +91,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -84,6 +107,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func countBits(n int) []int {
 	ans := make([]int, n+1)
@@ -93,6 +118,8 @@ func countBits(n int) []int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function countBits(n: number): number[] {
@@ -115,9 +142,15 @@ function bitCount(n: number): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -127,6 +160,8 @@ class Solution:
             ans[i] = ans[i & (i - 1)] + 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -139,6 +174,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -153,6 +190,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func countBits(n int) []int {
 	ans := make([]int, n+1)
@@ -162,6 +201,8 @@ func countBits(n int) []int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function countBits(n: number): number[] {
@@ -175,4 +216,6 @@ function countBits(n: number): number[] {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0861.Score%20After%20Flipping%20Matrix/README_EN.md
+tags:
+    - Greedy
+    - Bit Manipulation
+    - Array
+    - Matrix
+---
+
+<!-- problem:start -->
+
 # [861. Score After Flipping Matrix](https://leetcode.com/problems/score-after-flipping-matrix)
 
 [中文文档](/solution/0800-0899/0861.Score%20After%20Flipping%20Matrix/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an <code>m x n</code> binary matrix <code>grid</code>.</p>
 
@@ -38,11 +53,17 @@
 	<li><code>grid[i][j]</code> is either <code>0</code> or <code>1</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -58,6 +79,8 @@ class Solution:
             ans += max(cnt, m - cnt) * (1 << (n - j - 1))
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -82,6 +105,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -108,6 +133,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func matrixScore(grid [][]int) int {
 	m, n := len(grid), len(grid[0])
@@ -133,6 +160,8 @@ func matrixScore(grid [][]int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function matrixScore(grid: number[][]): number {
     const m = grid.length;
@@ -155,6 +184,8 @@ function matrixScore(grid: number[][]): number {
     return ans;
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -184,4 +215,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

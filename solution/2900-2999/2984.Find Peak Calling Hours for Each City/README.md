@@ -1,10 +1,20 @@
-# [2984. 找到每座城市的高峰通话时间](https://leetcode.cn/problems/find-peak-calling-hours-for-each-city)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2900-2999/2984.Find%20Peak%20Calling%20Hours%20for%20Each%20City/README.md
+tags:
+    - 数据库
+---
+
+<!-- problem:start -->
+
+# [2984. 找到每座城市的高峰通话时间 🔒](https://leetcode.cn/problems/find-peak-calling-hours-for-each-city)
 
 [English Version](/solution/2900-2999/2984.Find%20Peak%20Calling%20Hours%20for%20Each%20City/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>表：&nbsp;<code>Calls</code></p>
 
@@ -23,7 +33,7 @@
 
 <p>编写一个查询，找到每个 <code>city</code>&nbsp;的 <strong>高峰</strong> 通话 <b>时间</b>。如果 <strong>多个时间</strong>&nbsp;有 <strong>相同</strong> 数量的通话，则所有这些时间都将被视为该特定城市的 <strong>高峰时间</strong>。</p>
 
-<p>按照 <strong>高峰通话时间</strong>&nbsp;和<em> </em><code>city</code><em> </em>按 <strong>降序</strong> 排序返回结果表。</p>
+<p>按照 <strong>高峰时间</strong>&nbsp;和<em> </em><code>city</code><em> </em>按 <strong>降序</strong> 排序返回结果表。</p>
 
 <p>结果格式如下例所示。</p>
 
@@ -56,14 +66,20 @@ Calls table:
 对于 Houston：
   - 高峰时间是 22:00，总共记录了 3 次通话。 
 对于 New York：
-  - 3:00 和 14:00 都有相同数量的通话，因此这两个时间都被视为高峰小时。
-输出表按照高峰通话小时和城市按降序排序。</pre>
+  - 3:00 和 14:00 都有相同数量的通话，因此这两个时间都被视为高峰时间。
+输出表按照高峰时间和城市按降序排序。</pre>
+
+<!-- description:end -->
 
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -93,4 +109,6 @@ ORDER BY 2 DESC, 1 DESC;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

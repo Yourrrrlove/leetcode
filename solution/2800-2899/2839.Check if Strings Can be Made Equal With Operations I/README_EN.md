@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2839.Check%20if%20Strings%20Can%20be%20Made%20Equal%20With%20Operations%20I/README_EN.md
+rating: 1285
+source: Biweekly Contest 112 Q1
+tags:
+    - String
+---
+
+<!-- problem:start -->
+
 # [2839. Check if Strings Can be Made Equal With Operations I](https://leetcode.com/problems/check-if-strings-can-be-made-equal-with-operations-i)
 
 [中文文档](/solution/2800-2899/2839.Check%20if%20Strings%20Can%20be%20Made%20Equal%20With%20Operations%20I/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given two strings <code>s1</code> and <code>s2</code>, both of length <code>4</code>, consisting of <strong>lowercase</strong> English letters.</p>
 
@@ -41,7 +55,11 @@
 	<li><code>s1</code> and <code>s2</code> consist only of lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Counting
 
@@ -53,9 +71,11 @@ The time complexity is $O(n + |\Sigma|)$, and the space complexity is $O(|\Sigma
 
 Similar problems:
 
--   [2840. Check if Strings Can be Made Equal With Operations II](/solution/2800-2899/2840.Check%20if%20Strings%20Can%20be%20Made%20Equal%20With%20Operations%20II/README_EN.md)
+-   [2840. Check if Strings Can be Made Equal With Operations II](https://github.com/doocs/leetcode/blob/main/solution/2800-2899/2840.Check%20if%20Strings%20Can%20be%20Made%20Equal%20With%20Operations%20II/README_EN.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -64,6 +84,8 @@ class Solution:
             s2[1::2]
         )
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -82,6 +104,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -102,6 +126,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func canBeEqual(s1 string, s2 string) bool {
 	cnt := [2][26]int{}
@@ -117,6 +143,8 @@ func canBeEqual(s1 string, s2 string) bool {
 	return true
 }
 ```
+
+#### TypeScript
 
 ```ts
 function canBeEqual(s1: string, s2: string): boolean {
@@ -136,4 +164,6 @@ function canBeEqual(s1: string, s2: string): boolean {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0391.Perfect%20Rectangle/README_EN.md
+tags:
+    - Array
+    - Line Sweep
+---
+
+<!-- problem:start -->
+
 # [391. Perfect Rectangle](https://leetcode.com/problems/perfect-rectangle)
 
 [中文文档](/solution/0300-0399/0391.Perfect%20Rectangle/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an array <code>rectangles</code> where <code>rectangles[i] = [x<sub>i</sub>, y<sub>i</sub>, a<sub>i</sub>, b<sub>i</sub>]</code> represents an axis-aligned rectangle. The bottom-left point of the rectangle is <code>(x<sub>i</sub>, y<sub>i</sub>)</code> and the top-right point of it is <code>(a<sub>i</sub>, b<sub>i</sub>)</code>.</p>
 
@@ -39,14 +52,21 @@
 <ul>
 	<li><code>1 &lt;= rectangles.length &lt;= 2 * 10<sup>4</sup></code></li>
 	<li><code>rectangles[i].length == 4</code></li>
-	<li><code>-10<sup>5</sup> &lt;= x<sub>i</sub>, y<sub>i</sub>, a<sub>i</sub>, b<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
+	<li><code>-10<sup>5</sup> &lt;= x<sub>i</sub> &lt; a<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
+	<li><code>-10<sup>5</sup> &lt;= y<sub>i</sub> &lt; b<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -82,6 +102,8 @@ class Solution:
 
         return all(c == 2 or c == 4 for c in cnt.values())
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -150,6 +172,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -193,6 +217,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 type pair struct {
@@ -244,4 +270,6 @@ func isRectangleCover(rectangles [][]int) bool {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

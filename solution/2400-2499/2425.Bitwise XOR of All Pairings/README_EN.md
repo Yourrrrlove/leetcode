@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2400-2499/2425.Bitwise%20XOR%20of%20All%20Pairings/README_EN.md
+rating: 1622
+source: Biweekly Contest 88 Q3
+tags:
+    - Bit Manipulation
+    - Brainteaser
+    - Array
+---
+
+<!-- problem:start -->
+
 # [2425. Bitwise XOR of All Pairings](https://leetcode.com/problems/bitwise-xor-of-all-pairings)
 
 [中文文档](/solution/2400-2499/2425.Bitwise%20XOR%20of%20All%20Pairings/README.md)
 
 ## Description
 
-<p>You are given two <strong>0-indexed</strong> arrays, <code>nums1</code> and <code>nums2</code>, consisting of non-negative integers. There exists another array, <code>nums3</code>, which contains the bitwise XOR of <strong>all pairings</strong> of integers between <code>nums1</code> and <code>nums2</code> (every integer in <code>nums1</code> is paired with every integer in <code>nums2</code> <strong>exactly once</strong>).</p>
+<!-- description:start -->
+
+<p>You are given two <strong>0-indexed</strong> arrays, <code>nums1</code> and <code>nums2</code>, consisting of non-negative integers. Let there be another array, <code>nums3</code>, which contains the bitwise XOR of <strong>all pairings</strong> of integers between <code>nums1</code> and <code>nums2</code> (every integer in <code>nums1</code> is paired with every integer in <code>nums2</code> <strong>exactly once</strong>).</p>
 
 <p>Return<em> the <strong>bitwise XOR</strong> of all integers in </em><code>nums3</code>.</p>
 
@@ -39,7 +55,11 @@ Thus, one possible nums3 array is [2,5,1,6].
 	<li><code>0 &lt;= nums1[i], nums2[j] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Quick Thinking + Bit Manipulation
 
@@ -55,6 +75,8 @@ The time complexity is $O(m+n)$. Where $m$ and $n$ are the lengths of the `nums1
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def xorAllNums(self, nums1: List[int], nums2: List[int]) -> int:
@@ -67,6 +89,8 @@ class Solution:
                 ans ^= v
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -86,6 +110,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -107,6 +133,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func xorAllNums(nums1 []int, nums2 []int) int {
 	ans := 0
@@ -124,6 +152,8 @@ func xorAllNums(nums1 []int, nums2 []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function xorAllNums(nums1: number[], nums2: number[]): number {
     let ans = 0;
@@ -139,4 +169,6 @@ function xorAllNums(nums1: number[], nums2: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

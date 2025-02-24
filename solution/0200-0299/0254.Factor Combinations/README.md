@@ -1,16 +1,27 @@
-# [254. 因子的组合](https://leetcode.cn/problems/factor-combinations)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0254.Factor%20Combinations/README.md
+tags:
+    - 回溯
+---
+
+<!-- problem:start -->
+
+# [254. 因子的组合 🔒](https://leetcode.cn/problems/factor-combinations)
 
 [English Version](/solution/0200-0299/0254.Factor%20Combinations/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>整数可以被看作是其因子的乘积。</p>
 
 <p>例如：</p>
 
-<pre>8 = 2 x 2 x 2;
+<pre>
+8 = 2 x 2 x 2;
   = 2 x 4.</pre>
 
 <p>请实现一个函数，该函数接收一个整数 <em>n</em>&nbsp;并返回该整数所有的因子组合。</p>
@@ -24,18 +35,21 @@
 
 <p><strong>示例 1：</strong></p>
 
-<pre><strong>输入: </strong><code>1</code>
+<pre>
+<strong>输入: </strong><code>1</code>
 <strong>输出: </strong>[]
 </pre>
 
 <p><strong>示例 2：</strong></p>
 
-<pre><strong>输入: </strong><code>37</code>
+<pre>
+<strong>输入: </strong><code>37</code>
 <strong>输出: </strong>[]</pre>
 
 <p><strong>示例 3：</strong></p>
 
-<pre><strong>输入: </strong><code>12</code>
+<pre>
+<strong>输入: </strong><code>12</code>
 <strong>输出:</strong>
 [
   [2, 6],
@@ -45,7 +59,8 @@
 
 <p><strong>示例 4: </strong></p>
 
-<pre><strong>输入: </strong><code>32</code>
+<pre>
+<strong>输入: </strong><code>32</code>
 <strong>输出:</strong>
 [
   [2, 16],
@@ -57,7 +72,19 @@
 ]
 </pre>
 
+<p>&nbsp;</p>
+
+<p><b>提示：</b></p>
+
+<ul>
+	<li><code>1 &lt;= n &lt;= 10<sup>7</sup></code></li>
+</ul>
+
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：回溯
 
@@ -68,6 +95,8 @@
 时间复杂度 $O(\sqrt{n})$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -88,6 +117,8 @@ class Solution:
         dfs(n, 2)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -116,6 +147,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -142,6 +175,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func getFactors(n int) [][]int {
 	t := []int{}
@@ -166,4 +201,6 @@ func getFactors(n int) [][]int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

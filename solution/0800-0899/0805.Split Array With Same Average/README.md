@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0805.Split%20Array%20With%20Same%20Average/README.md
+tags:
+    - 位运算
+    - 数组
+    - 数学
+    - 动态规划
+    - 状态压缩
+---
+
+<!-- problem:start -->
+
 # [805. 数组的均值分割](https://leetcode.cn/problems/split-array-with-same-average)
 
 [English Version](/solution/0800-0899/0805.Split%20Array%20With%20Same%20Average/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定你一个整数数组<meta charset="UTF-8" />&nbsp;<code>nums</code></p>
 
@@ -40,13 +54,17 @@
 	<li><code>0 &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：折半查找 + 二进制枚举
 
-根据题目要求，要判断是否可以将数组 `nums` 划分为两个子数组 $A$ 和 $B$，使得两个子数组的平均值相等。
+根据题目要求，要判断是否可以将数组 $\textit{nums}$ 划分为两个子数组 $A$ 和 $B$，使得两个子数组的平均值相等。
 
-我们记数组 `nums` 的和为 $s$，元素个数为 $n$。子数组 $A$ 的和以及个数分别为 $s_1$ 和 $k$，那么子数组 $B$ 的和为 $s_2 = s - s_1$，个数为 $n - k$，即：
+我们记数组 $\textit{nums}$ 的和为 $s$，元素个数为 $n$。子数组 $A$ 的和以及个数分别为 $s_1$ 和 $k$，那么子数组 $B$ 的和为 $s_2 = s - s_1$，个数为 $n - k$，即：
 
 $$
 \frac{s_1}{k} = \frac{s_2}{n - k} = \frac{s-s_1}{n-k}
@@ -64,31 +82,33 @@ $$
 \frac{s_1}{k} = \frac{s}{n}
 $$
 
-也就是说，要我们找出一个子数组 $A$，使得其平均值等于数组 `nums` 的平均值。我们考虑将数组 `nums` 每个元素都减去数组 `nums` 的平均值，这样问题就转化为了在数组 `nums` 中找出一个子数组，使得其和为 $0$。
+也就是说，要我们找出一个子数组 $A$，使得其平均值等于数组 $\textit{nums}$ 的平均值。我们考虑将数组 $\textit{nums}$ 每个元素都减去数组 $\textit{nums}$ 的平均值，这样问题就转化为了在数组 $\textit{nums}$ 中找出一个子数组，使得其和为 $0$。
 
-但是，数组 `nums` 的平均值可能不是整数，浮点数计算可能存在精度问题，我们不妨将数组 `nums` 中的每个元素都乘以 $n$，即 $nums[i] \leftarrow nums[i] \times n$，上述式子就变成：
+但是，数组 $\textit{nums}$ 的平均值可能不是整数，浮点数计算可能存在精度问题，我们不妨将数组 $\textit{nums}$ 中的每个元素都乘以 $n$，即 $nums[i] \leftarrow nums[i] \times n$，上述式子就变成：
 
 $$
 \frac{s_1\times n}{k} = s
 $$
 
-此时我们将数组 `nums` 中每个元素都减去整数 $s$，题目就转化为：在数组 $nums$ 中找出一个子数组 $A$，使得其和为 $0$。
+此时我们将数组 $\textit{nums}$ 中每个元素都减去整数 $s$，题目就转化为：在数组 $nums$ 中找出一个子数组 $A$，使得其和为 $0$。
 
-数组 `nums` 的长度范围为 $[1, 30]$，如果我们使用暴力枚举子数组的方法，时间复杂度为 $O(2^n)$，会超时。我们可以使用折半查找的方法，将时间复杂度降低到 $O(2^{n/2})$。
+数组 $\textit{nums}$ 的长度范围为 $[1, 30]$，如果我们使用暴力枚举子数组的方法，时间复杂度为 $O(2^n)$，会超时。我们可以使用折半查找的方法，将时间复杂度降低到 $O(2^{n/2})$。
 
-我们将数组 `nums` 分成左右两部分，那么子数组 $A$ 可能存在三种情况：
+我们将数组 $\textit{nums}$ 分成左右两部分，那么子数组 $A$ 可能存在三种情况：
 
-1. 子数组 $A$ 完全在数组 `nums` 的左半部分；
-2. 子数组 $A$ 完全在数组 `nums` 的右半部分；
-3. 子数组 $A$ 一部分在数组 `nums` 的左半部分，一部分在数组 `nums` 的右半部分。
+1. 子数组 $A$ 完全在数组 $\textit{nums}$ 的左半部分；
+2. 子数组 $A$ 完全在数组 $\textit{nums}$ 的右半部分；
+3. 子数组 $A$ 一部分在数组 $\textit{nums}$ 的左半部分，一部分在数组 $\textit{nums}$ 的右半部分。
 
-我们可以使用二进制枚举的方法，先枚举左半部分所有子数组的和，如果存在一个子数组和为 $0$，直接返回 `true`，否则我们将其存入哈希表 `vis` 中；然后枚举右半部分所有子数组的和，如果存在一个子数组和为 $0$，直接返回 `true`，否则我们判断此时哈希表 `vis` 中是否存在该和的相反数，如果存在，直接返回 `true`。
+我们可以使用二进制枚举的方法，先枚举左半部分所有子数组的和，如果存在一个子数组和为 $0$，直接返回 `true`，否则我们将其存入哈希表 $\textit{vis}$ 中；然后枚举右半部分所有子数组的和，如果存在一个子数组和为 $0$，直接返回 `true`，否则我们判断此时哈希表 $\textit{vis}$ 中是否存在该和的相反数，如果存在，直接返回 `true`。
 
 需要注意的是，我们不能同时全选左半部分和右半部分，因为这样会导致子数组 $B$ 为空，这是不符合题意的。在实现上，我们只需要考虑数组的 $n-1$ 个数。
 
 时间复杂度 $O(n\times 2^{\frac{n}{2}})$，空间复杂度 $O(2^{\frac{n}{2}})$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -112,6 +132,8 @@ class Solution:
                 return True
         return False
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -154,6 +176,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -181,6 +205,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func splitArraySameAverage(nums []int) bool {
@@ -226,4 +252,6 @@ func splitArraySameAverage(nums []int) bool {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

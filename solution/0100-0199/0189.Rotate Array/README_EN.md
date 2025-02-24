@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0189.Rotate%20Array/README_EN.md
+tags:
+    - Array
+    - Math
+    - Two Pointers
+---
+
+<!-- problem:start -->
+
 # [189. Rotate Array](https://leetcode.com/problems/rotate-array)
 
 [中文文档](/solution/0100-0199/0189.Rotate%20Array/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>nums</code>, rotate the array to the right by <code>k</code> steps, where <code>k</code> is non-negative.</p>
 
@@ -45,7 +59,11 @@ rotate 2 steps to the right: [3,99,-1,-100]
 	<li>Could you do it in-place with <code>O(1)</code> extra space?</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Reverse three times
 
@@ -67,6 +85,8 @@ The time complexity is $O(n)$, where $n$ is the length of the array. The space c
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def rotate(self, nums: List[int], k: int) -> None:
@@ -81,6 +101,8 @@ class Solution:
         reverse(0, k - 1)
         reverse(k, n - 1)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -105,6 +127,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -117,6 +141,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func rotate(nums []int, k int) {
@@ -132,6 +158,8 @@ func rotate(nums []int, k int) {
 	reverse(k, n-1)
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -153,6 +181,8 @@ function rotate(nums: number[], k: number): void {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn rotate(nums: &mut Vec<i32>, k: i32) {
@@ -164,6 +194,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -184,6 +216,8 @@ var rotate = function (nums, k) {
     reverse(k, n - 1);
 };
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -210,17 +244,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```python
-class Solution:
-    def rotate(self, nums: List[int], k: int) -> None:
-        k %= len(nums)
-        nums[:] = nums[-k:] + nums[:-k]
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

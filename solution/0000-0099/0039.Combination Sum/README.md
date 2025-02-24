@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0039.Combination%20Sum/README.md
+tags:
+    - 数组
+    - 回溯
+---
+
+<!-- problem:start -->
+
 # [39. 组合总和](https://leetcode.cn/problems/combination-sum)
 
 [English Version](/solution/0000-0099/0039.Combination%20Sum/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个 <strong>无重复元素</strong> 的整数数组&nbsp;<code>candidates</code> 和一个目标整数&nbsp;<code>target</code>&nbsp;，找出&nbsp;<code>candidates</code>&nbsp;中可以使数字和为目标数&nbsp;<code>target</code> 的 所有<em>&nbsp;</em><strong>不同组合</strong> ，并以列表形式返回。你可以按 <strong>任意顺序</strong> 返回这些组合。</p>
 
@@ -17,7 +28,7 @@
 <p><strong>示例&nbsp;1：</strong></p>
 
 <pre>
-<strong>输入：</strong>candidates = <code>[2,3,6,7], </code>target = <code>7</code>
+<strong>输入：</strong>candidates = <code>[2,3,6,7]</code>, target = <code>7</code>
 <strong>输出：</strong>[[2,2,3],[7]]
 <strong>解释：</strong>
 2 和 3 可以形成一组候选，2 + 2 + 3 = 7 。注意 2 可以使用多次。
@@ -48,9 +59,13 @@
 	<li><code>1 &lt;= target &lt;= 40</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
 
-### 方法一：排序 + 剪枝 + 回溯（两种写法）
+<!-- solution:start -->
+
+### 方法一：排序 + 剪枝 + 回溯
 
 我们可以先对数组进行排序，方便剪枝。
 
@@ -58,19 +73,19 @@
 
 在函数 $dfs(i, s)$ 中，我们先判断 $s$ 是否为 $0$，如果是，则将当前搜索路径 $t$ 加入答案 $ans$ 中，然后返回。如果 $s \lt candidates[i]$，说明当前下标及后面的下标的元素都大于剩余目标值 $s$，路径不合法，直接返回。否则，我们从下标 $i$ 开始搜索，搜索的下标范围是 $j \in [i, n)$，其中 $n$ 为数组 $candidates$ 的长度。在搜索的过程中，我们将当前下标的元素加入搜索路径 $t$，递归调用函数 $dfs(j, s - candidates[j])$，递归结束后，将当前下标的元素从搜索路径 $t$ 中移除。
 
-我们也可以将函数 $dfs(i, s)$ 的实现逻辑改为另一种写法。在函数 $dfs(i, s)$ 中，我们先判断 $s$ 是否为 $0$，如果是，则将当前搜索路径 $t$ 加入答案 $ans$ 中，然后返回。如果 $i \geq n$ 或者 $s \lt candidates[i]$，路径不合法，直接返回。否则，我们考虑两种情况，一种是不选当前下标的元素，即递归调用函数 $dfs(i + 1, s)$，另一种是选当前下标的元素，即递归调用函数 $dfs(i, s - candidates[i])$。
-
 在主函数中，我们只要调用函数 $dfs(0, target)$，即可得到答案。
 
 时间复杂度 $O(2^n \times n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $candidates$ 的长度。由于剪枝，实际的时间复杂度要远小于 $O(2^n \times n)$。
 
 相似题目：
 
--   [40. 组合总和 II](/solution/0000-0099/0040.Combination%20Sum%20II/README.md)
--   [77. 组合](/solution/0000-0099/0077.Combinations/README.md)
--   [216. 组合总和 III](/solution/0200-0299/0216.Combination%20Sum%20III/README.md)
+-   [40. 组合总和 II](https://github.com/doocs/leetcode/blob/main/solution/0000-0099/0040.Combination%20Sum%20II/README.md)
+-   [77. 组合](https://github.com/doocs/leetcode/blob/main/solution/0000-0099/0077.Combinations/README.md)
+-   [216. 组合总和 III](https://github.com/doocs/leetcode/blob/main/solution/0200-0299/0216.Combination%20Sum%20III/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -92,6 +107,8 @@ class Solution:
         dfs(0, target)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -123,6 +140,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -150,6 +169,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func combinationSum(candidates []int, target int) (ans [][]int) {
 	sort.Ints(candidates)
@@ -174,6 +195,8 @@ func combinationSum(candidates []int, target int) (ans [][]int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function combinationSum(candidates: number[], target: number): number[][] {
     candidates.sort((a, b) => a - b);
@@ -197,6 +220,8 @@ function combinationSum(candidates: number[], target: number): number[][] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -223,6 +248,8 @@ impl Solution {
     }
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -256,9 +283,19 @@ public class Solution {
 
 <!-- tabs:end -->
 
-### 方法二
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### 方法二：排序 + 剪枝 + 回溯（写法二）
+
+我们也可以将函数 $dfs(i, s)$ 的实现逻辑改为另一种写法。在函数 $dfs(i, s)$ 中，我们先判断 $s$ 是否为 $0$，如果是，则将当前搜索路径 $t$ 加入答案 $ans$ 中，然后返回。如果 $i \geq n$ 或者 $s \lt candidates[i]$，路径不合法，直接返回。否则，我们考虑两种情况，一种是不选当前下标的元素，即递归调用函数 $dfs(i + 1, s)$，另一种是选当前下标的元素，即递归调用函数 $dfs(i, s - candidates[i])$。
+
+时间复杂度 $O(2^n \times n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $candidates$ 的长度。由于剪枝，实际的时间复杂度要远小于 $O(2^n \times n)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -280,6 +317,8 @@ class Solution:
         dfs(0, target)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -310,6 +349,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -336,6 +377,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func combinationSum(candidates []int, target int) (ans [][]int) {
 	sort.Ints(candidates)
@@ -359,6 +402,8 @@ func combinationSum(candidates []int, target int) (ans [][]int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function combinationSum(candidates: number[], target: number): number[][] {
     candidates.sort((a, b) => a - b);
@@ -381,6 +426,8 @@ function combinationSum(candidates: number[], target: number): number[][] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -406,6 +453,8 @@ impl Solution {
     }
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -436,6 +485,48 @@ public class Solution {
 }
 ```
 
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param integer[] $candidates
+     * @param integer $target
+     * @return integer[][]
+     */
+
+    function combinationSum($candidates, $target) {
+        $result = [];
+        $currentCombination = [];
+        $startIndex = 0;
+
+        sort($candidates);
+        $this->findCombinations($candidates, $target, $startIndex, $currentCombination, $result);
+        return $result;
+    }
+
+    function findCombinations($candidates, $target, $startIndex, $currentCombination, &$result) {
+        if ($target === 0) {
+            $result[] = $currentCombination;
+            return;
+        }
+
+        for ($i = $startIndex; $i < count($candidates); $i++) {
+            $num = $candidates[$i];
+            if ($num > $target) {
+                break;
+            }
+            $currentCombination[] = $num;
+
+            $this->findCombinations($candidates, $target - $num, $i, $currentCombination, $result);
+            array_pop($currentCombination);
+        }
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

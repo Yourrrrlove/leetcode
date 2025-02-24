@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1920.Build%20Array%20from%20Permutation/README_EN.md
+rating: 1160
+source: Weekly Contest 248 Q1
+tags:
+    - Array
+    - Simulation
+---
+
+<!-- problem:start -->
+
 # [1920. Build Array from Permutation](https://leetcode.com/problems/build-array-from-permutation)
 
 [中文文档](/solution/1900-1999/1920.Build%20Array%20from%20Permutation/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a <strong>zero-based permutation</strong> <code>nums</code> (<strong>0-indexed</strong>), build an array <code>ans</code> of the <strong>same length</strong> where <code>ans[i] = nums[nums[i]]</code> for each <code>0 &lt;= i &lt; nums.length</code> and return it.</p>
 
@@ -41,17 +56,29 @@ ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]]
 <p>&nbsp;</p>
 <p><strong>Follow-up:</strong> Can you solve it without using an extra space (i.e., <code>O(1)</code> memory)?</p>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Simulation
+
+We can directly simulate the process described in the problem by constructing a new array $\textit{ans}$. For each $i$, let $\textit{ans}[i] = \textit{nums}[\textit{nums}[i]]$.
+
+The time complexity is $O(n)$, where $n$ is the length of the array $\textit{nums}$. Ignoring the space consumption of the answer array, the space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def buildArray(self, nums: List[int]) -> List[int]:
         return [nums[num] for num in nums]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -64,6 +91,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -78,6 +107,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func buildArray(nums []int) []int {
 	ans := make([]int, len(nums))
@@ -88,21 +119,25 @@ func buildArray(nums []int) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function buildArray(nums: number[]): number[] {
-    return nums.map(v => nums[v]);
+    return nums.map(x => nums[x]);
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
     pub fn build_array(nums: Vec<i32>) -> Vec<i32> {
-        nums.iter()
-            .map(|&v| nums[v as usize])
-            .collect()
+        nums.iter().map(|&v| nums[v as usize]).collect()
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -110,13 +145,11 @@ impl Solution {
  * @return {number[]}
  */
 var buildArray = function (nums) {
-    let ans = [];
-    for (let i = 0; i < nums.length; ++i) {
-        ans[i] = nums[nums[i]];
-    }
-    return ans;
+    return nums.map(x => nums[x]);
 };
 ```
+
+#### C
 
 ```c
 /**
@@ -134,4 +167,6 @@ int* buildArray(int* nums, int numsSize, int* returnSize) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

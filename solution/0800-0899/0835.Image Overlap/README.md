@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0835.Image%20Overlap/README.md
+tags:
+    - 数组
+    - 矩阵
+---
+
+<!-- problem:start -->
+
 # [835. 图像重叠](https://leetcode.cn/problems/image-overlap)
 
 [English Version](/solution/0800-0899/0835.Image%20Overlap/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你两个图像 <code>img1</code> 和 <code>img2</code> ，两个图像的大小都是 <code>n x n</code> ，用大小相同的二进制正方形矩阵表示。二进制矩阵仅由若干 <code>0</code> 和若干 <code>1</code> 组成。</p>
 
@@ -57,15 +68,21 @@
 </div>
 </div>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：枚举
 
-我们可以枚举 $img1$ 和 $img2$ 的每个 $1$ 的位置，分别记为 $(i, j)$ 和 $(h, k)$。然后我们计算得到偏移量 $(i - h, j - k)$，记为 $(dx, dy)$，用哈希表 $cnt$ 记录每个偏移量出现的次数。最后我们遍历哈希表 $cnt$，找到出现次数最多的偏移量，即为答案。
+我们可以枚举 $\textit{img1}$ 和 $\textit{img2}$ 的每个 $1$ 的位置，分别记为 $(i, j)$ 和 $(h, k)$。然后我们计算得到偏移量 $(i - h, j - k)$，记为 $(dx, dy)$，用哈希表 $\textit{cnt}$ 记录每个偏移量出现的次数。最后我们遍历哈希表 $\textit{cnt}$，找到出现次数最多的偏移量，即为答案。
 
-时间复杂度 $O(n^4)$，空间复杂度 $O(n^2)$。其中 $n$ 是 $img1$ 的边长。
+时间复杂度 $O(n^4)$，空间复杂度 $O(n^2)$。其中 $n$ 是 $\textit{img1}$ 的边长。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -81,6 +98,8 @@ class Solution:
                                 cnt[(i - h, j - k)] += 1
         return max(cnt.values()) if cnt else 0
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -107,6 +126,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -132,6 +153,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func largestOverlap(img1 [][]int, img2 [][]int) (ans int) {
 	type pair struct{ x, y int }
@@ -154,6 +177,8 @@ func largestOverlap(img1 [][]int, img2 [][]int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function largestOverlap(img1: number[][], img2: number[][]): number {
@@ -181,4 +206,6 @@ function largestOverlap(img1: number[][], img2: number[][]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,27 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2900-2999/2920.Maximum%20Points%20After%20Collecting%20Coins%20From%20All%20Nodes/README.md
+rating: 2350
+source: 第 369 场周赛 Q4
+tags:
+    - 位运算
+    - 树
+    - 深度优先搜索
+    - 记忆化搜索
+    - 数组
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [2920. 收集所有金币可获得的最大积分](https://leetcode.cn/problems/maximum-points-after-collecting-coins-from-all-nodes)
 
 [English Version](/solution/2900-2999/2920.Maximum%20Points%20After%20Collecting%20Coins%20From%20All%20Nodes/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>有一棵由 <code>n</code> 个节点组成的无向树，以&nbsp;<code>0</code>&nbsp; 为根节点，节点编号从 <code>0</code> 到 <code>n - 1</code> 。给你一个长度为 <code>n - 1</code> 的二维 <strong>整数</strong> 数组 <code>edges</code> ，其中 <code>edges[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> 表示在树上的节点 <code>a<sub>i</sub></code> 和 <code>b<sub>i</sub></code> 之间存在一条边。另给你一个下标从 <strong>0</strong> 开始、长度为 <code>n</code> 的数组 <code>coins</code> 和一个整数 <code>k</code> ，其中 <code>coins[i]</code> 表示节点 <code>i</code> 处的金币数量。</p>
 
@@ -57,7 +74,11 @@
 	<li><code><font face="monospace">0 &lt;= k &lt;= 10<sup>4</sup></font></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：记忆化搜索
 
@@ -73,11 +94,12 @@
 
 最后，我们返回当前节点使用两种方法中能获得的最大积分。
 
-为了避免重复计算，我们使用记忆化搜索的方法，将 $dfs(i, fa, j)$ 的结果存储到 $f[i][j]$ 中，其中 $f[i][j]$ 表示当前节点为 $i$，父节点为 $fa$，当前节点的金币数需要右移 $j$ 位，所能获得的最大积分。
-
+为了避免重复计算，我们使用记忆化搜索的方法，将 $dfs(i, fa, j)$ 的结果存储到 $f[i][j]$ 中，其中 $f[i][j]$ 表示当前节点为 $i$，父节点为 $fa$，当前节点的金币数需要右移 $j$ 位，所能获得的最大
 时间复杂度 $O(n \times \log M)$，空间复杂度 $O(n \times \log M)$。其中 $M$ 表示 $coins[i]$ 的最大值。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -102,6 +124,8 @@ class Solution:
         dfs.cache_clear()
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -144,6 +168,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -157,7 +183,7 @@ public:
             g[a].emplace_back(b);
             g[b].emplace_back(a);
         }
-        function<int(int, int, int)> dfs = [&](int i, int fa, int j) {
+        auto dfs = [&](this auto&& dfs, int i, int fa, int j) -> int {
             if (f[i][j] != -1) {
                 return f[i][j];
             }
@@ -177,6 +203,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func maximumPoints(edges [][]int, coins []int, k int) int {
@@ -216,6 +244,8 @@ func maximumPoints(edges [][]int, coins []int, k int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function maximumPoints(edges: number[][], coins: number[], k: number): number {
     const n = coins.length;
@@ -247,4 +277,6 @@ function maximumPoints(edges: number[][], coins: number[], k: number): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

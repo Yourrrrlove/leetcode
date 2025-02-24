@@ -1,8 +1,20 @@
-# [1149. Article Views II](https://leetcode.com/problems/article-views-ii)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1100-1199/1149.Article%20Views%20II/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
+# [1149. Article Views II 🔒](https://leetcode.com/problems/article-views-ii)
 
 [中文文档](/solution/1100-1199/1149.Article%20Views%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table: <code>Views</code></p>
 
@@ -54,11 +66,17 @@ Views table:
 +------+
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -71,4 +89,6 @@ ORDER BY 1;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

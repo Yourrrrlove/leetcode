@@ -1,27 +1,38 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0600-0699/0689.Maximum%20Sum%20of%203%20Non-Overlapping%20Subarrays/README.md
+tags:
+    - 数组
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [689. 三个无重叠子数组的最大和](https://leetcode.cn/problems/maximum-sum-of-3-non-overlapping-subarrays)
 
 [English Version](/solution/0600-0699/0689.Maximum%20Sum%20of%203%20Non-Overlapping%20Subarrays/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，找出三个长度为 <code>k</code> 、互不重叠、且全部数字和（<code>3 * k</code> 项）最大的子数组，并返回这三个子数组。</p>
+<p>给你一个整数数组 <code>nums</code> 和一个整数 <code>k</code> ，找出三个长度为 <code>k</code> 、互不重叠、且全部数字和最大的子数组，并返回这三个子数组。</p>
 
 <p>以下标的数组形式返回结果，数组中的每一项分别指示每个子数组的起始位置（下标从 <strong>0</strong> 开始）。如果有多个结果，返回字典序最小的一个。</p>
 
 <p>&nbsp;</p>
 
-<p><strong>示例 1：</strong></p>
+<p><strong class="example">示例 1：</strong></p>
 
 <pre>
 <strong>输入：</strong>nums = [1,2,1,2,6,7,5,1], k = 2
 <strong>输出：</strong>[0,3,5]
 <strong>解释：</strong>子数组 [1, 2], [2, 6], [7, 5] 对应的起始下标为 [0, 3, 5]。
-也可以取 [2, 1], 但是结果 [1, 3, 5] 在字典序上更大。
+也可以取 [2, 1], 但是结果 [1, 3, 5] 在字典序上更小。
 </pre>
 
-<p><strong>示例 2：</strong></p>
+<p><strong class="example">示例 2：</strong></p>
 
 <pre>
 <strong>输入：</strong>nums = [1,2,1,2,1,2,1,2,1], k = 2
@@ -38,7 +49,11 @@
 	<li><code>1 &lt;= k &lt;= floor(nums.length / 3)</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：滑动窗口
 
@@ -47,6 +62,8 @@
 时间复杂度 $O(n)$，其中 $n$ 是数组 $nums$ 的长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -74,6 +91,8 @@ class Solution:
                 s3 -= nums[i - k + 1]
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -109,6 +128,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -146,6 +167,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxSumOfThreeSubarrays(nums []int, k int) []int {
 	ans := make([]int, 3)
@@ -178,6 +201,8 @@ func maxSumOfThreeSubarrays(nums []int, k int) []int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function maxSumOfThreeSubarrays(nums: number[], k: number): number[] {
@@ -232,6 +257,10 @@ function maxSumOfThreeSubarrays(nums: number[], k: number): number[] {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：预处理前后缀 + 枚举中间子数组
 
 我们可以预处理得到数组 $nums$ 的前缀和数组 $s$，其中 $s[i] = \sum_{j=0}^{i-1} nums[j]$，那么对于任意的 $i$，$j$，$s[j] - s[i]$ 就是子数组 $[i, j)$ 的和。
@@ -243,6 +272,8 @@ function maxSumOfThreeSubarrays(nums: number[], k: number): number[] {
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $nums$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -273,6 +304,8 @@ class Solution:
                 t = cur
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -316,6 +349,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -366,6 +401,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxSumOfThreeSubarrays(nums []int, k int) (ans []int) {
 	n := len(nums)
@@ -411,4 +448,6 @@ func maxSumOfThreeSubarrays(nums []int, k int) (ans []int) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

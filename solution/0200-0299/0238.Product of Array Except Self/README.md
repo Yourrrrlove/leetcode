@@ -1,16 +1,27 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0238.Product%20of%20Array%20Except%20Self/README.md
+tags:
+    - 数组
+    - 前缀和
+---
+
+<!-- problem:start -->
+
 # [238. 除自身以外数组的乘积](https://leetcode.cn/problems/product-of-array-except-self)
 
 [English Version](/solution/0200-0299/0238.Product%20of%20Array%20Except%20Self/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给你一个整数数组&nbsp;<code>nums</code>，返回 <em>数组&nbsp;<code>answer</code>&nbsp;，其中&nbsp;<code>answer[i]</code>&nbsp;等于&nbsp;<code>nums</code>&nbsp;中除&nbsp;<code>nums[i]</code>&nbsp;之外其余各元素的乘积</em>&nbsp;。</p>
+<p>给你一个整数数组&nbsp;<code>nums</code>，返回 数组&nbsp;<code>answer</code>&nbsp;，其中&nbsp;<code>answer[i]</code>&nbsp;等于&nbsp;<code>nums</code>&nbsp;中除&nbsp;<code>nums[i]</code>&nbsp;之外其余各元素的乘积&nbsp;。</p>
 
 <p>题目数据 <strong>保证</strong> 数组&nbsp;<code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在&nbsp; <strong>32 位</strong> 整数范围内。</p>
 
-<p>请&nbsp;<strong>不要使用除法，</strong>且在&nbsp;<code>O(<em>n</em>)</code> 时间复杂度内完成此题。</p>
+<p>请&nbsp;<strong>不要使用除法，</strong>且在&nbsp;<code>O(n)</code> 时间复杂度内完成此题。</p>
 
 <p>&nbsp;</p>
 
@@ -35,28 +46,34 @@
 <ul>
 	<li><code>2 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
 	<li><code>-30 &lt;= nums[i] &lt;= 30</code></li>
-	<li><strong>保证</strong> 数组&nbsp;<code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在&nbsp; <strong>32 位</strong> 整数范围内</li>
+	<li>输入&nbsp;<strong>保证</strong> 数组&nbsp;<code>answer[i]</code>&nbsp;在&nbsp; <strong>32 位</strong> 整数范围内</li>
 </ul>
 
 <p>&nbsp;</p>
 
 <p><strong>进阶：</strong>你可以在 <code>O(1)</code>&nbsp;的额外空间复杂度内完成这个题目吗？（ 出于对空间复杂度分析的目的，输出数组&nbsp;<strong>不被视为&nbsp;</strong>额外空间。）</p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：两次遍历
 
-我们定义两个变量 $left$ 和 $right$，分别表示当前元素左边所有元素的乘积和右边所有元素的乘积。初始时 $left=1$, $right=1$。定义一个长度为 $n$ 的答案数组 $ans$。
+我们定义两个变量 $\textit{left}$ 和 $\textit{right}$，分别表示当前元素左边所有元素的乘积和右边所有元素的乘积。初始时 $\textit{left}=1$, $\textit{right}=1$。定义一个长度为 $n$ 的答案数组 $\textit{ans}$。
 
-我们先从左到右遍历数组，对于遍历到的第 $i$ 个元素，我们用 $left$ 更新 $ans[i]$，然后 $left$ 乘以 $nums[i]$。
+我们先从左到右遍历数组，对于遍历到的第 $i$ 个元素，我们用 $\textit{left}$ 更新 $\textit{ans}[i]$，然后 $\textit{left}$ 乘以 $\textit{nums}[i]$。
 
-然后，我们从右到左遍历数组，对于遍历到的第 $i$ 个元素，我们更新 $ans[i]$ 为 $ans[i] \times right$，然后 $right$ 乘以 $nums[i]$。
+然后，我们从右到左遍历数组，对于遍历到的第 $i$ 个元素，我们更新 $\textit{ans}[i]$ 为 $\textit{ans}[i] \times \textit{right}$，然后 $\textit{right}$ 乘以 $\textit{nums}[i]$。
 
-遍历结束后，数组 `ans` 即为所求的答案。
+遍历结束后，返回答案数组 $\textit{ans}$。
 
-时间复杂度 $O(n)$，其中 $n$ 是数组 `nums` 的长度。忽略答案数组的空间消耗，空间复杂度 $O(1)$。
+时间复杂度 $O(n)$，其中 $n$ 是数组 $\textit{nums}$ 的长度。忽略答案数组的空间消耗，空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,6 +89,8 @@ class Solution:
             right *= nums[i]
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -90,6 +109,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -110,6 +131,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func productExceptSelf(nums []int) []int {
 	n := len(nums)
@@ -127,6 +150,8 @@ func productExceptSelf(nums []int) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function productExceptSelf(nums: number[]): number[] {
     const n = nums.length;
@@ -142,6 +167,8 @@ function productExceptSelf(nums: number[]): number[] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -160,6 +187,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -181,6 +210,8 @@ var productExceptSelf = function (nums) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public int[] ProductExceptSelf(int[] nums) {
@@ -198,6 +229,8 @@ public class Solution {
     }
 }
 ```
+
+#### PHP
 
 ```php
 class Solution {
@@ -223,16 +256,6 @@ class Solution {
 
 <!-- tabs:end -->
 
-### 方法二
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```ts
-function productExceptSelf(nums: number[]): number[] {
-    return nums.map((_, i) => nums.reduce((pre, val, j) => pre * (i === j ? 1 : val), 1));
-}
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

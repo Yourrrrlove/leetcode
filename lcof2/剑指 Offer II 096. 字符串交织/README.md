@@ -1,8 +1,15 @@
+---
+comments: true
+edit_url: https://github.com/doocs/leetcode/edit/main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20096.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%BA%A4%E7%BB%87/README.md
+---
+
+<!-- problem:start -->
+
 # [剑指 Offer II 096. 字符串交织](https://leetcode.cn/problems/IY6buf)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定三个字符串&nbsp;<code>s1</code>、<code>s2</code>、<code>s3</code>，请判断&nbsp;<code>s3</code>&nbsp;能不能由&nbsp;<code>s1</code>&nbsp;和&nbsp;<code>s2</code><em>&nbsp;</em><strong>交织（交错）</strong>&nbsp;组成。</p>
 
@@ -56,7 +63,11 @@
 
 <p><meta charset="UTF-8" />注意：本题与主站 97&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/interleaving-string/">https://leetcode.cn/problems/interleaving-string/</a></p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：记忆化搜索
 
@@ -80,6 +91,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
@@ -99,6 +112,8 @@ class Solution:
             return False
         return dfs(0, 0)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -143,6 +158,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -174,6 +191,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isInterleave(s1 string, s2 string, s3 string) bool {
 	m, n := len(s1), len(s2)
@@ -197,6 +216,8 @@ func isInterleave(s1 string, s2 string, s3 string) bool {
 	return dfs(0, 0)
 }
 ```
+
+#### TypeScript
 
 ```ts
 function isInterleave(s1: string, s2: string, s3: string): boolean {
@@ -225,6 +246,8 @@ function isInterleave(s1: string, s2: string, s3: string): boolean {
     return dfs(0, 0);
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -267,7 +290,56 @@ public class Solution {
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    private var memo = [String: Bool]()
+    private var s1: [Character] = []
+    private var s2: [Character] = []
+    private var s3: [Character] = []
+    private var m = 0
+    private var n = 0
+
+    func isInterleave(_ s1: String, _ s2: String, _ s3: String) -> Bool {
+        m = s1.count
+        n = s2.count
+        if m + n != s3.count {
+            return false
+        }
+        self.s1 = Array(s1)
+        self.s2 = Array(s2)
+        self.s3 = Array(s3)
+        return dfs(0, 0)
+    }
+
+    private func dfs(_ i: Int, _ j: Int) -> Bool {
+        if i >= m && j >= n {
+            return true
+        }
+        let key = "\(i),\(j)"
+        if let cached = memo[key] {
+            return cached
+        }
+        let k = i + j
+        var ans = false
+        if i < m && s1[i] == s3[k] && dfs(i + 1, j) {
+            ans = true
+        }
+        if !ans && j < n && s2[j] == s3[k] && dfs(i, j + 1) {
+            ans = true
+        }
+        memo[key] = ans
+        return ans
+    }
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start-->
 
 ### 方法二：动态规划
 
@@ -277,13 +349,13 @@ public class Solution {
 
 $$
 f[i][j] = \begin{cases}
-f[i - 1][j] & \text{if } s_1[i - 1] = s_3[i + j - 1] \\
-\text{or } f[i][j - 1] & \text{if } s_2[j - 1] = s_3[i + j - 1] \\
-\text{false} & \text{otherwise}
+f[i - 1][j] & \textit{if } s_1[i - 1] = s_3[i + j - 1] \\
+\textit{or } f[i][j - 1] & \textit{if } s_2[j - 1] = s_3[i + j - 1] \\
+\textit{false} & \textit{otherwise}
 \end{cases}
 $$
 
-其中 $f[0][0] = \text{true}$ 表示空串是两个空串的交错字符串。
+其中 $f[0][0] = \textit{true}$ 表示空串是两个空串的交错字符串。
 
 答案即为 $f[m][n]$。
 
@@ -292,6 +364,8 @@ $$
 我们注意到，状态 $f[i][j]$ 只和状态 $f[i - 1][j]$、$f[i][j - 1]$、$f[i - 1][j - 1]$ 有关，因此我们可以使用滚动数组优化空间复杂度，将空间复杂度优化到 $O(n)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -310,6 +384,8 @@ class Solution:
                     f[i][j] |= f[i][j - 1]
         return f[m][n]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -335,6 +411,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -363,6 +441,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isInterleave(s1 string, s2 string, s3 string) bool {
 	m, n := len(s1), len(s2)
@@ -389,6 +469,8 @@ func isInterleave(s1 string, s2 string, s3 string) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function isInterleave(s1: string, s2: string, s3: string): boolean {
     const m = s1.length;
@@ -412,6 +494,8 @@ function isInterleave(s1: string, s2: string, s3: string): boolean {
     return f[m][n];
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -440,9 +524,15 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start-->
+
 ### 方法三
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -460,6 +550,8 @@ class Solution:
                     f[j] |= f[j - 1] and s2[j - 1] == s3[k]
         return f[n]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -485,6 +577,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -513,6 +607,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isInterleave(s1 string, s2 string, s3 string) bool {
 	m, n := len(s1), len(s2)
@@ -535,6 +631,8 @@ func isInterleave(s1 string, s2 string, s3 string) bool {
 	return f[n]
 }
 ```
+
+#### TypeScript
 
 ```ts
 function isInterleave(s1: string, s2: string, s3: string): boolean {
@@ -559,6 +657,8 @@ function isInterleave(s1: string, s2: string, s3: string): boolean {
     return f[n];
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -585,6 +685,39 @@ public class Solution {
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func isInterleave(_ s1: String, _ s2: String, _ s3: String) -> Bool {
+        let m = s1.count, n = s2.count
+        if m + n != s3.count {
+            return false
+        }
+
+        let s1 = Array(s1), s2 = Array(s2), s3 = Array(s3)
+        var dp = Array(repeating: Array(repeating: false, count: n + 1), count: m + 1)
+        dp[0][0] = true
+
+        for i in 0...m {
+            for j in 0...n {
+                let k = i + j - 1
+                if i > 0 && s1[i - 1] == s3[k] {
+                    dp[i][j] = dp[i][j] || dp[i - 1][j]
+                }
+                if j > 0 && s2[j - 1] == s3[k] {
+                    dp[i][j] = dp[i][j] || dp[i][j - 1]
+                }
+            }
+        }
+
+        return dp[m][n]
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

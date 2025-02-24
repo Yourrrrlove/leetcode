@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0400-0499/0413.Arithmetic%20Slices/README.md
+tags:
+    - 数组
+    - 动态规划
+    - 滑动窗口
+---
+
+<!-- problem:start -->
+
 # [413. 等差数列划分](https://leetcode.cn/problems/arithmetic-slices)
 
 [English Version](/solution/0400-0499/0413.Arithmetic%20Slices/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>如果一个数列 <strong>至少有三个元素</strong> ，并且任意两个相邻元素之差相同，则称该数列为等差数列。</p>
 
@@ -46,13 +58,17 @@
 </div>
 </div>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：遍历计数
 
 我们用 $d$ 表示当前相邻两个元素的差值，用 $cnt$ 表示当前等差数列的长度，初始时 $d = 3000$, $cnt = 2$。
 
-遍历数组 `nums`，对于相邻的两个元素 $a$ 和 $b$，如果 $b - a = d$，则说明当前元素 $b$ 也属于当前等差数列，此时 $cnt$ 自增 1；否则说明当前元素 $b$ 不属于当前等差数列，此时更新 $d = b - a$，$cnt = 2$。如果 $cnt \ge 3$，则说明当前等差数列的长度至少为 3，此时等差数列的个数为 $cnt - 2$，将其加到答案中。
+遍历数组 `nums`，对于相邻的两个元素 $a$ 和 $b$，如果 $b - a = d$，则说明当前元素 $b$ 也属于当前等差数列，此时 $cnt$ 自增 1；否则说明当前元素 $b$ 不属于当前等差数列，此时更新 $d = b - a$，且 $cnt = 2$。如果 $cnt \ge 3$，则说明当前等差数列的长度至少为 3，此时等差数列的个数为 $cnt - 2$，将其加到答案中。
 
 遍历结束后，即可得到答案。
 
@@ -62,25 +78,29 @@
 
 相似题目：
 
--   [1513. 仅含 1 的子串数](/solution/1500-1599/1513.Number%20of%20Substrings%20With%20Only%201s/README.md)
--   [2348. 全 0 子数组的数目](/solution/2300-2399/2348.Number%20of%20Zero-Filled%20Subarrays/README.md)
+-   [1513. 仅含 1 的子串数](https://github.com/doocs/leetcode/blob/main/solution/1500-1599/1513.Number%20of%20Substrings%20With%20Only%201s/README.md)
+-   [2348. 全 0 子数组的数目](https://github.com/doocs/leetcode/blob/main/solution/2300-2399/2348.Number%20of%20Zero-Filled%20Subarrays/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def numberOfArithmeticSlices(self, nums: List[int]) -> int:
-        ans, cnt = 0, 2
+        ans = cnt = 0
         d = 3000
         for a, b in pairwise(nums):
             if b - a == d:
                 cnt += 1
             else:
                 d = b - a
-                cnt = 2
-            ans += max(0, cnt - 2)
+                cnt = 0
+            ans += cnt
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -100,6 +120,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -121,6 +143,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numberOfArithmeticSlices(nums []int) (ans int) {
 	cnt, d := 0, 3000
@@ -137,6 +161,8 @@ func numberOfArithmeticSlices(nums []int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function numberOfArithmeticSlices(nums: number[]): number {
@@ -160,25 +186,6 @@ function numberOfArithmeticSlices(nums: number[]): number {
 
 <!-- tabs:end -->
 
-### 方法二
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```python
-class Solution:
-    def numberOfArithmeticSlices(self, nums: List[int]) -> int:
-        ans = cnt = 0
-        d = 3000
-        for a, b in pairwise(nums):
-            if b - a == d:
-                cnt += 1
-            else:
-                d = b - a
-                cnt = 0
-            ans += cnt
-        return ans
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

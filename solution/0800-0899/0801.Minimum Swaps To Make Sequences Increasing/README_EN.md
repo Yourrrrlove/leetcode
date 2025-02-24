@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0801.Minimum%20Swaps%20To%20Make%20Sequences%20Increasing/README_EN.md
+tags:
+    - Array
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [801. Minimum Swaps To Make Sequences Increasing](https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing)
 
 [中文文档](/solution/0800-0899/0801.Minimum%20Swaps%20To%20Make%20Sequences%20Increasing/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given two integer arrays of the same length <code>nums1</code> and <code>nums2</code>. In one operation, you are allowed to swap <code>nums1[i]</code> with <code>nums2[i]</code>.</p>
 
@@ -42,11 +55,31 @@ which are both strictly increasing.
 	<li><code>0 &lt;= nums1[i], nums2[i] &lt;= 2 * 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Dynamic Programming
+
+Define $a$ and $b$ to represent the minimum number of swaps needed to make the element sequences strictly increasing up to index $[0..i]$, with the $i$-th element not swapped and swapped, respectively. The index starts from $0$.
+
+When $i=0$, we have $a = 0$ and $b = 1$.
+
+When $i \gt 0$, we first save the previous values of $a$ and $b$ in $x$ and $y$, and then discuss the following cases:
+
+If $nums1[i - 1] \ge nums1[i]$ or $nums2[i - 1] \ge nums2[i]$, to make both sequences strictly increasing, the relative positions of the elements at indices $i-1$ and $i$ must change. That is, if the previous position was swapped, then the current position should not be swapped, so $a = y$; if the previous position was not swapped, then the current position must be swapped, so $b = x + 1$.
+
+Otherwise, the relative positions of the elements at indices $i-1$ and $i$ do not need to change, so $b = y + 1$. Additionally, if $nums1[i - 1] \lt nums2[i]$ and $nums2[i - 1] \lt nums1[i]$, the relative positions of the elements at indices $i-1$ and $i$ can change, so $a$ and $b$ can take the smaller values, thus $a = \min(a, y)$ and $b = \min(b, x + 1)$.
+
+Finally, return the smaller value between $a$ and $b$.
+
+The time complexity is $O(n)$, and the space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -62,6 +95,8 @@ class Solution:
                     a, b = min(a, y), min(b, x + 1)
         return min(a, b)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -85,6 +120,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -107,6 +144,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minSwap(nums1 []int, nums2 []int) int {
 	a, b, n := 0, 1, len(nums1)
@@ -126,6 +165,31 @@ func minSwap(nums1 []int, nums2 []int) int {
 }
 ```
 
+#### TypeScript
+
+```ts
+function minSwap(nums1: number[], nums2: number[]): number {
+    let [a, b] = [0, 1];
+    for (let i = 1; i < nums1.length; ++i) {
+        let x = a,
+            y = b;
+        if (nums1[i - 1] >= nums1[i] || nums2[i - 1] >= nums2[i]) {
+            a = y;
+            b = x + 1;
+        } else {
+            b = y + 1;
+            if (nums1[i - 1] < nums2[i] && nums2[i - 1] < nums1[i]) {
+                a = Math.min(a, y);
+                b = Math.min(b, x + 1);
+            }
+        }
+    }
+    return Math.min(a, b);
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

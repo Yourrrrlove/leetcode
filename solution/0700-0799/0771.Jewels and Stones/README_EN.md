@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0771.Jewels%20and%20Stones/README_EN.md
+tags:
+    - Hash Table
+    - String
+---
+
+<!-- problem:start -->
+
 # [771. Jewels and Stones](https://leetcode.com/problems/jewels-and-stones)
 
 [中文文档](/solution/0700-0799/0771.Jewels%20and%20Stones/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You&#39;re given strings <code>jewels</code> representing the types of stones that are jewels, and <code>stones</code> representing the stones you have. Each character in <code>stones</code> is a type of stone you have. You want to know how many of the stones you have are also jewels.</p>
 
@@ -25,11 +38,21 @@
 	<li>All the characters of&nbsp;<code>jewels</code> are <strong>unique</strong>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Hash Table or Array
+
+We can first use a hash table or array $s$ to record all types of jewels. Then traverse all the stones, and if the current stone is a jewel, increment the answer by one.
+
+Time complexity is $O(m+n)$, and space complexity is $O(|\Sigma|)$, where $m$ and $n$ are the lengths of the strings $jewels$ and $stones$ respectively, and $\Sigma$ is the character set, which in this problem is the set of all uppercase and lowercase English letters.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -37,6 +60,8 @@ class Solution:
         s = set(jewels)
         return sum(c in s for c in stones)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -54,18 +79,26 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     int numJewelsInStones(string jewels, string stones) {
         int s[128] = {0};
-        for (char c : jewels) s[c] = 1;
+        for (char c : jewels) {
+            s[c] = 1;
+        }
         int ans = 0;
-        for (char c : stones) ans += s[c];
+        for (char c : stones) {
+            ans += s[c];
+        }
         return ans;
     }
 };
 ```
+
+#### Go
 
 ```go
 func numJewelsInStones(jewels string, stones string) (ans int) {
@@ -80,6 +113,8 @@ func numJewelsInStones(jewels string, stones string) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function numJewelsInStones(jewels: string, stones: string): number {
     const s = new Set([...jewels]);
@@ -91,14 +126,16 @@ function numJewelsInStones(jewels: string, stones: string): number {
 }
 ```
 
+#### Rust
+
 ```rust
 use std::collections::HashSet;
 impl Solution {
     pub fn num_jewels_in_stones(jewels: String, stones: String) -> i32 {
-        let mut set = jewels.as_bytes().iter().collect::<HashSet<&u8>>();
+        let mut s = jewels.as_bytes().iter().collect::<HashSet<&u8>>();
         let mut ans = 0;
         for c in stones.as_bytes() {
-            if set.contains(c) {
+            if s.contains(c) {
                 ans += 1;
             }
         }
@@ -106,6 +143,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -118,6 +157,8 @@ var numJewelsInStones = function (jewels, stones) {
     return stones.split('').reduce((prev, val) => prev + s.has(val), 0);
 };
 ```
+
+#### C
 
 ```c
 int numJewelsInStones(char* jewels, char* stones) {
@@ -135,4 +176,6 @@ int numJewelsInStones(char* jewels, char* stones) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

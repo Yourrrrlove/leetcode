@@ -2,15 +2,13 @@ class Solution {
 public:
     vector<int> getAverages(vector<int>& nums, int k) {
         int n = nums.size();
-        long s[n + 1];
-        s[0] = 0;
-        for (int i = 0; i < n; ++i) {
-            s[i + 1] = s[i] + nums[i];
-        }
         vector<int> ans(n, -1);
+        long long s = 0;
         for (int i = 0; i < n; ++i) {
-            if (i - k >= 0 && i + k < n) {
-                ans[i] = (s[i + k + 1] - s[i - k]) / (k << 1 | 1);
+            s += nums[i];
+            if (i >= k * 2) {
+                ans[i - k] = s / (k * 2 + 1);
+                s -= nums[i - k * 2];
             }
         }
         return ans;

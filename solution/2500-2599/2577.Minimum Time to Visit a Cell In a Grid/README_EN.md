@@ -1,8 +1,27 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2577.Minimum%20Time%20to%20Visit%20a%20Cell%20In%20a%20Grid/README_EN.md
+rating: 2381
+source: Weekly Contest 334 Q4
+tags:
+    - Breadth-First Search
+    - Graph
+    - Array
+    - Matrix
+    - Shortest Path
+    - Heap (Priority Queue)
+---
+
+<!-- problem:start -->
+
 # [2577. Minimum Time to Visit a Cell In a Grid](https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid)
 
 [中文文档](/solution/2500-2599/2577.Minimum%20Time%20to%20Visit%20a%20Cell%20In%20a%20Grid/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <code>m x n</code> matrix <code>grid</code> consisting of <b>non-negative</b> integers where <code>grid[row][col]</code> represents the <strong>minimum</strong> time required to be able to visit the cell <code>(row, col)</code>, which means you can visit the cell <code>(row, col)</code> only when the time you visit it is greater than or equal to <code>grid[row][col]</code>.</p>
 
@@ -61,7 +80,11 @@ The final time is 7. It can be shown that it is the minimum time possible.
 .spoilerbutton[value="Hide Message"] + .spoiler {padding:5px;}
 </style>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Shortest Path + Priority Queue (Min Heap)
 
@@ -76,6 +99,8 @@ Each time we take out the cell $(t, i, j)$ that can arrive the earliest from the
 The time complexity is $O(m \times n \times \log (m \times n))$, and the space complexity is $O(m \times n)$. Where $m$ and $n$ are the number of rows and columns of the grid, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -101,6 +126,8 @@ class Solution:
                         dist[x][y] = nt
                         heappush(q, (nt, x, y))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -141,6 +168,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -179,6 +208,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minimumTime(grid [][]int) int {
@@ -229,6 +260,78 @@ func (h *hp) Push(v any)        { *h = append(*h, v.(tuple)) }
 func (h *hp) Pop() any          { a := *h; v := a[len(a)-1]; *h = a[:len(a)-1]; return v }
 ```
 
+#### TypeScript
+
+```ts
+function minimumTime(grid: number[][]): number {
+    if (grid[0][1] > 1 && grid[1][0] > 1) return -1;
+
+    const [m, n] = [grid.length, grid[0].length];
+    const DIRS = [-1, 0, 1, 0, -1];
+    const q = new MinPriorityQueue({ priority: ([x]) => x });
+    const dist: number[][] = Array.from({ length: m }, () =>
+        new Array(n).fill(Number.POSITIVE_INFINITY),
+    );
+    dist[0][0] = 0;
+    q.enqueue([0, 0, 0]);
+
+    while (true) {
+        const [t, i, j] = q.dequeue().element;
+        if (i === m - 1 && j === n - 1) return t;
+
+        for (let k = 0; k < 4; k++) {
+            const [x, y] = [i + DIRS[k], j + DIRS[k + 1]];
+            if (x < 0 || x >= m || y < 0 || y >= n) continue;
+
+            let nt = t + 1;
+            if (nt < grid[x][y]) {
+                nt = grid[x][y] + ((grid[x][y] - nt) % 2);
+            }
+            if (nt < dist[x][y]) {
+                dist[x][y] = nt;
+                q.enqueue([nt, x, y]);
+            }
+        }
+    }
+}
+```
+
+#### JavaScript
+
+```js
+function minimumTime(grid) {
+    if (grid[0][1] > 1 && grid[1][0] > 1) return -1;
+
+    const [m, n] = [grid.length, grid[0].length];
+    const DIRS = [-1, 0, 1, 0, -1];
+    const q = new MinPriorityQueue({ priority: ([x]) => x });
+    const dist = Array.from({ length: m }, () => new Array(n).fill(Number.POSITIVE_INFINITY));
+    dist[0][0] = 0;
+    q.enqueue([0, 0, 0]);
+
+    while (true) {
+        const [t, i, j] = q.dequeue().element;
+        if (i === m - 1 && j === n - 1) return t;
+
+        for (let k = 0; k < 4; k++) {
+            const [x, y] = [i + DIRS[k], j + DIRS[k + 1]];
+            if (x < 0 || x >= m || y < 0 || y >= n) continue;
+
+            let nt = t + 1;
+            if (nt < grid[x][y]) {
+                nt = grid[x][y] + ((grid[x][y] - nt) % 2);
+            }
+            if (nt < dist[x][y]) {
+                dist[x][y] = nt;
+                q.enqueue([nt, x, y]);
+            }
+        }
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

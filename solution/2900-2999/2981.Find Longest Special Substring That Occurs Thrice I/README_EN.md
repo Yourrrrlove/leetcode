@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2900-2999/2981.Find%20Longest%20Special%20Substring%20That%20Occurs%20Thrice%20I/README_EN.md
+rating: 1505
+source: Weekly Contest 378 Q2
+tags:
+    - Hash Table
+    - String
+    - Binary Search
+    - Counting
+    - Sliding Window
+---
+
+<!-- problem:start -->
+
 # [2981. Find Longest Special Substring That Occurs Thrice I](https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-i)
 
 [中文文档](/solution/2900-2999/2981.Find%20Longest%20Special%20Substring%20That%20Occurs%20Thrice%20I/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a string <code>s</code> that consists of lowercase English letters.</p>
 
@@ -47,7 +65,11 @@ It can be shown that the maximum length achievable is 1.
 	<li><code>s</code> consists of only lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Binary Search + Sliding Window Counting
 
@@ -64,6 +86,8 @@ After the traversal, we go through the array $cnt$. If there exists $cnt[i] \geq
 The time complexity is $O((n + |\Sigma|) \times \log n)$, and the space complexity is $O(|\Sigma|)$, where $n$ is the length of the string $s$, and $|\Sigma|$ represents the size of the character set. In this problem, the character set is lowercase English letters, so $|\Sigma| = 26$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -89,6 +113,8 @@ class Solution:
                 r = mid - 1
         return -1 if l == 0 else l
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -129,6 +155,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -163,6 +191,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func maximumLength(s string) int {
@@ -199,6 +229,8 @@ func maximumLength(s string) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function maximumLength(s: string): number {
     const n = s.length;
@@ -233,4 +265,88 @@ function maximumLength(s: string): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 2: Counting
+
+The time complexity is $O(n)$
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function maximumLength(s: string): number {
+    const cnt = new Map<string, number>();
+    const n = s.length;
+    let [c, ch] = [0, ''];
+
+    for (let i = 0; i < n + 1; i++) {
+        if (ch === s[i]) {
+            c++;
+        } else {
+            let j = 1;
+            while (c) {
+                const char = ch.repeat(j++);
+                cnt.set(char, (cnt.get(char) ?? 0) + c);
+                c--;
+            }
+
+            ch = s[i];
+            c = 1;
+        }
+    }
+
+    let res = -1;
+    for (const [x, c] of cnt) {
+        if (c >= 3) {
+            res = Math.max(res, x.length);
+        }
+    }
+
+    return res;
+}
+```
+
+### JavaScript
+
+```js
+function maximumLength(s) {
+    const cnt = new Map();
+    const n = s.length;
+    let [c, ch] = [0, ''];
+
+    for (let i = 0; i < n + 1; i++) {
+        if (ch === s[i]) {
+            c++;
+        } else {
+            let j = 1;
+            while (c) {
+                const char = ch.repeat(j++);
+                cnt.set(char, (cnt.get(char) ?? 0) + c);
+                c--;
+            }
+
+            ch = s[i];
+            c = 1;
+        }
+    }
+
+    let res = -1;
+    for (const [x, c] of cnt) {
+        if (c >= 3) {
+            res = Math.max(res, x.length);
+        }
+    }
+
+    return res;
+}
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

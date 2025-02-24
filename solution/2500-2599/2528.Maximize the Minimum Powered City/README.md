@@ -1,10 +1,27 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2528.Maximize%20the%20Minimum%20Powered%20City/README.md
+rating: 2235
+source: 第 95 场双周赛 Q4
+tags:
+    - 贪心
+    - 队列
+    - 数组
+    - 二分查找
+    - 前缀和
+    - 滑动窗口
+---
+
+<!-- problem:start -->
+
 # [2528. 最大化城市的最小电量](https://leetcode.cn/problems/maximize-the-minimum-powered-city)
 
 [English Version](/solution/2500-2599/2528.Maximize%20the%20Minimum%20Powered%20City/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个下标从 <strong>0</strong>&nbsp;开始长度为 <code>n</code>&nbsp;的整数数组&nbsp;<code>stations</code>&nbsp;，其中&nbsp;<code>stations[i]</code>&nbsp;表示第 <code>i</code>&nbsp;座城市的供电站数目。</p>
 
@@ -62,7 +79,11 @@
 	<li><code>0 &lt;= k&nbsp;&lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：二分查找 + 差分数组 + 贪心
 
@@ -74,11 +95,13 @@
 
 函数 $check(x, k)$ 的实现逻辑是：
 
-遍历每座城市，如果当前城市 $i$ 的供电站数目小于 $x$，此时我们可以贪心地在尽可能右边的位置上建造供电站，位置 $j = min(i + r, n - 1)$，这样可以使得供电站覆盖尽可能多的城市。过程中我们可以借助差分数组，给一段连续的位置加上某个值。如果需要额外建造的供电站数量超过 $k$，那么 $x$ 不满足条件，返回 `false`。否则遍历结束后，返回 `true`。
+遍历每座城市，如果当前城市 $i$ 的供电站数目小于 $x$，此时我们可以贪心地在尽可能右边的位置上建造供电站，位置 $j = \min(i + r, n - 1)$，这样可以使得供电站覆盖尽可能多的城市。过程中我们可以借助差分数组，给一段连续的位置加上某个值。如果需要额外建造的供电站数量超过 $k$，那么 $x$ 不满足条件，返回 `false`。否则遍历结束后，返回 `true`。
 
 时间复杂度 $O(n \times \log M)$，空间复杂度 $O(n)$。其中 $n$ 为城市数量，而 $M$ 我们固定取 $2^{40}$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -116,6 +139,8 @@ class Solution:
                 right = mid - 1
         return left
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -171,6 +196,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -222,6 +249,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxPower(stations []int, r int, k int) int64 {
 	n := len(stations)
@@ -269,6 +298,63 @@ func maxPower(stations []int, r int, k int) int64 {
 }
 ```
 
+#### TypeScript
+
+```ts
+function maxPower(stations: number[], r: number, k: number): number {
+    function check(x: bigint, k: bigint): boolean {
+        d.fill(0n);
+        let t = 0n;
+        for (let i = 0; i < n; ++i) {
+            t += d[i];
+            const dist = x - (s[i] + t);
+            if (dist > 0) {
+                if (k < dist) {
+                    return false;
+                }
+                k -= dist;
+                const j = Math.min(i + r, n - 1);
+                const left = Math.max(0, j - r);
+                const right = Math.min(j + r, n - 1);
+                d[left] += dist;
+                d[right + 1] -= dist;
+                t += dist;
+            }
+        }
+        return true;
+    }
+    const n = stations.length;
+    const d: bigint[] = new Array(n + 1).fill(0n);
+    const s: bigint[] = new Array(n + 1).fill(0n);
+
+    for (let i = 0; i < n; ++i) {
+        const left = Math.max(0, i - r);
+        const right = Math.min(i + r, n - 1);
+        d[left] += BigInt(stations[i]);
+        d[right + 1] -= BigInt(stations[i]);
+    }
+
+    s[0] = d[0];
+    for (let i = 1; i < n + 1; ++i) {
+        s[i] = s[i - 1] + d[i];
+    }
+
+    let left = 0n,
+        right = 1n << 40n;
+    while (left < right) {
+        const mid = (left + right + 1n) >> 1n;
+        if (check(mid, BigInt(k))) {
+            left = mid;
+        } else {
+            right = mid - 1n;
+        }
+    }
+    return Number(left);
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

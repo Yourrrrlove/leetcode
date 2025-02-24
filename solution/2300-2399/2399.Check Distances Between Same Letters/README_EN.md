@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2399.Check%20Distances%20Between%20Same%20Letters/README_EN.md
+rating: 1243
+source: Weekly Contest 309 Q1
+tags:
+    - Array
+    - Hash Table
+    - String
+---
+
+<!-- problem:start -->
+
 # [2399. Check Distances Between Same Letters](https://leetcode.com/problems/check-distances-between-same-letters)
 
 [中文文档](/solution/2300-2399/2399.Check%20Distances%20Between%20Same%20Letters/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> string <code>s</code> consisting of only lowercase English letters, where each letter in <code>s</code> appears <strong>exactly</strong> <strong>twice</strong>. You are also given a <strong>0-indexed</strong> integer array <code>distance</code> of length <code>26</code>.</p>
 
@@ -47,28 +63,41 @@ Because distance[0] = 1, s is not a well-spaced string.
 	<li><code>0 &lt;= distance[i] &lt;= 50</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Array or Hash Table
+
+We can use a hash table $d$ to record the indices of each letter's occurrences. Then, traverse the hash table and check if the difference between the indices of each letter equals the corresponding value in the `distance` array. If any discrepancy is found, return `false`. If the traversal completes without discrepancies, return `true`.
+
+The time complexity is $O(n)$, where $n$ is the length of the string $s$. The space complexity is $O(|\Sigma|)$, where $\Sigma$ is the character set, which in this case is the set of lowercase letters.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def checkDistances(self, s: str, distance: List[int]) -> bool:
         d = defaultdict(int)
-        for i, c in enumerate(s, 1):
-            if d[c] and i - d[c] - 1 != distance[ord(c) - ord('a')]:
+        for i, c in enumerate(map(ord, s), 1):
+            j = c - ord("a")
+            if d[j] and i - d[j] - 1 != distance[j]:
                 return False
-            d[c] = i
+            d[j] = i
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
     public boolean checkDistances(String s, int[] distance) {
         int[] d = new int[26];
-        for (int i = 1, n = s.length(); i <= n; ++i) {
+        for (int i = 1; i <= s.length(); ++i) {
             int j = s.charAt(i - 1) - 'a';
             if (d[j] > 0 && i - d[j] - 1 != distance[j]) {
                 return false;
@@ -79,6 +108,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -97,6 +128,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func checkDistances(s string, distance []int) bool {
 	d := [26]int{}
@@ -111,10 +144,12 @@ func checkDistances(s string, distance []int) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function checkDistances(s: string, distance: number[]): boolean {
+    const d: number[] = Array(26).fill(0);
     const n = s.length;
-    const d: number[] = new Array(26).fill(0);
     for (let i = 1; i <= n; ++i) {
         const j = s.charCodeAt(i - 1) - 97;
         if (d[j] && i - d[j] - 1 !== distance[j]) {
@@ -125,6 +160,8 @@ function checkDistances(s: string, distance: number[]): boolean {
     return true;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -145,6 +182,8 @@ impl Solution {
 }
 ```
 
+#### C
+
 ```c
 bool checkDistances(char* s, int* distance, int distanceSize) {
     int n = strlen(s);
@@ -162,4 +201,6 @@ bool checkDistances(char* s, int* distance, int distanceSize) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

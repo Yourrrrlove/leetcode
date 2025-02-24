@@ -1,12 +1,25 @@
-# [2765. 最长交替子序列](https://leetcode.cn/problems/longest-alternating-subarray)
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2765.Longest%20Alternating%20Subarray/README.md
+rating: 1580
+source: 第 108 场双周赛 Q1
+tags:
+    - 数组
+    - 枚举
+---
+
+<!-- problem:start -->
+
+# [2765. 最长交替子数组](https://leetcode.cn/problems/longest-alternating-subarray)
 
 [English Version](/solution/2700-2799/2765.Longest%20Alternating%20Subarray/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给你一个下标从 <strong>0</strong>&nbsp;开始的整数数组&nbsp;<code>nums</code>&nbsp;。如果 <code>nums</code>&nbsp;中长度为&nbsp;<code>m</code>&nbsp;的子数组&nbsp;<code>s</code>&nbsp;满足以下条件，我们称它是一个 <strong>交替子序列</strong> ：</p>
+<p>给你一个下标从 <strong>0</strong>&nbsp;开始的整数数组&nbsp;<code>nums</code>&nbsp;。如果 <code>nums</code>&nbsp;中长度为&nbsp;<code>m</code>&nbsp;的子数组&nbsp;<code>s</code>&nbsp;满足以下条件，我们称它是一个 <strong>交替子数组</strong> ：</p>
 
 <ul>
 	<li><code>m</code>&nbsp;大于&nbsp;<code>1</code>&nbsp;。</li>
@@ -20,21 +33,23 @@
 
 <p>&nbsp;</p>
 
-<p><strong>示例 1：</strong></p>
+<p><strong class="example">示例 1：</strong></p>
 
-<pre>
-<b>输入：</b>nums = [2,3,4,3,4]
-<b>输出：</b>4
-<b>解释：</b>交替子数组有 [3,4] ，[3,4,3] 和 [3,4,3,4] 。最长的子数组为 [3,4,3,4] ，长度为4 。
-</pre>
+<div class="example-block"><b>输入：</b>nums = [2,3,4,3,4]</div>
 
-<p><strong>示例 2：</strong></p>
+<div class="example-block"><b>输出：</b>4</div>
 
-<pre>
-<b>输入：</b>nums = [4,5,6]
-<b>输出：</b>2
-<strong>解释：</strong>[4,5] 和 [5,6] 是仅有的两个交替子数组。它们长度都为 2 。
-</pre>
+<div class="example-block"><b>解释：</b>交替子数组有 <code>[2,3]</code>，<code>[3,4]</code>，<code>[3,4,3]</code> 和 <code>[3,4,3,4]</code>。最长的子数组为 <code>[3,4,3,4]</code>，长度为 4。</div>
+
+<p>&nbsp;</p>
+
+<p><strong class="example">示例 2：</strong></p>
+
+<div class="example-block"><b>输入：</b>nums = [4,5,6]</div>
+
+<div class="example-block"><b>输出：</b>2</div>
+
+<div class="example-block"><strong>解释：</strong><code>[4,5]</code> 和 <code>[5,6]</code> 是仅有的两个交替子数组。它们长度都为 2 。</div>
 
 <p>&nbsp;</p>
 
@@ -45,7 +60,11 @@
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：枚举
 
@@ -54,6 +73,8 @@
 时间复杂度 $O(n^2)$，其中 $n$ 是数组的长度。我们需要枚举子数组的左端点 $i$，对于每个 $i$，我们需要 $O(n)$ 的时间来找到最长的满足条件的子数组。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -69,6 +90,8 @@ class Solution:
                 ans = max(ans, j - i + 1)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -88,6 +111,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -109,6 +134,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func alternatingSubarray(nums []int) int {
 	ans, n := -1, len(nums)
@@ -125,6 +152,8 @@ func alternatingSubarray(nums []int) int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function alternatingSubarray(nums: number[]): number {
@@ -146,4 +175,6 @@ function alternatingSubarray(nums: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

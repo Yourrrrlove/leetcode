@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2000-2099/2059.Minimum%20Operations%20to%20Convert%20Number/README_EN.md
+rating: 1849
+source: Weekly Contest 265 Q3
+tags:
+    - Breadth-First Search
+    - Array
+---
+
+<!-- problem:start -->
+
 # [2059. Minimum Operations to Convert Number](https://leetcode.com/problems/minimum-operations-to-convert-number)
 
 [中文文档](/solution/2000-2099/2059.Minimum%20Operations%20to%20Convert%20Number/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> integer array <code>nums</code> containing <strong>distinct</strong> numbers, an integer <code>start</code>, and an integer <code>goal</code>. There is an integer <code>x</code> that is initially set to <code>start</code>, and you want to perform operations on <code>x</code> such that it is converted to <code>goal</code>. You can perform the following operation repeatedly on the number <code>x</code>:</p>
 
@@ -59,11 +74,17 @@ Note that the last operation sets x out of the range 0 &lt;= x &lt;= 1000, which
 	<li>All the integers in <code>nums</code> are distinct.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -86,6 +107,8 @@ class Solution:
                         vis[nx] = True
         return -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -117,6 +140,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -152,6 +177,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minimumOperations(nums []int, start int, goal int) int {
 	type pair struct {
@@ -186,6 +213,8 @@ func minimumOperations(nums []int, start int, goal int) int {
 	return -1
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minimumOperations(nums: number[], start: number, goal: number): number {
@@ -224,9 +253,15 @@ function minimumOperations(nums: number[], start: number, goal: number): number 
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -254,6 +289,8 @@ class Solution:
                         q.append(y)
         return -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -292,6 +329,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -328,6 +367,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minimumOperations(nums []int, start int, goal int) int {
 	next := func(x int) []int {
@@ -362,9 +403,15 @@ func minimumOperations(nums []int, start int, goal int) int {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 3
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -399,6 +446,8 @@ class Solution:
                 return t
         return -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -455,6 +504,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -500,6 +551,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minimumOperations(nums []int, start int, goal int) int {
@@ -548,4 +601,6 @@ func minimumOperations(nums []int, start int, goal int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

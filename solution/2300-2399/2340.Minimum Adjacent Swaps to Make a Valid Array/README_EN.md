@@ -1,8 +1,21 @@
-# [2340. Minimum Adjacent Swaps to Make a Valid Array](https://leetcode.com/problems/minimum-adjacent-swaps-to-make-a-valid-array)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2340.Minimum%20Adjacent%20Swaps%20to%20Make%20a%20Valid%20Array/README_EN.md
+tags:
+    - Greedy
+    - Array
+---
+
+<!-- problem:start -->
+
+# [2340. Minimum Adjacent Swaps to Make a Valid Array 🔒](https://leetcode.com/problems/minimum-adjacent-swaps-to-make-a-valid-array)
 
 [中文文档](/solution/2300-2399/2340.Minimum%20Adjacent%20Swaps%20to%20Make%20a%20Valid%20Array/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> integer array <code>nums</code>.</p>
 
@@ -49,11 +62,27 @@ It can be shown that 6 swaps is the minimum swaps required to make a valid array
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Maintain Index of Extremes + Case Analysis
+
+We can use indices $i$ and $j$ to record the index of the first minimum value and the last maximum value in the array $\textit{nums}$, respectively. Traverse the array $\textit{nums}$ to update the values of $i$ and $j$.
+
+Next, we need to consider the number of swaps.
+
+-   If $i = j$, it means the array $\textit{nums}$ is already a valid array, and no swaps are needed. Return $0$.
+-   If $i < j$, it means the minimum value in the array $\textit{nums}$ is to the left of the maximum value. The number of swaps needed is $i + n - 1 - j$, where $n$ is the length of the array $\textit{nums}$.
+-   If $i > j$, it means the minimum value in the array $\textit{nums}$ is to the right of the maximum value. The number of swaps needed is $i + n - 1 - j - 1$.
+
+The time complexity is $O(n)$, where $n$ is the length of the array $\textit{nums}$. The space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -66,6 +95,8 @@ class Solution:
                 j = k
         return 0 if i == j else i + len(nums) - 1 - j - (i > j)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -87,6 +118,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -110,6 +143,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minimumSwaps(nums []int) int {
 	var i, j int
@@ -131,6 +166,8 @@ func minimumSwaps(nums []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minimumSwaps(nums: number[]): number {
     let i = 0;
@@ -150,4 +187,6 @@ function minimumSwaps(nums: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

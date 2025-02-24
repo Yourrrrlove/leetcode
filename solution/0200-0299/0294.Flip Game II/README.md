@@ -1,10 +1,24 @@
-# [294. 翻转游戏 II](https://leetcode.cn/problems/flip-game-ii)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0294.Flip%20Game%20II/README.md
+tags:
+    - 记忆化搜索
+    - 数学
+    - 动态规划
+    - 回溯
+    - 博弈
+---
+
+<!-- problem:start -->
+
+# [294. 翻转游戏 II 🔒](https://leetcode.cn/problems/flip-game-ii)
 
 [English Version](/solution/0200-0299/0294.Flip%20Game%20II/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>你和朋友玩一个叫做「翻转游戏」的游戏。游戏规则如下：</p>
 
@@ -40,11 +54,17 @@
 
 <p><strong>进阶：</strong>请推导你算法的时间复杂度。</p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：状态压缩 + 记忆化搜索
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -65,6 +85,8 @@ class Solution:
                 mask |= 1 << i
         return dfs(mask)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -102,6 +124,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 using ll = long long;
 
@@ -131,6 +155,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func canWin(currentState string) bool {
@@ -166,6 +192,10 @@ func canWin(currentState string) bool {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：Sprague-Grundy 定理
 
 Sprague-Grundy 定理为游戏的每一个状态定义了一个 Sprague-Grundy 数（简称 SG 数），游戏状态的组合相当于 SG 数的异或运算。
@@ -195,6 +225,8 @@ SG 数有如下性质：
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def canWin(self, currentState: str) -> bool:
@@ -222,6 +254,8 @@ class Solution:
             i = j + 1
         return ans > 0
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -264,6 +298,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -292,6 +328,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func canWin(currentState string) bool {
@@ -332,4 +370,6 @@ func canWin(currentState string) bool {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

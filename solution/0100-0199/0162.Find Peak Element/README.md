@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0162.Find%20Peak%20Element/README.md
+tags:
+    - 数组
+    - 二分查找
+---
+
+<!-- problem:start -->
+
 # [162. 寻找峰值](https://leetcode.cn/problems/find-peak-element)
 
 [English Version](/solution/0100-0199/0162.Find%20Peak%20Element/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>峰值元素是指其值严格大于左右相邻值的元素。</p>
 
@@ -42,7 +53,11 @@
 	<li>对于所有有效的 <code>i</code> 都有 <code>nums[i] != nums[i + 1]</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：二分查找
 
@@ -56,6 +71,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
@@ -68,6 +85,8 @@ class Solution:
                 left = mid + 1
         return left
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -85,6 +104,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -104,6 +125,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func findPeakElement(nums []int) int {
 	left, right := 0, len(nums)-1
@@ -118,6 +141,8 @@ func findPeakElement(nums []int) int {
 	return left
 }
 ```
+
+#### TypeScript
 
 ```ts
 function findPeakElement(nums: number[]): number {
@@ -136,4 +161,6 @@ function findPeakElement(nums: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2581.Count%20Number%20of%20Possible%20Root%20Nodes/README.md
+rating: 2228
+source: 第 99 场双周赛 Q4
+tags:
+    - 树
+    - 深度优先搜索
+    - 数组
+    - 哈希表
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [2581. 统计可能的树根数目](https://leetcode.cn/problems/count-number-of-possible-root-nodes)
 
 [English Version](/solution/2500-2599/2581.Count%20Number%20of%20Possible%20Root%20Nodes/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>Alice 有一棵 <code>n</code> 个节点的树，节点编号为 <code>0</code> 到 <code>n - 1</code> 。树用一个长度为 <code>n - 1</code> 的二维整数数组 <code>edges</code> 表示，其中 <code>edges[i] = [a<sub>i</sub>, b<sub>i</sub>]</code> ，表示树中节点 <code>a<sub>i</sub></code> 和 <code>b<sub>i</sub></code> 之间有一条边。</p>
 
@@ -72,7 +88,11 @@
 	<li><code>0 &lt;= k &lt;= guesses.length</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：树形 DP（换根）
 
@@ -90,9 +110,11 @@
 
 相似题目：
 
--   [834. 树中距离之和](/solution/0800-0899/0834.Sum%20of%20Distances%20in%20Tree/README.md)
+-   [834. 树中距离之和](https://github.com/doocs/leetcode/blob/main/solution/0800-0899/0834.Sum%20of%20Distances%20in%20Tree/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -128,6 +150,8 @@ class Solution:
         dfs2(0, -1)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -187,12 +211,14 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     int rootCount(vector<vector<int>>& edges, vector<vector<int>>& guesses, int k) {
         int n = edges.size() + 1;
-        vector<vector<int>> g(n);
+        vector<int> g[n];
         unordered_map<long long, int> gs;
         auto f = [&](int i, int j) {
             return 1LL * i * n + j;
@@ -238,6 +264,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func rootCount(edges [][]int, guesses [][]int, k int) (ans int) {
@@ -289,6 +317,54 @@ func rootCount(edges [][]int, guesses [][]int, k int) (ans int) {
 }
 ```
 
+#### TypeScript
+
+```ts
+function rootCount(edges: number[][], guesses: number[][], k: number): number {
+    const n = edges.length + 1;
+    const g: number[][] = Array.from({ length: n }, () => []);
+    const gs: Map<number, number> = new Map();
+    const f = (i: number, j: number) => i * n + j;
+    for (const [a, b] of edges) {
+        g[a].push(b);
+        g[b].push(a);
+    }
+    for (const [a, b] of guesses) {
+        const x = f(a, b);
+        gs.set(x, gs.has(x) ? gs.get(x)! + 1 : 1);
+    }
+    let ans = 0;
+    let cnt = 0;
+    const dfs1 = (i: number, fa: number): void => {
+        for (const j of g[i]) {
+            if (j !== fa) {
+                cnt += gs.get(f(i, j)) || 0;
+                dfs1(j, i);
+            }
+        }
+    };
+    const dfs2 = (i: number, fa: number): void => {
+        ans += cnt >= k ? 1 : 0;
+        for (const j of g[i]) {
+            if (j !== fa) {
+                const a = gs.get(f(i, j)) || 0;
+                const b = gs.get(f(j, i)) || 0;
+                cnt -= a;
+                cnt += b;
+                dfs2(j, i);
+                cnt -= b;
+                cnt += a;
+            }
+        }
+    };
+    dfs1(0, -1);
+    dfs2(0, -1);
+    return ans;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

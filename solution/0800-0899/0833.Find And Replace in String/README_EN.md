@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0833.Find%20And%20Replace%20in%20String/README_EN.md
+tags:
+    - Array
+    - Hash Table
+    - String
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [833. Find And Replace in String](https://leetcode.com/problems/find-and-replace-in-string)
 
 [中文文档](/solution/0800-0899/0833.Find%20And%20Replace%20in%20String/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> string <code>s</code> that you must perform <code>k</code> replacement operations on. The replacement operations are given as three <strong>0-indexed</strong> parallel arrays, <code>indices</code>, <code>sources</code>, and <code>targets</code>, all of length <code>k</code>.</p>
 
@@ -60,11 +75,23 @@
 	<li><code>sources[i]</code> and <code>targets[i]</code> consist of only lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Simulation
+
+We iterate through each replacement operation. For the current $k$-th replacement operation $(i, \text{src})$, if $s[i..i+|\text{src}|-1]$ is equal to $\text{src}$, we record that the string at index $i$ needs to be replaced with the $k$-th string in $\text{targets}$; otherwise, no replacement is needed.
+
+Next, we only need to iterate through the original string $s$ and perform the replacements based on the recorded information.
+
+The time complexity is $O(L)$, and the space complexity is $O(n)$, where $L$ is the sum of the lengths of all strings, and $n$ is the length of the string $s$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -87,6 +114,8 @@ class Solution:
                 i += 1
         return "".join(ans)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -114,6 +143,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -140,6 +171,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func findReplaceString(s string, indices []int, sources []string, targets []string) string {
 	n := len(s)
@@ -162,6 +195,8 @@ func findReplaceString(s string, indices []int, sources []string, targets []stri
 	return ans.String()
 }
 ```
+
+#### TypeScript
 
 ```ts
 function findReplaceString(
@@ -193,4 +228,6 @@ function findReplaceString(
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

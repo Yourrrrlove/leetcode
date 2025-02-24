@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2400-2499/2488.Count%20Subarrays%20With%20Median%20K/README.md
+rating: 1998
+source: 第 321 场周赛 Q4
+tags:
+    - 数组
+    - 哈希表
+    - 前缀和
+---
+
+<!-- problem:start -->
+
 # [2488. 统计中位数为 K 的子数组](https://leetcode.cn/problems/count-subarrays-with-median-k)
 
 [English Version](/solution/2400-2499/2488.Count%20Subarrays%20With%20Median%20K/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个长度为 <code>n</code> 的数组 <code>nums</code> ，该数组由从 <code>1</code> 到 <code>n</code> 的 <strong>不同</strong> 整数组成。另给你一个正整数 <code>k</code> 。</p>
 
@@ -14,11 +28,13 @@
 
 <ul>
 	<li>数组的中位数是按 <strong>递增</strong> 顺序排列后位于 <strong>中间</strong> 的那个元素，如果数组长度为偶数，则中位数是位于中间靠 <strong>左</strong> 的那个元素。
+
     <ul>
     	<li>例如，<code>[2,3,1,4]</code> 的中位数是 <code>2</code> ，<code>[8,4,3,5,1]</code> 的中位数是 <code>4</code> 。</li>
     </ul>
     </li>
     <li>子数组是数组中的一个连续部分。</li>
+
 </ul>
 
 <p>&nbsp;</p>
@@ -50,7 +66,11 @@
 	<li><code>nums</code> 中的整数互不相同</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：遍历 + 计数
 
@@ -70,6 +90,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def countSubarrays(self, nums: List[int], k: int) -> int:
@@ -88,6 +110,8 @@ class Solution:
             ans += cnt[-x] + cnt[-x + 1]
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -119,6 +143,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -148,6 +174,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func countSubarrays(nums []int, k int) int {
@@ -185,6 +213,8 @@ func countSubarrays(nums []int, k int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function countSubarrays(nums: number[], k: number): number {
     const i = nums.indexOf(k);
@@ -209,4 +239,6 @@ function countSubarrays(nums: number[], k: number): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

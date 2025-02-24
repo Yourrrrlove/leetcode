@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0900-0999/0931.Minimum%20Falling%20Path%20Sum/README.md
+tags:
+    - 数组
+    - 动态规划
+    - 矩阵
+---
+
+<!-- problem:start -->
+
 # [931. 下降路径最小和](https://leetcode.cn/problems/minimum-falling-path-sum)
 
 [English Version](/solution/0900-0999/0931.Minimum%20Falling%20Path%20Sum/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个 <code>n x n</code> 的<strong> 方形 </strong>整数数组&nbsp;<code>matrix</code> ，请你找出并返回通过 <code>matrix</code> 的<strong>下降路径</strong><em> </em>的<strong> </strong><strong>最小和</strong> 。</p>
 
@@ -14,7 +26,7 @@
 
 <p><strong>示例 1：</strong></p>
 
-<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0931.Minimum%20Falling%20Path%20Sum/images/failing1-grid.jpg" style="height: 500px; width: 499px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0931.Minimum%20Falling%20Path%20Sum/images/1729566253-aneDag-image.png" style="height: 500px; width: 499px;" /></p>
 
 <pre>
 <strong>输入：</strong>matrix = [[2,1,3],[6,5,4],[7,8,9]]
@@ -24,7 +36,7 @@
 
 <p><strong>示例 2：</strong></p>
 
-<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0931.Minimum%20Falling%20Path%20Sum/images/failing2-grid.jpg" style="height: 365px; width: 164px;" /></p>
+<p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0900-0999/0931.Minimum%20Falling%20Path%20Sum/images/1729566282-dtXwRd-image.png" style="height: 365px; width: 164px;" /></p>
 
 <pre>
 <strong>输入：</strong>matrix = [[-19,57],[-40,-5]]
@@ -42,7 +54,11 @@
 	<li><code>-100 &lt;= matrix[i][j] &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：动态规划
 
@@ -60,6 +76,8 @@ $$
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def minFallingPathSum(self, matrix: List[List[int]]) -> int:
@@ -73,6 +91,8 @@ class Solution:
             f = g
         return min(f)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -102,6 +122,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -126,6 +148,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minFallingPathSum(matrix [][]int) int {
 	n := len(matrix)
@@ -147,6 +171,8 @@ func minFallingPathSum(matrix [][]int) int {
 	return slices.Min(f)
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minFallingPathSum(matrix: number[][]): number {
@@ -171,4 +197,6 @@ function minFallingPathSum(matrix: number[][]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

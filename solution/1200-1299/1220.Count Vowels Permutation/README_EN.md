@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1220.Count%20Vowels%20Permutation/README_EN.md
+rating: 1729
+source: Weekly Contest 157 Q4
+tags:
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [1220. Count Vowels Permutation](https://leetcode.com/problems/count-vowels-permutation)
 
 [中文文档](/solution/1200-1299/1220.Count%20Vowels%20Permutation/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer <code>n</code>, your task is to count how many strings of length <code>n</code> can be formed under the following rules:</p>
 
@@ -47,7 +61,11 @@
 	<li><code>1 &lt;= n &lt;= 2 * 10^4</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Dynamic Programming
 
@@ -92,6 +110,8 @@ The time complexity is $O(n)$, and the space complexity is $O(C)$. Here, $n$ is 
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def countVowelPermutation(self, n: int) -> int:
@@ -107,6 +127,8 @@ class Solution:
             f = g
         return sum(f) % mod
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -132,6 +154,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -152,6 +176,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func countVowelPermutation(n int) (ans int) {
@@ -176,6 +202,8 @@ func countVowelPermutation(n int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function countVowelPermutation(n: number): number {
     const f: number[] = Array(5).fill(1);
@@ -192,6 +220,8 @@ function countVowelPermutation(n: number): number {
     return f.reduce((a, b) => (a + b) % mod);
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -216,45 +246,46 @@ var countVowelPermutation = function (n) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Matrix Exponentiation to Accelerate Recursion
 
 The time complexity is $O(C^3 \times \log n)$, and the space complexity is $O(C^2)$. Here, $C$ is the number of vowels. In this problem, $C=5$.
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
+import numpy as np
+
+
 class Solution:
     def countVowelPermutation(self, n: int) -> int:
         mod = 10**9 + 7
-
-        def mul(a: List[List[int]], b: List[List[int]]) -> List[List[int]]:
-            m, n = len(a), len(b[0])
-            c = [[0] * n for _ in range(m)]
-            for i in range(m):
-                for j in range(n):
-                    for k in range(len(b)):
-                        c[i][j] = (c[i][j] + a[i][k] * b[k][j]) % mod
-            return c
-
-        def pow(a: List[List[int]], n: int) -> List[int]:
-            res = [[1] * len(a)]
-            while n:
-                if n & 1:
-                    res = mul(res, a)
-                a = mul(a, a)
-                n >>= 1
-            return res
-
-        a = [
-            [0, 1, 0, 0, 0],
-            [1, 0, 1, 0, 0],
-            [1, 1, 0, 1, 1],
-            [0, 0, 1, 0, 1],
-            [1, 0, 0, 0, 0],
-        ]
-        res = pow(a, n - 1)
-        return sum(map(sum, res)) % mod
+        factor = np.asmatrix(
+            [
+                (0, 1, 0, 0, 0),
+                (1, 0, 1, 0, 0),
+                (1, 1, 0, 1, 1),
+                (0, 0, 1, 0, 1),
+                (1, 0, 0, 0, 0),
+            ],
+            np.dtype("O"),
+        )
+        res = np.asmatrix([(1, 1, 1, 1, 1)], np.dtype("O"))
+        n -= 1
+        while n:
+            if n & 1:
+                res = res * factor % mod
+            factor = factor * factor % mod
+            n >>= 1
+        return res.sum() % mod
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -298,6 +329,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -345,6 +378,8 @@ private:
 };
 ```
 
+#### Go
+
 ```go
 const mod = 1e9 + 7
 
@@ -391,6 +426,8 @@ func pow(a [][]int, n int) [][]int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 const mod = 1e9 + 7;
 
@@ -432,6 +469,8 @@ function pow(a: number[][], n: number): number[][] {
     return res;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -482,63 +521,6 @@ function pow(a, n) {
 
 <!-- tabs:end -->
 
-### Solution 3
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```python
-import numpy as np
-
-
-class Solution:
-    def countVowelPermutation(self, n: int) -> int:
-        mod = 10**9 + 7
-        factor = np.mat(
-            [
-                (0, 1, 0, 0, 0),
-                (1, 0, 1, 0, 0),
-                (1, 1, 0, 1, 1),
-                (0, 0, 1, 0, 1),
-                (1, 0, 0, 0, 0),
-            ],
-            np.dtype("O"),
-        )
-        res = np.mat([(1, 1, 1, 1, 1)], np.dtype("O"))
-        n -= 1
-        while n:
-            if n & 1:
-                res = res * factor % mod
-            factor = factor * factor % mod
-            n >>= 1
-        return res.sum() % mod
-```
-
-```java
-class Solution {
-    public int countVowelPermutation(int n) {
-        final int mod = 1000000007;
-        long countA = 1, countE = 1, countI = 1, countO = 1, countU = 1;
-        for (int length = 1; length < n; length++) {
-            // Calculate the next counts for each vowel based on the previous counts
-            long nextCountA = countE;
-            long nextCountE = (countA + countI) % mod;
-            long nextCountI = (countA + countE + countO + countU) % mod;
-            long nextCountO = (countI + countU) % mod;
-            long nextCountU = countA;
-            // Update the counts with the newly calculated values for the next length
-            countA = nextCountA;
-            countE = nextCountE;
-            countI = nextCountI;
-            countO = nextCountO;
-            countU = nextCountU;
-        }
-        // Calculate the total count of valid strings for length n
-        long totalCount = (countA + countE + countI + countO + countU) % mod;
-        return (int) totalCount;
-    }
-}
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

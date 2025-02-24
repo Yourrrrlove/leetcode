@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2400-2499/2483.Minimum%20Penalty%20for%20a%20Shop/README_EN.md
+rating: 1494
+source: Biweekly Contest 92 Q3
+tags:
+    - String
+    - Prefix Sum
+---
+
+<!-- problem:start -->
+
 # [2483. Minimum Penalty for a Shop](https://leetcode.com/problems/minimum-penalty-for-a-shop)
 
 [中文文档](/solution/2400-2499/2483.Minimum%20Penalty%20for%20a%20Shop/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given the customer visit log of a shop represented by a <strong>0-indexed</strong> string <code>customers</code> consisting only of characters <code>&#39;N&#39;</code> and <code>&#39;Y&#39;</code>:</p>
 
@@ -60,11 +75,23 @@ Closing the shop at 2<sup>nd</sup> or 4<sup>th</sup> hour gives a minimum penalt
 	<li><code>customers</code> consists only of characters <code>&#39;Y&#39;</code> and <code>&#39;N&#39;</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Prefix Sum + Enumeration
+
+First, we calculate how many customers arrive in the first $i$ hours and record it in the prefix sum array $s$.
+
+Then we enumerate the closing time $j$ of the shop, calculate the cost, and take the earliest closing time with the smallest cost.
+
+The time complexity is $O(n)$, and the space complexity is $O(n)$. Where $n$ is the length of the string $customers$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -80,6 +107,8 @@ class Solution:
                 ans, cost = j, t
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -101,6 +130,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -124,6 +155,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func bestClosingTime(customers string) (ans int) {
 	n := len(customers)
@@ -144,6 +177,8 @@ func bestClosingTime(customers string) (ans int) {
 	return
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -174,4 +209,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

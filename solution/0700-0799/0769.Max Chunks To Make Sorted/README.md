@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0769.Max%20Chunks%20To%20Make%20Sorted/README.md
+tags:
+    - 栈
+    - 贪心
+    - 数组
+    - 排序
+    - 单调栈
+---
+
+<!-- problem:start -->
+
 # [769. 最多能完成排序的块](https://leetcode.cn/problems/max-chunks-to-make-sorted)
 
 [English Version](/solution/0700-0799/0769.Max%20Chunks%20To%20Make%20Sorted/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个长度为 <code>n</code> 的整数数组 <code>arr</code> ，它表示在 <code>[0, n - 1]</code> 范围内的整数的排列。</p>
 
@@ -46,15 +60,21 @@
 	<li><code>arr</code>&nbsp;中每个元素都 <strong>不同</strong></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：贪心 + 一次遍历
 
-由于 $arr$ 是 $[0,..,n-1]$ 的一个排列，若已遍历过的数中的最大值 $mx$ 与当前遍历到的下标 $i$ 相等，说明可以进行一次分割，累加答案。
+由于 $\textit{arr}$ 是 $[0,..,n-1]$ 的一个排列，若已遍历过的数中的最大值 $\textit{mx}$ 与当前遍历到的下标 $i$ 相等，说明可以进行一次分割，累加答案。
 
-时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为数组 $arr$ 的长度。
+时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为数组 $\textit{arr}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -66,6 +86,8 @@ class Solution:
                 ans += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -82,6 +104,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -96,6 +120,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxChunksToSorted(arr []int) int {
 	ans, mx := 0, 0
@@ -109,14 +135,16 @@ func maxChunksToSorted(arr []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function maxChunksToSorted(arr: number[]): number {
     const n = arr.length;
     let ans = 0;
-    let max = 0;
+    let mx = 0;
     for (let i = 0; i < n; i++) {
-        max = Math.max(arr[i], max);
-        if (max == i) {
+        mx = Math.max(arr[i], mx);
+        if (mx == i) {
             ans++;
         }
     }
@@ -124,39 +152,47 @@ function maxChunksToSorted(arr: number[]): number {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn max_chunks_to_sorted(arr: Vec<i32>) -> i32 {
-        let mut res = 0;
-        let mut max = 0;
+        let mut ans = 0;
+        let mut mx = 0;
         for i in 0..arr.len() {
-            max = max.max(arr[i]);
-            if max == (i as i32) {
-                res += 1;
+            mx = mx.max(arr[i]);
+            if mx == (i as i32) {
+                ans += 1;
             }
         }
-        res
+        ans
     }
 }
 ```
+
+#### C
 
 ```c
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 
 int maxChunksToSorted(int* arr, int arrSize) {
-    int res = 0;
+    int ans = 0;
     int mx = -1;
     for (int i = 0; i < arrSize; i++) {
         mx = max(mx, arr[i]);
         if (mx == i) {
-            res++;
+            ans++;
         }
     }
-    return res;
+    return ans;
 }
 ```
 
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### 方法二：单调栈
 
@@ -164,11 +200,13 @@ int maxChunksToSorted(int* arr, int arrSize) {
 
 根据题目，我们可以发现，从左到右，每个分块都有一个最大值，并且这些分块的最大值呈单调递增。我们可以用一个栈来存储这些分块的最大值。最后得到的栈的大小，也就是题目所求的最多能完成排序的块。
 
-以上这种解法，不仅可以解决本题，也可以解决 [768. 最多能完成排序的块 II](/solution/0700-0799/0768.Max%20Chunks%20To%20Make%20Sorted%20II/README.md) 这道困难题。大家可以自行尝试。
+以上这种解法，不仅可以解决本题，也可以解决 [768. 最多能完成排序的块 II](https://github.com/doocs/leetcode/blob/main/solution/0700-0799/0768.Max%20Chunks%20To%20Make%20Sorted%20II/README.md) 这道困难题。大家可以自行尝试。
 
-时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $arr$ 的长度。
+时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $\textit{arr}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -184,6 +222,8 @@ class Solution:
                 stk.append(mx)
         return len(stk)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -204,6 +244,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -227,6 +269,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxChunksToSorted(arr []int) int {
 	stk := []int{}
@@ -246,6 +290,44 @@ func maxChunksToSorted(arr []int) int {
 }
 ```
 
+#### TypeScript
+
+```ts
+function maxChunksToSorted(arr: number[]): number {
+    const stk: number[] = [];
+
+    for (const x of arr) {
+        if (stk.at(-1)! > x) {
+            const top = stk.pop()!;
+            while (stk.length && stk.at(-1)! > x) stk.pop();
+            stk.push(top);
+        } else stk.push(x);
+    }
+
+    return stk.length;
+}
+```
+
+#### JavaScript
+
+```js
+function maxChunksToSorted(arr) {
+    const stk = [];
+
+    for (const x of arr) {
+        if (stk.at(-1) > x) {
+            const top = stk.pop();
+            while (stk.length && stk.at(-1) > x) stk.pop();
+            stk.push(top);
+        } else stk.push(x);
+    }
+
+    return stk.length;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1700-1799/1727.Largest%20Submatrix%20With%20Rearrangements/README.md
+rating: 1926
+source: 第 224 场周赛 Q3
+tags:
+    - 贪心
+    - 数组
+    - 矩阵
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [1727. 重新排列后的最大子矩阵](https://leetcode.cn/problems/largest-submatrix-with-rearrangements)
 
 [English Version](/solution/1700-1799/1727.Largest%20Submatrix%20With%20Rearrangements/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个二进制矩阵 <code>matrix</code> ，它的大小为 <code>m x n</code> ，你可以将 <code>matrix</code> 中的 <strong>列</strong> 按任意顺序重新排列。</p>
 
@@ -59,7 +74,11 @@
 	<li><code>matrix[i][j]</code> 要么是 <code>0</code> ，要么是 <code>1</code> 。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：预处理 + 排序
 
@@ -71,9 +90,11 @@
 
 对于矩阵的某一行，我们记第 $k$ 大元素的值为 $val_k$，其中 $k \geq 1$，那么该行至少有 $k$ 个元素不小于 $val_k$，组成的全 $1$ 子矩阵面积为 $val_k \times k$。从大到小遍历矩阵该行的每个元素，取 $val_k \times k$ 的最大值，更新答案。
 
-时间复杂度 $O(m\times n\times \log n)$。其中 $m$ 和 $n$ 分别为矩阵的行数和列数。
+时间复杂度 $O(m \times n \times \log n)$。其中 $m$ 和 $n$ 分别为矩阵的行数和列数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -89,6 +110,8 @@ class Solution:
                 ans = max(ans, j * v)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -114,6 +137,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -138,6 +163,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func largestSubmatrix(matrix [][]int) int {
 	m, n := len(matrix), len(matrix[0])
@@ -158,6 +185,8 @@ func largestSubmatrix(matrix [][]int) int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function largestSubmatrix(matrix: number[][]): number {
@@ -200,4 +229,6 @@ function largestSubmatrix(matrix: number[][]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

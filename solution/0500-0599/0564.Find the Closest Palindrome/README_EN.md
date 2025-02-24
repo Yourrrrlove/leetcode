@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0500-0599/0564.Find%20the%20Closest%20Palindrome/README_EN.md
+tags:
+    - Math
+    - String
+---
+
+<!-- problem:start -->
+
 # [564. Find the Closest Palindrome](https://leetcode.com/problems/find-the-closest-palindrome)
 
 [中文文档](/solution/0500-0599/0564.Find%20the%20Closest%20Palindrome/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a string <code>n</code> representing an integer, return <em>the closest integer (not including itself), which is a palindrome</em>. If there is a tie, return <em><strong>the smaller one</strong></em>.</p>
 
@@ -34,11 +47,17 @@
 	<li><code>n</code> is representing an integer in the range <code>[1, 10<sup>18</sup> - 1]</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -65,6 +84,8 @@ class Solution:
                 ans = t
         return str(ans)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -98,6 +119,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -126,6 +149,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func nearestPalindromic(n string) string {
@@ -162,6 +187,63 @@ func abs(x int) int {
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {string} n
+ * @return {string}
+ */
+
+function nearestPalindromic(n) {
+    const x = BigInt(n);
+    let ans = null;
+
+    for (const t of getCandidates(n)) {
+        if (
+            ans === null ||
+            absDiff(t, x) < absDiff(ans, x) ||
+            (absDiff(t, x) === absDiff(ans, x) && t < ans)
+        ) {
+            ans = t;
+        }
+    }
+
+    return ans.toString();
+}
+
+function getCandidates(n) {
+    const length = n.length;
+    const res = new Set();
+
+    res.add(BigInt(Math.pow(10, length - 1) - 1));
+    res.add(BigInt(Math.pow(10, length) + 1));
+
+    const left = BigInt(n.substring(0, Math.ceil(length / 2)));
+
+    for (let i = left - 1n; i <= left + 1n; i++) {
+        const prefix = i.toString();
+        const t =
+            prefix +
+            prefix
+                .split('')
+                .reverse()
+                .slice(length % 2)
+                .join('');
+        res.add(BigInt(t));
+    }
+
+    res.delete(BigInt(n));
+    return res;
+}
+
+function absDiff(a, b) {
+    return a > b ? a - b : b - a;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

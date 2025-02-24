@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0102.Binary%20Tree%20Level%20Order%20Traversal/README_EN.md
+tags:
+    - Tree
+    - Breadth-First Search
+    - Binary Tree
+---
+
+<!-- problem:start -->
+
 # [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal)
 
 [中文文档](/solution/0100-0199/0102.Binary%20Tree%20Level%20Order%20Traversal/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given the <code>root</code> of a binary tree, return <em>the level order traversal of its nodes&#39; values</em>. (i.e., from left to right, level by level).</p>
 
@@ -36,7 +50,11 @@
 	<li><code>-1000 &lt;= Node.val &lt;= 1000</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: BFS
 
@@ -50,6 +68,8 @@ Finally, return the answer array.
 The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes in the binary tree.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -76,6 +96,8 @@ class Solution:
             ans.append(t)
         return ans
 ```
+
+#### Java
 
 ```java
 /**
@@ -120,6 +142,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -144,8 +168,12 @@ public:
                 auto node = q.front();
                 q.pop();
                 t.push_back(node->val);
-                if (node->left) q.push(node->left);
-                if (node->right) q.push(node->right);
+                if (node->left) {
+                    q.push(node->left);
+                }
+                if (node->right) {
+                    q.push(node->right);
+                }
             }
             ans.push_back(t);
         }
@@ -153,6 +181,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -187,6 +217,8 @@ func levelOrder(root *TreeNode) (ans [][]int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 /**
  * Definition for a binary tree node.
@@ -203,25 +235,27 @@ func levelOrder(root *TreeNode) (ans [][]int) {
  */
 
 function levelOrder(root: TreeNode | null): number[][] {
-    const res = [];
-    if (root == null) {
-        return res;
+    const ans: number[][] = [];
+    if (!root) {
+        return ans;
     }
-    const queue = [root];
-    while (queue.length != 0) {
-        const n = queue.length;
-        res.push(
-            new Array(n).fill(null).map(() => {
-                const { val, left, right } = queue.shift();
-                left && queue.push(left);
-                right && queue.push(right);
-                return val;
-            }),
-        );
+    const q: TreeNode[] = [root];
+    while (q.length) {
+        const t: number[] = [];
+        const qq: TreeNode[] = [];
+        for (const { val, left, right } of q) {
+            t.push(val);
+            left && qq.push(left);
+            right && qq.push(right);
+        }
+        ans.push(t);
+        q.splice(0, q.length, ...qq);
     }
-    return res;
+    return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 // Definition for a binary tree node.
@@ -242,39 +276,38 @@ function levelOrder(root: TreeNode | null): number[][] {
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
 use std::collections::VecDeque;
+use std::rc::Rc;
 impl Solution {
     pub fn level_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {
-        let mut res = vec![];
-        if root.is_none() {
-            return res;
-        }
-        let mut queue: VecDeque<Option<Rc<RefCell<TreeNode>>>> = vec![root].into_iter().collect();
-        while !queue.is_empty() {
-            let n = queue.len();
-            res.push(
-                (0..n)
-                    .into_iter()
-                    .map(|_| {
-                        let mut node = queue.pop_front().unwrap();
-                        let mut node = node.as_mut().unwrap().borrow_mut();
-                        if node.left.is_some() {
-                            queue.push_back(node.left.take());
+        let mut ans = Vec::new();
+        if let Some(root_node) = root {
+            let mut q = VecDeque::new();
+            q.push_back(root_node);
+            while !q.is_empty() {
+                let mut t = Vec::new();
+                for _ in 0..q.len() {
+                    if let Some(node) = q.pop_front() {
+                        let node_ref = node.borrow();
+                        t.push(node_ref.val);
+                        if let Some(ref left) = node_ref.left {
+                            q.push_back(Rc::clone(left));
                         }
-                        if node.right.is_some() {
-                            queue.push_back(node.right.take());
+                        if let Some(ref right) = node_ref.right {
+                            q.push_back(Rc::clone(right));
                         }
-                        node.val
-                    })
-                    .collect()
-            );
+                    }
+                }
+                ans.push(t);
+            }
         }
-        res
+        ans
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -290,20 +323,21 @@ impl Solution {
  * @return {number[][]}
  */
 var levelOrder = function (root) {
-    let ans = [];
+    const ans = [];
     if (!root) {
         return ans;
     }
-    let q = [root];
+    const q = [root];
     while (q.length) {
-        let t = [];
-        for (let n = q.length; n; --n) {
-            const { val, left, right } = q.shift();
+        const t = [];
+        const qq = [];
+        for (const { val, left, right } of q) {
             t.push(val);
-            left && q.push(left);
-            right && q.push(right);
+            left && qq.push(left);
+            right && qq.push(right);
         }
         ans.push(t);
+        q.splice(0, q.length, ...qq);
     }
     return ans;
 };
@@ -311,4 +345,6 @@ var levelOrder = function (root) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

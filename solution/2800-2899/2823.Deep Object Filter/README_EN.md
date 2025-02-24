@@ -1,8 +1,20 @@
-# [2823. Deep Object Filter](https://leetcode.com/problems/deep-object-filter)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2823.Deep%20Object%20Filter/README_EN.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
+# [2823. Deep Object Filter 🔒](https://leetcode.com/problems/deep-object-filter)
 
 [中文文档](/solution/2800-2899/2823.Deep%20Object%20Filter/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an object or an array&nbsp;<code>obj</code> and a function <code>fn</code>, return a filtered object or array&nbsp;<code>filteredObject</code>.&nbsp;</p>
 
@@ -58,11 +70,17 @@ fn = (x) =&gt; Array.isArray(x)
 	<li><code>2 &lt;= JSON.stringify(obj).length &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 function deepFilter(obj: Record<string, any>, fn: Function): Record<string, any> | undefined {
@@ -92,4 +110,6 @@ function deepFilter(obj: Record<string, any>, fn: Function): Record<string, any>
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

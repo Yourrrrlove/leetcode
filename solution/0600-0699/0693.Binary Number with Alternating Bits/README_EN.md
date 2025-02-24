@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0600-0699/0693.Binary%20Number%20with%20Alternating%20Bits/README_EN.md
+tags:
+    - Bit Manipulation
+---
+
+<!-- problem:start -->
+
 # [693. Binary Number with Alternating Bits](https://leetcode.com/problems/binary-number-with-alternating-bits)
 
 [中文文档](/solution/0600-0699/0693.Binary%20Number%20with%20Alternating%20Bits/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a positive integer, check whether it has alternating bits: namely, if two adjacent bits will always have different values.</p>
 
@@ -36,11 +48,17 @@
 	<li><code>1 &lt;= n &lt;= 2<sup>31</sup> - 1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -54,6 +72,8 @@ class Solution:
             n >>= 1
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -72,6 +92,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -88,6 +110,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func hasAlternatingBits(n int) bool {
 	prev := -1
@@ -102,6 +126,8 @@ func hasAlternatingBits(n int) bool {
 	return true
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -123,9 +149,15 @@ impl Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -133,6 +165,8 @@ class Solution:
         n ^= n >> 1
         return (n & (n + 1)) == 0
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -142,6 +176,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -153,12 +189,16 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func hasAlternatingBits(n int) bool {
 	n ^= (n >> 1)
 	return (n & (n + 1)) == 0
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -171,4 +211,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

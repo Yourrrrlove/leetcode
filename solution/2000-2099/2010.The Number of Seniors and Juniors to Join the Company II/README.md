@@ -1,10 +1,20 @@
-# [2010. 职员招聘人数 II](https://leetcode.cn/problems/the-number-of-seniors-and-juniors-to-join-the-company-ii)
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2000-2099/2010.The%20Number%20of%20Seniors%20and%20Juniors%20to%20Join%20the%20Company%20II/README.md
+tags:
+    - 数据库
+---
+
+<!-- problem:start -->
+
+# [2010. 职员招聘人数 II 🔒](https://leetcode.cn/problems/the-number-of-seniors-and-juniors-to-join-the-company-ii)
 
 [English Version](/solution/2000-2099/2010.The%20Number%20of%20Seniors%20and%20Juniors%20to%20Join%20the%20Company%20II/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>表: <code>Candidates</code></p>
 
@@ -23,7 +33,7 @@ employee_id 是该表中具有唯一值的列。
 
 <p>&nbsp;</p>
 
-<p>一家公司想雇佣新员工。公司的工资预算是 <code>70000</code> 。公司的招聘标准是：</p>
+<p>一家公司想雇佣新员工。公司的工资预算是 <code>$70000</code> 。公司的招聘标准是：</p>
 
 <ol>
 	<li>继续雇佣薪水最低的高级职员，直到你不能再雇佣更多的高级职员。</li>
@@ -93,15 +103,21 @@ Candidates table:
 我们不能用目前的预算雇佣任何高级员工，因为我们需要至少 80000 美元来雇佣一名高级员工。
 我们可以用剩下的预算雇佣三名初级员工。</pre>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：窗口函数
 
 相似题目：
 
--   [2004. 职员招聘人数](/solution/2000-2099/2004.The%20Number%20of%20Seniors%20and%20Juniors%20to%20Join%20the%20Company/README.md)
+-   [2004. 职员招聘人数](https://github.com/doocs/leetcode/blob/main/solution/2000-2099/2004.The%20Number%20of%20Seniors%20and%20Juniors%20to%20Join%20the%20Company/README.md)
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -139,4 +155,6 @@ WHERE cur <= 70000;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

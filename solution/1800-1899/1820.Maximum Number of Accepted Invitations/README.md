@@ -1,10 +1,23 @@
-# [1820. 最多邀请的个数](https://leetcode.cn/problems/maximum-number-of-accepted-invitations)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1800-1899/1820.Maximum%20Number%20of%20Accepted%20Invitations/README.md
+tags:
+    - 深度优先搜索
+    - 图
+    - 数组
+    - 矩阵
+---
+
+<!-- problem:start -->
+
+# [1820. 最多邀请的个数 🔒](https://leetcode.cn/problems/maximum-number-of-accepted-invitations)
 
 [English Version](/solution/1800-1899/1820.Maximum%20Number%20of%20Accepted%20Invitations/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>某一个班级有 <code>m</code> 个男孩和 <code>n</code> 个女孩，即将举行一个派对。</p>
 
@@ -49,7 +62,11 @@
 	<li><code>grid[i][j]</code> 是 <code>0</code> 或 <code>1</code> 之一。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：匈牙利算法
 
@@ -60,6 +77,8 @@
 时间复杂度 $O(m \times n)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -81,6 +100,8 @@ class Solution:
             ans += find(i)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -121,6 +142,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -150,6 +173,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func maximumInvitations(grid [][]int) int {
@@ -185,4 +210,6 @@ func maximumInvitations(grid [][]int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

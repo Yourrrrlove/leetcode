@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1000-1099/1010.Pairs%20of%20Songs%20With%20Total%20Durations%20Divisible%20by%2060/README_EN.md
+rating: 1377
+source: Weekly Contest 128 Q2
+tags:
+    - Array
+    - Hash Table
+    - Counting
+---
+
+<!-- problem:start -->
+
 # [1010. Pairs of Songs With Total Durations Divisible by 60](https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60)
 
 [中文文档](/solution/1000-1099/1010.Pairs%20of%20Songs%20With%20Total%20Durations%20Divisible%20by%2060/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a list of songs where the <code>i<sup>th</sup></code> song has a duration of <code>time[i]</code> seconds.</p>
 
@@ -36,11 +52,17 @@
 	<li><code>1 &lt;= time[i] &lt;= 500</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -51,6 +73,8 @@ class Solution:
         ans += cnt[30] * (cnt[30] - 1) // 2
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -69,6 +93,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -89,6 +115,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numPairsDivisibleBy60(time []int) (ans int) {
 	cnt := [60]int{}
@@ -103,6 +131,8 @@ func numPairsDivisibleBy60(time []int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function numPairsDivisibleBy60(time: number[]): number {
@@ -122,9 +152,15 @@ function numPairsDivisibleBy60(time: number[]): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -138,6 +174,8 @@ class Solution:
             cnt[x] += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -154,6 +192,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -172,6 +212,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numPairsDivisibleBy60(time []int) (ans int) {
 	cnt := [60]int{}
@@ -184,6 +226,8 @@ func numPairsDivisibleBy60(time []int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function numPairsDivisibleBy60(time: number[]): number {
@@ -201,4 +245,6 @@ function numPairsDivisibleBy60(time: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

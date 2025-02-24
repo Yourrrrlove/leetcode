@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2601.Prime%20Subtraction%20Operation/README_EN.md
+rating: 1779
+source: Weekly Contest 338 Q2
+tags:
+    - Greedy
+    - Array
+    - Math
+    - Binary Search
+    - Number Theory
+---
+
+<!-- problem:start -->
+
 # [2601. Prime Subtraction Operation](https://leetcode.com/problems/prime-subtraction-operation)
 
 [中文文档](/solution/2600-2699/2601.Prime%20Subtraction%20Operation/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> integer array <code>nums</code> of length <code>n</code>.</p>
 
@@ -49,7 +67,11 @@ After the second operation, nums is sorted in strictly increasing order, so the 
 	<li><code><font face="monospace">nums.length == n</font></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Preprocessing prime numbers + binary search
 
@@ -62,6 +84,8 @@ If all the elements in $nums$ are processed, it means that it can be strictly in
 The time complexity is $O(n \log n)$ and the space complexity is $O(n)$. where $n$ is the length of the array $nums$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -84,6 +108,8 @@ class Solution:
             nums[i] -= p[j]
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -130,6 +156,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -163,6 +191,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func primeSubOperation(nums []int) bool {
 	p := []int{}
@@ -191,6 +221,8 @@ func primeSubOperation(nums []int) bool {
 	return true
 }
 ```
+
+#### TypeScript
 
 ```ts
 function primeSubOperation(nums: number[]): boolean {
@@ -237,4 +269,88 @@ function primeSubOperation(nums: number[]): boolean {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 2: Preprocessing prime numbers
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function primeSubOperation(nums: number[]): boolean {
+    const p: number[] = [];
+    const max = Math.max(...nums);
+
+    for (let i = 2; i < max; i++) {
+        let isPrime = true;
+
+        for (const x of p) {
+            if (i % x === 0) {
+                isPrime = false;
+                break;
+            }
+        }
+
+        while (isPrime && p.length <= i) {
+            p.push(i);
+        }
+    }
+
+    for (let i = nums.length - 2; i >= 0; i--) {
+        if (nums[i] < nums[i + 1]) continue;
+
+        const [x, next] = [nums[i], nums[i + 1]];
+        const prime = p[x - next + 1];
+
+        if (!prime || prime >= x) return false;
+        nums[i] -= prime;
+    }
+
+    return true;
+}
+```
+
+#### JavaScript
+
+```js
+function primeSubOperation(nums) {
+    const p = [];
+    const max = Math.max(...nums);
+
+    for (let i = 2; i < max; i++) {
+        let isPrime = true;
+
+        for (const x of p) {
+            if (i % x === 0) {
+                isPrime = false;
+                break;
+            }
+        }
+
+        while (isPrime && p.length <= i) {
+            p.push(i);
+        }
+    }
+
+    for (let i = nums.length - 2; i >= 0; i--) {
+        if (nums[i] < nums[i + 1]) continue;
+
+        const [x, next] = [nums[i], nums[i + 1]];
+        const prime = p[x - next + 1];
+
+        if (!prime || prime >= x) return false;
+        nums[i] -= prime;
+    }
+
+    return true;
+}
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

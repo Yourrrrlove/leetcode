@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1500-1599/1599.Maximum%20Profit%20of%20Operating%20a%20Centennial%20Wheel/README_EN.md
+rating: 1548
+source: Weekly Contest 208 Q2
+tags:
+    - Array
+    - Simulation
+---
+
+<!-- problem:start -->
+
 # [1599. Maximum Profit of Operating a Centennial Wheel](https://leetcode.com/problems/maximum-profit-of-operating-a-centennial-wheel)
 
 [中文文档](/solution/1500-1599/1599.Maximum%20Profit%20of%20Operating%20a%20Centennial%20Wheel/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are the operator of a Centennial Wheel that has <strong>four gondolas</strong>, and each gondola has room for <strong>up</strong> <strong>to</strong> <strong>four people</strong>. You have the ability to rotate the gondolas <strong>counterclockwise</strong>, which costs you <code>runningCost</code> dollars.</p>
 
@@ -19,10 +34,10 @@
 <strong>Input:</strong> customers = [8,3], boardingCost = 5, runningCost = 6
 <strong>Output:</strong> 3
 <strong>Explanation:</strong> The numbers written on the gondolas are the number of people currently there.
-1. 8 customers arrive, 4 board and 4 wait for the next gondola, the wheel rotates. Current profit is 4 * 5 - 1 * 6 = 14.
-2. 3 customers arrive, the 4 waiting board the wheel and the other 3 wait, the wheel rotates. Current profit is 8 * 5 - 2 * 6 = 28.
-3. The final 3 customers board the gondola, the wheel rotates. Current profit is 11 * 5 - 3 * 6 = 37.
-The highest profit was 37 after rotating the wheel 3 times.
+1. 8 customers arrive, 4 board and 4 wait for the next gondola, the wheel rotates. Current profit is 4 * $5 - 1 * $6 = $14.
+2. 3 customers arrive, the 4 waiting board the wheel and the other 3 wait, the wheel rotates. Current profit is 8 * $5 - 2 * $6 = $28.
+3. The final 3 customers board the gondola, the wheel rotates. Current profit is 11 * $5 - 3 * $6 = $37.
+The highest profit was $37 after rotating the wheel 3 times.
 </pre>
 
 <p><strong class="example">Example 2:</strong></p>
@@ -31,14 +46,14 @@ The highest profit was 37 after rotating the wheel 3 times.
 <strong>Input:</strong> customers = [10,9,6], boardingCost = 6, runningCost = 4
 <strong>Output:</strong> 7
 <strong>Explanation:</strong>
-1. 10 customers arrive, 4 board and 6 wait for the next gondola, the wheel rotates. Current profit is 4 * 6 - 1 * 4 = 20.
-2. 9 customers arrive, 4 board and 11 wait (2 originally waiting, 9 newly waiting), the wheel rotates. Current profit is 8 * 6 - 2 * 4 = 40.
-3. The final 6 customers arrive, 4 board and 13 wait, the wheel rotates. Current profit is 12 * 6 - 3 * 4 = 60.
-4. 4 board and 9 wait, the wheel rotates. Current profit is 16 * 6 - 4 * 4 = 80.
-5. 4 board and 5 wait, the wheel rotates. Current profit is 20 * 6 - 5 * 4 = 100.
-6. 4 board and 1 waits, the wheel rotates. Current profit is 24 * 6 - 6 * 4 = 120.
-7. 1 boards, the wheel rotates. Current profit is 25 * 6 - 7 * 4 = 122.
-The highest profit was 122 after rotating the wheel 7 times.
+1. 10 customers arrive, 4 board and 6 wait for the next gondola, the wheel rotates. Current profit is 4 * $6 - 1 * $4 = $20.
+2. 9 customers arrive, 4 board and 11 wait (2 originally waiting, 9 newly waiting), the wheel rotates. Current profit is 8 * $6 - 2 * $4 = $40.
+3. The final 6 customers arrive, 4 board and 13 wait, the wheel rotates. Current profit is 12 * $6 - 3 * $4 = $60.
+4. 4 board and 9 wait, the wheel rotates. Current profit is 16 * $6 - 4 * $4 = $80.
+5. 4 board and 5 wait, the wheel rotates. Current profit is 20 * $6 - 5 * $4 = $100.
+6. 4 board and 1 waits, the wheel rotates. Current profit is 24 * $6 - 6 * $4 = $120.
+7. 1 boards, the wheel rotates. Current profit is 25 * $6 - 7 * $4 = $122.
+The highest profit was $122 after rotating the wheel 7 times.
 </pre>
 
 <p><strong class="example">Example 3:</strong></p>
@@ -47,11 +62,11 @@ The highest profit was 122 after rotating the wheel 7 times.
 <strong>Input:</strong> customers = [3,4,0,5,1], boardingCost = 1, runningCost = 92
 <strong>Output:</strong> -1
 <strong>Explanation:</strong>
-1. 3 customers arrive, 3 board and 0 wait, the wheel rotates. Current profit is 3 * 1 - 1 * 92 = -89.
-2. 4 customers arrive, 4 board and 0 wait, the wheel rotates. Current profit is 7 * 1 - 2 * 92 = -177.
-3. 0 customers arrive, 0 board and 0 wait, the wheel rotates. Current profit is 7 * 1 - 3 * 92 = -269.
-4. 5 customers arrive, 4 board and 1 waits, the wheel rotates. Current profit is 11 * 1 - 4 * 92 = -357.
-5. 1 customer arrives, 2 board and 0 wait, the wheel rotates. Current profit is 13 * 1 - 5 * 92 = -447.
+1. 3 customers arrive, 3 board and 0 wait, the wheel rotates. Current profit is 3 * $1 - 1 * $92 = -$89.
+2. 4 customers arrive, 4 board and 0 wait, the wheel rotates. Current profit is 7 * $1 - 2 * $92 = -$177.
+3. 0 customers arrive, 0 board and 0 wait, the wheel rotates. Current profit is 7 * $1 - 3 * $92 = -$269.
+4. 5 customers arrive, 4 board and 1 waits, the wheel rotates. Current profit is 11 * $1 - 4 * $92 = -$357.
+5. 1 customer arrives, 2 board and 0 wait, the wheel rotates. Current profit is 13 * $1 - 5 * $92 = -$447.
 The profit was never positive, so return -1.
 </pre>
 
@@ -65,7 +80,11 @@ The profit was never positive, so return -1.
 	<li><code>1 &lt;= boardingCost, runningCost &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Simulation
 
@@ -74,6 +93,8 @@ We directly simulate the rotation process of the Ferris wheel. Each time it rota
 The time complexity is $O(n)$, where $n$ is the length of the `customers` array. The space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -96,6 +117,8 @@ class Solution:
         return ans
 ```
 
+#### Java
+
 ```java
 class Solution {
     public int minOperationsMaxProfit(int[] customers, int boardingCost, int runningCost) {
@@ -117,6 +140,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -141,6 +166,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minOperationsMaxProfit(customers []int, boardingCost int, runningCost int) int {
 	ans := -1
@@ -162,6 +189,8 @@ func minOperationsMaxProfit(customers []int, boardingCost int, runningCost int) 
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minOperationsMaxProfit(
@@ -188,12 +217,14 @@ function minOperationsMaxProfit(
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn min_operations_max_profit(
         customers: Vec<i32>,
         boarding_cost: i32,
-        running_cost: i32
+        running_cost: i32,
     ) -> i32 {
         let mut ans = -1;
         let mut mx = 0;
@@ -221,4 +252,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2880.Select%20Data/README_EN.md
+tags:
+    - Pandas
+---
+
+<!-- problem:start -->
+
 # [2880. Select Data](https://leetcode.com/problems/select-data)
 
 [中文文档](/solution/2800-2899/2880.Select%20Data/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <pre>
 DataFrame students
@@ -41,11 +53,17 @@ Input:</strong>
 <strong>Explanation:
 </strong>Student Ulysses has student_id = 101, we select the name and age.</pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 import pandas as pd
@@ -57,4 +75,6 @@ def selectData(students: pd.DataFrame) -> pd.DataFrame:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

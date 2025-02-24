@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0136.Single%20Number/README.md
+tags:
+    - 位运算
+    - 数组
+---
+
+<!-- problem:start -->
+
 # [136. 只出现一次的数字](https://leetcode.cn/problems/single-number)
 
 [English Version](/solution/0100-0199/0136.Single%20Number/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个 <strong>非空</strong> 整数数组 <code>nums</code> ，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
 
@@ -16,24 +27,27 @@
 
 <p><strong class="example">示例 1 ：</strong></p>
 
-<pre>
-<strong>输入：</strong>nums = [2,2,1]
-<strong>输出：</strong>1
-</pre>
+<div class="example-block">
+<p><strong>输入：</strong>nums = [2,2,1]</p>
+
+<p><strong>输出：</strong>1</p>
+</div>
 
 <p><strong class="example">示例 2 ：</strong></p>
 
-<pre>
-<strong>输入：</strong>nums = [4,1,2,1,2]
-<strong>输出：</strong>4
-</pre>
+<div class="example-block">
+<p><strong>输入：</strong>nums = [4,1,2,1,2]</p>
+
+<p><strong>输出：</strong>4</p>
+</div>
 
 <p><strong class="example">示例 3 ：</strong></p>
 
-<pre>
-<strong>输入：</strong>nums = [1]
-<strong>输出：</strong>1
-</pre>
+<div class="example-block">
+<p><strong>输入：</strong>nums = [1]</p>
+
+<p><strong>输出：</strong>1</p>
+</div>
 
 <p>&nbsp;</p>
 
@@ -47,7 +61,11 @@
 </div>
 </div>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：位运算
 
@@ -62,11 +80,15 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
         return reduce(xor, nums)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -79,6 +101,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -93,6 +117,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func singleNumber(nums []int) (ans int) {
 	for _, v := range nums {
@@ -102,21 +128,25 @@ func singleNumber(nums []int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function singleNumber(nums: number[]): number {
     return nums.reduce((r, v) => r ^ v);
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn single_number(nums: Vec<i32>) -> i32 {
-        nums.into_iter()
-            .reduce(|r, v| r ^ v)
-            .unwrap()
+        nums.into_iter().reduce(|r, v| r ^ v).unwrap()
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -128,6 +158,8 @@ var singleNumber = function (nums) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public int SingleNumber(int[] nums) {
@@ -135,6 +167,8 @@ public class Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 int singleNumber(int* nums, int numsSize) {
@@ -146,6 +180,8 @@ int singleNumber(int* nums, int numsSize) {
 }
 ```
 
+#### Swift
+
 ```swift
 class Solution {
     func singleNumber(_ nums: [Int]) -> Int {
@@ -156,9 +192,15 @@ class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二
 
 <!-- tabs:start -->
+
+#### Java
 
 ```java
 class Solution {
@@ -170,4 +212,6 @@ class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

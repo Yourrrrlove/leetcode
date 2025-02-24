@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0173.Binary%20Search%20Tree%20Iterator/README_EN.md
+tags:
+    - Stack
+    - Tree
+    - Design
+    - Binary Search Tree
+    - Binary Tree
+    - Iterator
+---
+
+<!-- problem:start -->
+
 # [173. Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator)
 
 [中文文档](/solution/0100-0199/0173.Binary%20Search%20Tree%20Iterator/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Implement the <code>BSTIterator</code> class that represents an iterator over the <strong><a href="https://en.wikipedia.org/wiki/Tree_traversal#In-order_(LNR)" target="_blank">in-order traversal</a></strong> of a binary search tree (BST):</p>
 
@@ -56,11 +73,17 @@ bSTIterator.hasNext(); // return False
 	<li>Could you implement <code>next()</code> and <code>hasNext()</code> to run in average <code>O(1)</code> time and use&nbsp;<code>O(h)</code> memory, where <code>h</code> is the height of the tree?</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -95,6 +118,8 @@ class BSTIterator:
 # param_1 = obj.next()
 # param_2 = obj.hasNext()
 ```
+
+#### Java
 
 ```java
 /**
@@ -145,6 +170,8 @@ class BSTIterator {
  */
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -191,6 +218,8 @@ public:
  */
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -234,6 +263,8 @@ func (this *BSTIterator) HasNext() bool {
  * param_2 := obj.HasNext();
  */
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -286,6 +317,8 @@ class BSTIterator {
  */
 ```
 
+#### Rust
+
 ```rust
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
@@ -310,8 +343,8 @@ struct BSTIterator {
     index: usize,
 }
 
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 /**
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
@@ -329,10 +362,7 @@ impl BSTIterator {
     fn new(root: Option<Rc<RefCell<TreeNode>>>) -> Self {
         let mut vals = vec![];
         Self::inorder(&root, &mut vals);
-        BSTIterator {
-            vals,
-            index: 0,
-        }
+        BSTIterator { vals, index: 0 }
     }
 
     fn next(&mut self) -> i32 {
@@ -343,13 +373,10 @@ impl BSTIterator {
     fn has_next(&self) -> bool {
         self.index != self.vals.len()
     }
-}/**
- * Your BSTIterator object will be instantiated and called as such:
- * let obj = BSTIterator::new(root);
- * let ret_1: i32 = obj.next();
- * let ret_2: bool = obj.has_next();
- */
+}
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -399,9 +426,15 @@ BSTIterator.prototype.hasNext = function () {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -434,6 +467,8 @@ class BSTIterator:
 # param_1 = obj.next()
 # param_2 = obj.hasNext()
 ```
+
+#### Java
 
 ```java
 /**
@@ -481,6 +516,8 @@ class BSTIterator {
  */
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -524,6 +561,8 @@ public:
  * bool param_2 = obj->hasNext();
  */
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -580,6 +619,8 @@ class BSTIterator {
  */
 ```
 
+#### Rust
+
 ```rust
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
@@ -603,8 +644,8 @@ struct BSTIterator {
     stack: Vec<Option<Rc<RefCell<TreeNode>>>>,
 }
 
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 /**
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
@@ -612,7 +653,7 @@ use std::cell::RefCell;
 impl BSTIterator {
     fn dfs(
         mut root: Option<Rc<RefCell<TreeNode>>>,
-        stack: &mut Vec<Option<Rc<RefCell<TreeNode>>>>
+        stack: &mut Vec<Option<Rc<RefCell<TreeNode>>>>,
     ) {
         if root.is_some() {
             let left = root.as_mut().unwrap().borrow_mut().left.take();
@@ -639,14 +680,11 @@ impl BSTIterator {
     fn has_next(&self) -> bool {
         self.stack.len() != 0
     }
-}/**
- * Your BSTIterator object will be instantiated and called as such:
- * let obj = BSTIterator::new(root);
- * let ret_1: i32 = obj.next();
- * let ret_2: bool = obj.has_next();
- */
+}
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

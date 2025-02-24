@@ -1,8 +1,27 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1800-1899/1878.Get%20Biggest%20Three%20Rhombus%20Sums%20in%20a%20Grid/README_EN.md
+rating: 1897
+source: Biweekly Contest 53 Q3
+tags:
+    - Array
+    - Math
+    - Matrix
+    - Prefix Sum
+    - Sorting
+    - Heap (Priority Queue)
+---
+
+<!-- problem:start -->
+
 # [1878. Get Biggest Three Rhombus Sums in a Grid](https://leetcode.com/problems/get-biggest-three-rhombus-sums-in-a-grid)
 
 [中文文档](/solution/1800-1899/1878.Get%20Biggest%20Three%20Rhombus%20Sums%20in%20a%20Grid/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an <code>m x n</code> integer matrix <code>grid</code>​​​.</p>
 
@@ -53,7 +72,11 @@
 	<li><code>1 &lt;= grid[i][j] &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Enumerate Diamond Center + Prefix Sum + Ordered Set
 
@@ -75,10 +98,9 @@ The time complexity is $O(m \times n \times \min(m, n))$, and the space complexi
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedSet
-
-
 class Solution:
     def getBiggestThree(self, grid: List[List[int]]) -> List[int]:
         m, n = len(grid), len(grid[0])
@@ -105,6 +127,8 @@ class Solution:
                     ss.remove(ss[0])
         return list(ss)[::-1]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -144,6 +168,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -178,6 +204,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func getBiggestThree(grid [][]int) []int {
@@ -220,6 +248,8 @@ func getBiggestThree(grid [][]int) []int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function getBiggestThree(grid: number[][]): number[] {
@@ -896,4 +926,6 @@ class TreeMultiSet<T = number> {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

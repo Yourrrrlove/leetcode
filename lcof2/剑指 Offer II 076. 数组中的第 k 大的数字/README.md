@@ -1,8 +1,15 @@
+---
+comments: true
+edit_url: https://github.com/doocs/leetcode/edit/main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20076.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%AC%20k%20%E5%A4%A7%E7%9A%84%E6%95%B0%E5%AD%97/README.md
+---
+
+<!-- problem:start -->
+
 # [剑指 Offer II 076. 数组中的第 k 大的数字](https://leetcode.cn/problems/xx4gT2)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定整数数组 <code>nums</code> 和整数 <code>k</code>，请返回数组中第 <code><strong>k</strong></code> 个最大的元素。</p>
 
@@ -36,11 +43,17 @@
 
 <p><meta charset="UTF-8" />注意：本题与主站 215&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/kth-largest-element-in-an-array/">https://leetcode.cn/problems/kth-largest-element-in-an-array/</a></p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -68,6 +81,8 @@ class Solution:
         n = len(nums)
         return quick_sort(0, n - 1, n - k)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -101,6 +116,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -124,6 +141,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findKthLargest(nums []int, k int) int {
@@ -161,6 +180,43 @@ func quickSort(nums []int, left, right, k int) int {
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func findKthLargest(_ nums: [Int], _ k: Int) -> Int {
+        var nums = nums
+        let n = nums.count
+        return quickSelect(&nums, 0, n - 1, n - k)
+    }
+
+    private func quickSelect(_ nums: inout [Int], _ left: Int, _ right: Int, _ k: Int) -> Int {
+        if left == right {
+            return nums[left]
+        }
+
+        var i = left - 1
+        var j = right + 1
+        let pivot = nums[(left + right) / 2]
+
+        while i < j {
+            repeat { i += 1 } while nums[i] < pivot
+            repeat { j -= 1 } while nums[j] > pivot
+            if i < j {
+                nums.swapAt(i, j)
+            }
+        }
+
+        if j < k {
+            return quickSelect(&nums, j + 1, right, k)
+        }
+        return quickSelect(&nums, left, j, k)
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

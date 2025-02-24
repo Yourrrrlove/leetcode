@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0197.Rising%20Temperature/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
 # [197. Rising Temperature](https://leetcode.com/problems/rising-temperature)
 
 [中文文档](/solution/0100-0199/0197.Rising%20Temperature/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table: <code>Weather</code></p>
 
@@ -15,12 +27,13 @@
 | temperature   | int     |
 +---------------+---------+
 id is the column with unique values for this table.
+There are no different rows with the same recordDate.
 This table contains information about the temperature on a certain day.
 </pre>
 
 <p>&nbsp;</p>
 
-<p>Write a solution to find all dates&#39; <code>Id</code> with higher temperatures compared to its previous dates (yesterday).</p>
+<p>Write a solution to find all dates&#39; <code>id</code> with higher temperatures compared to its previous dates (yesterday).</p>
 
 <p>Return the result table in <strong>any order</strong>.</p>
 
@@ -52,13 +65,19 @@ In 2015-01-02, the temperature was higher than the previous day (10 -&gt; 25).
 In 2015-01-04, the temperature was higher than the previous day (20 -&gt; 30).
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Self-Join + DATEDIFF/SUBDATE Function
 
 We can use self-join to compare each row in the `Weather` table with its previous row. If the temperature is higher and the date difference is one day, then it is the result we are looking for.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 import pandas as pd
@@ -71,6 +90,8 @@ def rising_temperature(weather: pd.DataFrame) -> pd.DataFrame:
     ][["id"]]
 ```
 
+#### MySQL
+
 ```sql
 # Write your MySQL query statement below
 SELECT w1.id
@@ -82,9 +103,15 @@ FROM
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -97,4 +124,6 @@ FROM
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

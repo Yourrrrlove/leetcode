@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0073.Set%20Matrix%20Zeroes/README.md
+tags:
+    - 数组
+    - 哈希表
+    - 矩阵
+---
+
+<!-- problem:start -->
+
 # [73. 矩阵置零](https://leetcode.cn/problems/set-matrix-zeroes)
 
 [English Version](/solution/0000-0099/0073.Set%20Matrix%20Zeroes/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个&nbsp;<code><em>m</em> x <em>n</em></code> 的矩阵，如果一个元素为 <strong>0 </strong>，则将其所在行和列的所有元素都设为 <strong>0</strong> 。请使用 <strong><a href="http://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95" target="_blank">原地</a></strong> 算法<strong>。</strong></p>
 
@@ -48,51 +60,60 @@
 	<li>你能想出一个仅使用常量空间的解决方案吗？</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
 
-### 方法一：数组标记
+<!-- solution:start -->
 
-我们分别用数组 `rows` 和 `cols` 标记待清零的行和列。
+### Solution 1: Array Marking
 
-然后再遍历一遍矩阵，将 `rows` 和 `cols` 中标记的行和列对应的元素清零。
+Let the number of rows and columns of the matrix be $m$ and $n$, respectively. We use an array $\textit{rows}$ of length $m$ and an array $\textit{cols}$ of length $n$ to record which rows and columns need to be set to zero.
 
-时间复杂度 $O(m\times n)$，空间复杂度 $O(m+n)$。其中 $m$ 和 $n$ 分别为矩阵的行数和列数。
+First, we traverse the matrix. When we find a zero element in the matrix, we set the corresponding row and column markers to $\text{true}$. That is, if $\textit{matrix}[i][j] = 0$, then $\textit{rows}[i] = \textit{cols}[j] = \text{true}$.
+
+Finally, we traverse the matrix again and use the markers in $\textit{rows}$ and $\textit{cols}$ to update the elements in the matrix. When we find that $\textit{rows}[i]$ or $\textit{cols}[j]$ is $\text{true}$, we set $\textit{matrix}[i][j]$ to zero.
+
+The time complexity is $O(m \times n)$, and the space complexity is $O(m + n)$. Here, $m$ and $n$ are the number of rows and columns of the matrix, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def setZeroes(self, matrix: List[List[int]]) -> None:
         m, n = len(matrix), len(matrix[0])
-        rows = [0] * m
-        cols = [0] * n
-        for i, row in enumerate(matrix):
-            for j, v in enumerate(row):
-                if v == 0:
-                    rows[i] = cols[j] = 1
+        row = [False] * m
+        col = [False] * n
         for i in range(m):
             for j in range(n):
-                if rows[i] or cols[j]:
+                if matrix[i][j] == 0:
+                    row[i] = col[j] = True
+        for i in range(m):
+            for j in range(n):
+                if row[i] or col[j]:
                     matrix[i][j] = 0
 ```
+
+#### Java
 
 ```java
 class Solution {
     public void setZeroes(int[][] matrix) {
         int m = matrix.length, n = matrix[0].length;
-        boolean[] rows = new boolean[m];
-        boolean[] cols = new boolean[n];
+        boolean[] row = new boolean[m];
+        boolean[] col = new boolean[n];
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (matrix[i][j] == 0) {
-                    rows[i] = true;
-                    cols[j] = true;
+                    row[i] = col[j] = true;
                 }
             }
         }
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
-                if (rows[i] || cols[j]) {
+                if (row[i] || col[j]) {
                     matrix[i][j] = 0;
                 }
             }
@@ -101,24 +122,25 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
         int m = matrix.size(), n = matrix[0].size();
-        vector<bool> rows(m);
-        vector<bool> cols(n);
+        vector<bool> row(m);
+        vector<bool> col(n);
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
-                if (!matrix[i][j]) {
-                    rows[i] = 1;
-                    cols[j] = 1;
+                if (matrix[i][j] == 0) {
+                    row[i] = col[j] = true;
                 }
             }
         }
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
-                if (rows[i] || cols[j]) {
+                if (row[i] || col[j]) {
                     matrix[i][j] = 0;
                 }
             }
@@ -127,28 +149,31 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func setZeroes(matrix [][]int) {
-	m, n := len(matrix), len(matrix[0])
-	rows := make([]bool, m)
-	cols := make([]bool, n)
-	for i, row := range matrix {
-		for j, v := range row {
-			if v == 0 {
-				rows[i] = true
-				cols[j] = true
+	row := make([]bool, len(matrix))
+	col := make([]bool, len(matrix[0]))
+	for i := range matrix {
+		for j, x := range matrix[i] {
+			if x == 0 {
+				row[i] = true
+				col[j] = true
 			}
 		}
 	}
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
-			if rows[i] || cols[j] {
+	for i := range matrix {
+		for j := range matrix[i] {
+			if row[i] || col[j] {
 				matrix[i][j] = 0
 			}
 		}
 	}
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -157,25 +182,26 @@ func setZeroes(matrix [][]int) {
 function setZeroes(matrix: number[][]): void {
     const m = matrix.length;
     const n = matrix[0].length;
-    const rows: boolean[] = new Array(m).fill(false);
-    const cols: boolean[] = new Array(n).fill(false);
+    const row: boolean[] = Array(m).fill(false);
+    const col: boolean[] = Array(n).fill(false);
     for (let i = 0; i < m; ++i) {
         for (let j = 0; j < n; ++j) {
             if (matrix[i][j] === 0) {
-                rows[i] = true;
-                cols[j] = true;
+                row[i] = col[j] = true;
             }
         }
     }
     for (let i = 0; i < m; ++i) {
         for (let j = 0; j < n; ++j) {
-            if (rows[i] || cols[j]) {
+            if (row[i] || col[j]) {
                 matrix[i][j] = 0;
             }
         }
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -185,19 +211,18 @@ function setZeroes(matrix: number[][]): void {
 var setZeroes = function (matrix) {
     const m = matrix.length;
     const n = matrix[0].length;
-    const rows = new Array(m).fill(false);
-    const cols = new Array(n).fill(false);
+    const row = Array(m).fill(false);
+    const col = Array(n).fill(false);
     for (let i = 0; i < m; ++i) {
         for (let j = 0; j < n; ++j) {
-            if (matrix[i][j] == 0) {
-                rows[i] = true;
-                cols[j] = true;
+            if (matrix[i][j] === 0) {
+                row[i] = col[j] = true;
             }
         }
     }
     for (let i = 0; i < m; ++i) {
         for (let j = 0; j < n; ++j) {
-            if (rows[i] || cols[j]) {
+            if (row[i] || col[j]) {
                 matrix[i][j] = 0;
             }
         }
@@ -205,22 +230,24 @@ var setZeroes = function (matrix) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public void SetZeroes(int[][] matrix) {
         int m = matrix.Length, n = matrix[0].Length;
-        bool[] rows = new bool[m], cols = new bool[n];
+        bool[] row = new bool[m], col = new bool[n];
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (matrix[i][j] == 0) {
-                    rows[i] = true;
-                    cols[j] = true;
+                    row[i] = true;
+                    col[j] = true;
                 }
             }
         }
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
-                if (rows[i] || cols[j]) {
+                if (row[i] || col[j]) {
                     matrix[i][j] = 0;
                 }
             }
@@ -231,6 +258,10 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：原地标记
 
 方法一中使用了额外的数组标记待清零的行和列，实际上我们也可以直接用矩阵的第一行和第一列来标记，不需要开辟额外的数组空间。
@@ -240,6 +271,8 @@ public class Solution {
 时间复杂度 $O(m\times n)$，空间复杂度 $O(1)$。其中 $m$ 和 $n$ 分别为矩阵的行数和列数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -262,6 +295,8 @@ class Solution:
             for i in range(m):
                 matrix[i][0] = 0
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -308,6 +343,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -356,6 +393,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func setZeroes(matrix [][]int) {
 	m, n := len(matrix), len(matrix[0])
@@ -399,6 +438,8 @@ func setZeroes(matrix [][]int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 /**
  Do not return anything, modify matrix in-place instead.
@@ -433,6 +474,8 @@ function setZeroes(matrix: number[][]): void {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -478,6 +521,8 @@ var setZeroes = function (matrix) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public void SetZeroes(int[][] matrix) {
@@ -520,4 +565,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

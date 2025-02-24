@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0600-0699/0680.Valid%20Palindrome%20II/README.md
+tags:
+    - 贪心
+    - 双指针
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [680. 验证回文串 II](https://leetcode.cn/problems/valid-palindrome-ii)
 
 [English Version](/solution/0600-0699/0680.Valid%20Palindrome%20II/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个字符串&nbsp;<code>s</code>，<strong>最多</strong> 可以从中删除一个字符。</p>
 
@@ -42,7 +54,11 @@
 	<li><code>s</code> 由小写英文字母组成</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：双指针
 
@@ -53,6 +69,8 @@
 时间复杂度 $O(n)$，其中 $n$ 是字符串 $s$ 的长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,20 +90,25 @@ class Solution:
         return True
 ```
 
+#### Java
+
 ```java
 class Solution {
-    public boolean validPalindrome(String s) {
-        for (int i = 0, j = s.length() - 1; i < j; ++i, --j) {
-            if (s.charAt(i) != s.charAt(j)) {
-                return check(s, i + 1, j) || check(s, i, j - 1);
+    private char[] s;
+
+    public boolean validPalindrome(String S) {
+        this.s = S.toCharArray();
+        for (int i = 0, j = s.length - 1; i < j; ++i, --j) {
+            if (s[i] != s[j]) {
+                return check(i + 1, j) || check(i, j - 1);
             }
         }
         return true;
     }
 
-    private boolean check(String s, int i, int j) {
+    private boolean check(int i, int j) {
         for (; i < j; ++i, --j) {
-            if (s.charAt(i) != s.charAt(j)) {
+            if (s[i] != s[j]) {
                 return false;
             }
         }
@@ -94,28 +117,31 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     bool validPalindrome(string s) {
+        auto check = [&](int i, int j) {
+            for (; i < j; ++i, --j) {
+                if (s[i] != s[j]) {
+                    return false;
+                }
+            }
+            return true;
+        };
         for (int i = 0, j = s.size() - 1; i < j; ++i, --j) {
             if (s[i] != s[j]) {
-                return check(s, i + 1, j) || check(s, i, j - 1);
-            }
-        }
-        return 1;
-    }
-
-    bool check(string s, int i, int j) {
-        for (; i < j; ++i, --j) {
-            if (s[i] != s[j]) {
-                return false;
+                return check(i + 1, j) || check(i, j - 1);
             }
         }
         return true;
     }
 };
 ```
+
+#### Go
 
 ```go
 func validPalindrome(s string) bool {
@@ -136,25 +162,28 @@ func validPalindrome(s string) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function validPalindrome(s: string): boolean {
-    for (let i: number = 0, j = s.length - 1; i < j; ++i, --j) {
-        if (s.charAt(i) != s.charAt(j)) {
-            return isPalinddrome(s.slice(i, j)) || isPalinddrome(s.slice(i + 1, j + 1));
+    const check = (i: number, j: number): boolean => {
+        for (; i < j; ++i, --j) {
+            if (s[i] !== s[j]) {
+                return false;
+            }
         }
-    }
-    return true;
-}
-
-function isPalinddrome(s: string): boolean {
-    for (let i: number = 0, j = s.length - 1; i < j; ++i, --j) {
-        if (s.charAt(i) != s.charAt(j)) {
-            return false;
+        return true;
+    };
+    for (let i = 0, j = s.length - 1; i < j; ++i, --j) {
+        if (s[i] !== s[j]) {
+            return check(i + 1, j) || check(i, j - 1);
         }
     }
     return true;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -162,22 +191,24 @@ function isPalinddrome(s: string): boolean {
  * @return {boolean}
  */
 var validPalindrome = function (s) {
-    let check = function (i, j) {
+    const check = function (i, j) {
         for (; i < j; ++i, --j) {
-            if (s.charAt(i) != s.charAt(j)) {
+            if (s[i] !== s[j]) {
                 return false;
             }
         }
         return true;
     };
     for (let i = 0, j = s.length - 1; i < j; ++i, --j) {
-        if (s.charAt(i) != s.charAt(j)) {
+        if (s[i] !== s[j]) {
             return check(i + 1, j) || check(i, j - 1);
         }
     }
     return true;
 };
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -208,4 +239,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

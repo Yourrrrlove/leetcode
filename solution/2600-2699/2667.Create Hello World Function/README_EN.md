@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2667.Create%20Hello%20World%20Function/README_EN.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
 # [2667. Create Hello World Function](https://leetcode.com/problems/create-hello-world-function)
 
 [中文文档](/solution/2600-2699/2667.Create%20Hello%20World%20Function/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 Write a function&nbsp;<code>createHelloWorld</code>.&nbsp;It should return a new function that always returns&nbsp;<code>&quot;Hello World&quot;</code>.
 
@@ -38,11 +50,17 @@ Any arguments could be passed to the function but it should still always return 
 	<li><code>0 &lt;= args.length &lt;= 10</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 function createHelloWorld() {
@@ -59,4 +77,6 @@ function createHelloWorld() {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,24 +1,38 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1260.Shift%202D%20Grid/README.md
+rating: 1337
+source: 第 163 场周赛 Q1
+tags:
+    - 数组
+    - 矩阵
+    - 模拟
+---
+
+<!-- problem:start -->
+
 # [1260. 二维网格迁移](https://leetcode.cn/problems/shift-2d-grid)
 
 [English Version](/solution/1200-1299/1260.Shift%202D%20Grid/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给你一个 <code>m</code> 行 <code>n</code> 列的二维网格 <code>grid</code> 和一个整数 <code>k</code>。你需要将 <code>grid</code> 迁移 <code>k</code> 次。</p>
+<p>给你一个 <code>m</code> 行 <code>n</code>&nbsp;列的二维网格&nbsp;<code>grid</code>&nbsp;和一个整数&nbsp;<code>k</code>。你需要将&nbsp;<code>grid</code>&nbsp;迁移&nbsp;<code>k</code>&nbsp;次。</p>
 
 <p>每次「迁移」操作将会引发下述活动：</p>
 
 <ul>
-	<li>位于 <code>grid[i][j]</code> 的元素将会移动到 <code>grid[i][j + 1]</code>。</li>
-	<li>位于 <code>grid[i][n - 1]</code> 的元素将会移动到 <code>grid[i + 1][0]</code>。</li>
-	<li>位于 <code>grid[m - 1][n - 1]</code> 的元素将会移动到 <code>grid[0][0]</code>。</li>
+	<li>位于 <code>grid[i][j]</code>（<code>j &lt; n - 1</code>）的元素将会移动到&nbsp;<code>grid[i][j + 1]</code>。</li>
+	<li>位于&nbsp;<code>grid[i][n&nbsp;- 1]</code> 的元素将会移动到&nbsp;<code>grid[i + 1][0]</code>。</li>
+	<li>位于 <code>grid[m&nbsp;- 1][n - 1]</code>&nbsp;的元素将会移动到&nbsp;<code>grid[0][0]</code>。</li>
 </ul>
 
-<p>请你返回 <code>k</code> 次迁移操作后最终得到的 <strong>二维网格</strong>。</p>
+<p>请你返回&nbsp;<code>k</code> 次迁移操作后最终得到的 <strong>二维网格</strong>。</p>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
 
@@ -45,20 +59,24 @@
 <strong>输出：</strong>[[1,2,3],[4,5,6],[7,8,9]]
 </pre>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>提示：</strong></p>
 
 <ul>
-	<li><code>m == grid.length</code></li>
-	<li><code>n == grid[i].length</code></li>
-	<li><code>1 <= m <= 50</code></li>
-	<li><code>1 <= n <= 50</code></li>
-	<li><code>-1000 <= grid[i][j] <= 1000</code></li>
-	<li><code>0 <= k <= 100</code></li>
+	<li><code>m ==&nbsp;grid.length</code></li>
+	<li><code>n ==&nbsp;grid[i].length</code></li>
+	<li><code>1 &lt;= m &lt;= 50</code></li>
+	<li><code>1 &lt;= n &lt;= 50</code></li>
+	<li><code>-1000 &lt;= grid[i][j] &lt;= 1000</code></li>
+	<li><code>0 &lt;= k &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：二维数组展开
 
@@ -69,6 +87,8 @@
 时间复杂度 $O(m \times n)$，其中 $m$ 和 $n$ 分别是二维数组 `grid` 的行数和列数。需要遍历二维数组 `grid` 一次，计算每个元素在最后的位置。忽略答案数组的空间消耗，空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -81,6 +101,8 @@ class Solution:
                 ans[x][y] = v
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -106,6 +128,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -123,6 +147,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func shiftGrid(grid [][]int, k int) [][]int {
@@ -142,6 +168,8 @@ func shiftGrid(grid [][]int, k int) [][]int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function shiftGrid(grid: number[][], k: number): number[][] {
     const [m, n] = [grid.length, grid[0].length];
@@ -159,4 +187,6 @@ function shiftGrid(grid: number[][], k: number): number[][] {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

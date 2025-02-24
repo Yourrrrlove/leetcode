@@ -1,10 +1,27 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2200-2299/2251.Number%20of%20Flowers%20in%20Full%20Bloom/README.md
+rating: 2022
+source: 第 290 场周赛 Q4
+tags:
+    - 数组
+    - 哈希表
+    - 二分查找
+    - 有序集合
+    - 前缀和
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [2251. 花期内花的数目](https://leetcode.cn/problems/number-of-flowers-in-full-bloom)
 
 [English Version](/solution/2200-2299/2251.Number%20of%20Flowers%20in%20Full%20Bloom/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个下标从 <strong>0</strong>&nbsp;开始的二维整数数组&nbsp;<code>flowers</code>&nbsp;，其中&nbsp;<code>flowers[i] = [start<sub>i</sub>, end<sub>i</sub>]</code>&nbsp;表示第&nbsp;<code>i</code>&nbsp;朵花的 <strong>花期</strong>&nbsp;从&nbsp;<code>start<sub>i</sub></code>&nbsp;到&nbsp;<code>end<sub>i</sub></code>&nbsp;（都 <strong>包含</strong>）。同时给你一个下标从 <strong>0</strong>&nbsp;开始大小为 <code>n</code>&nbsp;的整数数组&nbsp;<code>people</code> ，<code>people[i]</code>&nbsp;是第&nbsp;<code>i</code>&nbsp;个人来看花的时间。</p>
 
@@ -46,15 +63,21 @@
 	<li><code>1 &lt;= people[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序 + 二分查找
 
 我们将花按照开始时间和结束时间分别排序，然后对于每个人，我们可以使用二分查找来找到他们到达时在花期内花的数目。就是说，找出在每个人到达时，已经开花的花的数目，减去在每个人到达时，已经凋谢的花的数目，即可得到答案。
 
-时间复杂度 $O((m + n) \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别是数组 $flowers$ 和 $people$ 的长度。
+时间复杂度 $O((m + n) \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别是数组 $\textit{flowers}$ 和 $\textit{people}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -64,6 +87,8 @@ class Solution:
         start, end = sorted(a for a, _ in flowers), sorted(b for _, b in flowers)
         return [bisect_right(start, p) - bisect_left(end, p) for p in people]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -100,6 +125,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -124,6 +151,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func fullBloomFlowers(flowers [][]int, people []int) (ans []int) {
 	n := len(flowers)
@@ -143,6 +172,8 @@ func fullBloomFlowers(flowers [][]int, people []int) (ans []int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function fullBloomFlowers(flowers: number[][], people: number[]): number[] {
@@ -179,6 +210,8 @@ function search(nums: number[], x: number): number {
 }
 ```
 
+#### Rust
+
 ```rust
 use std::collections::BTreeMap;
 
@@ -188,13 +221,9 @@ impl Solution {
         let n = people.len();
 
         // First sort the people vector based on the first item
-        let mut people: Vec<(usize, i32)> = people
-            .into_iter()
-            .enumerate()
-            .map(|x| x)
-            .collect();
+        let mut people: Vec<(usize, i32)> = people.into_iter().enumerate().map(|x| x).collect();
 
-        people.sort_by(|lhs, rhs| { lhs.1.cmp(&rhs.1) });
+        people.sort_by(|lhs, rhs| lhs.1.cmp(&rhs.1));
 
         // Initialize the difference vector
         let mut diff = BTreeMap::new();
@@ -232,13 +261,19 @@ impl Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：差分 + 排序 + 离线查询
 
 我们可以利用差分来维护每个时间点的花的数目。接下来，我们将 $people$ 按照到达时间从小到大排序，在每个人到达时，我们对差分数组进行前缀和运算，就可以得到答案。
 
-时间复杂度 $O(m \times \log m + n \times \log n)$，空间复杂度 $O(n + m)$。其中 $n$ 和 $m$ 分别是数组 $flowers$ 和 $people$ 的长度。
+时间复杂度 $O(m \times \log m + n \times \log n)$，空间复杂度 $O(n + m)$。其中 $n$ 和 $m$ 分别是数组 $\textit{flowers}$ 和 $\textit{people}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -260,6 +295,8 @@ class Solution:
             ans[j] = s
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -288,6 +325,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -318,6 +357,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func fullBloomFlowers(flowers [][]int, people []int) []int {
@@ -351,6 +392,8 @@ func fullBloomFlowers(flowers [][]int, people []int) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function fullBloomFlowers(flowers: number[][], people: number[]): number[] {
     const d: Map<number, number> = new Map();
@@ -378,4 +421,6 @@ function fullBloomFlowers(flowers: number[][], people: number[]): number[] {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,58 +1,82 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0191.Number%20of%201%20Bits/README_EN.md
+tags:
+    - Bit Manipulation
+    - Divide and Conquer
+---
+
+<!-- problem:start -->
+
 # [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits)
 
 [中文文档](/solution/0100-0199/0191.Number%20of%201%20Bits/README.md)
 
 ## Description
 
-<p>Write a function that takes&nbsp;the binary representation of an unsigned integer and returns the number of &#39;1&#39; bits it has (also known as the <a href="http://en.wikipedia.org/wiki/Hamming_weight" target="_blank">Hamming weight</a>).</p>
+<!-- description:start -->
 
-<p><strong>Note:</strong></p>
-
-<ul>
-	<li>Note that in some languages, such as Java, there is no unsigned integer type. In this case, the input will be given as a signed integer type. It should not affect your implementation, as the integer&#39;s internal binary representation is the same, whether it is signed or unsigned.</li>
-	<li>In Java, the compiler represents the signed integers using <a href="https://en.wikipedia.org/wiki/Two%27s_complement" target="_blank">2&#39;s complement notation</a>. Therefore, in <strong class="example">Example 3</strong>, the input represents the signed integer. <code>-3</code>.</li>
-</ul>
+<p>Given a positive integer <code>n</code>, write a function that returns the number of <span data-keyword="set-bit">set bits</span> in its binary representation (also known as the <a href="http://en.wikipedia.org/wiki/Hamming_weight" target="_blank">Hamming weight</a>).</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre>
-<strong>Input:</strong> n = 00000000000000000000000000001011
-<strong>Output:</strong> 3
-<strong>Explanation:</strong> The input binary string <strong>00000000000000000000000000001011</strong> has a total of three &#39;1&#39; bits.
-</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">n = 11</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">3</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The input binary string <strong>1011</strong> has a total of three set bits.</p>
+</div>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre>
-<strong>Input:</strong> n = 00000000000000000000000010000000
-<strong>Output:</strong> 1
-<strong>Explanation:</strong> The input binary string <strong>00000000000000000000000010000000</strong> has a total of one &#39;1&#39; bit.
-</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">n = 128</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">1</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The input binary string <strong>10000000</strong> has a total of one set bit.</p>
+</div>
 
 <p><strong class="example">Example 3:</strong></p>
 
-<pre>
-<strong>Input:</strong> n = 11111111111111111111111111111101
-<strong>Output:</strong> 31
-<strong>Explanation:</strong> The input binary string <strong>11111111111111111111111111111101</strong> has a total of thirty one &#39;1&#39; bits.
-</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">n = 2147483645</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">30</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The input binary string <strong>1111111111111111111111111111101</strong> has a total of thirty set bits.</p>
+</div>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
 <ul>
-	<li>The input must be a <strong>binary string</strong> of length <code>32</code>.</li>
+	<li><code>1 &lt;= n &lt;= 2<sup>31</sup> - 1</code></li>
 </ul>
 
 <p>&nbsp;</p>
 <strong>Follow up:</strong> If this function is called many times, how would you optimize it?
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -63,6 +87,8 @@ class Solution:
             ans += 1
         return ans
 ```
+
+#### Java
 
 ```java
 public class Solution {
@@ -78,6 +104,8 @@ public class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -92,6 +120,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func hammingWeight(num uint32) int {
 	ans := 0
@@ -102,6 +132,8 @@ func hammingWeight(num uint32) int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function hammingWeight(n: number): number {
@@ -114,6 +146,8 @@ function hammingWeight(n: number): number {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn hammingWeight(n: u32) -> i32 {
@@ -121,6 +155,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -137,6 +173,8 @@ var hammingWeight = function (n) {
 };
 ```
 
+#### C
+
 ```c
 int hammingWeight(uint32_t n) {
     int ans = 0;
@@ -148,11 +186,33 @@ int hammingWeight(uint32_t n) {
 }
 ```
 
+#### Kotlin
+
+```kotlin
+class Solution {
+    fun hammingWeight(n: Int): Int {
+        var count = 0
+        var num = n
+        while (num != 0) {
+            num = num and (num - 1)
+            count++
+        }
+        return count
+    }
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -163,6 +223,8 @@ class Solution:
             ans += 1
         return ans
 ```
+
+#### Java
 
 ```java
 public class Solution {
@@ -178,6 +240,8 @@ public class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -192,6 +256,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func hammingWeight(num uint32) int {
 	ans := 0
@@ -202,6 +268,21 @@ func hammingWeight(num uint32) int {
 	return ans
 }
 ```
+
+#### TypeScript
+
+```ts
+function hammingWeight(n: number): number {
+    let count = 0;
+    while (n) {
+        n -= n & -n;
+        count++;
+    }
+    return count;
+}
+```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -216,6 +297,41 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var hammingWeight = function (n) {
+    let count = 0;
+    while (n) {
+        n -= n & -n;
+        count++;
+    }
+    return count;
+};
+```
+
+#### Kotlin
+
+```kotlin
+class Solution {
+    fun hammingWeight(n: Int): Int {
+        var count = 0
+        var num = n
+        while (num != 0) {
+            num -= num and (-num)
+            count++
+        }
+        return count
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

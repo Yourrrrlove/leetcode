@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2334.Subarray%20With%20Elements%20Greater%20Than%20Varying%20Threshold/README_EN.md
+rating: 2381
+source: Biweekly Contest 82 Q4
+tags:
+    - Stack
+    - Union Find
+    - Array
+    - Monotonic Stack
+---
+
+<!-- problem:start -->
+
 # [2334. Subarray With Elements Greater Than Varying Threshold](https://leetcode.com/problems/subarray-with-elements-greater-than-varying-threshold)
 
 [中文文档](/solution/2300-2399/2334.Subarray%20With%20Elements%20Greater%20Than%20Varying%20Threshold/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an integer array <code>nums</code> and an integer <code>threshold</code>.</p>
 
@@ -40,11 +57,17 @@ Therefore, 2, 3, 4, or 5 may also be returned.</pre>
 	<li><code>1 &lt;= nums[i], threshold &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -76,6 +99,8 @@ class Solution:
             vis[i] = True
         return -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -131,6 +156,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 using pii = pair<int, int>;
 
@@ -171,6 +198,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func validSubarraySize(nums []int, threshold int) int {
@@ -224,9 +253,15 @@ func validSubarraySize(nums []int, threshold int) int {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -254,6 +289,8 @@ class Solution:
                 return k
         return -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -297,6 +334,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -327,6 +366,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func validSubarraySize(nums []int, threshold int) int {
@@ -370,4 +411,6 @@ func validSubarraySize(nums []int, threshold int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

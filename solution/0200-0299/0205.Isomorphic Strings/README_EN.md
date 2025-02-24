@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0205.Isomorphic%20Strings/README_EN.md
+tags:
+    - Hash Table
+    - String
+---
+
+<!-- problem:start -->
+
 # [205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings)
 
 [中文文档](/solution/0200-0299/0205.Isomorphic%20Strings/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given two strings <code>s</code> and <code>t</code>, <em>determine if they are isomorphic</em>.</p>
 
@@ -12,15 +25,42 @@
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
-<pre><strong>Input:</strong> s = "egg", t = "add"
-<strong>Output:</strong> true
-</pre><p><strong class="example">Example 2:</strong></p>
-<pre><strong>Input:</strong> s = "foo", t = "bar"
-<strong>Output:</strong> false
-</pre><p><strong class="example">Example 3:</strong></p>
-<pre><strong>Input:</strong> s = "paper", t = "title"
-<strong>Output:</strong> true
-</pre>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;egg&quot;, t = &quot;add&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The strings <code>s</code> and <code>t</code> can be made identical by:</p>
+
+<ul>
+	<li>Mapping <code>&#39;e&#39;</code> to <code>&#39;a&#39;</code>.</li>
+	<li>Mapping <code>&#39;g&#39;</code> to <code>&#39;d&#39;</code>.</li>
+</ul>
+</div>
+
+<p><strong class="example">Example 2:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;foo&quot;, t = &quot;bar&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">false</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The strings <code>s</code> and <code>t</code> can not be made identical as <code>&#39;o&#39;</code> needs to be mapped to both <code>&#39;a&#39;</code> and <code>&#39;r&#39;</code>.</p>
+</div>
+
+<p><strong class="example">Example 3:</strong></p>
+
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">s = &quot;paper&quot;, t = &quot;title&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
+</div>
+
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
@@ -30,7 +70,11 @@
 	<li><code>s</code> and <code>t</code> consist of any valid ascii character.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hash Table or Array
 
@@ -41,6 +85,8 @@ Traverse $s$ and $t$, if the corresponding character mapping relationships in $d
 The time complexity is $O(n)$ and the space complexity is $O(C)$. Where $n$ is the length of the string $s$; and $C$ is the size of the character set, which is $C = 256$ in this problem.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -54,6 +100,8 @@ class Solution:
             d2[b] = a
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -77,6 +125,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -96,6 +146,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isIsomorphic(s string, t string) bool {
 	d1 := [256]int{}
@@ -110,6 +162,8 @@ func isIsomorphic(s string, t string) bool {
 	return true
 }
 ```
+
+#### TypeScript
 
 ```ts
 function isIsomorphic(s: string, t: string): boolean {
@@ -127,6 +181,8 @@ function isIsomorphic(s: string, t: string): boolean {
     return true;
 }
 ```
+
+#### Rust
 
 ```rust
 use std::collections::HashMap;
@@ -152,6 +208,8 @@ impl Solution {
 }
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public bool IsIsomorphic(string s, string t) {
@@ -173,9 +231,15 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -188,6 +252,8 @@ class Solution:
             d1[a] = d2[b] = i
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -210,4 +276,6 @@ class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

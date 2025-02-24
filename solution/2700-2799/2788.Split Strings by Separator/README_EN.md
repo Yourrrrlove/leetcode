@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2788.Split%20Strings%20by%20Separator/README_EN.md
+rating: 1239
+source: Weekly Contest 355 Q1
+tags:
+    - Array
+    - String
+---
+
+<!-- problem:start -->
+
 # [2788. Split Strings by Separator](https://leetcode.com/problems/split-strings-by-separator)
 
 [中文文档](/solution/2700-2799/2788.Split%20Strings%20by%20Separator/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an array of strings <code>words</code> and a character <code>separator</code>, <strong>split</strong> each string in <code>words</code> by <code>separator</code>.</p>
 
@@ -33,12 +48,12 @@ Hence, the resulting array is [&quot;one&quot;,&quot;two&quot;,&quot;three&quot;
 <p><strong class="example">Example 2:</strong></p>
 
 <pre>
-<strong>Input:</strong> words = [&quot;&#36;easy&#36;&quot;,&quot;&#36;problem&#36;&quot;], separator = &quot;&#36;&quot;
+<strong>Input:</strong> words = [&quot;$easy$&quot;,&quot;$problem$&quot;], separator = &quot;$&quot;
 <strong>Output:</strong> [&quot;easy&quot;,&quot;problem&quot;]
 <strong>Explanation:</strong> In this example we split as follows: 
 
-&quot;&#36;easy&#36;&quot; splits into &quot;easy&quot; (excluding empty strings)
-&quot;&#36;problem&#36;&quot; splits into &quot;problem&quot; (excluding empty strings)
+&quot;$easy$&quot; splits into &quot;easy&quot; (excluding empty strings)
+&quot;$problem$&quot; splits into &quot;problem&quot; (excluding empty strings)
 
 Hence, the resulting array is [&quot;easy&quot;,&quot;problem&quot;].
 </pre>
@@ -56,11 +71,15 @@ Hence, the resulting array is [&quot;easy&quot;,&quot;problem&quot;].
 <ul>
 	<li><code>1 &lt;= words.length &lt;= 100</code></li>
 	<li><code>1 &lt;= words[i].length &lt;= 20</code></li>
-	<li>characters in <code>words[i]</code> are either lowercase English letters or characters from the string <code>&quot;.,|&#36;#@&quot;</code> (excluding the quotes)</li>
-	<li><code>separator</code> is a character from the string <code>&quot;.,|&#36;#@&quot;</code> (excluding the quotes)</li>
+	<li>characters in <code>words[i]</code> are either lowercase English letters or characters from the string <code>&quot;.,|$#@&quot;</code> (excluding the quotes)</li>
+	<li><code>separator</code> is a character from the string <code>&quot;.,|$#@&quot;</code> (excluding the quotes)</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Simulation
 
@@ -70,11 +89,15 @@ The time complexity is $O(n \times m)$, and the space complexity is $O(m)$, wher
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def splitWordsBySeparator(self, words: List[str], separator: str) -> List[str]:
         return [s for w in words for s in w.split(separator) if s]
 ```
+
+#### Java
 
 ```java
 import java.util.regex.Pattern;
@@ -93,6 +116,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -113,6 +138,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func splitWordsBySeparator(words []string, separator byte) (ans []string) {
 	for _, w := range words {
@@ -126,6 +153,8 @@ func splitWordsBySeparator(words []string, separator byte) (ans []string) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function splitWordsBySeparator(words: string[], separator: string): string[] {
     return words.flatMap(w => w.split(separator).filter(s => s.length > 0));
@@ -134,4 +163,6 @@ function splitWordsBySeparator(words: string[], separator: string): string[] {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,14 +1,24 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0009.Palindrome%20Number/README.md
+tags:
+    - 数学
+---
+
+<!-- problem:start -->
+
 # [9. 回文数](https://leetcode.cn/problems/palindrome-number)
 
 [English Version](/solution/0000-0099/0009.Palindrome%20Number/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个整数 <code>x</code> ，如果 <code>x</code> 是一个回文整数，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
 
-<p>回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<p><span data-keyword="palindrome-integer">回文数</span>是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
 
 <ul>
 	<li>例如，<code>121</code> 是回文，而 <code>123</code> 不是。</li>
@@ -51,7 +61,11 @@
 
 <p><strong>进阶：</strong>你能不将整数转为字符串来解决这个问题吗？</p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：反转一半数字
 
@@ -79,6 +93,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def isPalindrome(self, x: int) -> bool:
@@ -90,6 +106,8 @@ class Solution:
             x //= 10
         return x in (y, y // 10)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -105,6 +123,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -122,6 +142,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isPalindrome(x int) bool {
 	if x < 0 || (x > 0 && x%10 == 0) {
@@ -134,6 +156,8 @@ func isPalindrome(x int) bool {
 	return x == y || x == y/10
 }
 ```
+
+#### TypeScript
 
 ```ts
 function isPalindrome(x: number): boolean {
@@ -148,28 +172,25 @@ function isPalindrome(x: number): boolean {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
-    pub fn is_palindrome(x: i32) -> bool {
-        if x < 0 {
+    pub fn is_palindrome(mut x: i32) -> bool {
+        if x < 0 || (x != 0 && x % 10 == 0) {
             return false;
         }
-        let s = x.to_string();
-        let bs = s.as_bytes();
-        let n = bs.len();
-        let mut l = 0;
-        let mut r = n - 1;
-        while l < r {
-            if bs[l] != bs[r] {
-                return false;
-            }
-            l += 1;
-            r -= 1;
+        let mut y = 0;
+        while x > y {
+            y = y * 10 + x % 10;
+            x /= 10;
         }
-        true
+        x == y || x == y / 10
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -188,29 +209,47 @@ var isPalindrome = function (x) {
 };
 ```
 
-<!-- tabs:end -->
+#### C#
 
-### 方法二
-
-<!-- tabs:start -->
-
-```rust
-impl Solution {
-    pub fn is_palindrome(mut x: i32) -> bool {
-        if x < 0 || (x % 10 == 0 && x != 0) {
+```cs
+public class Solution {
+    public bool IsPalindrome(int x) {
+        if (x < 0 || (x > 0 && x % 10 == 0)) {
             return false;
         }
-        let mut y = 0;
-        while x > y {
-            y *= 10;
-            y += x % 10;
-            x /= 10;
+        int y = 0;
+        for (; y < x; x /= 10) {
+            y = y * 10 + x % 10;
         }
-        x == y || x == y / 10
+        return x == y || x == y / 10;
+    }
+}
+```
+
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param Integer $x
+     * @return Boolean
+     */
+    function isPalindrome($x) {
+        if ($x < 0 || ($x && $x % 10 == 0)) {
+            return false;
+        }
+        $y = 0;
+        while ($x > $y) {
+            $y = $y * 10 + ($x % 10);
+            $x = (int) ($x / 10);
+        }
+        return $x == $y || $x == (int) ($y / 10);
     }
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

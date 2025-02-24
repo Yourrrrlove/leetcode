@@ -1,15 +1,28 @@
-# [320. 列举单词的全部缩写](https://leetcode.cn/problems/generalized-abbreviation)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0320.Generalized%20Abbreviation/README.md
+tags:
+    - 位运算
+    - 字符串
+    - 回溯
+---
+
+<!-- problem:start -->
+
+# [320. 列举单词的全部缩写 🔒](https://leetcode.cn/problems/generalized-abbreviation)
 
 [English Version](/solution/0300-0399/0320.Generalized%20Abbreviation/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>单词的 <strong>广义缩写词</strong> 可以通过下述步骤构造：先取任意数量的 <strong>不重叠、不相邻</strong> 的子字符串，再用它们各自的长度进行替换。</p>
+<p>单词的 <strong>广义缩写词</strong> 可以通过下述步骤构造：先取任意数量的 <strong>不重叠、不相邻</strong> 的<span data-keyword="substring-nonempty">子字符串</span>，再用它们各自的长度进行替换。</p>
 
 <ul>
 	<li>例如，<code>"abcde"</code> 可以缩写为：
+
     <ul>
     	<li><code>"a3e"</code>（<code>"bcd"</code> 变为 <code>"3"</code> ）</li>
     	<li><code>"1bcd1"</code>（<code>"a"</code> 和 <code>"e"</code> 都变为 <code>"1"</code>）<meta charset="UTF-8" /></li>
@@ -23,6 +36,7 @@
     	<li><meta charset="UTF-8" /><code>"22de"</code>&nbsp;(<code>"ab"</code> 变为&nbsp;<code>"2"</code>&nbsp;，&nbsp;<code>"bc"</code>&nbsp;变为&nbsp;<code>"2"</code>) &nbsp;是无效的，因为被选择的字符串是重叠的</li>
     </ul>
     </li>
+
 </ul>
 
 <p>给你一个字符串&nbsp;<code>word</code> ，返回&nbsp;<em>一个由</em>&nbsp;<code>word</code> 的<em>所有可能 <strong>广义缩写词</strong> 组成的列表</em>&nbsp;。按 <strong>任意顺序</strong> 返回答案。</p>
@@ -52,7 +66,11 @@
 	<li><code>word</code> 仅由小写英文字母组成</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：DFS
 
@@ -72,6 +90,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def generateAbbreviations(self, word: str) -> List[str]:
@@ -87,6 +107,8 @@ class Solution:
         n = len(word)
         return dfs(0)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -117,6 +139,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -143,6 +167,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func generateAbbreviations(word string) []string {
@@ -171,6 +197,8 @@ func generateAbbreviations(word string) []string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function generateAbbreviations(word: string): string[] {
     const n = word.length;
@@ -195,6 +223,10 @@ function generateAbbreviations(word: string): string[] {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：二进制枚举
 
 由于字符串 $word$ 的长度不超过 $15$，因此我们可以使用二进制枚举的方法枚举所有的缩写。我们用一个长度为 $n$ 的二进制数 $i$ 表示一种缩写方式，其中 $0$ 表示保留对应的字符，而 $1$ 表示删除对应的字符。我们在 $[0, 2^n)$ 的范围内枚举所有 $i$，并将其转换成对应的缩写，添加到答案列表中即可。
@@ -202,6 +234,8 @@ function generateAbbreviations(word: string): string[] {
 时间复杂度 $O(n \times 2^n)$，空间复杂度 $O(n)$。其中 $n$ 是字符串 $word$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -224,6 +258,8 @@ class Solution:
             ans.append("".join(s))
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -253,6 +289,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -284,6 +322,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func generateAbbreviations(word string) (ans []string) {
 	n := len(word)
@@ -312,4 +352,6 @@ func generateAbbreviations(word string) (ans []string) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

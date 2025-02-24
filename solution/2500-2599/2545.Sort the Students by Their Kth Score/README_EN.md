@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2545.Sort%20the%20Students%20by%20Their%20Kth%20Score/README_EN.md
+rating: 1294
+source: Weekly Contest 329 Q2
+tags:
+    - Array
+    - Matrix
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [2545. Sort the Students by Their Kth Score](https://leetcode.com/problems/sort-the-students-by-their-kth-score)
 
 [中文文档](/solution/2500-2599/2545.Sort%20the%20Students%20by%20Their%20Kth%20Score/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There is a class with <code>m</code> students and <code>n</code> exams. You are given a <strong>0-indexed</strong> <code>m x n</code> integer matrix <code>score</code>, where each row represents one student and <code>score[i][j]</code> denotes the score the <code>i<sup>th</sup></code> student got in the <code>j<sup>th</sup></code> exam. The matrix <code>score</code> contains <strong>distinct</strong> integers only.</p>
 
@@ -44,21 +60,29 @@
 	<li><code>0 &lt;= k &lt; n</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Sorting
 
-We sort score in descending order based on the scores in the $k^{th}$ column, and then return it.
+We directly sort $\textit{score}$ in descending order based on the scores in the $k$-th column, and then return the result.
 
-The time complexity is $O(m \times \log m)$, and the space complexity is $O(1)$. Here, $m$ is the number of rows in score.
+The time complexity is $O(m \times \log m)$, and the space complexity is $O(\log m)$. Here, $m$ is the number of rows in $\textit{score}$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def sortTheStudents(self, score: List[List[int]], k: int) -> List[List[int]]:
         return sorted(score, key=lambda x: -x[k])
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -69,15 +93,19 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     vector<vector<int>> sortTheStudents(vector<vector<int>>& score, int k) {
-        sort(score.begin(), score.end(), [&](const auto& a, const auto& b) { return a[k] > b[k]; });
+        ranges::sort(score, [k](const auto& a, const auto& b) { return a[k] > b[k]; });
         return score;
     }
 };
 ```
+
+#### Go
 
 ```go
 func sortTheStudents(score [][]int, k int) [][]int {
@@ -86,11 +114,15 @@ func sortTheStudents(score [][]int, k int) [][]int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function sortTheStudents(score: number[][], k: number): number[][] {
     return score.sort((a, b) => b[k] - a[k]);
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -104,4 +136,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

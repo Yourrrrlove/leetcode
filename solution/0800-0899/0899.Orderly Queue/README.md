@@ -1,14 +1,26 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0899.Orderly%20Queue/README.md
+tags:
+    - 数学
+    - 字符串
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [899. 有序队列](https://leetcode.cn/problems/orderly-queue)
 
 [English Version](/solution/0800-0899/0899.Orderly%20Queue/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个字符串 <code>s</code> 和一个整数 <code>k</code>&nbsp;。你可以从 <code>s</code> 的前 <code>k</code> 个字母中选择一个，并把它加到字符串的末尾。</p>
 
-<p>返回 <em>在应用上述步骤的任意数量的移动后，字典上最小的字符串&nbsp;</em>。</p>
+<p>返回 <em>在应用上述步骤的任意数量的移动后，字典序最小的字符串&nbsp;</em>。</p>
 
 <p>&nbsp;</p>
 
@@ -41,7 +53,11 @@
 	<li><code>s</code>&nbsp;只由小写字母组成。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：分情况判断
 
@@ -55,6 +71,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def orderlyQueue(self, s: str, k: int) -> str:
@@ -66,6 +84,8 @@ class Solution:
             return ans
         return "".join(sorted(s))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -88,6 +108,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -106,6 +128,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func orderlyQueue(s string, k int) string {
 	if k == 1 {
@@ -123,6 +147,8 @@ func orderlyQueue(s string, k int) string {
 	return string(t)
 }
 ```
+
+#### TypeScript
 
 ```ts
 function orderlyQueue(s: string, k: number): string {
@@ -143,4 +169,6 @@ function orderlyQueue(s: string, k: number): string {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

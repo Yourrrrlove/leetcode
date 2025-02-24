@@ -1,8 +1,15 @@
+---
+comments: true
+edit_url: https://github.com/doocs/leetcode/edit/main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20083.%20%E6%B2%A1%E6%9C%89%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%E9%9B%86%E5%90%88%E7%9A%84%E5%85%A8%E6%8E%92%E5%88%97/README.md
+---
+
+<!-- problem:start -->
+
 # [剑指 Offer II 083. 没有重复元素集合的全排列](https://leetcode.cn/problems/VvJkup)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个不含重复数字的整数数组 <code>nums</code> ，返回其 <strong>所有可能的全排列</strong> 。可以 <strong>按任意顺序</strong> 返回答案。</p>
 
@@ -43,11 +50,17 @@
 
 <p><meta charset="UTF-8" />注意：本题与主站 46&nbsp;题相同：<a href="https://leetcode.cn/problems/permutations/">https://leetcode.cn/problems/permutations/</a>&nbsp;</p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -71,6 +84,8 @@ class Solution:
         dfs(0)
         return res
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -102,6 +117,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -131,6 +148,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func permute(nums []int) [][]int {
 	n := len(nums)
@@ -158,6 +177,8 @@ func dfs(u, n int, nums []int, used []bool, path []int, res *[][]int) {
 	}
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -189,6 +210,8 @@ function dfs(u, n, nums, used, path, res) {
     }
 }
 ```
+
+#### C#
 
 ```cs
 using System.Collections.Generic;
@@ -224,6 +247,40 @@ public class Solution {
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func permute(_ nums: [Int]) -> [[Int]] {
+        var res = [[Int]]()
+        var path = [Int]()
+        var used = [Bool](repeating: false, count: nums.count)
+        dfs(0, nums.count, nums, &used, &path, &res)
+        return res
+    }
+
+    private func dfs(
+        _ u: Int, _ n: Int, _ nums: [Int], _ used: inout [Bool], _ path: inout [Int], _ res: inout [[Int]]
+    ) {
+        if u == n {
+            res.append(path)
+            return
+        }
+        for i in 0..<n {
+            if !used[i] {
+                path.append(nums[i])
+                used[i] = true
+                dfs(u + 1, n, nums, &used, &path, &res)
+                used[i] = false
+                path.removeLast()
+            }
+        }
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

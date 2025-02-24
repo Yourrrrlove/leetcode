@@ -1,18 +1,29 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0400-0499/0429.N-ary%20Tree%20Level%20Order%20Traversal/README.md
+tags:
+    - 树
+    - 广度优先搜索
+---
+
+<!-- problem:start -->
+
 # [429. N 叉树的层序遍历](https://leetcode.cn/problems/n-ary-tree-level-order-traversal)
 
 [English Version](/solution/0400-0499/0429.N-ary%20Tree%20Level%20Order%20Traversal/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个 N 叉树，返回其节点值的<em>层序遍历</em>。（即从左到右，逐层遍历）。</p>
 
 <p>树的序列化输入是用层序遍历，每组子节点都由 null 值分隔（参见示例）。</p>
 
-<p> </p>
+<p>&nbsp;</p>
 
-<p><strong>示例 1：</strong></p>
+<p><strong class="example">示例 1：</strong></p>
 
 <p><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0429.N-ary%20Tree%20Level%20Order%20Traversal/images/narytreeexample.png" style="width: 100%; max-width: 300px;" /></p>
 
@@ -21,7 +32,7 @@
 <strong>输出：</strong>[[1],[3,2,4],[5,6]]
 </pre>
 
-<p><strong>示例 2：</strong></p>
+<p><strong class="example">示例 2：</strong></p>
 
 <p><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/0400-0499/0429.N-ary%20Tree%20Level%20Order%20Traversal/images/sample_4_964.png" style="width: 296px; height: 241px;" /></p>
 
@@ -30,24 +41,40 @@
 <strong>输出：</strong>[[1],[2,3,4,5],[6,7,8,9,10],[11,12,13],[14]]
 </pre>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>提示：</strong></p>
 
 <ul>
-	<li>树的高度不会超过 <code>1000</code></li>
-	<li>树的节点总数在 <code>[0, 10^4]</code> 之间</li>
+	<li>树的高度不会超过&nbsp;<code>1000</code></li>
+	<li>树的节点总数在 <code>[0,&nbsp;10<sup>4</sup>]</code> 之间</li>
 </ul>
+
+<!-- description:end -->
 
 ## 解法
 
+<!-- solution:start -->
+
 ### 方法一：BFS
 
-借助队列，逐层遍历。
+我们首先判断根节点是否为空，若为空则直接返回空列表。
 
-时间复杂度 $O(n)$。
+否则，我们创建一个队列 $q$，初始时将根节点加入队列。
+
+当队列不为空时，我们循环以下操作：
+
+1. 创建一个空列表 $t$，用于存放当前层的节点值。
+2. 对于队列中的每个节点，将其值加入 $t$ 中，并将其子节点加入队列。
+3. 将 $t$ 加入结果列表 $ans$。
+
+最后返回结果列表 $ans$。
+
+时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为 N 叉树的节点数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 """
@@ -74,6 +101,8 @@ class Solution:
             ans.append(t)
         return ans
 ```
+
+#### Java
 
 ```java
 /*
@@ -117,6 +146,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /*
 // Definition for a Node.
@@ -142,15 +173,19 @@ class Solution {
 public:
     vector<vector<int>> levelOrder(Node* root) {
         vector<vector<int>> ans;
-        if (!root) return ans;
+        if (!root) {
+            return ans;
+        }
         queue<Node*> q{{root}};
         while (!q.empty()) {
             vector<int> t;
-            for (int n = q.size(); n > 0; --n) {
+            for (int n = q.size(); n; --n) {
                 root = q.front();
                 q.pop();
                 t.push_back(root->val);
-                for (auto& child : root->children) q.push(child);
+                for (auto& child : root->children) {
+                    q.push(child);
+                }
             }
             ans.push_back(t);
         }
@@ -158,6 +193,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -168,10 +205,9 @@ public:
  * }
  */
 
-func levelOrder(root *Node) [][]int {
-	var ans [][]int
+func levelOrder(root *Node) (ans [][]int) {
 	if root == nil {
-		return ans
+		return
 	}
 	q := []*Node{root}
 	for len(q) > 0 {
@@ -186,9 +222,11 @@ func levelOrder(root *Node) [][]int {
 		}
 		ans = append(ans, t)
 	}
-	return ans
+	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -204,36 +242,50 @@ func levelOrder(root *Node) [][]int {
  */
 
 function levelOrder(root: Node | null): number[][] {
-    const res = [];
-    if (root == null) {
-        return res;
+    const ans: number[][] = [];
+    if (!root) {
+        return ans;
     }
-    const queue = [root];
-    while (queue.length !== 0) {
-        const n = queue.length;
-        const vals = [];
-        for (let i = 0; i < n; i++) {
-            const { val, children } = queue.shift();
-            vals.push(val);
-            queue.push(...children);
+    const q: Node[] = [root];
+    while (q.length) {
+        const qq: Node[] = [];
+        const t: number[] = [];
+        for (const { val, children } of q) {
+            qq.push(...children);
+            t.push(val);
         }
-        res.push(vals);
+        ans.push(t);
+        q.splice(0, q.length, ...qq);
     }
-    return res;
+    return ans;
 }
 ```
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：DFS
 
-按深度遍历。
+我们可以使用深度优先搜索的方法，遍历整棵树。
 
-假设当前深度为 i，遍历到的节点为 root。若结果列表 `ans[i]` 不存在，则创建一个空列表放入 ans 中，然后将 `root.val` 放入 `ans[i]`。接着往下一层遍历（root 的子节点）。
+我们定义一个辅助函数 $dfs(root, i)$，其中 $root$ 表示当前节点，而 $i$ 表示当前层数。
 
-时间复杂度 $O(n)$。
+在 $dfs$ 函数中，我们首先判断 $root$ 是否为空，若为空则直接返回。
+
+否则，我们判断 $ans$ 的长度是否小于等于 $i$，若是则说明当前层还没有加入到 $ans$ 中，我们需要先加入一个空列表。然后将 $root$ 的值加入 $ans[i]$ 中。
+
+接着，我们遍历 $root$ 的所有子节点，对于每个子节点，我们调用 $dfs(child, i + 1)$。
+
+在主函数中，我们调用 $dfs(root, 0)$，并返回 $ans$。
+
+时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为 N 叉树的节点数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 """
@@ -261,6 +313,8 @@ class Solution:
         return ans
 ```
 
+#### Java
+
 ```java
 /*
 // Definition for a Node.
@@ -282,13 +336,14 @@ class Node {
 */
 
 class Solution {
+    private List<List<Integer>> ans = new ArrayList<>();
+
     public List<List<Integer>> levelOrder(Node root) {
-        List<List<Integer>> ans = new ArrayList<>();
-        dfs(root, 0, ans);
+        dfs(root, 0);
         return ans;
     }
 
-    private void dfs(Node root, int i, List<List<Integer>> ans) {
+    private void dfs(Node root, int i) {
         if (root == null) {
             return;
         }
@@ -297,11 +352,13 @@ class Solution {
         }
         ans.get(i++).add(root.val);
         for (Node child : root.children) {
-            dfs(child, i, ans);
+            dfs(child, i);
         }
     }
 }
 ```
+
+#### C++
 
 ```cpp
 /*
@@ -328,18 +385,25 @@ class Solution {
 public:
     vector<vector<int>> levelOrder(Node* root) {
         vector<vector<int>> ans;
-        dfs(root, 0, ans);
+        function<void(Node*, int i)> dfs = [&](Node* root, int i) {
+            if (!root) {
+                return;
+            }
+            if (ans.size() <= i) {
+                ans.push_back({});
+            }
+            ans[i++].push_back(root->val);
+            for (auto& child : root->children) {
+                dfs(child, i);
+            }
+        };
+        dfs(root, 0);
         return ans;
-    }
-
-    void dfs(Node* root, int i, vector<vector<int>>& ans) {
-        if (!root) return;
-        if (ans.size() <= i) ans.push_back({});
-        ans[i++].push_back(root->val);
-        for (Node* child : root->children) dfs(child, i, ans);
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -350,8 +414,7 @@ public:
  * }
  */
 
-func levelOrder(root *Node) [][]int {
-	var ans [][]int
+func levelOrder(root *Node) (ans [][]int) {
 	var dfs func(root *Node, i int)
 	dfs = func(root *Node, i int) {
 		if root == nil {
@@ -366,9 +429,11 @@ func levelOrder(root *Node) [][]int {
 		}
 	}
 	dfs(root, 0)
-	return ans
+	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -384,23 +449,25 @@ func levelOrder(root *Node) [][]int {
  */
 
 function levelOrder(root: Node | null): number[][] {
-    const res = [];
-    const dfs = (root: Node | null, depth: number) => {
-        if (root == null) {
+    const ans: number[][] = [];
+    const dfs = (root: Node | null, i: number) => {
+        if (root === null) {
             return;
         }
-        if (res.length <= depth) {
-            res.push([]);
+        if (ans.length <= i) {
+            ans.push([]);
         }
         const { val, children } = root;
-        res[depth].push(val);
-        children.forEach(node => dfs(node, depth + 1));
+        ans[i++].push(val);
+        children.forEach(node => dfs(node, i));
     };
     dfs(root, 0);
-    return res;
+    return ans;
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

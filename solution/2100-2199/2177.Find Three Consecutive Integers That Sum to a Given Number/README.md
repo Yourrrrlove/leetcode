@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2100-2199/2177.Find%20Three%20Consecutive%20Integers%20That%20Sum%20to%20a%20Given%20Number/README.md
+rating: 1257
+source: 第 72 场双周赛 Q2
+tags:
+    - 数学
+    - 模拟
+---
+
+<!-- problem:start -->
+
 # [2177. 找到和为给定整数的三个连续整数](https://leetcode.cn/problems/find-three-consecutive-integers-that-sum-to-a-given-number)
 
 [English Version](/solution/2100-2199/2177.Find%20Three%20Consecutive%20Integers%20That%20Sum%20to%20a%20Given%20Number/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个整数&nbsp;<code>num</code>&nbsp;，请你返回三个连续的整数，它们的&nbsp;<strong>和</strong>&nbsp;为<em>&nbsp;</em><code>num</code>&nbsp;。如果&nbsp;<code>num</code>&nbsp;无法被表示成三个连续整数的和，请你返回一个 <strong>空</strong>&nbsp;数组。</p>
 
@@ -33,15 +46,21 @@
 	<li><code>0 &lt;= num &lt;= 10<sup>15</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：数学
 
-假设三个连续的整数分别为 $x-1$, $x$, $x+1$，则它们的和为 $3x$，因此 $num$ 必须是 $3$ 的倍数。如果 $num$ 不是 $3$ 的倍数，则无法表示成三个连续整数的和，返回空数组。否则，令 $x = \frac{num}{3}$，则 $x-1$, $x$, $x+1$ 就是三个连续整数，它们的和为 $num$。
+我们假设三个连续的整数分别为 $x-1$, $x$, $x+1$，则它们的和为 $3x$，因此 $\textit{num}$ 必须是 $3$ 的倍数。如果 $\textit{num}$ 不是 $3$ 的倍数，则无法表示成三个连续整数的和，返回空数组。否则，令 $x = \frac{\textit{num}}{3}$，则 $x-1$, $x$, $x+1$ 就是三个连续整数，它们的和为 $\textit{num}$。
 
 时间复杂度 $O(1)$，空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -49,6 +68,8 @@ class Solution:
         x, mod = divmod(num, 3)
         return [] if mod else [x - 1, x, x + 1]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -61,6 +82,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -75,6 +98,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func sumOfThree(num int64) []int64 {
 	if num%3 != 0 {
@@ -84,6 +109,8 @@ func sumOfThree(num int64) []int64 {
 	return []int64{x - 1, x, x + 1}
 }
 ```
+
+#### TypeScript
 
 ```ts
 function sumOfThree(num: number): number[] {
@@ -95,6 +122,38 @@ function sumOfThree(num: number): number[] {
 }
 ```
 
+#### Rust
+
+```rust
+impl Solution {
+    pub fn sum_of_three(num: i64) -> Vec<i64> {
+        if num % 3 != 0 {
+            return Vec::new();
+        }
+        let x = num / 3;
+        vec![x - 1, x, x + 1]
+    }
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {number} num
+ * @return {number[]}
+ */
+var sumOfThree = function (num) {
+    if (num % 3) {
+        return [];
+    }
+    const x = Math.floor(num / 3);
+    return [x - 1, x, x + 1];
+};
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

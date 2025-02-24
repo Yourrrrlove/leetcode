@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0900-0999/0998.Maximum%20Binary%20Tree%20II/README_EN.md
+tags:
+    - Tree
+    - Binary Tree
+---
+
+<!-- problem:start -->
+
 # [998. Maximum Binary Tree II](https://leetcode.com/problems/maximum-binary-tree-ii)
 
 [中文文档](/solution/0900-0999/0998.Maximum%20Binary%20Tree%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>A <strong>maximum tree</strong> is a tree where every node has a value greater than any other value in its subtree.</p>
 
@@ -59,7 +72,11 @@
 	<li><code>1 &lt;= val &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Recursion
 
@@ -70,6 +87,8 @@ If $val$ is not the maximum number, since $val$ is the last appended number, it 
 The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes in the tree.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -87,6 +106,8 @@ class Solution:
         root.right = self.insertIntoMaxTree(root.right, val)
         return root
 ```
+
+#### Java
 
 ```java
 /**
@@ -115,6 +136,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -137,6 +160,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -154,6 +179,8 @@ func insertIntoMaxTree(root *TreeNode, val int) *TreeNode {
 	return root
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -179,6 +206,8 @@ function insertIntoMaxTree(root: TreeNode | null, val: number): TreeNode | null 
 }
 ```
 
+#### Rust
+
 ```rust
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
@@ -198,23 +227,19 @@ function insertIntoMaxTree(root: TreeNode | null, val: number): TreeNode | null 
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 impl Solution {
     pub fn insert_into_max_tree(
         mut root: Option<Rc<RefCell<TreeNode>>>,
-        val: i32
+        val: i32,
     ) -> Option<Rc<RefCell<TreeNode>>> {
         if root.is_none() || root.as_ref().unwrap().as_ref().borrow().val < val {
-            return Some(
-                Rc::new(
-                    RefCell::new(TreeNode {
-                        val,
-                        left: root.take(),
-                        right: None,
-                    })
-                )
-            );
+            return Some(Rc::new(RefCell::new(TreeNode {
+                val,
+                left: root.take(),
+                right: None,
+            })));
         }
         {
             let mut root = root.as_ref().unwrap().as_ref().borrow_mut();
@@ -224,6 +249,8 @@ impl Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 /**
@@ -250,6 +277,10 @@ struct TreeNode* insertIntoMaxTree(struct TreeNode* root, int val) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Iteration
 
 Search the right subtree, find the node where $curr.val \gt val \gt curr.right.val$, then create a new node $node$, point $node.left$ to $curr.right$, and then point $curr.right$ to $node$.
@@ -259,6 +290,8 @@ Finally, return $root$.
 The time complexity is $O(n)$, where $n$ is the number of nodes in the tree. The space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -281,6 +314,8 @@ class Solution:
         curr.right = node
         return root
 ```
+
+#### Java
 
 ```java
 /**
@@ -315,6 +350,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -341,6 +378,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -364,6 +403,8 @@ func insertIntoMaxTree(root *TreeNode, val int) *TreeNode {
 	return root
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -397,4 +438,6 @@ function insertIntoMaxTree(root: TreeNode | null, val: number): TreeNode | null 
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

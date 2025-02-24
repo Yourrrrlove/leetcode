@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2860.Happy%20Students/README_EN.md
+rating: 1625
+source: Weekly Contest 363 Q2
+tags:
+    - Array
+    - Enumeration
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [2860. Happy Students](https://leetcode.com/problems/happy-students)
 
 [中文文档](/solution/2800-2899/2860.Happy%20Students/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> integer array <code>nums</code> of length <code>n</code> where <code>n</code> is the total number of students in the class. The class teacher tries to select a group of students so that all the students remain happy.</p>
 
@@ -48,7 +64,11 @@ The class teacher selects all the students to form the group.
 	<li><code>0 &lt;= nums[i] &lt; nums.length</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Sorting + Enumeration
 
@@ -68,6 +88,8 @@ The time complexity is $O(n \times \log n)$, and the space complexity is $O(\log
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def countWays(self, nums: List[int]) -> int:
@@ -79,8 +101,11 @@ class Solution:
                 continue
             if i < n and nums[i] <= i:
                 continue
+            ans += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -97,6 +122,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -116,6 +143,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func countWays(nums []int) (ans int) {
 	sort.Ints(nums)
@@ -129,6 +158,8 @@ func countWays(nums []int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function countWays(nums: number[]): number {
@@ -147,4 +178,6 @@ function countWays(nums: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

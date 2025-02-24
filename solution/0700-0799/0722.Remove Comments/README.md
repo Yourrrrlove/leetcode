@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0722.Remove%20Comments/README.md
+tags:
+    - 数组
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [722. 删除注释](https://leetcode.cn/problems/remove-comments)
 
 [English Version](/solution/0700-0799/0722.Remove%20Comments/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给一个 C++ 程序，删除程序中的注释。这个程序<code>source</code>是一个数组，其中<code>source[i]</code>表示第&nbsp;<code>i</code>&nbsp;行源码。&nbsp;这表示每行源码由 <code>'\n'</code>&nbsp;分隔。</p>
 
@@ -87,23 +98,29 @@ a = b + c;
 </ul>
 <span style="display:block"><span style="height:0px"><span style="position:absolute"><span style="top:0px"><span style="left:-9999px"><span style="opacity:0"><span style="overflow:hidden">&nbsp;</span></span></span></span></span></span>​​​​​​</span>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：分情况讨论
 
-我们用一个变量 $blockComment$ 来表示当前是否处于块注释中，初始时 $blockComment$ 为 `false`；用一个变量 $t$ 来存储当前行的有效字符。
+我们用一个变量 来表示当前是否处于块注释中，初始时 $\textit{blockComment}$ 为 `false`；用一个变量 $t$ 来存储当前行的有效字符。
 
 接下来，遍历每一行，分情况讨论：
 
-如果当前处于块注释中，那么如果当前字符和下一个字符是 `'*/'`，说明块注释结束，我们将 $blockComment$ 置为 `false`，并且跳过这两个字符；否则，我们继续保持块注释状态，不做任何操作；
+如果当前处于块注释中，那么如果当前字符和下一个字符是 `'*/'`，说明块注释结束，我们将 $\textit{blockComment}$ 置为 `false`，并且跳过这两个字符；否则，我们继续保持块注释状态，不做任何操作；
 
-如果当前不处于块注释中，那么如果当前字符和下一个字符是 `'/*'`，说明块注释开始，我们将 $blockComment$ 置为 `true`，并且跳过这两个字符；如果当前字符和下一个字符是 `'//'`，那么说明行注释开始，我们直接退出当前行的遍历；否则，说明当前字符是有效字符，我们将其加入 $t$ 中；
+如果当前不处于块注释中，那么如果当前字符和下一个字符是 `'/*'`，说明块注释开始，我们将 $\textit{blockComment}$ 置为 `true`，并且跳过这两个字符；如果当前字符和下一个字符是 `'//'`，那么说明行注释开始，我们直接退出当前行的遍历；否则，说明当前字符是有效字符，我们将其加入 $t$ 中；
 
-遍历完当前行后，如果 $blockComment$ 为 `false`，并且 $t$ 不为空，说明当前行是有效行，我们将其加入答案数组中，并且清空 $t$。继续遍历下一行。
+遍历完当前行后，如果 $\textit{blockComment}$ 为 `false`，并且 $t$ 不为空，说明当前行是有效行，我们将其加入答案数组中，并且清空 $t$。继续遍历下一行。
 
 时间复杂度 $O(L)$，空间复杂度 $O(L)$，其中 $L$ 是源代码的总长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -132,6 +149,8 @@ class Solution:
                 t.clear()
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -167,6 +186,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -204,6 +225,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func removeComments(source []string) (ans []string) {
 	t := []byte{}
@@ -235,6 +258,8 @@ func removeComments(source []string) (ans []string) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function removeComments(source: string[]): string[] {
@@ -268,6 +293,8 @@ function removeComments(source: string[]): string[] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -311,4 +338,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

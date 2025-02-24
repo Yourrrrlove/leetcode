@@ -1,10 +1,25 @@
-# [1183. 矩阵中 1 的最大数量](https://leetcode.cn/problems/maximum-number-of-ones)
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1100-1199/1183.Maximum%20Number%20of%20Ones/README.md
+rating: 2366
+source: 第 8 场双周赛 Q4
+tags:
+    - 贪心
+    - 数学
+    - 排序
+    - 堆（优先队列）
+---
+
+<!-- problem:start -->
+
+# [1183. 矩阵中 1 的最大数量 🔒](https://leetcode.cn/problems/maximum-number-of-ones)
 
 [English Version](/solution/1100-1199/1183.Maximum%20Number%20of%20Ones/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>现在有一个尺寸为 <code>width * height</code>&nbsp;的矩阵&nbsp;<code>M</code>，矩阵中的每个单元格的值不是&nbsp;<code>0</code>&nbsp;就是&nbsp;<code>1</code>。</p>
 
@@ -46,7 +61,11 @@
 	<li><code>0 &lt;= maxOnes &lt;= sideLength * sideLength</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：统计等效位置
 
@@ -57,6 +76,8 @@
 时间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是矩阵的行数和列数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,6 +93,8 @@ class Solution:
         cnt.sort(reverse=True)
         return sum(cnt[:maxOnes])
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -93,6 +116,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -116,6 +141,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maximumNumberOfOnes(width int, height int, sideLength int, maxOnes int) int {
 	x := sideLength
@@ -134,6 +161,8 @@ func maximumNumberOfOnes(width int, height int, sideLength int, maxOnes int) int
 	return ans
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -159,4 +188,6 @@ var maximumNumberOfOnes = function (width, height, sideLength, maxOnes) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,18 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/lcci/03.02.Min%20Stack/README_EN.md
+---
+
+<!-- problem:start -->
+
 # [03.02. Min Stack](https://leetcode.cn/problems/min-stack-lcci)
 
 [中文文档](/lcci/03.02.Min%20Stack/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>How would you design a stack which, in addition to push and pop, has a function min which returns the minimum element? Push, pop and min should all operate in 0(1) time.</p>
 
@@ -26,11 +36,26 @@ minStack.top();      --&gt; return 0.
 
 minStack.getMin();   --&gt; return -2.</pre>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Double Stack
+
+We use two stacks to implement this, where `stk1` is used to store data, and `stk2` is used to store the current minimum value in the stack. Initially, `stk2` stores a very large value.
+
+-   When we push an element `x` into the stack, we push `x` into `stk1`, and push `min(x, stk2[-1])` into `stk2`.
+-   When we pop an element from the stack, we pop the top elements of both `stk1` and `stk2`.
+-   When we want to get the top element in the current stack, we just need to return the top element of `stk1`.
+-   When we want to get the minimum value in the current stack, we just need to return the top element of `stk2`.
+
+For each operation, the time complexity is $O(1)$, and the space complexity is $O(n)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class MinStack:
@@ -63,6 +88,8 @@ class MinStack:
 # param_3 = obj.top()
 # param_4 = obj.getMin()
 ```
+
+#### Java
 
 ```java
 class MinStack {
@@ -102,6 +129,8 @@ class MinStack {
  * int param_4 = obj.getMin();
  */
 ```
+
+#### C++
 
 ```cpp
 class MinStack {
@@ -144,6 +173,8 @@ private:
  */
 ```
 
+#### Go
+
 ```go
 type MinStack struct {
 	stk1 []int
@@ -183,6 +214,8 @@ func (this *MinStack) GetMin() int {
  */
 ```
 
+#### TypeScript
+
 ```ts
 class MinStack {
     stack: number[];
@@ -221,6 +254,8 @@ class MinStack {
  */
 ```
 
+#### Rust
+
 ```rust
 use std::collections::VecDeque;
 struct MinStack {
@@ -235,7 +270,10 @@ struct MinStack {
 impl MinStack {
     /** initialize your data structure here. */
     fn new() -> Self {
-        Self { stack: VecDeque::new(), min_stack: VecDeque::new() }
+        Self {
+            stack: VecDeque::new(),
+            min_stack: VecDeque::new(),
+        }
     }
 
     fn push(&mut self, x: i32) {
@@ -259,15 +297,10 @@ impl MinStack {
     fn get_min(&self) -> i32 {
         *self.min_stack.back().unwrap()
     }
-}/**
- * Your MinStack object will be instantiated and called as such:
- * let obj = MinStack::new();
- * obj.push(x);
- * obj.pop();
- * let ret_3: i32 = obj.top();
- * let ret_4: i32 = obj.get_min();
- */
+}
 ```
+
+#### C#
 
 ```cs
 public class MinStack {
@@ -308,6 +341,50 @@ public class MinStack {
  */
 ```
 
+#### Swift
+
+```swift
+class MinStack {
+    private var stk1: [Int]
+    private var stk2: [Int]
+
+    init() {
+        stk1 = []
+        stk2 = [Int.max]
+    }
+
+    func push(_ x: Int) {
+        stk1.append(x)
+
+        stk2.append(min(x, stk2.last!))
+    }
+
+    func pop() {
+        stk1.removeLast()
+        stk2.removeLast()
+    }
+
+    func top() -> Int {
+        return stk1.last!
+    }
+
+    func getMin() -> Int {
+        return stk2.last!
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * let obj = MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * let param_3 = obj.top();
+ * let param_4 = obj.getMin();
+ */
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,20 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2880.Select%20Data/README.md
+tags:
+    - Pandas
+---
+
+<!-- problem:start -->
+
 # [2880. 数据选取](https://leetcode.cn/problems/select-data)
 
 [English Version](/solution/2800-2899/2880.Select%20Data/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <pre>
 DataFrame students
@@ -45,11 +55,17 @@ DataFrame students
 <strong>解释：
 </strong>学生 Ulysses 的 student_id = 101，所以我们输出了他的 name 和 age。</pre>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 import pandas as pd
@@ -61,4 +77,6 @@ def selectData(students: pd.DataFrame) -> pd.DataFrame:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0500-0599/0547.Number%20of%20Provinces/README_EN.md
+tags:
+    - Depth-First Search
+    - Breadth-First Search
+    - Union Find
+    - Graph
+---
+
+<!-- problem:start -->
+
 # [547. Number of Provinces](https://leetcode.com/problems/number-of-provinces)
 
 [中文文档](/solution/0500-0599/0547.Number%20of%20Provinces/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There are <code>n</code> cities. Some of them are connected, while some are not. If city <code>a</code> is connected directly with city <code>b</code>, and city <code>b</code> is connected directly with city <code>c</code>, then city <code>a</code> is connected indirectly with city <code>c</code>.</p>
 
@@ -39,11 +54,25 @@
 	<li><code>isConnected[i][j] == isConnected[j][i]</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: DFS
+
+We create an array $\textit{vis}$ to record whether each city has been visited.
+
+Next, we traverse each city $i$. If the city has not been visited, we start a depth-first search from that city. Using the matrix $\textit{isConnected}$, we find the cities directly connected to this city. These cities and the current city belong to the same province. We continue the depth-first search for these cities until all cities in the same province have been visited. This counts as one province, so we increment the answer $\textit{ans}$ by $1$. Then, we move to the next unvisited city and repeat the process until all cities have been traversed.
+
+Finally, return the answer.
+
+The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ is the number of cities.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -63,6 +92,8 @@ class Solution:
                 ans += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -94,6 +125,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -102,7 +135,7 @@ public:
         int ans = 0;
         bool vis[n];
         memset(vis, false, sizeof(vis));
-        function<void(int)> dfs = [&](int i) {
+        auto dfs = [&](this auto&& dfs, int i) -> void {
             vis[i] = true;
             for (int j = 0; j < n; ++j) {
                 if (!vis[j] && isConnected[i][j]) {
@@ -120,6 +153,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findCircleNum(isConnected [][]int) (ans int) {
@@ -144,6 +179,8 @@ func findCircleNum(isConnected [][]int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function findCircleNum(isConnected: number[][]): number {
     const n = isConnected.length;
@@ -166,6 +203,8 @@ function findCircleNum(isConnected: number[][]): number {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -197,9 +236,23 @@ impl Solution {
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 2: Union-Find
+
+We can also use the union-find data structure to maintain each connected component. Initially, each city belongs to a different connected component, so the number of provinces is $n$.
+
+Next, we traverse the matrix $\textit{isConnected}$. If there is a connection between two cities $(i, j)$ and they belong to two different connected components, they will be merged into one connected component, and the number of provinces is decremented by $1$.
+
+Finally, return the number of provinces.
+
+The time complexity is $O(n^2 \times \log n)$, and the space complexity is $O(n)$. Here, $n$ is the number of cities, and $\log n$ is the time complexity of path compression in the union-find data structure.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -221,6 +274,8 @@ class Solution:
                         ans -= 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -256,6 +311,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -263,7 +320,7 @@ public:
         int n = isConnected.size();
         int p[n];
         iota(p, p + n, 0);
-        function<int(int)> find = [&](int x) -> int {
+        auto find = [&](this auto&& find, int x) -> int {
             if (p[x] != x) {
                 p[x] = find(p[x]);
             }
@@ -285,6 +342,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findCircleNum(isConnected [][]int) (ans int) {
@@ -316,13 +375,12 @@ func findCircleNum(isConnected [][]int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function findCircleNum(isConnected: number[][]): number {
     const n = isConnected.length;
-    const p: number[] = new Array(n);
-    for (let i = 0; i < n; ++i) {
-        p[i] = i;
-    }
+    const p: number[] = Array.from({ length: n }, (_, i) => i);
     const find = (x: number): number => {
         if (p[x] !== x) {
             p[x] = find(p[x]);
@@ -348,4 +406,6 @@ function findCircleNum(isConnected: number[][]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

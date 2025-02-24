@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2817.Minimum%20Absolute%20Difference%20Between%20Elements%20With%20Constraint/README_EN.md
+rating: 1889
+source: Weekly Contest 358 Q3
+tags:
+    - Array
+    - Binary Search
+    - Ordered Set
+---
+
+<!-- problem:start -->
+
 # [2817. Minimum Absolute Difference Between Elements With Constraint](https://leetcode.com/problems/minimum-absolute-difference-between-elements-with-constraint)
 
 [中文文档](/solution/2800-2899/2817.Minimum%20Absolute%20Difference%20Between%20Elements%20With%20Constraint/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> integer array <code>nums</code> and an integer <code>x</code>.</p>
 
@@ -52,7 +68,11 @@ It can be shown that 3 is the optimal answer.
 	<li><code>0 &lt;= x &lt; nums.length</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Ordered Set
 
@@ -64,10 +84,9 @@ The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$.
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedList
-
-
 class Solution:
     def minAbsoluteDifference(self, nums: List[int], x: int) -> int:
         sl = SortedList()
@@ -81,6 +100,8 @@ class Solution:
                 ans = min(ans, nums[i] - sl[j - 1])
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -102,6 +123,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -125,6 +148,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minAbsoluteDifference(nums []int, x int) int {
 	rbt := redblacktree.NewWithIntComparator()
@@ -143,6 +168,8 @@ func minAbsoluteDifference(nums []int, x int) int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minAbsoluteDifference(nums: number[], x: number): number {
@@ -668,4 +695,6 @@ class TreeMultiSet<T = number> {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

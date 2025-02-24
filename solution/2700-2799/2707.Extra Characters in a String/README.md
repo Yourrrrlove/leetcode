@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2707.Extra%20Characters%20in%20a%20String/README.md
+rating: 1735
+source: 第 105 场双周赛 Q2
+tags:
+    - 字典树
+    - 数组
+    - 哈希表
+    - 字符串
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [2707. 字符串中的额外字符](https://leetcode.cn/problems/extra-characters-in-a-string)
 
 [English Version](/solution/2700-2799/2707.Extra%20Characters%20in%20a%20String/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个下标从 <strong>0</strong>&nbsp;开始的字符串&nbsp;<code>s</code>&nbsp;和一个单词字典&nbsp;<code>dictionary</code>&nbsp;。你需要将&nbsp;<code>s</code>&nbsp;分割成若干个 <strong>互不重叠</strong>&nbsp;的子字符串，每个子字符串都在&nbsp;<code>dictionary</code>&nbsp;中出现过。<code>s</code>&nbsp;中可能会有一些&nbsp;<strong>额外的字符</strong>&nbsp;不在任何子字符串中。</p>
 
@@ -38,7 +54,11 @@
 	<li><code>dictionary</code>&nbsp;中的单词互不相同。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：哈希表 + 动态规划
 
@@ -62,6 +82,8 @@ $$
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def minExtraChar(self, s: str, dictionary: List[str]) -> int:
@@ -75,6 +97,8 @@ class Solution:
                     f[i] = f[j]
         return f[n]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -99,6 +123,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -120,6 +146,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minExtraChar(s string, dictionary []string) int {
 	ss := map[string]bool{}
@@ -140,6 +168,8 @@ func minExtraChar(s string, dictionary []string) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minExtraChar(s: string, dictionary: string[]): number {
     const ss = new Set(dictionary);
@@ -156,6 +186,8 @@ function minExtraChar(s: string, dictionary: string[]): number {
     return f[n];
 }
 ```
+
+#### Rust
 
 ```rust
 use std::collections::HashSet;
@@ -178,7 +210,35 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {string} s
+ * @param {string[]} dictionary
+ * @return {number}
+ */
+var minExtraChar = function (s, dictionary) {
+    const ss = new Set(dictionary);
+    const n = s.length;
+    const f = Array(n + 1).fill(0);
+    for (let i = 1; i <= n; ++i) {
+        f[i] = f[i - 1] + 1;
+        for (let j = 0; j < i; ++j) {
+            if (ss.has(s.slice(j, i))) {
+                f[i] = Math.min(f[i], f[j]);
+            }
+        }
+    }
+    return f[n];
+};
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### 方法二：字典树 + 动态规划
 
@@ -191,6 +251,8 @@ impl Solution {
 时间复杂度 $O(n^2 + L)$，空间复杂度 $O(n + L \times |\Sigma|)$。其中 $n$ 是字符串 $s$ 的长度，而 $L$ 是字典中所有单词的长度之和，另外 $|\Sigma|$ 是字符集的大小，本题中字符集为小写英文字母，因此 $|\Sigma| = 26$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Node:
@@ -226,6 +288,8 @@ class Solution:
                     f[i] = f[j]
         return f[n]
 ```
+
+#### Java
 
 ```java
 class Node {
@@ -266,6 +330,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Node {
@@ -314,6 +380,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 type Node struct {
 	children [26]*Node
@@ -352,6 +420,8 @@ func minExtraChar(s string, dictionary []string) int {
 	return f[n]
 }
 ```
+
+#### TypeScript
 
 ```ts
 class Node {
@@ -395,4 +465,6 @@ function minExtraChar(s: string, dictionary: string[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

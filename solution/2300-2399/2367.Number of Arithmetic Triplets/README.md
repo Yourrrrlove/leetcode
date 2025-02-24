@@ -1,12 +1,27 @@
-# [2367. 算术三元组的数目](https://leetcode.cn/problems/number-of-arithmetic-triplets)
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2367.Number%20of%20Arithmetic%20Triplets/README.md
+rating: 1203
+source: 第 305 场周赛 Q1
+tags:
+    - 数组
+    - 哈希表
+    - 双指针
+    - 枚举
+---
+
+<!-- problem:start -->
+
+# [2367. 等差三元组的数目](https://leetcode.cn/problems/number-of-arithmetic-triplets)
 
 [English Version](/solution/2300-2399/2367.Number%20of%20Arithmetic%20Triplets/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给你一个下标从 <strong>0</strong> 开始、<strong>严格递增</strong> 的整数数组 <code>nums</code> 和一个正整数 <code>diff</code> 。如果满足下述全部条件，则三元组 <code>(i, j, k)</code> 就是一个 <strong>算术三元组</strong> ：</p>
+<p>给你一个下标从 <strong>0</strong> 开始、<strong>严格递增</strong> 的整数数组 <code>nums</code> 和一个正整数 <code>diff</code> 。如果满足下述全部条件，则三元组 <code>(i, j, k)</code> 就是一个 <strong>等差三元组</strong> ：</p>
 
 <ul>
 	<li><code>i &lt; j &lt; k</code> ，</li>
@@ -14,26 +29,28 @@
 	<li><code>nums[k] - nums[j] == diff</code></li>
 </ul>
 
-<p>返回不同 <strong>算术三元组</strong> 的数目<em>。</em></p>
+<p>返回不同 <strong>等差三元组</strong> 的数目<em>。</em></p>
 
 <p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
 
-<pre><strong>输入：</strong>nums = [0,1,4,6,7,10], diff = 3
+<pre>
+<strong>输入：</strong>nums = [0,1,4,6,7,10], diff = 3
 <strong>输出：</strong>2
 <strong>解释：</strong>
-(1, 2, 4) 是算术三元组：7 - 4 == 3 且 4 - 1 == 3 。
-(2, 4, 5) 是算术三元组：10 - 7 == 3 且 7 - 4 == 3 。
+(1, 2, 4) 是等差三元组：7 - 4 == 3 且 4 - 1 == 3 。
+(2, 4, 5) 是等差三元组：10 - 7 == 3 且 7 - 4 == 3 。
 </pre>
 
 <p><strong>示例 2：</strong></p>
 
-<pre><strong>输入：</strong>nums = [4,5,6,7,8,9], diff = 2
+<pre>
+<strong>输入：</strong>nums = [4,5,6,7,8,9], diff = 2
 <strong>输出：</strong>2
 <strong>解释：</strong>
-(0, 2, 4) 是算术三元组：8 - 6 == 2 且 6 - 4 == 2 。
-(1, 3, 5) 是算术三元组：9 - 7 == 2 且 7 - 5 == 2 。
+(0, 2, 4) 是等差三元组：8 - 6 == 2 且 6 - 4 == 2 。
+(1, 3, 5) 是等差三元组：9 - 7 == 2 且 7 - 5 == 2 。
 </pre>
 
 <p>&nbsp;</p>
@@ -47,7 +64,11 @@
 	<li><code>nums</code> <strong>严格</strong> 递增</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：暴力枚举
 
@@ -57,11 +78,15 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def arithmeticTriplets(self, nums: List[int], diff: int) -> int:
         return sum(b - a == diff and c - b == diff for a, b, c in combinations(nums, 3))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -81,6 +106,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -102,6 +129,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func arithmeticTriplets(nums []int, diff int) (ans int) {
 	n := len(nums)
@@ -117,6 +146,8 @@ func arithmeticTriplets(nums []int, diff int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function arithmeticTriplets(nums: number[], diff: number): number {
@@ -137,6 +168,10 @@ function arithmeticTriplets(nums: number[], diff: number): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：数组或哈希表
 
 我们可以先将 $nums$ 中的元素存入哈希表或数组 $vis$ 中，然后枚举 $nums$ 中的每个元素 $x$，判断 $x+diff$, $x+diff+diff$ 是否也在 $vis$ 中，若是，累加三元组数目。
@@ -147,12 +182,16 @@ function arithmeticTriplets(nums: number[], diff: number): number {
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def arithmeticTriplets(self, nums: List[int], diff: int) -> int:
         vis = set(nums)
         return sum(x + diff in vis and x + diff * 2 in vis for x in nums)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -172,6 +211,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -189,6 +230,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func arithmeticTriplets(nums []int, diff int) (ans int) {
 	vis := [301]bool{}
@@ -203,6 +246,8 @@ func arithmeticTriplets(nums []int, diff int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function arithmeticTriplets(nums: number[], diff: number): number {
@@ -222,4 +267,6 @@ function arithmeticTriplets(nums: number[], diff: number): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0735.Asteroid%20Collision/README_EN.md
+tags:
+    - Stack
+    - Array
+    - Simulation
+---
+
+<!-- problem:start -->
+
 # [735. Asteroid Collision](https://leetcode.com/problems/asteroid-collision)
 
 [中文文档](/solution/0700-0799/0735.Asteroid%20Collision/README.md)
 
 ## Description
 
-<p>We are given an array <code>asteroids</code> of integers representing asteroids in a row.</p>
+<!-- description:start -->
+
+<p>We are given an array <code>asteroids</code> of integers representing asteroids in a row. The indices of the asteriod in the array represent their relative position in space.</p>
 
 <p>For each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.</p>
 
@@ -44,7 +58,11 @@
 	<li><code>asteroids[i] != 0</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Stack
 
@@ -58,6 +76,8 @@ Finally, we return the elements in the stack as the answer.
 The time complexity is $O(n)$, and the space complexity is $O(n)$. Where $n$ is the length of the array $asteroids$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -75,6 +95,8 @@ class Solution:
                     stk.append(x)
         return stk
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -98,6 +120,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -123,6 +147,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func asteroidCollision(asteroids []int) (stk []int) {
 	for _, x := range asteroids {
@@ -142,6 +168,8 @@ func asteroidCollision(asteroids []int) (stk []int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function asteroidCollision(asteroids: number[]): number[] {
@@ -163,6 +191,8 @@ function asteroidCollision(asteroids: number[]): number[] {
     return stk;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -190,4 +220,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

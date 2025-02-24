@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0722.Remove%20Comments/README_EN.md
+tags:
+    - Array
+    - String
+---
+
+<!-- problem:start -->
+
 # [722. Remove Comments](https://leetcode.com/problems/remove-comments)
 
 [中文文档](/solution/0700-0799/0722.Remove%20Comments/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a C++ program, remove comments from it. The program source is an array of strings <code>source</code> where <code>source[i]</code> is the <code>i<sup>th</sup></code> line of the source code. This represents the result of splitting the original source code string by the newline character <code>&#39;\n&#39;</code>.</p>
 
@@ -83,11 +96,29 @@ a = b + c;
 	<li>There are no single-quote or&nbsp;double-quote in the input.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Case Analysis
+
+We use a variable $\textit{blockComment}$ to indicate whether we are currently in a block comment. Initially, $\textit{blockComment}$ is `false`. We use a variable $t$ to store the valid characters of the current line.
+
+Next, we traverse each line and discuss the following cases:
+
+If we are currently in a block comment, and the current character and the next character are `'*/'`, it means the block comment ends. We set $\textit{blockComment}$ to `false` and skip these two characters. Otherwise, we continue in the block comment state without doing anything.
+
+If we are not currently in a block comment, and the current character and the next character are `'/*'`, it means a block comment starts. We set $\textit{blockComment}$ to `true` and skip these two characters. If the current character and the next character are `'//'`, it means a line comment starts, and we exit the current line traversal. Otherwise, the current character is a valid character, and we add it to $t$.
+
+After traversing the current line, if $\textit{blockComment}$ is `false` and $t$ is not empty, it means the current line is valid. We add it to the answer array and clear $t$. Continue to traverse the next line.
+
+The time complexity is $O(L)$, and the space complexity is $O(L)$, where $L$ is the total length of the source code.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -116,6 +147,8 @@ class Solution:
                 t.clear()
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -151,6 +184,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -188,6 +223,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func removeComments(source []string) (ans []string) {
 	t := []byte{}
@@ -219,6 +256,8 @@ func removeComments(source []string) (ans []string) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function removeComments(source: string[]): string[] {
@@ -252,6 +291,8 @@ function removeComments(source: string[]): string[] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -295,4 +336,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

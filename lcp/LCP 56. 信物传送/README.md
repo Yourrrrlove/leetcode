@@ -1,13 +1,21 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/lcp/LCP%2056.%20%E4%BF%A1%E7%89%A9%E4%BC%A0%E9%80%81/README.md
+---
+
+<!-- problem:start -->
+
 # [LCP 56. 信物传送](https://leetcode.cn/problems/6UEx57)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 欢迎各位勇者来到力扣城，本次试炼主题为「信物传送」。
 
 本次试炼场地设有若干传送带，`matrix[i][j]` 表示第 `i` 行 `j` 列的传送带运作方向，`"^","v","<",">"` 这四种符号分别表示 **上、下、左、右** 四个方向。信物会随传送带的方向移动。勇者**每一次**施法操作，可**临时**变更一处传送带的方向，在物品经过后传送带恢复原方向。
-![lcp (2).gif](<https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2056.%20%E4%BF%A1%E7%89%A9%E4%BC%A0%E9%80%81/images/1649835246-vfupSL-lcp%20(2).gif>)
+![lcp (2).gif](<https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcp/LCP%2056.%20%E4%BF%A1%E7%89%A9%E4%BC%A0%E9%80%81/images/1649835246-vfupSL-lcp%20(2).gif>){:width=300px}
 
 通关信物初始位于坐标 `start`处，勇者需要将其移动到坐标 `end` 处，请返回勇者施法操作的最少次数。
 
@@ -49,7 +57,11 @@
 -   `0 <= start[0],end[0] < matrix.length`
 -   `0 <= start[1],end[1] < matrix[i].length`
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：双端队列 BFS(0-1 BFS)
 
@@ -62,6 +74,8 @@
 时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是矩阵的行数和列数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -87,6 +101,8 @@ class Solution:
                     else:
                         q.append((x, y))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -128,6 +144,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -166,6 +184,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func conveyorBelt(matrix []string, start []int, end []int) int {
@@ -212,6 +232,8 @@ func conveyorBelt(matrix []string, start []int, end []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function conveyorBelt(matrix: string[], start: number[], end: number[]): number {
     const dirs = [-1, 0, 1, 0, -1];
@@ -249,6 +271,59 @@ function conveyorBelt(matrix: string[], start: number[], end: number[]): number 
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func conveyorBelt(_ matrix: [String], _ start: [Int], _ end: [Int]) -> Int {
+        let directions: [(Int, Int)] = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+        let directionMap: [Character: Int] = ["^": 0, ">": 1, "v": 2, "<": 3]
+
+        let rows = matrix.count
+        let cols = matrix[0].count
+
+        var dist = Array(repeating: Array(repeating: Int.max, count: cols), count: rows)
+        var deque: [(Int, Int)] = []
+
+        dist[start[0]][start[1]] = 0
+        deque.append((start[0], start[1]))
+
+        while !deque.isEmpty {
+            let (i, j) = deque.removeFirst()
+
+            if i == end[0] && j == end[1] {
+                return dist[i][j]
+            }
+
+            for (k, (di, dj)) in directions.enumerated() {
+                let ni = i + di
+                let nj = j + dj
+
+                if ni >= 0 && ni < rows && nj >= 0 && nj < cols {
+                    let currentChar = matrix[i][matrix[i].index(matrix[i].startIndex, offsetBy: j)]
+                    let additionalCost = directionMap[currentChar] == k ? 0 : 1
+                    let newDist = dist[i][j] + additionalCost
+
+                    if newDist < dist[ni][nj] {
+                        dist[ni][nj] = newDist
+
+                        if additionalCost == 0 {
+                            deque.insert((ni, nj), at: 0)
+                        } else {
+                            deque.append((ni, nj))
+                        }
+                    }
+                }
+            }
+        }
+
+        return -1
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

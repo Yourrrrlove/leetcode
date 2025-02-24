@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1981.Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/README.md
+rating: 2009
+source: 第 255 场周赛 Q3
+tags:
+    - 数组
+    - 动态规划
+    - 矩阵
+---
+
+<!-- problem:start -->
+
 # [1981. 最小化目标值与所选元素的差](https://leetcode.cn/problems/minimize-the-difference-between-target-and-chosen-elements)
 
 [English Version](/solution/1900-1999/1981.Minimize%20the%20Difference%20Between%20Target%20and%20Chosen%20Elements/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个大小为 <code>m x n</code> 的整数矩阵 <code>mat</code> 和一个整数 <code>target</code> 。</p>
 
@@ -67,14 +81,18 @@
 	<li><code>1 &lt;= target &lt;= 800</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：动态规划（分组背包）
 
 设 $f[i][j]$ 表示前 $i$ 行是否能选出元素和为 $j$，则有状态转移方程：
 
 $$
-f[i][j] = \begin{cases} 1 & \text{如果存在 } x \in row[i] \text{ 使得 } f[i - 1][j - x] = 1 \\ 0 & \text{否则} \end{cases}
+f[i][j] = \begin{cases} 1 & \textit{如果存在 } x \in row[i] \textit{ 使得 } f[i - 1][j - x] = 1 \\ 0 & \textit{否则} \end{cases}
 $$
 
 其中 $row[i]$ 表示第 $i$ 行的元素集合。
@@ -87,6 +105,8 @@ $$
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def minimizeTheDifference(self, mat: List[List[int]], target: int) -> int:
@@ -96,28 +116,37 @@ class Solution:
         return min(abs(v - target) for v in f)
 ```
 
+#### Java
+
 ```java
 class Solution {
     public int minimizeTheDifference(int[][] mat, int target) {
-        Set<Integer> f = new HashSet<>();
-        f.add(0);
+        boolean[] f = {true};
         for (var row : mat) {
-            Set<Integer> g = new HashSet<>();
-            for (int a : f) {
-                for (int b : row) {
-                    g.add(a + b);
+            int mx = 0;
+            for (int x : row) {
+                mx = Math.max(mx, x);
+            }
+            boolean[] g = new boolean[f.length + mx];
+            for (int x : row) {
+                for (int j = x; j < f.length + x; ++j) {
+                    g[j] |= f[j - x];
                 }
             }
             f = g;
         }
         int ans = 1 << 30;
-        for (int v : f) {
-            ans = Math.min(ans, Math.abs(v - target));
+        for (int j = 0; j < f.length; ++j) {
+            if (f[j]) {
+                ans = Math.min(ans, Math.abs(j - target));
+            }
         }
         return ans;
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -144,6 +173,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minimizeTheDifference(mat [][]int, target int) int {
@@ -177,38 +208,6 @@ func abs(x int) int {
 
 <!-- tabs:end -->
 
-### 方法二
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```java
-class Solution {
-    public int minimizeTheDifference(int[][] mat, int target) {
-        boolean[] f = {true};
-        for (var row : mat) {
-            int mx = 0;
-            for (int x : row) {
-                mx = Math.max(mx, x);
-            }
-            boolean[] g = new boolean[f.length + mx];
-            for (int x : row) {
-                for (int j = x; j < f.length + x; ++j) {
-                    g[j] |= f[j - x];
-                }
-            }
-            f = g;
-        }
-        int ans = 1 << 30;
-        for (int j = 0; j < f.length; ++j) {
-            if (f[j]) {
-                ans = Math.min(ans, Math.abs(j - target));
-            }
-        }
-        return ans;
-    }
-}
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

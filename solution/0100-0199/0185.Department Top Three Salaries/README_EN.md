@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0185.Department%20Top%20Three%20Salaries/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
 # [185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries)
 
 [中文文档](/solution/0100-0199/0185.Department%20Top%20Three%20Salaries/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table: <code>Employee</code></p>
 
@@ -92,11 +104,24 @@ In the Sales department:
 - There is no third-highest salary as there are only two employees
 </pre>
 
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li>There are no employees with the <strong>exact</strong> same name, salary <em>and</em> department.</li>
+</ul>
+
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 import pandas as pd
@@ -121,6 +146,8 @@ def top_three_salaries(
     )[["Department", "Employee", "Salary"]]
 ```
 
+#### MySQL
+
 ```sql
 SELECT
     Department.NAME AS Department,
@@ -141,9 +168,15 @@ WHERE
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -166,4 +199,6 @@ WHERE rk <= 3;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

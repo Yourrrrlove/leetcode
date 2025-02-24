@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2000-2099/2063.Vowels%20of%20All%20Substrings/README.md
+rating: 1663
+source: 第 266 场周赛 Q2
+tags:
+    - 数学
+    - 字符串
+    - 动态规划
+    - 组合数学
+---
+
+<!-- problem:start -->
+
 # [2063. 所有子字符串中的元音](https://leetcode.cn/problems/vowels-of-all-substrings)
 
 [English Version](/solution/2000-2099/2063.Vowels%20of%20All%20Substrings/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个字符串 <code>word</code> ，返回 <code>word</code> 的所有子字符串中 <strong>元音的总数</strong> ，元音是指 <code>'a'</code>、<code>'e'</code><em>、</em><code>'i'</code><em>、</em><code>'o'</code><em> </em>和 <code>'u'</code><em> 。</em></p>
 
@@ -62,15 +77,21 @@
 	<li><code>word</code> 由小写英文字母组成</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：枚举贡献
 
-我们可以枚举字符串的每个字符 $word[i]$，如果 $word[i]$ 是元音字母，那么 $word[i]$ 一共在 $(i + 1) \times (n - i)$ 个子字符串中出现，将这些子字符串的个数累加即可。
+我们可以枚举字符串的每个字符 $\textit{word}[i]$，如果 $\textit{word}[i]$ 是元音字母，那么 $\textit{word}[i]$ 一共在 $(i + 1) \times (n - i)$ 个子字符串中出现，将这些子字符串的个数累加即可。
 
-时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为字符串 $word$ 的长度。
+时间复杂度 $O(n)$，其中 $n$ 为字符串 $\textit{word}$ 的长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -78,6 +99,8 @@ class Solution:
         n = len(word)
         return sum((i + 1) * (n - i) for i, c in enumerate(word) if c in 'aeiou')
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -93,6 +116,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -110,6 +135,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func countVowels(word string) (ans int64) {
 	for i, c := range word {
@@ -120,6 +147,8 @@ func countVowels(word string) (ans int64) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function countVowels(word: string): number {
@@ -134,6 +163,42 @@ function countVowels(word: string): number {
 }
 ```
 
+#### Rust
+
+```rust
+impl Solution {
+    pub fn count_vowels(word: String) -> i64 {
+        let n = word.len() as i64;
+        word.chars()
+            .enumerate()
+            .filter(|(_, c)| "aeiou".contains(*c))
+            .map(|(i, _)| (i as i64 + 1) * (n - i as i64))
+            .sum()
+    }
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {string} word
+ * @return {number}
+ */
+var countVowels = function (word) {
+    const n = word.length;
+    let ans = 0;
+    for (let i = 0; i < n; ++i) {
+        if (['a', 'e', 'i', 'o', 'u'].includes(word[i])) {
+            ans += (i + 1) * (n - i);
+        }
+    }
+    return ans;
+};
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

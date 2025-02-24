@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2800-2899/2801.Count%20Stepping%20Numbers%20in%20Range/README_EN.md
+rating: 2367
+source: Weekly Contest 356 Q4
+tags:
+    - String
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [2801. Count Stepping Numbers in Range](https://leetcode.com/problems/count-stepping-numbers-in-range)
 
 [中文文档](/solution/2800-2899/2801.Count%20Stepping%20Numbers%20in%20Range/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given two positive integers <code>low</code> and <code>high</code> represented as strings, find the count of <strong>stepping numbers</strong> in the inclusive range <code>[low, high]</code>.</p>
 
@@ -39,7 +54,11 @@
 	<li><code>low</code> and <code>high</code> don&#39;t have any leading zeros.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Digit DP
 
@@ -64,9 +83,11 @@ The time complexity is $O(\log M \times |\Sigma|^2)$, and the space complexity i
 
 Similar problems:
 
--   [2719. Count of Integers](/solution/2700-2799/2719.Count%20of%20Integers/README_EN.md)
+-   [2719. Count of Integers](https://github.com/doocs/leetcode/blob/main/solution/2700-2799/2719.Count%20of%20Integers/README_EN.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -92,6 +113,8 @@ class Solution:
         b = dfs(0, -1, True, True)
         return (a - b) % mod
 ```
+
+#### Java
 
 ```java
 import java.math.BigInteger;
@@ -135,6 +158,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -185,6 +210,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func countSteppingNumbers(low string, high string) int {
@@ -253,6 +280,8 @@ func abs(x int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function countSteppingNumbers(low: string, high: string): number {
     const mod = 1e9 + 7;
@@ -295,4 +324,6 @@ function countSteppingNumbers(low: string, high: string): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1300-1399/1399.Count%20Largest%20Group/README_EN.md
+rating: 1341
+source: Biweekly Contest 23 Q1
+tags:
+    - Hash Table
+    - Math
+---
+
+<!-- problem:start -->
+
 # [1399. Count Largest Group](https://leetcode.com/problems/count-largest-group)
 
 [中文文档](/solution/1300-1399/1399.Count%20Largest%20Group/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an integer <code>n</code>.</p>
 
@@ -36,7 +51,11 @@ There are 4 groups with largest size.
 	<li><code>1 &lt;= n &lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hash Table or Array
 
@@ -49,6 +68,8 @@ Finally, we return $ans$.
 The time complexity is $O(n \times \log M)$, and the space complexity is $O(\log M)$. Where $n$ is the given number, and $M$ is the range of $n$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -68,6 +89,8 @@ class Solution:
                 ans += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -91,6 +114,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -116,6 +141,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func countLargestGroup(n int) (ans int) {
 	cnt := [40]int{}
@@ -136,6 +163,8 @@ func countLargestGroup(n int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function countLargestGroup(n: number): number {
@@ -161,4 +190,6 @@ function countLargestGroup(n: number): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

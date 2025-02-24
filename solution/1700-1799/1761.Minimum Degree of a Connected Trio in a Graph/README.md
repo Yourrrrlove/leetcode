@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1700-1799/1761.Minimum%20Degree%20of%20a%20Connected%20Trio%20in%20a%20Graph/README.md
+rating: 2005
+source: 第 228 场周赛 Q4
+tags:
+    - 图
+---
+
+<!-- problem:start -->
+
 # [1761. 一个图中连通三元组的最小度数](https://leetcode.cn/problems/minimum-degree-of-a-connected-trio-in-a-graph)
 
 [English Version](/solution/1700-1799/1761.Minimum%20Degree%20of%20a%20Connected%20Trio%20in%20a%20Graph/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个无向图，整数 <code>n</code> 表示图中节点的数目，<code>edges</code> 数组表示图中的边，其中 <code>edges[i] = [u<sub>i</sub>, v<sub>i</sub>]</code> ，表示 <code>u<sub>i</sub></code> 和 <code>v<sub>i</sub></code><sub> </sub>之间有一条无向边。</p>
 
@@ -48,13 +60,17 @@
 	<li>图中没有重复的边。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：暴力枚举
 
-我们先将所有边存入邻接矩阵 $g$ 中，再将每个节点的度数存入数组 $deg$ 中。初始化答案 $ans=+\infty$。
+我们先将所有边存入邻接矩阵 $\textit{g}$ 中，再将每个节点的度数存入数组 $\textit{deg}$ 中。初始化答案 $\textit{ans}=+\infty$。
 
-然后枚举所有的三元组 $(i, j, k)$，其中 $i \lt j \lt k$，如果 $g[i][j] = g[j][k] = g[i][k] = 1$，则说明这三个节点构成了一个连通三元组，此时更新答案为 $ans = \min(ans, deg[i] + deg[j] + deg[k] - 6)$。
+然后枚举所有的三元组 $(i, j, k)$，其中 $i \lt j \lt k$，如果 $\textit{g}[i][j] = \textit{g}[j][k] = \textit{g}[i][k] = 1$，则说明这三个节点构成了一个连通三元组，此时更新答案为 $\textit{ans} = \min(\textit{ans}, \textit{deg}[i] + \textit{deg}[j] + \textit{deg}[k] - 6)$。
 
 枚举完所有的三元组后，如果答案仍然为 $+\infty$，说明图中不存在连通三元组，返回 $-1$，否则返回答案。
 
@@ -62,7 +78,13 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
+def min(a: int, b: int) -> int:
+    return a if a < b else b
+
+
 class Solution:
     def minTrioDegree(self, n: int, edges: List[List[int]]) -> int:
         g = [[False] * n for _ in range(n)]
@@ -81,6 +103,8 @@ class Solution:
                             ans = min(ans, deg[i] + deg[j] + deg[k] - 6)
         return -1 if ans == inf else ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -111,6 +135,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -140,6 +166,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minTrioDegree(n int, edges [][]int) int {
@@ -173,6 +201,8 @@ func minTrioDegree(n int, edges [][]int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minTrioDegree(n: number, edges: number[][]): number {
     const g = Array.from({ length: n }, () => Array(n).fill(false));
@@ -202,4 +232,6 @@ function minTrioDegree(n: number, edges: number[][]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

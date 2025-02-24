@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2572.Count%20the%20Number%20of%20Square-Free%20Subsets/README.md
+rating: 2419
+source: 第 333 场周赛 Q3
+tags:
+    - 位运算
+    - 数组
+    - 数学
+    - 动态规划
+    - 状态压缩
+---
+
+<!-- problem:start -->
+
 # [2572. 无平方子集计数](https://leetcode.cn/problems/count-the-number-of-square-free-subsets)
 
 [English Version](/solution/2500-2599/2572.Count%20the%20Number%20of%20Square-Free%20Subsets/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个正整数数组 <code>nums</code> 。</p>
 
@@ -47,7 +63,11 @@
 	<li><code>1 &lt;= nums[i] &lt;= 30</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：状态压缩动态规划
 
@@ -65,9 +85,11 @@
 
 相似题目：
 
--   [1994. 好子集的数目](/solution/1900-1999/1994.The%20Number%20of%20Good%20Subsets/README.md)
+-   [1994. 好子集的数目](https://github.com/doocs/leetcode/blob/main/solution/1900-1999/1994.The%20Number%20of%20Good%20Subsets/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -90,6 +112,8 @@ class Solution:
                     f[state] = (f[state] + cnt[x] * f[state ^ mask]) % mod
         return sum(v for v in f) % mod - 1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -132,6 +156,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -173,6 +199,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func squareFreeSubsets(nums []int) (ans int) {
 	primes := []int{2, 3, 5, 7, 11, 13, 17, 19, 23, 29}
@@ -211,6 +239,49 @@ func squareFreeSubsets(nums []int) (ans int) {
 }
 ```
 
+#### TypeScript
+
+```ts
+function squareFreeSubsets(nums: number[]): number {
+    const primes: number[] = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
+    const cnt: number[] = Array(31).fill(0);
+    for (const x of nums) {
+        ++cnt[x];
+    }
+    const mod: number = Math.pow(10, 9) + 7;
+    const n: number = primes.length;
+    const f: number[] = Array(1 << n).fill(0);
+    f[0] = 1;
+    for (let i = 0; i < cnt[1]; ++i) {
+        f[0] = (f[0] * 2) % mod;
+    }
+    for (let x = 2; x < 31; ++x) {
+        if (cnt[x] === 0 || x % 4 === 0 || x % 9 === 0 || x % 25 === 0) {
+            continue;
+        }
+        let mask: number = 0;
+        for (let i = 0; i < n; ++i) {
+            if (x % primes[i] === 0) {
+                mask |= 1 << i;
+            }
+        }
+        for (let state = (1 << n) - 1; state > 0; --state) {
+            if ((state & mask) === mask) {
+                f[state] = (f[state] + cnt[x] * f[state ^ mask]) % mod;
+            }
+        }
+    }
+    let ans: number = 0;
+    for (let i = 0; i < 1 << n; ++i) {
+        ans = (ans + f[i]) % mod;
+    }
+    ans -= 1;
+    return ans >= 0 ? ans : ans + mod;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

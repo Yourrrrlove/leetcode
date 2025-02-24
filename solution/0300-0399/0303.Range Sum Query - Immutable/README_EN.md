@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0303.Range%20Sum%20Query%20-%20Immutable/README_EN.md
+tags:
+    - Design
+    - Array
+    - Prefix Sum
+---
+
+<!-- problem:start -->
+
 # [303. Range Sum Query - Immutable](https://leetcode.com/problems/range-sum-query-immutable)
 
 [中文文档](/solution/0300-0399/0303.Range%20Sum%20Query%20-%20Immutable/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>nums</code>, handle multiple queries of the following type:</p>
 
@@ -44,7 +58,11 @@ numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
 	<li>At most <code>10<sup>4</sup></code> calls will be made to <code>sumRange</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Prefix Sum
 
@@ -53,6 +71,8 @@ We create a prefix sum array $s$ of length $n + 1$, where $s[i]$ represents the 
 The time complexity for initializing the prefix sum array $s$ is $O(n)$, and the time complexity for querying is $O(1)$. The space complexity is $O(n)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class NumArray:
@@ -67,6 +87,8 @@ class NumArray:
 # obj = NumArray(nums)
 # param_1 = obj.sumRange(left,right)
 ```
+
+#### Java
 
 ```java
 class NumArray {
@@ -91,6 +113,8 @@ class NumArray {
  * int param_1 = obj.sumRange(left,right);
  */
 ```
+
+#### C++
 
 ```cpp
 class NumArray {
@@ -118,6 +142,8 @@ private:
  */
 ```
 
+#### Go
+
 ```go
 type NumArray struct {
 	s []int
@@ -143,6 +169,8 @@ func (this *NumArray) SumRange(left int, right int) int {
  */
 ```
 
+#### TypeScript
+
 ```ts
 class NumArray {
     private s: number[];
@@ -167,6 +195,8 @@ class NumArray {
  */
 ```
 
+#### Rust
+
 ```rust
 struct NumArray {
     s: Vec<i32>,
@@ -189,12 +219,10 @@ impl NumArray {
     fn sum_range(&self, left: i32, right: i32) -> i32 {
         self.s[(right + 1) as usize] - self.s[left as usize]
     }
-}/**
- * Your NumArray object will be instantiated and called as such:
- * let obj = NumArray::new(nums);
- * let ret_1: i32 = obj.sum_range(left, right);
- */
+}
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -224,6 +252,8 @@ NumArray.prototype.sumRange = function (left, right) {
  */
 ```
 
+#### PHP
+
 ```php
 class NumArray {
     /**
@@ -252,6 +282,8 @@ class NumArray {
  * $ret_1 = $obj->sumRange($left, $right);
  */
 ```
+
+#### C
 
 ```c
 typedef struct {
@@ -287,6 +319,31 @@ void numArrayFree(NumArray* obj) {
 */
 ```
 
+#### Kotlin
+
+```kotlin
+class NumArray(nums: IntArray) {
+    private val prefix_sums: IntArray
+
+    init {
+        val nums_size = nums.size
+        this.prefix_sums = IntArray(nums_size + 1)
+        for (i in 0..<nums_size) {
+            this.prefix_sums[i + 1] = this.prefix_sums[i] + nums[i]
+        }
+    }
+
+    fun sumRange(left: Int, right: Int): Int = this.prefix_sums[right + 1] - this.prefix_sums[left]
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such: var obj = NumArray(nums) var
+ * param_1 = obj.sumRange(left,right)
+ */
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

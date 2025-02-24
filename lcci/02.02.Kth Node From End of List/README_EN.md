@@ -1,8 +1,18 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/lcci/02.02.Kth%20Node%20From%20End%20of%20List/README_EN.md
+---
+
+<!-- problem:start -->
+
 # [02.02. Kth Node From End of List](https://leetcode.cn/problems/kth-node-from-end-of-list-lcci)
 
 [中文文档](/lcci/02.02.Kth%20Node%20From%20End%20of%20List/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Implement an algorithm to find the kth to last element of a singly linked list.&nbsp;Return the value of the element.</p>
 
@@ -20,11 +30,21 @@
 
 <p>k is always valid.</p>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Two Pointers
+
+We define two pointers `slow` and `fast`, both initially pointing to the head node `head`. Then the `fast` pointer moves forward $k$ steps first, and then the `slow` and `fast` pointers move forward together until the `fast` pointer points to the end of the list. At this point, the node pointed to by the `slow` pointer is the $k$-th node from the end of the list.
+
+The time complexity is $O(n)$, where $n$ is the length of the list. The space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for singly-linked list.
@@ -40,9 +60,12 @@ class Solution:
         for _ in range(k):
             fast = fast.next
         while fast:
-            slow, fast = slow.next, fast.next
+            slow = slow.next
+            fast = fast.next
         return slow.val
 ```
+
+#### Java
 
 ```java
 /**
@@ -68,6 +91,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for singly-linked list.
@@ -82,7 +107,7 @@ public:
     int kthToLast(ListNode* head, int k) {
         ListNode* fast = head;
         ListNode* slow = head;
-        while (k-- > 0) {
+        while (k--) {
             fast = fast->next;
         }
         while (fast) {
@@ -94,10 +119,19 @@ public:
 };
 ```
 
+#### Go
+
 ```go
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
 func kthToLast(head *ListNode, k int) int {
 	slow, fast := head, head
-	for i := 0; i < k; i++ {
+	for ; k > 0; k-- {
 		fast = fast.Next
 	}
 	for fast != nil {
@@ -107,6 +141,36 @@ func kthToLast(head *ListNode, k int) int {
 	return slow.Val
 }
 ```
+
+#### TypeScript
+
+```ts
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function kthToLast(head: ListNode | null, k: number): number {
+    let [slow, fast] = [head, head];
+    while (k--) {
+        fast = fast.next;
+    }
+    while (fast !== null) {
+        slow = slow.next;
+        fast = fast.next;
+    }
+    return slow.val;
+}
+```
+
+#### Rust
 
 ```rust
 // Definition for singly-linked list.
@@ -141,6 +205,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * Definition for singly-linked list.
@@ -155,19 +221,56 @@ impl Solution {
  * @return {number}
  */
 var kthToLast = function (head, k) {
-    let fast = head,
-        slow = head;
-    for (let i = 0; i < k; i++) {
+    let [slow, fast] = [head, head];
+    while (k--) {
         fast = fast.next;
     }
-    while (fast != null) {
-        fast = fast.next;
+    while (fast !== null) {
         slow = slow.next;
+        fast = fast.next;
     }
     return slow.val;
 };
 ```
 
+#### Swift
+
+```swift
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     var val: Int
+ *     var next: ListNode?
+ *     init(_ x: Int, _ next: ListNode? = nil) {
+ *         self.val = x
+ *         self.next = next
+ *     }
+ * }
+ */
+
+class Solution {
+    func kthToLast(_ head: ListNode?, _ k: Int) -> Int {
+        var slow = head
+        var fast = head
+        var k = k
+
+        while k > 0 {
+            fast = fast?.next
+            k -= 1
+        }
+
+        while fast != nil {
+            slow = slow?.next
+            fast = fast?.next
+        }
+
+        return slow?.val ?? 0
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

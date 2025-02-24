@@ -1,14 +1,24 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0896.Monotonic%20Array/README.md
+tags:
+    - 数组
+---
+
+<!-- problem:start -->
+
 # [896. 单调数列](https://leetcode.cn/problems/monotonic-array)
 
 [English Version](/solution/0800-0899/0896.Monotonic%20Array/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>如果数组是单调递增或单调递减的，那么它是&nbsp;<strong>单调 </strong><em>的</em>。</p>
 
-<p>如果对于所有 <code>i &lt;= j</code>，<code>nums[i] &lt;= nums[j]</code>，那么数组 <code>nums</code> 是单调递增的。 如果对于所有 <code>i &lt;= j</code>，<code>nums[i]&gt; = nums[j]</code>，那么数组 <code>nums</code>&nbsp;是单调递减的。</p>
+<p>如果对于所有 <code>i &lt;= j</code>，<code>nums[i] &lt;= nums[j]</code>，那么数组 <code>nums</code> 是单调递增的。 如果对于所有 <code>i &lt;= j</code>，<code>nums[i] &gt;= nums[j]</code>，那么数组 <code>nums</code>&nbsp;是单调递减的。</p>
 
 <p>当给定的数组 <code>nums</code>&nbsp;是单调数组时返回 <code>true</code>，否则返回 <code>false</code>。</p>
 
@@ -47,7 +57,11 @@
 	<li><code>-10<sup>5</sup>&nbsp;&lt;= nums[i] &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：一次遍历
 
@@ -59,6 +73,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def isMonotonic(self, nums: List[int]) -> bool:
@@ -66,6 +82,8 @@ class Solution:
         desc = all(a >= b for a, b in pairwise(nums))
         return asc or desc
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -85,6 +103,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -106,6 +126,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isMonotonic(nums []int) bool {
 	asc, desc := false, false
@@ -123,6 +145,8 @@ func isMonotonic(nums []int) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function isMonotonic(nums: number[]): boolean {
     let [asc, desc] = [false, false];
@@ -139,6 +163,8 @@ function isMonotonic(nums: number[]): boolean {
     return true;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -159,6 +185,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -183,4 +211,6 @@ var isMonotonic = function (nums) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0769.Max%20Chunks%20To%20Make%20Sorted/README_EN.md
+tags:
+    - Stack
+    - Greedy
+    - Array
+    - Sorting
+    - Monotonic Stack
+---
+
+<!-- problem:start -->
+
 # [769. Max Chunks To Make Sorted](https://leetcode.com/problems/max-chunks-to-make-sorted)
 
 [中文文档](/solution/0700-0799/0769.Max%20Chunks%20To%20Make%20Sorted/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an integer array <code>arr</code> of length <code>n</code> that represents a permutation of the integers in the range <code>[0, n - 1]</code>.</p>
 
@@ -41,11 +57,21 @@ However, splitting into [1, 0], [2], [3], [4] is the highest number of chunks po
 	<li>All the elements of <code>arr</code> are <strong>unique</strong>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Greedy + One Pass
+
+Since $\textit{arr}$ is a permutation of $[0,..,n-1]$, if the maximum value $\textit{mx}$ among the numbers traversed so far is equal to the current index $i$, it means a split can be made, and the answer is incremented.
+
+Time complexity is $O(n)$, and space complexity is $O(1)$. Where $n$ is the length of the array $\textit{arr}$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -57,6 +83,8 @@ class Solution:
                 ans += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -73,6 +101,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -87,6 +117,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxChunksToSorted(arr []int) int {
 	ans, mx := 0, 0
@@ -100,14 +132,16 @@ func maxChunksToSorted(arr []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function maxChunksToSorted(arr: number[]): number {
     const n = arr.length;
     let ans = 0;
-    let max = 0;
+    let mx = 0;
     for (let i = 0; i < n; i++) {
-        max = Math.max(arr[i], max);
-        if (max == i) {
+        mx = Math.max(arr[i], mx);
+        if (mx == i) {
             ans++;
         }
     }
@@ -115,43 +149,61 @@ function maxChunksToSorted(arr: number[]): number {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn max_chunks_to_sorted(arr: Vec<i32>) -> i32 {
-        let mut res = 0;
-        let mut max = 0;
+        let mut ans = 0;
+        let mut mx = 0;
         for i in 0..arr.len() {
-            max = max.max(arr[i]);
-            if max == (i as i32) {
-                res += 1;
+            mx = mx.max(arr[i]);
+            if mx == (i as i32) {
+                ans += 1;
             }
         }
-        res
+        ans
     }
 }
 ```
+
+#### C
 
 ```c
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 
 int maxChunksToSorted(int* arr, int arrSize) {
-    int res = 0;
+    int ans = 0;
     int mx = -1;
     for (int i = 0; i < arrSize; i++) {
         mx = max(mx, arr[i]);
         if (mx == i) {
-            res++;
+            ans++;
         }
     }
-    return res;
+    return ans;
 }
 ```
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 2: Monotonic Stack
+
+The solution of method one has certain limitations. If there are duplicate elements in the array, the correct answer cannot be obtained.
+
+According to the problem, we can find that from left to right, each chunk has a maximum value, and these maximum values are monotonically increasing. We can use a stack to store these maximum values of the chunks. The size of the final stack is the maximum number of chunks that can be sorted.
+
+This solution can not only solve this problem but also solve the problem 768. Max Chunks To Make Sorted II. You can try it yourself.
+
+Time complexity is $O(n)$, and space complexity is $O(n)$. Where $n$ is the length of the array $\textit{arr}$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -167,6 +219,8 @@ class Solution:
                 stk.append(mx)
         return len(stk)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -187,6 +241,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -210,6 +266,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxChunksToSorted(arr []int) int {
 	stk := []int{}
@@ -229,6 +287,44 @@ func maxChunksToSorted(arr []int) int {
 }
 ```
 
+#### TypeScript
+
+```ts
+function maxChunksToSorted(arr: number[]): number {
+    const stk: number[] = [];
+
+    for (const x of arr) {
+        if (stk.at(-1)! > x) {
+            const top = stk.pop()!;
+            while (stk.length && stk.at(-1)! > x) stk.pop();
+            stk.push(top);
+        } else stk.push(x);
+    }
+
+    return stk.length;
+}
+```
+
+#### JavaScript
+
+```js
+function maxChunksToSorted(arr) {
+    const stk = [];
+
+    for (const x of arr) {
+        if (stk.at(-1) > x) {
+            const top = stk.pop();
+            while (stk.length && stk.at(-1) > x) stk.pop();
+            stk.push(top);
+        } else stk.push(x);
+    }
+
+    return stk.length;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

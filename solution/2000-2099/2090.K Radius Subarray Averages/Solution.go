@@ -1,14 +1,14 @@
 func getAverages(nums []int, k int) []int {
-	n := len(nums)
-	s := make([]int, n+1)
-	for i, v := range nums {
-		s[i+1] = s[i] + v
-	}
-	ans := make([]int, n)
-	for i := 0; i < n; i++ {
+	ans := make([]int, len(nums))
+	for i := range ans {
 		ans[i] = -1
-		if i-k >= 0 && i+k < n {
-			ans[i] = (s[i+k+1] - s[i-k]) / (k<<1 | 1)
+	}
+	s := 0
+	for i, x := range nums {
+		s += x
+		if i >= k*2 {
+			ans[i-k] = s / (k*2 + 1)
+			s -= nums[i-k*2]
 		}
 	}
 	return ans

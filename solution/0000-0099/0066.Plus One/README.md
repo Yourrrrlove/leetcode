@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0066.Plus%20One/README.md
+tags:
+    - 数组
+    - 数学
+---
+
+<!-- problem:start -->
+
 # [66. 加一](https://leetcode.cn/problems/plus-one)
 
 [English Version](/solution/0000-0099/0066.Plus%20One/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个由 <strong>整数 </strong>组成的<strong> 非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p>
 
@@ -12,9 +23,9 @@
 
 <p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
 
-<p> </p>
+<p>&nbsp;</p>
 
-<p><strong>示例 1：</strong></p>
+<p><strong>示例&nbsp;1：</strong></p>
 
 <pre>
 <strong>输入：</strong>digits = [1,2,3]
@@ -22,7 +33,7 @@
 <strong>解释：</strong>输入数组表示数字 123。
 </pre>
 
-<p><strong>示例 2：</strong></p>
+<p><strong>示例&nbsp;2：</strong></p>
 
 <pre>
 <strong>输入：</strong>digits = [4,3,2,1]
@@ -33,20 +44,27 @@
 <p><strong>示例 3：</strong></p>
 
 <pre>
-<strong>输入：</strong>digits = [0]
-<strong>输出：</strong>[1]
+<strong>输入：</strong>digits = [9]
+<strong>输出：</strong>[1,0]
+<strong>解释：</strong>输入数组表示数字 9。
+加 1 得到了 9 + 1 = 10。
+因此，结果应该是 [1,0]。
 </pre>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>提示：</strong></p>
 
 <ul>
-	<li><code>1 <= digits.length <= 100</code></li>
-	<li><code>0 <= digits[i] <= 9</code></li>
+	<li><code>1 &lt;= digits.length &lt;= 100</code></li>
+	<li><code>0 &lt;= digits[i] &lt;= 9</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：模拟
 
@@ -55,6 +73,8 @@
 时间复杂度 $O(n)$，其中 $n$ 是数组的长度。忽略答案的空间消耗，空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -67,6 +87,8 @@ class Solution:
                 return digits
         return [1] + digits
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -86,6 +108,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -101,6 +125,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func plusOne(digits []int) []int {
 	n := len(digits)
@@ -115,6 +141,8 @@ func plusOne(digits []int) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function plusOne(digits: number[]): number[] {
     const n = digits.length;
@@ -127,6 +155,8 @@ function plusOne(digits: number[]): number[] {
     return [1, ...digits];
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -144,6 +174,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -164,4 +196,6 @@ var plusOne = function (digits) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

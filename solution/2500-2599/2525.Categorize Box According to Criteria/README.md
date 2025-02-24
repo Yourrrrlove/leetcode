@@ -1,15 +1,28 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2525.Categorize%20Box%20According%20to%20Criteria/README.md
+rating: 1301
+source: 第 95 场双周赛 Q1
+tags:
+    - 数学
+---
+
+<!-- problem:start -->
+
 # [2525. 根据规则将箱子分类](https://leetcode.cn/problems/categorize-box-according-to-criteria)
 
 [English Version](/solution/2500-2599/2525.Categorize%20Box%20According%20to%20Criteria/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你四个整数&nbsp;<code>length</code>&nbsp;，<code>width</code>&nbsp;，<code>height</code>&nbsp;和&nbsp;<code>mass</code>&nbsp;，分别表示一个箱子的三个维度和质量，请你返回一个表示箱子 <strong>类别</strong> 的字符串。</p>
 
 <ul>
 	<li>如果满足以下条件，那么箱子是&nbsp;<code>"Bulky"</code>&nbsp;的：
+
     <ul>
     	<li>箱子 <strong>至少有一个</strong> 维度大于等于 <code>10<sup>4</sup></code>&nbsp;。</li>
     	<li>或者箱子的 <strong>体积</strong> 大于等于&nbsp;<code>10<sup>9</sup></code>&nbsp;。</li>
@@ -20,6 +33,7 @@
     <li>如果箱子既不是&nbsp;<code>"Bulky"</code>&nbsp;，也不是&nbsp;<code>"Heavy"</code>&nbsp;，那么返回类别为&nbsp;<code>"Neither"</code>&nbsp;。</li>
     <li>如果箱子是&nbsp;<code>"Bulky"</code>&nbsp;但不是&nbsp;<code>"Heavy"</code>&nbsp;，那么返回类别为&nbsp;<code>"Bulky"</code>&nbsp;。</li>
     <li>如果箱子是&nbsp;<code>"Heavy"</code>&nbsp;但不是&nbsp;<code>"Bulky"</code>&nbsp;，那么返回类别为&nbsp;<code>"Heavy"</code>&nbsp;。</li>
+
 </ul>
 
 <p><strong>注意</strong>，箱子的体积等于箱子的长度、宽度和高度的乘积。</p>
@@ -57,7 +71,11 @@
 	<li><code>1 &lt;= mass &lt;= 10<sup>3</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：模拟
 
@@ -66,6 +84,8 @@
 时间复杂度 $O(1)$，空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -77,6 +97,8 @@ class Solution:
         d = ['Neither', 'Bulky', 'Heavy', 'Both']
         return d[i]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -91,6 +113,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -104,6 +128,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func categorizeBox(length int, width int, height int, mass int) string {
@@ -120,6 +146,8 @@ func categorizeBox(length int, width int, height int, mass int) string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function categorizeBox(length: number, width: number, height: number, mass: number): string {
     const v = length * width * height;
@@ -133,6 +161,8 @@ function categorizeBox(length: number, width: number, height: number, mass: numb
     return ['Neither', 'Bulky', 'Heavy', 'Both'][i];
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -156,9 +186,15 @@ impl Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -176,6 +212,8 @@ class Solution:
 
         return "Neither"
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -198,6 +236,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -222,6 +262,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func categorizeBox(length int, width int, height int, mass int) string {
 	v := length * width * height
@@ -239,6 +281,8 @@ func categorizeBox(length int, width int, height int, mass int) string {
 	return "Neither"
 }
 ```
+
+#### TypeScript
 
 ```ts
 function categorizeBox(length: number, width: number, height: number, mass: number): string {
@@ -258,15 +302,16 @@ function categorizeBox(length: number, width: number, height: number, mass: numb
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn categorize_box(length: i32, width: i32, height: i32, mass: i32) -> String {
         let v = length * width * height;
-        let bulky =
-            length >= 10000 ||
-            width >= 10000 ||
-            height >= 10000 ||
-            (length as i64) * (width as i64) * (height as i64) >= 1000000000;
+        let bulky = length >= 10000
+            || width >= 10000
+            || height >= 10000
+            || (length as i64) * (width as i64) * (height as i64) >= 1000000000;
 
         let heavy = mass >= 100;
 
@@ -287,4 +332,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

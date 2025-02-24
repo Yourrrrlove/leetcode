@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1700-1799/1775.Equal%20Sum%20Arrays%20With%20Minimum%20Number%20of%20Operations/README_EN.md
+rating: 1850
+source: Weekly Contest 230 Q3
+tags:
+    - Greedy
+    - Array
+    - Hash Table
+    - Counting
+---
+
+<!-- problem:start -->
+
 # [1775. Equal Sum Arrays With Minimum Number of Operations](https://leetcode.com/problems/equal-sum-arrays-with-minimum-number-of-operations)
 
 [中文文档](/solution/1700-1799/1775.Equal%20Sum%20Arrays%20With%20Minimum%20Number%20of%20Operations/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given two arrays of integers <code>nums1</code> and <code><font face="monospace">nums2</font></code>, possibly of different lengths. The values in the arrays are between <code>1</code> and <code>6</code>, inclusive.</p>
 
@@ -49,11 +66,17 @@
 	<li><code>1 &lt;= nums1[i], nums2[i] &lt;= 6</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -71,6 +94,8 @@ class Solution:
                 return i
         return -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -104,6 +129,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -126,6 +153,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minOperations(nums1 []int, nums2 []int) int {
@@ -164,9 +193,15 @@ func sum(nums []int) (s int) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -186,6 +221,8 @@ class Solution:
                 ans += 1
         return ans if d <= 0 else -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -219,6 +256,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -243,6 +282,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minOperations(nums1 []int, nums2 []int) (ans int) {
@@ -284,4 +325,6 @@ func sum(nums []int) (s int) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

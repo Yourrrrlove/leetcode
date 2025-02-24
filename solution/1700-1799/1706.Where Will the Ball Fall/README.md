@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1700-1799/1706.Where%20Will%20the%20Ball%20Fall/README.md
+rating: 1764
+source: 第 221 场周赛 Q3
+tags:
+    - 数组
+    - 矩阵
+    - 模拟
+---
+
+<!-- problem:start -->
+
 # [1706. 球会落何处](https://leetcode.cn/problems/where-will-the-ball-fall)
 
 [English Version](/solution/1700-1799/1706.Where%20Will%20the%20Ball%20Fall/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>用一个大小为 <code>m x n</code> 的二维网格 <code>grid</code> 表示一个箱子。你有 <code>n</code> 颗球。箱子的顶部和底部都是开着的。</p>
 
@@ -62,11 +76,15 @@ b4 球开始放在第 4 列上，会卡在第 2、3 列和第 1 行之间的 "V"
 	<li><code>grid[i][j]</code> 为 <code>1</code> 或 <code>-1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：分情况讨论 + DFS
 
-我们可以使用 DFS 来模拟球的运动过程，设计一个函数 $dfs(i, j)$，表示球从第 $i$ 行第 $j$ 列出发，最终会落在第几列。对于以下情况，球会卡住：
+我们可以使用 DFS 来模拟球的运动过程，设计一个函数 $\textit{dfs}(i, j)$，表示球从第 $i$ 行第 $j$ 列出发，最终会落在第几列。对于以下情况，球会卡住：
 
 1. 球位于最左一列，并且球所在的单元格单元格挡板将球导向左侧
 1. 球位于最右一列，并且此单元格挡板将球导向右侧
@@ -75,9 +93,11 @@ b4 球开始放在第 4 列上，会卡在第 2、3 列和第 1 行之间的 "V"
 
 如果满足以上任意一种情况，我们就可以判断球会卡住，返回 $-1$。否则，我们就可以继续递归地寻找球的下一个位置。最后，如果球到了最后一行，我们就可以返回当前列的编号。
 
-时间复杂度 $O(m \times n)$，空间复杂度 $O(m)$。其中 $m$ 和 $n$ 分别是数组 $grid$ 的行数和列数。
+时间复杂度 $O(m \times n)$，空间复杂度 $O(m)$。其中 $m$ 和 $n$ 分别是数组 $\textit{grid}$ 的行数和列数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -98,6 +118,8 @@ class Solution:
         m, n = len(grid), len(grid[0])
         return [dfs(0, j) for j in range(n)]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -137,6 +159,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -168,6 +192,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findBall(grid [][]int) (ans []int) {
@@ -201,6 +227,8 @@ func findBall(grid [][]int) (ans []int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function findBall(grid: number[][]): number[] {
     const m = grid.length;
@@ -221,13 +249,11 @@ function findBall(grid: number[][]): number[] {
             return dfs(i + 1, j - 1);
         }
     };
-    const ans: number[] = [];
-    for (let j = 0; j < n; ++j) {
-        ans.push(dfs(0, j));
-    }
-    return ans;
+    return Array.from({ length: n }, (_, j) => dfs(0, j));
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -251,15 +277,47 @@ impl Solution {
     pub fn find_ball(grid: Vec<Vec<i32>>) -> Vec<i32> {
         let m = grid.len();
         let n = grid[0].len();
-        let mut res = vec![0; n];
+        let mut ans = vec![0; n];
         for i in 0..n {
-            res[i] = Self::dfs(&grid, 0, i);
+            ans[i] = Self::dfs(&grid, 0, i);
         }
-        res
+        ans
     }
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {number[][]} grid
+ * @return {number[]}
+ */
+var findBall = function (grid) {
+    const m = grid.length;
+    const n = grid[0].length;
+    const dfs = (i, j) => {
+        if (i === m) {
+            return j;
+        }
+        if (grid[i][j] === 1) {
+            if (j === n - 1 || grid[i][j + 1] === -1) {
+                return -1;
+            }
+            return dfs(i + 1, j + 1);
+        } else {
+            if (j === 0 || grid[i][j - 1] === 1) {
+                return -1;
+            }
+            return dfs(i + 1, j - 1);
+        }
+    };
+    return Array.from({ length: n }, (_, j) => dfs(0, j));
+};
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

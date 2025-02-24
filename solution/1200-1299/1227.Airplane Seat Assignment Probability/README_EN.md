@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1227.Airplane%20Seat%20Assignment%20Probability/README_EN.md
+tags:
+    - Brainteaser
+    - Math
+    - Dynamic Programming
+    - Probability and Statistics
+---
+
+<!-- problem:start -->
+
 # [1227. Airplane Seat Assignment Probability](https://leetcode.com/problems/airplane-seat-assignment-probability)
 
 [中文文档](/solution/1200-1299/1227.Airplane%20Seat%20Assignment%20Probability/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p><code>n</code> passengers board an airplane with exactly <code>n</code> seats. The first passenger has lost the ticket and picks a seat randomly. But after that, the rest of the passengers will:</p>
 
@@ -36,15 +51,19 @@
 	<li><code>1 &lt;= n &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Mathematics
 
 Let $f(n)$ represent the probability that the $n$th passenger will sit in their own seat when there are $n$ passengers boarding. Consider from the simplest case:
 
--   When $n=1$, there is only 1 passenger and 1 seat, so the first passenger can only sit in the first seat, $f(1)=1$;
+When $n=1$, there is only 1 passenger and 1 seat, so the first passenger can only sit in the first seat, $f(1)=1$;
 
--   When $n=2$, there are 2 seats, each seat has a probability of 0.5 to be chosen by the first passenger. After the first passenger chooses a seat, the second passenger can only choose the remaining seat, so the second passenger has a probability of 0.5 to sit in their own seat, $f(2)=0.5$.
+When $n=2$, there are 2 seats, each seat has a probability of 0.5 to be chosen by the first passenger. After the first passenger chooses a seat, the second passenger can only choose the remaining seat, so the second passenger has a probability of 0.5 to sit in their own seat, $f(2)=0.5$.
 
 When $n>2$, how to calculate the value of $f(n)$? Consider the seat chosen by the first passenger, there are three cases.
 
@@ -117,13 +136,19 @@ f(n) = \begin{cases}
 \end{cases}
 $$
 
+The time complexity of this solution is $O(1)$, and the space complexity is $O(1)$.
+
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def nthPersonGetsNthSeat(self, n: int) -> float:
         return 1 if n == 1 else 0.5
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -132,6 +157,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -142,6 +169,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func nthPersonGetsNthSeat(n int) float64 {
 	if n == 1 {
@@ -151,6 +180,26 @@ func nthPersonGetsNthSeat(n int) float64 {
 }
 ```
 
+#### TypeScript
+
+```ts
+function nthPersonGetsNthSeat(n: number): number {
+    return n === 1 ? 1 : 0.5;
+}
+```
+
+#### Rust
+
+```rust
+impl Solution {
+    pub fn nth_person_gets_nth_seat(n: i32) -> f64 {
+        return if n == 1 { 1.0 } else { 0.5 };
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

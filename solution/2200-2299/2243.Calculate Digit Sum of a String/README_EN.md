@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2200-2299/2243.Calculate%20Digit%20Sum%20of%20a%20String/README_EN.md
+rating: 1301
+source: Weekly Contest 289 Q1
+tags:
+    - String
+    - Simulation
+---
+
+<!-- problem:start -->
+
 # [2243. Calculate Digit Sum of a String](https://leetcode.com/problems/calculate-digit-sum-of-a-string)
 
 [中文文档](/solution/2200-2299/2243.Calculate%20Digit%20Sum%20of%20a%20String/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a string <code>s</code> consisting of digits and an integer <code>k</code>.</p>
 
@@ -52,11 +67,17 @@ s becomes &quot;0&quot; + &quot;0&quot; + &quot;0&quot; = &quot;000&quot;, whose
 	<li><code>s</code> consists of digits only.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,6 +93,8 @@ class Solution:
             s = "".join(t)
         return s
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -92,6 +115,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -114,6 +139,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func digitSum(s string, k int) string {
 	for len(s) > k {
@@ -132,6 +159,8 @@ func digitSum(s string, k int) string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function digitSum(s: string, k: number): string {
     let ans = [];
@@ -149,22 +178,6 @@ function digitSum(s: string, k: number): string {
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```python
-class Solution:
-    def digitSum(self, s: str, k: int) -> str:
-        if len(s) <= k:
-            return s
-        t = []
-        while s:
-            t.append(str(sum(int(v) for v in s[:k])))
-            s = s[k:]
-        return self.digitSum(''.join(t), k)
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

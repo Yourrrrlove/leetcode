@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0500-0599/0590.N-ary%20Tree%20Postorder%20Traversal/README_EN.md
+tags:
+    - Stack
+    - Tree
+    - Depth-First Search
+---
+
+<!-- problem:start -->
+
 # [590. N-ary Tree Postorder Traversal](https://leetcode.com/problems/n-ary-tree-postorder-traversal)
 
 [中文文档](/solution/0500-0599/0590.N-ary%20Tree%20Postorder%20Traversal/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given the <code>root</code> of an n-ary tree, return <em>the postorder traversal of its nodes&#39; values</em>.</p>
 
@@ -35,11 +49,21 @@
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> Recursive solution is trivial, could you do it iteratively?</p>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Recursion
+
+We can recursively traverse the entire tree. For each node, we first recursively call the function for each of the node's children, then add the node's value to the answer.
+
+The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 """
@@ -65,6 +89,8 @@ class Solution:
         return ans
 ```
 
+#### Java
+
 ```java
 /*
 // Definition for a Node.
@@ -86,11 +112,9 @@ class Node {
 */
 
 class Solution {
-
-    private List<Integer> ans;
+    private List<Integer> ans = new ArrayList<>();
 
     public List<Integer> postorder(Node root) {
-        ans = new ArrayList<>();
         dfs(root);
         return ans;
     }
@@ -106,6 +130,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 /*
@@ -132,17 +158,22 @@ class Solution {
 public:
     vector<int> postorder(Node* root) {
         vector<int> ans;
-        dfs(root, ans);
+        function<void(Node*)> dfs = [&](Node* root) {
+            if (!root) {
+                return;
+            }
+            for (auto& child : root->children) {
+                dfs(child);
+            }
+            ans.push_back(root->val);
+        };
+        dfs(root);
         return ans;
-    }
-
-    void dfs(Node* root, vector<int>& ans) {
-        if (!root) return;
-        for (auto& child : root->children) dfs(child, ans);
-        ans.push_back(root->val);
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -153,9 +184,8 @@ public:
  * }
  */
 
-func postorder(root *Node) []int {
-	var ans []int
-	var dfs func(root *Node)
+func postorder(root *Node) (ans []int) {
+	var dfs func(*Node)
 	dfs = func(root *Node) {
 		if root == nil {
 			return
@@ -166,9 +196,11 @@ func postorder(root *Node) []int {
 		ans = append(ans, root.Val)
 	}
 	dfs(root)
-	return ans
+	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -184,26 +216,38 @@ func postorder(root *Node) []int {
  */
 
 function postorder(root: Node | null): number[] {
-    const res = [];
+    const ans: number[] = [];
     const dfs = (root: Node | null) => {
-        if (root == null) {
+        if (!root) {
             return;
         }
-        for (const node of root.children) {
-            dfs(node);
+        for (const child of root.children) {
+            dfs(child);
         }
-        res.push(root.val);
+        ans.push(root.val);
     };
     dfs(root);
-    return res;
+    return ans;
 }
 ```
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 2: Iteration (Stack Implementation)
+
+We can also solve this problem iteratively.
+
+We use a stack to help us get the post-order traversal. We first push the root node into the stack. Since the post-order traversal is left subtree, right subtree, root, and the characteristic of the stack is first in last out, we first add the node's value to the answer, then push each of the node's children into the stack in the order from left to right. This way, we can get the traversal result of root, right subtree, left subtree. Finally, we reverse the answer to get the post-order traversal result.
+
+The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 """
@@ -228,6 +272,8 @@ class Solution:
                 stk.append(child)
         return ans[::-1]
 ```
+
+#### Java
 
 ```java
 /*
@@ -269,6 +315,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /*
 // Definition for a Node.
@@ -294,19 +342,25 @@ class Solution {
 public:
     vector<int> postorder(Node* root) {
         vector<int> ans;
-        if (!root) return ans;
+        if (!root) {
+            return ans;
+        }
         stack<Node*> stk{{root}};
         while (!stk.empty()) {
             root = stk.top();
             ans.push_back(root->val);
             stk.pop();
-            for (Node* child : root->children) stk.push(child);
+            for (Node* child : root->children) {
+                stk.push(child);
+            }
         }
         reverse(ans.begin(), ans.end());
         return ans;
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -335,6 +389,8 @@ func postorder(root *Node) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 /**
  * Definition for node.
@@ -349,26 +405,22 @@ func postorder(root *Node) []int {
  */
 
 function postorder(root: Node | null): number[] {
-    const res = [];
-    if (root == null) {
-        return res;
+    const ans: number[] = [];
+    if (!root) {
+        return ans;
     }
-    const stack = [root];
-    while (stack.length !== 0) {
-        const target = stack[stack.length - 1];
-        if (target.children == null) {
-            res.push(stack.pop().val);
-        } else {
-            for (let i = target.children.length - 1; i >= 0; i--) {
-                stack.push(target.children[i]);
-            }
-            target.children = null;
-        }
+    const stk: Node[] = [root];
+    while (stk.length) {
+        const { val, children } = stk.pop()!;
+        ans.push(val);
+        stk.push(...children);
     }
-    return res;
+    return ans.reverse();
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

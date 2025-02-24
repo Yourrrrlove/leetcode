@@ -1,34 +1,65 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0290.Word%20Pattern/README_EN.md
+tags:
+    - Hash Table
+    - String
+---
+
+<!-- problem:start -->
+
 # [290. Word Pattern](https://leetcode.com/problems/word-pattern)
 
 [中文文档](/solution/0200-0299/0290.Word%20Pattern/README.md)
 
 ## Description
 
+<!-- description:start -->
+
 <p>Given a <code>pattern</code> and a string <code>s</code>, find if <code>s</code>&nbsp;follows the same pattern.</p>
 
-<p>Here <b>follow</b> means a full match, such that there is a bijection between a letter in <code>pattern</code> and a <b>non-empty</b> word in <code>s</code>.</p>
+<p>Here <b>follow</b> means a full match, such that there is a bijection between a letter in <code>pattern</code> and a <b>non-empty</b> word in <code>s</code>. Specifically:</p>
+
+<ul>
+	<li>Each letter in <code>pattern</code> maps to <strong>exactly</strong> one unique word in <code>s</code>.</li>
+	<li>Each unique word in <code>s</code> maps to <strong>exactly</strong> one letter in <code>pattern</code>.</li>
+	<li>No two letters map to the same word, and no two words map to the same letter.</li>
+</ul>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre>
-<strong>Input:</strong> pattern = &quot;abba&quot;, s = &quot;dog cat cat dog&quot;
-<strong>Output:</strong> true
-</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">pattern = &quot;abba&quot;, s = &quot;dog cat cat dog&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">true</span></p>
+
+<p><strong>Explanation:</strong></p>
+
+<p>The bijection can be established as:</p>
+
+<ul>
+	<li><code>&#39;a&#39;</code> maps to <code>&quot;dog&quot;</code>.</li>
+	<li><code>&#39;b&#39;</code> maps to <code>&quot;cat&quot;</code>.</li>
+</ul>
+</div>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre>
-<strong>Input:</strong> pattern = &quot;abba&quot;, s = &quot;dog cat cat fish&quot;
-<strong>Output:</strong> false
-</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">pattern = &quot;abba&quot;, s = &quot;dog cat cat fish&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">false</span></p>
+</div>
 
 <p><strong class="example">Example 3:</strong></p>
 
-<pre>
-<strong>Input:</strong> pattern = &quot;aaaa&quot;, s = &quot;dog cat cat dog&quot;
-<strong>Output:</strong> false
-</pre>
+<div class="example-block">
+<p><strong>Input:</strong> <span class="example-io">pattern = &quot;aaaa&quot;, s = &quot;dog cat cat dog&quot;</span></p>
+
+<p><strong>Output:</strong> <span class="example-io">false</span></p>
+</div>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
@@ -42,7 +73,11 @@
 	<li>All the words in <code>s</code> are separated by a <strong>single space</strong>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hash Table
 
@@ -55,6 +90,8 @@ After the traversal, return `true`.
 The time complexity is $O(m + n)$ and the space complexity is $O(m + n)$. Here $m$ and $n$ are the length of $pattern$ and string $s$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -71,6 +108,8 @@ class Solution:
             d2[b] = a
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -94,6 +133,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -123,6 +164,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func wordPattern(pattern string, s string) bool {
 	ws := strings.Split(s, " ")
@@ -145,6 +188,8 @@ func wordPattern(pattern string, s string) bool {
 	return true
 }
 ```
+
+#### TypeScript
 
 ```ts
 function wordPattern(pattern: string, s: string): boolean {
@@ -169,6 +214,8 @@ function wordPattern(pattern: string, s: string): boolean {
     return true;
 }
 ```
+
+#### Rust
 
 ```rust
 use std::collections::HashMap;
@@ -201,6 +248,8 @@ impl Solution {
 }
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public bool WordPattern(string pattern, string s) {
@@ -229,4 +278,38 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 2
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function wordPattern(pattern: string, s: string): boolean {
+    const hash: Record<string, string> = Object.create(null);
+    const arr = s.split(/\s+/);
+
+    if (pattern.length !== arr.length || new Set(pattern).size !== new Set(arr).size) {
+        return false;
+    }
+
+    for (let i = 0; i < pattern.length; i++) {
+        hash[pattern[i]] ??= arr[i];
+        if (hash[pattern[i]] !== arr[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

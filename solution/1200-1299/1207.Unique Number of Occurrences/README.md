@@ -1,32 +1,46 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1207.Unique%20Number%20of%20Occurrences/README.md
+rating: 1195
+source: 第 156 场周赛 Q1
+tags:
+    - 数组
+    - 哈希表
+---
+
+<!-- problem:start -->
+
 # [1207. 独一无二的出现次数](https://leetcode.cn/problems/unique-number-of-occurrences)
 
 [English Version](/solution/1200-1299/1207.Unique%20Number%20of%20Occurrences/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给你一个整数数组&nbsp;<code>arr</code>，请你帮忙统计数组中每个数的出现次数。</p>
-
-<p>如果每个数的出现次数都是独一无二的，就返回&nbsp;<code>true</code>；否则返回 <code>false</code>。</p>
+<p>给你一个整数数组&nbsp;<code>arr</code>，如果每个数的出现次数都是独一无二的，就返回&nbsp;<code>true</code>；否则返回 <code>false</code>。</p>
 
 <p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
 
-<pre><strong>输入：</strong>arr = [1,2,2,1,1,3]
+<pre>
+<strong>输入：</strong>arr = [1,2,2,1,1,3]
 <strong>输出：</strong>true
 <strong>解释：</strong>在该数组中，1 出现了 3 次，2 出现了 2 次，3 只出现了 1 次。没有两个数的出现次数相同。</pre>
 
 <p><strong>示例 2：</strong></p>
 
-<pre><strong>输入：</strong>arr = [1,2]
+<pre>
+<strong>输入：</strong>arr = [1,2]
 <strong>输出：</strong>false
 </pre>
 
 <p><strong>示例 3：</strong></p>
 
-<pre><strong>输入：</strong>arr = [-3,0,1,-3,1,1,1,-3,10,0]
+<pre>
+<strong>输入：</strong>arr = [-3,0,1,-3,1,1,1,-3,10,0]
 <strong>输出：</strong>true
 </pre>
 
@@ -39,7 +53,11 @@
 	<li><code>-1000 &lt;= arr[i] &lt;= 1000</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：哈希表
 
@@ -49,12 +67,16 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def uniqueOccurrences(self, arr: List[int]) -> bool:
         cnt = Counter(arr)
         return len(set(cnt.values())) == len(cnt)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -67,6 +89,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -88,6 +112,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func uniqueOccurrences(arr []int) bool {
 	cnt := map[int]int{}
@@ -105,6 +131,8 @@ func uniqueOccurrences(arr []int) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function uniqueOccurrences(arr: number[]): boolean {
     const cnt: Map<number, number> = new Map();
@@ -117,4 +145,6 @@ function uniqueOccurrences(arr: number[]): boolean {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

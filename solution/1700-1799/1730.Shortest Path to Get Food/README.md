@@ -1,10 +1,22 @@
-# [1730. 获取食物的最短路径](https://leetcode.cn/problems/shortest-path-to-get-food)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1700-1799/1730.Shortest%20Path%20to%20Get%20Food/README.md
+tags:
+    - 广度优先搜索
+    - 数组
+    - 矩阵
+---
+
+<!-- problem:start -->
+
+# [1730. 获取食物的最短路径 🔒](https://leetcode.cn/problems/shortest-path-to-get-food)
 
 [English Version](/solution/1700-1799/1730.Shortest%20Path%20to%20Get%20Food/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>你现在很饿，想要尽快找东西吃。你需要找到最短的路径到达一个食物所在的格子。</p>
 
@@ -43,6 +55,12 @@
 <strong>输出:</strong> 6
 <strong>解释:</strong> 这里有多个食物。拿到下边的食物仅需走 6 步。</pre>
 
+<p><strong class="example">示例 4：</strong></p>
+
+<pre>
+<b>输入：</b>grid = [["X","X","X","X","X","X","X","X"],["X","*","O","X","O","#","O","X"],["X","O","O","X","O","O","X","X"],["X","O","O","O","O","#","O","X"],["O","O","O","O","O","O","O","O"]]
+<b>输出：</b>5</pre>
+
 <p>&nbsp;</p>
 
 <p><b>提示：</b></p>
@@ -55,7 +73,11 @@
 	<li><code>grid</code>&nbsp;中<strong>有且只有一个</strong>&nbsp;<code>'*'</code>&nbsp;。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：BFS
 
@@ -68,6 +90,8 @@
 时间复杂度 $O(m \times n)$，空间复杂度 $O(1)$。其中 $m$ 和 $n$ 分别为二维数组的行数和列数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -91,6 +115,8 @@ class Solution:
                             q.append((x, y))
         return -1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -133,6 +159,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -173,6 +201,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func getFood(grid [][]byte) (ans int) {
 	m, n := len(grid), len(grid[0])
@@ -210,6 +240,8 @@ func getFood(grid [][]byte) (ans int) {
 	return -1
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -256,4 +288,6 @@ var getFood = function (grid) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

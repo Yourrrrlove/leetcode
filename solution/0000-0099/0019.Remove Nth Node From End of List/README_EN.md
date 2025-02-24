@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0019.Remove%20Nth%20Node%20From%20End%20of%20List/README_EN.md
+tags:
+    - Linked List
+    - Two Pointers
+---
+
+<!-- problem:start -->
+
 # [19. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list)
 
 [中文文档](/solution/0000-0099/0019.Remove%20Nth%20Node%20From%20End%20of%20List/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given the <code>head</code> of a linked list, remove the <code>n<sup>th</sup></code> node from the end of the list and return its head.</p>
 
@@ -41,7 +54,11 @@
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> Could you do this in one pass?</p>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Fast and Slow Pointers
 
@@ -52,6 +69,8 @@ Next, the `fast` pointer moves forward $n$ steps first, then `fast` and `slow` p
 The time complexity is $O(n)$, where $n$ is the length of the linked list. The space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for singly-linked list.
@@ -70,6 +89,8 @@ class Solution:
         slow.next = slow.next.next
         return dummy.next
 ```
+
+#### Java
 
 ```java
 /**
@@ -98,6 +119,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 /**
@@ -129,6 +152,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for singly-linked list.
@@ -150,6 +175,8 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	return dummy.Next
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -179,6 +206,8 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
     return dummy.next;
 }
 ```
+
+#### Rust
 
 ```rust
 // Definition for singly-linked list.
@@ -215,6 +244,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * Definition for singly-linked list.
@@ -244,6 +275,40 @@ var removeNthFromEnd = function (head, n) {
 };
 ```
 
+#### Swift
+
+```swift
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public var val: Int
+ *     public var next: ListNode?
+ *     public init() { self.val = 0; self.next = nil; }
+ *     public init(_ val: Int) { self.val = val; self.next = nil; }
+ *     public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+ * }
+ */
+class Solution {
+    func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
+        let dummy = ListNode(0)
+        dummy.next = head
+        var fast: ListNode? = dummy
+        var slow: ListNode? = dummy
+        for _ in 0..<n {
+            fast = fast?.next
+        }
+        while fast?.next != nil {
+            fast = fast?.next
+            slow = slow?.next
+        }
+        slow?.next = slow?.next?.next
+        return dummy.next
+    }
+}
+```
+
+#### Ruby
+
 ```rb
 # Definition for singly-linked list.
 # class ListNode
@@ -272,6 +337,75 @@ def remove_nth_from_end(head, n)
 end
 ```
 
+#### C#
+
+```cs
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int val=0, ListNode next=null) {
+ *         this.val = val;
+ *         this.next = next;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode RemoveNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode fast = dummy, slow = dummy;
+        while (n-- > 0) {
+            fast = fast.next;
+        }
+        while (fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        slow.next = slow.next.next;
+        return dummy.next;
+    }
+}
+```
+
+#### PHP
+
+```php
+/**
+ * Definition for a singly-linked list.
+ * class ListNode {
+ *     public $val = 0;
+ *     public $next = null;
+ *     function __construct($val = 0, $next = null) {
+ *         $this->val = $val;
+ *         $this->next = $next;
+ *     }
+ * }
+ */
+class Solution {
+    /**
+     * @param ListNode $head
+     * @param Integer $n
+     * @return ListNode
+     */
+    function removeNthFromEnd($head, $n) {
+        $dummy = new ListNode(0, $head);
+        $fast = $slow = $dummy;
+        for ($i = 0; $i < $n; $i++) {
+            $fast = $fast->next;
+        }
+        while ($fast->next !== null) {
+            $fast = $fast->next;
+            $slow = $slow->next;
+        }
+        $slow->next = $slow->next->next;
+        return $dummy->next;
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

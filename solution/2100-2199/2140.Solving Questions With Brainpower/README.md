@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2100-2199/2140.Solving%20Questions%20With%20Brainpower/README.md
+rating: 1709
+source: 第 276 场周赛 Q3
+tags:
+    - 数组
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [2140. 解决智力问题](https://leetcode.cn/problems/solving-questions-with-brainpower)
 
 [English Version](/solution/2100-2199/2140.Solving%20Questions%20With%20Brainpower/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个下标从 <strong>0</strong>&nbsp;开始的二维整数数组&nbsp;<code>questions</code>&nbsp;，其中&nbsp;<code>questions[i] = [points<sub>i</sub>, brainpower<sub>i</sub>]</code>&nbsp;。</p>
 
@@ -12,6 +25,7 @@
 
 <ul>
 	<li>比方说，给你&nbsp;<code>questions = [[3, 2], [4, 3], [4, 4], [2, 5]]</code>&nbsp;：
+
     <ul>
     	<li>如果问题&nbsp;<code>0</code>&nbsp;被解决了， 那么你可以获得&nbsp;<code>3</code>&nbsp;分，但你不能解决问题&nbsp;<code>1</code> 和&nbsp;<code>2</code>&nbsp;。</li>
     	<li>如果你跳过问题&nbsp;<code>0</code>&nbsp;，且解决问题&nbsp;<code>1</code>&nbsp;，你将获得 <code>4</code> 分但是不能解决问题&nbsp;<code>2</code> 和&nbsp;<code>3</code>&nbsp;。</li>
@@ -57,7 +71,11 @@
 	<li><code>1 &lt;= points<sub>i</sub>, brainpower<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：记忆化搜索
 
@@ -74,6 +92,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def mostPoints(self, questions: List[List[int]]) -> int:
@@ -86,6 +106,8 @@ class Solution:
 
         return dfs(0)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -113,6 +135,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -135,6 +159,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func mostPoints(questions [][]int) int64 {
 	n := len(questions)
@@ -154,6 +180,8 @@ func mostPoints(questions [][]int) int64 {
 	return dfs(0)
 }
 ```
+
+#### TypeScript
 
 ```ts
 function mostPoints(questions: number[][]): number {
@@ -175,6 +203,10 @@ function mostPoints(questions: number[][]): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：动态规划
 
 我们定义 $f[i]$ 表示从第 $i$ 个问题开始解决，能够获得的最高分数。那么答案就是 $f[0]$。
@@ -191,6 +223,8 @@ $$
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def mostPoints(self, questions: List[List[int]]) -> int:
@@ -202,6 +236,8 @@ class Solution:
             f[i] = max(f[i + 1], p + (0 if j > n else f[j]))
         return f[0]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -217,6 +253,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -235,6 +273,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func mostPoints(questions [][]int) int64 {
 	n := len(questions)
@@ -249,6 +289,8 @@ func mostPoints(questions [][]int) int64 {
 	return f[0]
 }
 ```
+
+#### TypeScript
 
 ```ts
 function mostPoints(questions: number[][]): number {
@@ -265,4 +307,6 @@ function mostPoints(questions: number[][]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

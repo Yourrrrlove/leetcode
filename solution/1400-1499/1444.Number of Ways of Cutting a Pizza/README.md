@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1400-1499/1444.Number%20of%20Ways%20of%20Cutting%20a%20Pizza/README.md
+rating: 2126
+source: 第 188 场周赛 Q4
+tags:
+    - 记忆化搜索
+    - 数组
+    - 动态规划
+    - 矩阵
+    - 前缀和
+---
+
+<!-- problem:start -->
+
 # [1444. 切披萨的方案数](https://leetcode.cn/problems/number-of-ways-of-cutting-a-pizza)
 
 [English Version](/solution/1400-1499/1444.Number%20of%20Ways%20of%20Cutting%20a%20Pizza/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个&nbsp;<code>rows x cols</code>&nbsp;大小的矩形披萨和一个整数 <code>k</code>&nbsp;，矩形包含两种字符：&nbsp;<code>&#39;A&#39;</code> （表示苹果）和&nbsp;<code>&#39;.&#39;</code>&nbsp;（表示空白格子）。你需要切披萨 <code>k-1</code> 次，得到&nbsp;<code>k</code>&nbsp;块披萨并送给别人。</p>
 
@@ -47,14 +63,18 @@
 	<li><code>pizza</code>&nbsp;只包含字符&nbsp;<code>&#39;A&#39;</code>&nbsp;和&nbsp;<code>&#39;.&#39;</code>&nbsp;。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：二维前缀和 + 记忆化搜索
 
 我们可以使用二维前缀和来快速计算出每个子矩形中苹果的数量，定义 $s[i][j]$ 表示矩形前 $i$ 行，前 $j$ 列的子矩形中苹果的数量，那么 $s[i][j]$ 可以由 $s[i-1][j]$, $s[i][j-1]$, $s[i-1][j-1]$ 三个子矩形的苹果数量求得，具体的计算方法如下：
 
 $$
-s[i][j] = s[i-1][j] + s[i][j-1] - s[i-1][j-1] + (pizza[i-1][j-1] == 'A')
+s[i][j] = s[i-1][j] + s[i][j-1] - s[i-1][j-1] + \textit{int}(pizza[i-1][j-1] == 'A')
 $$
 
 其中 $pizza[i-1][j-1]$ 表示矩形中第 $i$ 行，第 $j$ 列的字符，如果是苹果，则为 $1$，否则为 $0$。
@@ -70,9 +90,13 @@ $$
 
 时间复杂度 $O(m \times n \times k \times (m + n))$，空间复杂度 $O(m \times n \times k)$。其中 $m$, $n$ 分别是矩形的行数和列数。
 
-相似题目：[2312. 卖木头块](/solution/2300-2399/2312.Selling%20Pieces%20of%20Wood/README.md)
+相似题目：
+
+-   [2312. 卖木头块](https://github.com/doocs/leetcode/blob/main/solution/2300-2399/2312.Selling%20Pieces%20of%20Wood/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -98,6 +122,8 @@ class Solution:
                 s[i][j] = s[i - 1][j] + s[i][j - 1] - s[i - 1][j - 1] + int(c == 'A')
         return dfs(0, 0, k - 1)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -144,6 +170,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -182,6 +210,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func ways(pizza []string, k int) int {
@@ -238,6 +268,8 @@ func ways(pizza []string, k int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function ways(pizza: string[], k: number): number {
     const mod = 1e9 + 7;
@@ -277,4 +309,6 @@ function ways(pizza: string[], k: number): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

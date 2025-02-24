@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1000-1099/1029.Two%20City%20Scheduling/README.md
+rating: 1348
+source: 第 133 场周赛 Q1
+tags:
+    - 贪心
+    - 数组
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [1029. 两地调度](https://leetcode.cn/problems/two-city-scheduling)
 
 [English Version](/solution/1000-1099/1029.Two%20City%20Scheduling/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>公司计划面试 <code>2n</code> 人。给你一个数组 <code>costs</code> ，其中 <code>costs[i] = [aCost<sub>i</sub>, bCost<sub>i</sub>]</code> 。第 <code>i</code> 人飞往 <code>a</code> 市的费用为 <code>aCost<sub>i</sub></code> ，飞往 <code>b</code> 市的费用为 <code>bCost<sub>i</sub></code> 。</p>
 
@@ -51,7 +65,11 @@
 	<li><code>1 <= aCost<sub>i</sub>, bCost<sub>i</sub> <= 1000</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序 + 贪心
 
@@ -61,9 +79,11 @@
 
 相似题目：
 
--   [2611. 老鼠和奶酪](/solution/2600-2699/2611.Mice%20and%20Cheese/README.md)
+-   [2611. 老鼠和奶酪](https://github.com/doocs/leetcode/blob/main/solution/2600-2699/2611.Mice%20and%20Cheese/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,6 +92,8 @@ class Solution:
         n = len(costs) >> 1
         return sum(costs[i][0] + costs[i + n][1] for i in range(n))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -86,6 +108,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -104,6 +128,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func twoCitySchedCost(costs [][]int) (ans int) {
 	sort.Slice(costs, func(i, j int) bool {
@@ -116,6 +142,8 @@ func twoCitySchedCost(costs [][]int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function twoCitySchedCost(costs: number[][]): number {
@@ -131,4 +159,6 @@ function twoCitySchedCost(costs: number[][]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

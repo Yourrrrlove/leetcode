@@ -1,10 +1,22 @@
-# [247. 中心对称数 II](https://leetcode.cn/problems/strobogrammatic-number-ii)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0247.Strobogrammatic%20Number%20II/README.md
+tags:
+    - 递归
+    - 数组
+    - 字符串
+---
+
+<!-- problem:start -->
+
+# [247. 中心对称数 II 🔒](https://leetcode.cn/problems/strobogrammatic-number-ii)
 
 [English Version](/solution/0200-0299/0247.Strobogrammatic%20Number%20II/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个整数&nbsp;<code>n</code>&nbsp;，返回所有长度为&nbsp;<code>n</code>&nbsp;的 <strong>中心对称数</strong>&nbsp;。你可以以 <strong>任何顺序</strong> 返回答案。</p>
 
@@ -33,7 +45,11 @@
 	<li><code>1 &lt;= n &lt;= 14</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：递归
 
@@ -51,9 +67,13 @@
 
 时间复杂度为 $O(2^{n+2})$。
 
-相似题目：[248. 中心对称数 III](/solution/0200-0299/0248.Strobogrammatic%20Number%20III/README.md)
+相似题目：
+
+-   [248. 中心对称数 III 🔒](https://github.com/doocs/leetcode/blob/main/solution/0200-0299/0248.Strobogrammatic%20Number%20III/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -73,6 +93,8 @@ class Solution:
 
         return dfs(n)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -105,6 +127,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -125,6 +149,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findStrobogrammatic(n int) []string {
@@ -154,4 +180,6 @@ func findStrobogrammatic(n int) []string {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

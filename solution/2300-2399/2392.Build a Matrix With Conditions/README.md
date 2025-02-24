@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2392.Build%20a%20Matrix%20With%20Conditions/README.md
+rating: 1960
+source: 第 308 场周赛 Q4
+tags:
+    - 图
+    - 拓扑排序
+    - 数组
+    - 矩阵
+---
+
+<!-- problem:start -->
+
 # [2392. 给定条件下构造矩阵](https://leetcode.cn/problems/build-a-matrix-with-conditions)
 
 [English Version](/solution/2300-2399/2392.Build%20a%20Matrix%20With%20Conditions/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个 <strong>正</strong>&nbsp;整数&nbsp;<code>k</code>&nbsp;，同时给你：</p>
 
@@ -65,7 +80,11 @@
 	<li><code>left<sub>i</sub> != right<sub>i</sub></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：拓扑排序
 
@@ -74,6 +93,8 @@
 时间复杂度 $O(m+n+k)$。其中 $m$ 和 $n$ 分别为 `rowConditions` 和 `colConditions` 的长度，而 $k$ 为题目中给定的正整数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -110,6 +131,8 @@ class Solution:
             ans[i][m[v]] = v
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -165,6 +188,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -217,6 +242,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func buildMatrix(k int, rowConditions [][]int, colConditions [][]int) [][]int {
@@ -274,6 +301,8 @@ func buildMatrix(k int, rowConditions [][]int, colConditions [][]int) [][]int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function buildMatrix(k: number, rowConditions: number[][], colConditions: number[][]): number[][] {
     function f(cond) {
@@ -321,4 +350,6 @@ function buildMatrix(k: number, rowConditions: number[][], colConditions: number
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

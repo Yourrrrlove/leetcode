@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1691.Maximum%20Height%20by%20Stacking%20Cuboids/README_EN.md
+rating: 2171
+source: Weekly Contest 219 Q4
+tags:
+    - Array
+    - Dynamic Programming
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [1691. Maximum Height by Stacking Cuboids](https://leetcode.com/problems/maximum-height-by-stacking-cuboids)
 
 [中文文档](/solution/1600-1699/1691.Maximum%20Height%20by%20Stacking%20Cuboids/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given <code>n</code> <code>cuboids</code> where the dimensions of the <code>i<sup>th</sup></code> cuboid is <code>cuboids[i] = [width<sub>i</sub>, length<sub>i</sub>, height<sub>i</sub>]</code> (<strong>0-indexed</strong>). Choose a <strong>subset</strong> of <code>cuboids</code> and place them on each other.</p>
 
@@ -55,7 +71,11 @@ The maximum height of stacked cuboids is 6 * 17 = 102.
 	<li><code>1 &lt;= width<sub>i</sub>, length<sub>i</sub>, height<sub>i</sub> &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Sorting + Dynamic Programming
 
@@ -81,6 +101,8 @@ The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ i
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def maxHeight(self, cuboids: List[List[int]]) -> int:
@@ -96,6 +118,8 @@ class Solution:
             f[i] += cuboids[i][2]
         return max(f)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -120,11 +144,15 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     int maxHeight(vector<vector<int>>& cuboids) {
-        for (auto& c : cuboids) sort(c.begin(), c.end());
+        for (auto& c : cuboids) {
+            sort(c.begin(), c.end());
+        }
         sort(cuboids.begin(), cuboids.end());
         int n = cuboids.size();
         vector<int> f(n);
@@ -140,6 +168,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func maxHeight(cuboids [][]int) int {
@@ -164,6 +194,37 @@ func maxHeight(cuboids [][]int) int {
 }
 ```
 
+#### TypeScript
+
+```ts
+function maxHeight(cuboids: number[][]): number {
+    for (const c of cuboids) {
+        c.sort((a, b) => a - b);
+    }
+    cuboids.sort((a, b) => {
+        if (a[0] !== b[0]) {
+            return a[0] - b[0];
+        }
+        if (a[1] !== b[1]) {
+            return a[1] - b[1];
+        }
+        return a[2] - b[2];
+    });
+    const n = cuboids.length;
+    const f = Array(n).fill(0);
+    for (let i = 0; i < n; ++i) {
+        for (let j = 0; j < i; ++j) {
+            const ok = cuboids[j][1] <= cuboids[i][1] && cuboids[j][2] <= cuboids[i][2];
+            if (ok) f[i] = Math.max(f[i], f[j]);
+        }
+        f[i] += cuboids[i][2];
+    }
+    return Math.max(...f);
+}
+```
+
+#### JavaScript
+
 ```js
 /**
  * @param {number[][]} cuboids
@@ -174,12 +235,16 @@ var maxHeight = function (cuboids) {
         c.sort((a, b) => a - b);
     }
     cuboids.sort((a, b) => {
-        if (a[0] != b[0]) return a[0] - b[0];
-        if (a[1] != b[1]) return a[1] - b[1];
+        if (a[0] !== b[0]) {
+            return a[0] - b[0];
+        }
+        if (a[1] !== b[1]) {
+            return a[1] - b[1];
+        }
         return a[2] - b[2];
     });
     const n = cuboids.length;
-    const f = new Array(n).fill(0);
+    const f = Array(n).fill(0);
     for (let i = 0; i < n; ++i) {
         for (let j = 0; j < i; ++j) {
             const ok = cuboids[j][1] <= cuboids[i][1] && cuboids[j][2] <= cuboids[i][2];
@@ -193,4 +258,6 @@ var maxHeight = function (cuboids) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

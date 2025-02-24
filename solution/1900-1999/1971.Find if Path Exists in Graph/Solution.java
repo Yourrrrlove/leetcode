@@ -1,26 +1,28 @@
 class Solution {
+    private int destination;
     private boolean[] vis;
     private List<Integer>[] g;
 
     public boolean validPath(int n, int[][] edges, int source, int destination) {
+        this.destination = destination;
         vis = new boolean[n];
         g = new List[n];
-        Arrays.setAll(g, k -> new ArrayList<>());
+        Arrays.setAll(g, i -> new ArrayList<>());
         for (var e : edges) {
-            int a = e[0], b = e[1];
-            g[a].add(b);
-            g[b].add(a);
+            int u = e[0], v = e[1];
+            g[u].add(v);
+            g[v].add(u);
         }
-        return dfs(source, destination);
+        return dfs(source);
     }
 
-    private boolean dfs(int source, int destination) {
-        if (source == destination) {
+    private boolean dfs(int i) {
+        if (i == destination) {
             return true;
         }
-        vis[source] = true;
-        for (int nxt : g[source]) {
-            if (!vis[nxt] && dfs(nxt, destination)) {
+        vis[i] = true;
+        for (var j : g[i]) {
+            if (!vis[j] && dfs(j)) {
                 return true;
             }
         }

@@ -1,13 +1,28 @@
-# [320. Generalized Abbreviation](https://leetcode.com/problems/generalized-abbreviation)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0320.Generalized%20Abbreviation/README_EN.md
+tags:
+    - Bit Manipulation
+    - String
+    - Backtracking
+---
+
+<!-- problem:start -->
+
+# [320. Generalized Abbreviation 🔒](https://leetcode.com/problems/generalized-abbreviation)
 
 [中文文档](/solution/0300-0399/0320.Generalized%20Abbreviation/README.md)
 
 ## Description
 
+<!-- description:start -->
+
 <p>A word&#39;s <strong>generalized abbreviation</strong> can be constructed by taking any number of <strong>non-overlapping</strong> and <strong>non-adjacent</strong> <span data-keyword="substring-nonempty">substrings</span> and replacing them with their respective lengths.</p>
 
 <ul>
 	<li>For example, <code>&quot;abcde&quot;</code> can be abbreviated into:
+
     <ul>
     	<li><code>&quot;a3e&quot;</code> (<code>&quot;bcd&quot;</code> turned into <code>&quot;3&quot;</code>)</li>
     	<li><code>&quot;1bcd1&quot;</code> (<code>&quot;a&quot;</code> and <code>&quot;e&quot;</code> both turned into <code>&quot;1&quot;</code>)</li>
@@ -21,6 +36,7 @@
     	<li><code>&quot;22de&quot;</code> (<code>&quot;ab&quot;</code> turned into <code>&quot;2&quot;</code> and <code>&quot;bc&quot;</code> turned into <code>&quot;2&quot;</code>) is invalid as the substring chosen overlap.</li>
     </ul>
     </li>
+
 </ul>
 
 <p>Given a string <code>word</code>, return <em>a list of all the possible <strong>generalized abbreviations</strong> of</em> <code>word</code>. Return the answer in <strong>any order</strong>.</p>
@@ -41,7 +57,11 @@
 	<li><code>word</code> consists of only lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: DFS
 
@@ -61,6 +81,8 @@ The time complexity is $O(n \times 2^n)$, and the space complexity is $O(n)$. Wh
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def generateAbbreviations(self, word: str) -> List[str]:
@@ -76,6 +98,8 @@ class Solution:
         n = len(word)
         return dfs(0)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -106,6 +130,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -132,6 +158,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func generateAbbreviations(word string) []string {
@@ -160,6 +188,8 @@ func generateAbbreviations(word string) []string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function generateAbbreviations(word: string): string[] {
     const n = word.length;
@@ -184,6 +214,10 @@ function generateAbbreviations(word: string): string[] {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Binary Enumeration
 
 Since the length of the string $word$ does not exceed $15$, we can use the method of binary enumeration to enumerate all abbreviations. We use a binary number $i$ of length $n$ to represent an abbreviation, where $0$ represents keeping the corresponding character, and $1$ represents deleting the corresponding character. We enumerate all $i$ in the range of $[0, 2^n)$, convert it into the corresponding abbreviation, and add it to the answer list.
@@ -191,6 +225,8 @@ Since the length of the string $word$ does not exceed $15$, we can use the metho
 The time complexity is $O(n \times 2^n)$, and the space complexity is $O(n)$. Where $n$ is the length of the string $word$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -213,6 +249,8 @@ class Solution:
             ans.append("".join(s))
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -242,6 +280,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -273,6 +313,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func generateAbbreviations(word string) (ans []string) {
 	n := len(word)
@@ -301,4 +343,6 @@ func generateAbbreviations(word string) (ans []string) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

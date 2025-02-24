@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1209.Remove%20All%20Adjacent%20Duplicates%20in%20String%20II/README_EN.md
+rating: 1541
+source: Weekly Contest 156 Q3
+tags:
+    - Stack
+    - String
+---
+
+<!-- problem:start -->
+
 # [1209. Remove All Adjacent Duplicates in String II](https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii)
 
 [中文文档](/solution/1200-1299/1209.Remove%20All%20Adjacent%20Duplicates%20in%20String%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a string <code>s</code> and an integer <code>k</code>, a <code>k</code> <strong>duplicate removal</strong> consists of choosing <code>k</code> adjacent and equal letters from <code>s</code> and removing them, causing the left and the right side of the deleted substring to concatenate together.</p>
 
@@ -44,7 +59,11 @@ Finally delete &quot;ddd&quot;, get &quot;aa&quot;</pre>
 	<li><code>s</code> only contains lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Stack
 
@@ -56,27 +75,24 @@ The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is 
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def removeDuplicates(self, s: str, k: int) -> str:
-        t = []
-        i, n = 0, len(s)
-        while i < n:
-            j = i
-            while j < n and s[j] == s[i]:
-                j += 1
-            cnt = j - i
-            cnt %= k
-            if t and t[-1][0] == s[i]:
-                t[-1][1] = (t[-1][1] + cnt) % k
-                if t[-1][1] == 0:
-                    t.pop()
-            elif cnt:
-                t.append([s[i], cnt])
-            i = j
-        ans = [c * v for c, v in t]
+        stk = []
+        for c in s:
+            if stk and stk[-1][0] == c:
+                stk[-1][1] = (stk[-1][1] + 1) % k
+                if stk[-1][1] == 0:
+                    stk.pop()
+            else:
+                stk.append([c, 1])
+        ans = [c * v for c, v in stk]
         return "".join(ans)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -106,6 +122,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -129,6 +147,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func removeDuplicates(s string, k int) string {
@@ -160,25 +180,6 @@ type pair struct {
 
 <!-- tabs:end -->
 
-### Solution 2
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```python
-class Solution:
-    def removeDuplicates(self, s: str, k: int) -> str:
-        stk = []
-        for c in s:
-            if stk and stk[-1][0] == c:
-                stk[-1][1] = (stk[-1][1] + 1) % k
-                if stk[-1][1] == 0:
-                    stk.pop()
-            else:
-                stk.append([c, 1])
-        ans = [c * v for c, v in stk]
-        return "".join(ans)
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

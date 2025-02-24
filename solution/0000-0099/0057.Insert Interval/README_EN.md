@@ -1,14 +1,28 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0057.Insert%20Interval/README_EN.md
+tags:
+    - Array
+---
+
+<!-- problem:start -->
+
 # [57. Insert Interval](https://leetcode.com/problems/insert-interval)
 
 [中文文档](/solution/0000-0099/0057.Insert%20Interval/README.md)
 
 ## Description
 
+<!-- description:start -->
+
 <p>You are given an array of non-overlapping intervals <code>intervals</code> where <code>intervals[i] = [start<sub>i</sub>, end<sub>i</sub>]</code> represent the start and the end of the <code>i<sup>th</sup></code> interval and <code>intervals</code> is sorted in ascending order by <code>start<sub>i</sub></code>. You are also given an interval <code>newInterval = [start, end]</code> that represents the start and end of another interval.</p>
 
 <p>Insert <code>newInterval</code> into <code>intervals</code> such that <code>intervals</code> is still sorted in ascending order by <code>start<sub>i</sub></code> and <code>intervals</code> still does not have any overlapping intervals (merge overlapping intervals if necessary).</p>
 
 <p>Return <code>intervals</code><em> after the insertion</em>.</p>
+
+<p><strong>Note</strong> that you don&#39;t need to modify <code>intervals</code> in-place. You can make a new array and return it.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
@@ -38,7 +52,11 @@
 	<li><code>0 &lt;= start &lt;= end &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Sorting + Interval Merging
 
@@ -47,6 +65,8 @@ We can first add the new interval `newInterval` to the interval list `intervals`
 The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$. Here, $n$ is the number of intervals.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -66,6 +86,8 @@ class Solution:
         intervals.append(newInterval)
         return merge(intervals)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -95,6 +117,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -119,6 +143,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func insert(intervals [][]int, newInterval []int) [][]int {
 	merge := func(intervals [][]int) (ans [][]int) {
@@ -137,6 +163,8 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 	return merge(intervals)
 }
 ```
+
+#### TypeScript
 
 ```ts
 function insert(intervals: number[][], newInterval: number[]): number[][] {
@@ -157,6 +185,8 @@ function insert(intervals: number[][], newInterval: number[]): number[][] {
     return merge(intervals);
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -185,6 +215,8 @@ impl Solution {
     }
 }
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -215,6 +247,10 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: One-pass Traversal
 
 We can traverse the interval list `intervals`, let the current interval be `interval`, and there are three situations for each interval:
@@ -228,6 +264,8 @@ After the traversal, if the new interval has not been added, then add the new in
 The time complexity is $O(n)$, where $n$ is the number of intervals. Ignoring the space consumption of the answer array, the space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -252,6 +290,8 @@ class Solution:
             ans.append([st, ed])
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -281,6 +321,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -312,6 +354,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func insert(intervals [][]int, newInterval []int) (ans [][]int) {
 	st, ed := newInterval[0], newInterval[1]
@@ -338,6 +382,8 @@ func insert(intervals [][]int, newInterval []int) (ans [][]int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function insert(intervals: number[][], newInterval: number[]): number[][] {
     let [st, ed] = newInterval;
@@ -363,6 +409,8 @@ function insert(intervals: number[][], newInterval: number[]): number[][] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -395,6 +443,8 @@ impl Solution {
 }
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public int[][] Insert(int[][] intervals, int[] newInterval) {
@@ -426,4 +476,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

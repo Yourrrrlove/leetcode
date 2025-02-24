@@ -1,8 +1,18 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/lcci/01.01.Is%20Unique/README_EN.md
+---
+
+<!-- problem:start -->
+
 # [01.01. Is Unique](https://leetcode.cn/problems/is-unique-lcci)
 
 [中文文档](/lcci/01.01.Is%20Unique/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Implement an algorithm to determine if a string has all unique characters. What if you cannot use additional data structures?</p>
 
@@ -32,7 +42,11 @@
 	<li><code>0 &lt;= len(s) &lt;= 100 </code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Bit Manipulation
 
@@ -44,17 +58,20 @@ The time complexity is $O(n)$, where $n$ is the length of the string. The space 
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def isUnique(self, astr: str) -> bool:
         mask = 0
-        for c in astr:
-            i = ord(c) - ord('a')
+        for i in map(lambda c: ord(c) - ord("a"), astr):
             if (mask >> i) & 1:
                 return False
             mask |= 1 << i
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -71,6 +88,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -89,6 +108,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isUnique(astr string) bool {
 	mask := 0
@@ -103,6 +124,8 @@ func isUnique(astr string) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function isUnique(astr: string): boolean {
     let mask = 0;
@@ -116,6 +139,8 @@ function isUnique(astr: string): boolean {
     return true;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -135,6 +160,26 @@ var isUnique = function (astr) {
 };
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    func isUnique(_ astr: String) -> Bool {
+        var mask = 0
+        for c in astr {
+            let i = Int(c.asciiValue! - Character("a").asciiValue!)
+            if (mask >> i) & 1 != 0 {
+                return false
+            }
+            mask |= 1 << i
+        }
+        return true
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

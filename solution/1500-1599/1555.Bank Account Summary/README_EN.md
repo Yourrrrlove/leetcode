@@ -1,8 +1,20 @@
-# [1555. Bank Account Summary](https://leetcode.com/problems/bank-account-summary)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1500-1599/1555.Bank%20Account%20Summary/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
+# [1555. Bank Account Summary 🔒](https://leetcode.com/problems/bank-account-summary)
 
 [中文文档](/solution/1500-1599/1555.Bank%20Account%20Summary/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table: <code>Users</code></p>
 
@@ -86,17 +98,23 @@ Transactions table:
 | 4          | Luis       | 800        | No                    |
 +------------+------------+------------+-----------------------+
 <strong>Explanation:</strong> 
-Moustafa paid 400 on &quot;2020-08-01&quot; and received 200 on &quot;2020-08-03&quot;, credit (100 -400 +200) = -100
-Jonathan received 500 on &quot;2020-08-02&quot; and paid 200 on &quot;2020-08-08&quot;, credit (200 +500 -200) = 500
-Winston received 400 on &quot;2020-08-01&quot; and paid 500 on &quot;2020-08-03&quot;, credit (10000 +400 -500) = 9990
-Luis did not received any transfer, credit = 800
+Moustafa paid $400 on &quot;2020-08-01&quot; and received $200 on &quot;2020-08-03&quot;, credit (100 -400 +200) = -$100
+Jonathan received $500 on &quot;2020-08-02&quot; and paid $200 on &quot;2020-08-08&quot;, credit (200 +500 -200) = $500
+Winston received $400 on &quot;2020-08-01&quot; and paid $500 on &quot;2020-08-03&quot;, credit (10000 +400 -500) = $9990
+Luis did not received any transfer, credit = $800
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -119,4 +137,6 @@ GROUP BY t.user_id;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

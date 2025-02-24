@@ -1,10 +1,24 @@
-# [536. 从字符串生成二叉树](https://leetcode.cn/problems/construct-binary-tree-from-string)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0500-0599/0536.Construct%20Binary%20Tree%20from%20String/README.md
+tags:
+    - 栈
+    - 树
+    - 深度优先搜索
+    - 字符串
+    - 二叉树
+---
+
+<!-- problem:start -->
+
+# [536. 从字符串生成二叉树 🔒](https://leetcode.cn/problems/construct-binary-tree-from-string)
 
 [English Version](/solution/0500-0599/0536.Construct%20Binary%20Tree%20from%20String/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>你需要用一个包括括号和整数的字符串构建一棵二叉树。</p>
 
@@ -42,14 +56,20 @@
 <ul>
 	<li><code>0 &lt;= s.length &lt;= 3 * 10<sup>4</sup></code></li>
 	<li>输入字符串中只包含&nbsp;<code>'('</code>, <code>')'</code>, <code>'-'</code>&nbsp;和&nbsp;<code>'0'</code> ~ <code>'9'</code>&nbsp;</li>
-	<li>空树由&nbsp;<code>""</code>&nbsp;而非<code>"()"</code>表示。</li>
+	<li>树中所有数字的值 <strong>最多</strong> 不超过&nbsp;<code>2<sup>30</sup></code>。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -84,6 +104,8 @@ class Solution:
 
         return dfs(s)
 ```
+
+#### Java
 
 ```java
 /**
@@ -137,6 +159,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -179,6 +203,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 /**
@@ -227,4 +253,6 @@ func str2tree(s string) *TreeNode {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

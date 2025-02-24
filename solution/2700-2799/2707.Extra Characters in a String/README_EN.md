@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2707.Extra%20Characters%20in%20a%20String/README_EN.md
+rating: 1735
+source: Biweekly Contest 105 Q2
+tags:
+    - Trie
+    - Array
+    - Hash Table
+    - String
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [2707. Extra Characters in a String](https://leetcode.com/problems/extra-characters-in-a-string)
 
 [中文文档](/solution/2700-2799/2707.Extra%20Characters%20in%20a%20String/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> string <code>s</code> and a dictionary of words <code>dictionary</code>. You have to break <code>s</code> into one or more <strong>non-overlapping</strong> substrings such that each substring is present in <code>dictionary</code>. There may be some <strong>extra characters</strong> in <code>s</code> which are not present in any of the substrings.</p>
 
@@ -37,7 +55,11 @@
 	<li><code>dictionary</code> contains distinct words</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hash Table + Dynamic Programming
 
@@ -61,6 +83,8 @@ The time complexity is $O(n^3 + L)$, and the space complexity is $O(n + L)$. Her
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def minExtraChar(self, s: str, dictionary: List[str]) -> int:
@@ -74,6 +98,8 @@ class Solution:
                     f[i] = f[j]
         return f[n]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -98,6 +124,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -119,6 +147,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minExtraChar(s string, dictionary []string) int {
 	ss := map[string]bool{}
@@ -139,6 +169,8 @@ func minExtraChar(s string, dictionary []string) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minExtraChar(s: string, dictionary: string[]): number {
     const ss = new Set(dictionary);
@@ -155,6 +187,8 @@ function minExtraChar(s: string, dictionary: string[]): number {
     return f[n];
 }
 ```
+
+#### Rust
 
 ```rust
 use std::collections::HashSet;
@@ -177,7 +211,35 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {string} s
+ * @param {string[]} dictionary
+ * @return {number}
+ */
+var minExtraChar = function (s, dictionary) {
+    const ss = new Set(dictionary);
+    const n = s.length;
+    const f = Array(n + 1).fill(0);
+    for (let i = 1; i <= n; ++i) {
+        f[i] = f[i - 1] + 1;
+        for (let j = 0; j < i; ++j) {
+            if (ss.has(s.slice(j, i))) {
+                f[i] = Math.min(f[i], f[j]);
+            }
+        }
+    }
+    return f[n];
+};
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### Solution 2: Trie + Dynamic Programming
 
@@ -190,6 +252,8 @@ When $i \ge 1$, the $i$th character $s[i - 1]$ can be an extra character, in whi
 The time complexity is $O(n^2 + L)$, and the space complexity is $O(n + L \times |\Sigma|)$. Here, $n$ is the length of string $s$, and $L$ is the sum of the lengths of all words in the dictionary. Additionally, $|\Sigma|$ is the size of the character set. In this problem, the character set is lowercase English letters, so $|\Sigma| = 26$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Node:
@@ -225,6 +289,8 @@ class Solution:
                     f[i] = f[j]
         return f[n]
 ```
+
+#### Java
 
 ```java
 class Node {
@@ -265,6 +331,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Node {
@@ -313,6 +381,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 type Node struct {
 	children [26]*Node
@@ -351,6 +421,8 @@ func minExtraChar(s string, dictionary []string) int {
 	return f[n]
 }
 ```
+
+#### TypeScript
 
 ```ts
 class Node {
@@ -394,4 +466,6 @@ function minExtraChar(s: string, dictionary: string[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

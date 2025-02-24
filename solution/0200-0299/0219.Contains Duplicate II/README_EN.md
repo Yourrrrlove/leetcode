@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0219.Contains%20Duplicate%20II/README_EN.md
+tags:
+    - Array
+    - Hash Table
+    - Sliding Window
+---
+
+<!-- problem:start -->
+
 # [219. Contains Duplicate II](https://leetcode.com/problems/contains-duplicate-ii)
 
 [中文文档](/solution/0200-0299/0219.Contains%20Duplicate%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>nums</code> and an integer <code>k</code>, return <code>true</code> <em>if there are two <strong>distinct indices</strong> </em><code>i</code><em> and </em><code>j</code><em> in the array such that </em><code>nums[i] == nums[j]</code><em> and </em><code>abs(i - j) &lt;= k</code>.</p>
 
@@ -37,19 +51,25 @@
 	<li><code>0 &lt;= k &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hash Table
 
-We use a hash table $d$ to store the nearest index of the number it has visited.
+We use a hash table $\textit{d}$ to store the recently traversed numbers and their corresponding indices.
 
-We traverse the array `nums`. For the current element $nums[i]$, if it exists in the hash table, and the difference between its index and the current index is no larger than $k$, then return `true`. Otherwise, we add the current element into the hash table.
+Traverse the array $\textit{nums}$. For the current element $\textit{nums}[i]$, if it exists in the hash table and the difference between the indices is no more than $k$, return $\text{true}$. Otherwise, add the current element to the hash table.
 
-After the traversal, return `false`.
+After traversing, return $\text{false}$.
 
-The time complexity is $O(n)$ and the space complexity is $O(n)$. Here $n$ is the length of array `nums`.
+The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{nums}$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -61,6 +81,8 @@ class Solution:
             d[x] = i
         return False
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -76,6 +98,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -93,6 +117,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func containsNearbyDuplicate(nums []int, k int) bool {
 	d := map[int]int{}
@@ -106,6 +132,8 @@ func containsNearbyDuplicate(nums []int, k int) bool {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function containsNearbyDuplicate(nums: number[], k: number): boolean {
     const d: Map<number, number> = new Map();
@@ -118,6 +146,28 @@ function containsNearbyDuplicate(nums: number[], k: number): boolean {
     return false;
 }
 ```
+
+#### JavaScript
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {boolean}
+ */
+var containsNearbyDuplicate = function (nums, k) {
+    const d = new Map();
+    for (let i = 0; i < nums.length; ++i) {
+        if (d.has(nums[i]) && i - d.get(nums[i]) <= k) {
+            return true;
+        }
+        d.set(nums[i], i);
+    }
+    return false;
+};
+```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -134,6 +184,8 @@ public class Solution {
 }
 ```
 
+#### PHP
+
 ```php
 class Solution {
     /**
@@ -142,13 +194,12 @@ class Solution {
      * @return Boolean
      */
     function containsNearbyDuplicate($nums, $k) {
-        $hashtable = [];
-        for ($i = 0; $i < count($nums); $i++) {
-            $tmp = $nums[$i];
-            if (array_key_exists($tmp, $hashtable) && $k >= $i - $hashtable[$tmp]) {
+        $d = [];
+        for ($i = 0; $i < count($nums); ++$i) {
+            if (array_key_exists($nums[$i], $d) && $i - $d[$nums[$i]] <= $k) {
                 return true;
             }
-            $hashtable[$tmp] = $i;
+            $d[$nums[$i]] = $i;
         }
         return false;
     }
@@ -157,4 +208,6 @@ class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,27 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2400-2499/2476.Closest%20Nodes%20Queries%20in%20a%20Binary%20Search%20Tree/README.md
+rating: 1596
+source: 第 320 场周赛 Q2
+tags:
+    - 树
+    - 深度优先搜索
+    - 二叉搜索树
+    - 数组
+    - 二分查找
+    - 二叉树
+---
+
+<!-- problem:start -->
+
 # [2476. 二叉搜索树最近节点查询](https://leetcode.cn/problems/closest-nodes-queries-in-a-binary-search-tree)
 
 [English Version](/solution/2400-2499/2476.Closest%20Nodes%20Queries%20in%20a%20Binary%20Search%20Tree/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个 <strong>二叉搜索树</strong> 的根节点 <code>root</code> ，和一个由正整数组成、长度为 <code>n</code> 的数组 <code>queries</code> 。</p>
 
@@ -54,15 +71,21 @@
 	<li><code>1 &lt;= queries[i] &lt;= 10<sup>6</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：中序遍历 + 二分查找
 
 由于题目中给出的是一棵二叉搜索树，因此我们可以通过中序遍历得到一个有序数组，然后对于每个查询，我们可以通过二分查找得到小于等于该查询值的最大值和大于等于该查询值的最小值。
 
-时间复杂度 $O(n + m \times \log n)$，空间复杂度 $O(n)。其中 $n$ 和 $m$ 分别是二叉搜索树中的节点数和查询数。
+时间复杂度 $O(n + m \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别是二叉搜索树中的节点数和查询数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -93,6 +116,8 @@ class Solution:
             ans.append([mi, mx])
         return ans
 ```
+
+#### Java
 
 ```java
 /**
@@ -139,6 +164,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -178,6 +205,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -214,6 +243,8 @@ func closestNodes(root *TreeNode, queries []int) (ans [][]int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -265,6 +296,53 @@ function closestNodes(root: TreeNode | null, queries: number[]): number[][] {
 }
 ```
 
+#### C#
+
+```cs
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+public class Solution {
+    private List<int> nums = new List<int>();
+
+    public IList<IList<int>> ClosestNodes(TreeNode root, IList<int> queries) {
+        Dfs(root);
+        List<IList<int>> ans = new List<IList<int>>();
+        foreach (int x in queries) {
+            int i = nums.BinarySearch(x + 1);
+            int j = nums.BinarySearch(x);
+            i = i < 0 ? -i - 2 : i - 1;
+            j = j < 0 ? -j - 1 : j;
+            int mi = i >= 0 && i < nums.Count ? nums[i] : -1;
+            int mx = j >= 0 && j < nums.Count ? nums[j] : -1;
+            ans.Add(new List<int> {mi, mx});
+        }
+        return ans;
+    }
+
+    private void Dfs(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Dfs(root.left);
+        nums.Add(root.val);
+        Dfs(root.right);
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

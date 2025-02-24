@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2719.Count%20of%20Integers/README_EN.md
+rating: 2354
+source: Weekly Contest 348 Q4
+tags:
+    - Math
+    - String
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [2719. Count of Integers](https://leetcode.com/problems/count-of-integers)
 
 [中文文档](/solution/2700-2799/2719.Count%20of%20Integers/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given two numeric strings <code>num1</code> and <code>num2</code> and two integers <code>max_sum</code> and <code>min_sum</code>. We denote an integer <code>x</code> to be <em>good</em> if:</p>
 
@@ -40,7 +56,11 @@
 	<li><code>1 &lt;= min_sum &lt;= max_sum &lt;= 400</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Digit DP
 
@@ -54,9 +74,11 @@ The time complexity is $O(10 \times n \times max\_sum)$, and the space complexit
 
 Similar problems:
 
--   [2801. Count Stepping Numbers in Range](/solution/2800-2899/2801.Count%20Stepping%20Numbers%20in%20Range/README_EN.md)
+-   [2801. Count Stepping Numbers in Range](https://github.com/doocs/leetcode/blob/main/solution/2800-2899/2801.Count%20Stepping%20Numbers%20in%20Range/README_EN.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -78,6 +100,8 @@ class Solution:
         b = dfs(0, 0, True)
         return (a - b) % mod
 ```
+
+#### Java
 
 ```java
 import java.math.BigInteger;
@@ -120,6 +144,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -165,6 +191,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func count(num1 string, num2 string, min_sum int, max_sum int) int {
@@ -221,6 +249,8 @@ func count(num1 string, num2 string, min_sum int, max_sum int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function count(num1: string, num2: string, min_sum: number, max_sum: number): number {
     const mod = 1e9 + 7;
@@ -253,4 +283,6 @@ function count(num1: string, num2: string, min_sum: number, max_sum: number): nu
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

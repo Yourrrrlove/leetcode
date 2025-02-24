@@ -1,18 +1,28 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1800-1899/1800.Maximum%20Ascending%20Subarray%20Sum/README.md
+rating: 1229
+source: 第 233 场周赛 Q1
+tags:
+    - 数组
+---
+
+<!-- problem:start -->
+
 # [1800. 最大升序子数组和](https://leetcode.cn/problems/maximum-ascending-subarray-sum)
 
 [English Version](/solution/1800-1899/1800.Maximum%20Ascending%20Subarray%20Sum/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给你一个正整数组成的数组 <code>nums</code> ，返回 <code>nums</code> 中一个 <strong>升序 </strong>子数组的最大可能元素和。</p>
+<p>给你一个正整数组成的数组 <code>nums</code> ，返回 <code>nums</code> 中一个 <span data-keyword="strictly-increasing-array">严格递增子数组</span> 的最大可能元素和。</p>
 
 <p>子数组是数组中的一个连续数字序列。</p>
 
-<p>已知子数组 <code>[nums<sub>l</sub>, nums<sub>l+1</sub>, ..., nums<sub>r-1</sub>, nums<sub>r</sub>]</code> ，若对所有 <code>i</code>（<code>l <= i < r</code>），<code>nums<sub>i </sub> < nums<sub>i+1</sub></code> 都成立，则称这一子数组为 <strong>升序</strong> 子数组。注意，大小为 <code>1</code> 的子数组也视作 <strong>升序</strong> 子数组。</p>
-
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
 
@@ -38,23 +48,20 @@
 <strong>解释：</strong>[10,11,12] 是元素和最大的升序子数组，最大元素和为 33 。 
 </pre>
 
-<p><strong>示例 4：</strong></p>
-
-<pre>
-<strong>输入：</strong>nums = [100,10,1]
-<strong>输出：</strong>100
-</pre>
-
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>提示：</strong></p>
 
 <ul>
-	<li><code>1 <= nums.length <= 100</code></li>
-	<li><code>1 <= nums[i] <= 100</code></li>
+	<li><code>1 &lt;= nums.length &lt;= 100</code></li>
+	<li><code>1 &lt;= nums[i] &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：直接模拟
 
@@ -70,6 +77,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def maxAscendingSum(self, nums: List[int]) -> int:
@@ -82,6 +91,8 @@ class Solution:
                 t = v
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -99,6 +110,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -118,6 +131,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxAscendingSum(nums []int) int {
 	ans, t := 0, 0
@@ -135,6 +150,8 @@ func maxAscendingSum(nums []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function maxAscendingSum(nums: number[]): number {
     const n = nums.length;
@@ -150,6 +167,8 @@ function maxAscendingSum(nums: number[]): number {
     return Math.max(res, sum);
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -168,6 +187,8 @@ impl Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 #define max(a, b) (((a) > (b)) ? (a) : (b))
@@ -188,4 +209,6 @@ int maxAscendingSum(int* nums, int numsSize) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

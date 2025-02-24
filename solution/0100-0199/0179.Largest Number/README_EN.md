@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0100-0199/0179.Largest%20Number/README_EN.md
+tags:
+    - Greedy
+    - Array
+    - String
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [179. Largest Number](https://leetcode.com/problems/largest-number)
 
 [中文文档](/solution/0100-0199/0179.Largest%20Number/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a list of non-negative integers <code>nums</code>, arrange them such that they form the largest number and return it.</p>
 
@@ -31,11 +46,17 @@
 	<li><code>0 &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -44,6 +65,8 @@ class Solution:
         nums.sort(key=cmp_to_key(lambda a, b: 1 if a + b < b + a else -1))
         return "0" if nums[0] == "0" else "".join(nums)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -60,6 +83,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -78,6 +103,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func largestNumber(nums []int) string {
 	vs := make([]string, len(nums))
@@ -93,6 +120,8 @@ func largestNumber(nums []int) string {
 	return strings.Join(vs, "")
 }
 ```
+
+#### C#
 
 ```cs
 using System;
@@ -151,6 +180,34 @@ public class Solution {
 }
 ```
 
+#### TypeScript
+
+```ts
+function largestNumber(nums: number[]): string {
+    nums.sort((a, b) => {
+        const [ab, ba] = [String(a) + String(b), String(b) + String(a)];
+        return +ba - +ab;
+    });
+
+    return nums[0] ? nums.join('') : '0';
+}
+```
+
+#### JavaScript
+
+```js
+function largestNumber(nums) {
+    nums.sort((a, b) => {
+        const [ab, ba] = [String(a) + String(b), String(b) + String(a)];
+        return +ba - +ab;
+    });
+
+    return nums[0] ? nums.join('') : '0';
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

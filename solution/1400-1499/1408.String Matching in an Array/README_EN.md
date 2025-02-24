@@ -1,12 +1,26 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1400-1499/1408.String%20Matching%20in%20an%20Array/README_EN.md
+rating: 1223
+source: Weekly Contest 184 Q1
+tags:
+    - Array
+    - String
+    - String Matching
+---
+
+<!-- problem:start -->
+
 # [1408. String Matching in an Array](https://leetcode.com/problems/string-matching-in-an-array)
 
 [中文文档](/solution/1400-1499/1408.String%20Matching%20in%20an%20Array/README.md)
 
 ## Description
 
-<p>Given an array of string <code>words</code>, return <em>all strings in </em><code>words</code><em> that is a <strong>substring</strong> of another word</em>. You can return the answer in <strong>any order</strong>.</p>
+<!-- description:start -->
 
-<p>A <strong>substring</strong> is a contiguous sequence of characters within a string</p>
+<p>Given an array of string <code>words</code>, return all strings in<em> </em><code>words</code><em> </em>that are a <span data-keyword="substring-nonempty">substring</span> of another word. You can return the answer in <strong>any order</strong>.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
@@ -44,7 +58,11 @@
 	<li>All the strings of <code>words</code> are <strong>unique</strong>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Brute Force Enumeration
 
@@ -53,6 +71,8 @@ We directly enumerate all strings $words[i]$, and check whether it is a substrin
 The time complexity is $O(n^3)$, and the space complexity is $O(n)$. Where $n$ is the length of the string array.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -63,6 +83,8 @@ class Solution:
                 ans.append(s)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -81,6 +103,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -101,6 +125,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func stringMatching(words []string) []string {
 	ans := []string{}
@@ -115,6 +141,8 @@ func stringMatching(words []string) []string {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function stringMatching(words: string[]): string[] {
@@ -131,6 +159,8 @@ function stringMatching(words: string[]): string[] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -152,4 +182,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

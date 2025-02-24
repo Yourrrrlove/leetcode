@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2341.Maximum%20Number%20of%20Pairs%20in%20Array/README.md
+rating: 1184
+source: 第 302 场周赛 Q1
+tags:
+    - 数组
+    - 哈希表
+    - 计数
+---
+
+<!-- problem:start -->
+
 # [2341. 数组能形成多少数对](https://leetcode.cn/problems/maximum-number-of-pairs-in-array)
 
 [English Version](/solution/2300-2399/2341.Maximum%20Number%20of%20Pairs%20in%20Array/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 。在一步操作中，你可以执行以下步骤：</p>
 
@@ -52,21 +66,27 @@ nums[0] 和 nums[1] 形成一个数对，并从 nums 中移除，nums = [2] 。
 	<li><code>0 &lt;= nums[i] &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：计数
 
-我们可以统计数组 `nums` 中每个数字 $x$ 出现的次数，记录在哈希表或数组 `cnt` 中。
+我们可以统计数组 $\textit{nums}$ 中每个数字 $x$ 出现的次数，记录在哈希表或数组 $\textit{cnt}$ 中。
 
-然后遍历 `cnt`，对于每个数字 $x$，如果 $x$ 出现的次数 $v$ 大于 $1$，则可以从数组中选出两个 $x$ 形成一个数对，我们将 $v$ 除以 $2$ 向下取整，即可得到当前数字 $x$ 可以形成的数对数目，然后我们累加这个数目到变量 $s$ 中。
+然后遍历 $\textit{cnt}$，对于每个数字 $x$，如果 $x$ 出现的次数 $v$ 大于 $1$，则可以从数组中选出两个 $x$ 形成一个数对，我们将 $v$ 除以 $2$ 向下取整，即可得到当前数字 $x$ 可以形成的数对数目，然后我们累加这个数目到变量 $s$ 中。
 
-最后剩余的个数为数组 `nums` 的长度减去可以形成的数对数目乘以 $2$，即 $n - s \times 2$。
+最后剩余的个数为数组 $\textit{nums}$ 的长度减去可以形成的数对数目乘以 $2$，即 $n - s \times 2$。
 
 答案为 $[s, n - s \times 2]$。
 
-时间复杂度 $O(n)$，空间复杂度 $O(C)$。其中 $n$ 为数组 `nums` 的长度；而 $C$ 为数组 `nums` 中数字的范围，本题中 $C = 101$。
+时间复杂度 $O(n)$，空间复杂度 $O(C)$。其中 $n$ 为数组 $\textit{nums}$ 的长度；而 $C$ 为数组 $\textit{nums}$ 中数字的范围，本题中 $C = 101$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -75,6 +95,8 @@ class Solution:
         s = sum(v // 2 for v in cnt.values())
         return [s, len(nums) - s * 2]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -91,6 +113,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -109,6 +133,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numberOfPairs(nums []int) []int {
 	cnt := [101]int{}
@@ -123,6 +149,8 @@ func numberOfPairs(nums []int) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function numberOfPairs(nums: number[]): number[] {
     const n = nums.length;
@@ -134,6 +162,8 @@ function numberOfPairs(nums: number[]): number[] {
     return [sum, n - sum * 2];
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -152,6 +182,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number[]} nums
@@ -166,6 +198,8 @@ var numberOfPairs = function (nums) {
     return [s, nums.length - s * 2];
 };
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -182,6 +216,8 @@ public class Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 /**
@@ -206,4 +242,6 @@ int* numberOfPairs(int* nums, int numsSize, int* returnSize) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

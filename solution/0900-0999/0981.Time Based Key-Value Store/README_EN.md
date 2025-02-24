@@ -1,8 +1,23 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0900-0999/0981.Time%20Based%20Key-Value%20Store/README_EN.md
+tags:
+    - Design
+    - Hash Table
+    - String
+    - Binary Search
+---
+
+<!-- problem:start -->
+
 # [981. Time Based Key-Value Store](https://leetcode.com/problems/time-based-key-value-store)
 
 [中文文档](/solution/0900-0999/0981.Time%20Based%20Key-Value%20Store/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Design a time-based key-value data structure that can store multiple values for the same key at different time stamps and retrieve the key&#39;s value at a certain timestamp.</p>
 
@@ -45,11 +60,23 @@ timeMap.get(&quot;foo&quot;, 5);         // return &quot;bar2&quot;
 	<li>At most <code>2 * 10<sup>5</sup></code> calls will be made to <code>set</code> and <code>get</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Hash Table + Ordered Set (or Binary Search)
+
+We can use a hash table $\textit{kvt}$ to record key-value pairs, where the key is the string $\textit{key}$ and the value is an ordered set. Each element in the set is a tuple $(\textit{timestamp}, \textit{value})$, representing the value $\textit{value}$ corresponding to the key $\textit{key}$ at the timestamp $\textit{timestamp}$.
+
+When we need to query the value corresponding to the key $\textit{key}$ at the timestamp $\textit{timestamp}$, we can use the ordered set to find the largest timestamp $\textit{timestamp}'$ such that $\textit{timestamp}' \leq \textit{timestamp}$, and then return the corresponding value.
+
+In terms of time complexity, for the $\textit{set}$ operation, since the insertion operation of the hash table has a time complexity of $O(1)$, the time complexity is $O(1)$. For the $\textit{get}$ operation, since the lookup operation of the hash table has a time complexity of $O(1)$ and the lookup operation of the ordered set has a time complexity of $O(\log n)$, the time complexity is $O(\log n)$. The space complexity is $O(n)$, where $n$ is the number of $\textit{set}$ operations.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class TimeMap:
@@ -72,6 +99,8 @@ class TimeMap:
 # obj.set(key,value,timestamp)
 # param_2 = obj.get(key,timestamp)
 ```
+
+#### Java
 
 ```java
 class TimeMap {
@@ -102,6 +131,8 @@ class TimeMap {
  */
 ```
 
+#### C++
+
 ```cpp
 class TimeMap {
 public:
@@ -130,6 +161,8 @@ private:
  * string param_2 = obj->get(key,timestamp);
  */
 ```
+
+#### Go
 
 ```go
 type TimeMap struct {
@@ -168,4 +201,6 @@ type pair struct {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

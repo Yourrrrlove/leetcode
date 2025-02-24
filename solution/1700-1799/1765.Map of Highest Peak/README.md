@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1700-1799/1765.Map%20of%20Highest%20Peak/README.md
+rating: 1782
+source: 第 46 场双周赛 Q3
+tags:
+    - 广度优先搜索
+    - 数组
+    - 矩阵
+---
+
+<!-- problem:start -->
+
 # [1765. 地图中的最高点](https://leetcode.cn/problems/map-of-highest-peak)
 
 [English Version](/solution/1700-1799/1765.Map%20of%20Highest%20Peak/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个大小为&nbsp;<code>m x n</code>&nbsp;的整数矩阵&nbsp;<code>isWater</code>&nbsp;，它代表了一个由 <strong>陆地</strong>&nbsp;和 <strong>水域</strong>&nbsp;单元格组成的地图。</p>
 
@@ -60,8 +74,13 @@
 	<li><code>isWater[i][j]</code>&nbsp;要么是&nbsp;<code>0</code>&nbsp;，要么是&nbsp;<code>1</code>&nbsp;。</li>
 	<li>至少有 <strong>1</strong>&nbsp;个水域格子。</li>
 </ul>
+<strong>注意：</strong>本题与 <a href="https://leetcode.cn/problems/01-matrix/">542</a> 题相同。
+
+<!-- description:end -->
 
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：BFS
 
@@ -72,6 +91,8 @@
 时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是整数矩阵 `isWater` 的行数和列数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -93,6 +114,8 @@ class Solution:
                     q.append((x, y))
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -124,6 +147,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -158,6 +183,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func highestPeak(isWater [][]int) [][]int {
 	m, n := len(isWater), len(isWater[0])
@@ -189,6 +216,8 @@ func highestPeak(isWater [][]int) [][]int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function highestPeak(isWater: number[][]): number[][] {
@@ -222,6 +251,8 @@ function highestPeak(isWater: number[][]): number[][] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 use std::collections::VecDeque;
@@ -277,9 +308,15 @@ impl Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -302,6 +339,8 @@ class Solution:
                         q.append((x, y))
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -335,6 +374,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -370,6 +411,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func highestPeak(isWater [][]int) [][]int {
@@ -407,4 +450,6 @@ func highestPeak(isWater [][]int) [][]int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

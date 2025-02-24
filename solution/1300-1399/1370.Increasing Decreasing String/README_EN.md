@@ -1,24 +1,40 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1300-1399/1370.Increasing%20Decreasing%20String/README_EN.md
+rating: 1369
+source: Biweekly Contest 21 Q1
+tags:
+    - Hash Table
+    - String
+    - Counting
+---
+
+<!-- problem:start -->
+
 # [1370. Increasing Decreasing String](https://leetcode.com/problems/increasing-decreasing-string)
 
 [中文文档](/solution/1300-1399/1370.Increasing%20Decreasing%20String/README.md)
 
 ## Description
 
+<!-- description:start -->
+
 <p>You are given a string <code>s</code>. Reorder the string using the following algorithm:</p>
 
 <ol>
-	<li>Pick the <strong>smallest</strong> character from <code>s</code> and <strong>append</strong> it to the result.</li>
-	<li>Pick the <strong>smallest</strong> character from <code>s</code> which is greater than the last appended character to the result and <strong>append</strong> it.</li>
-	<li>Repeat step 2 until you cannot pick more characters.</li>
-	<li>Pick the <strong>largest</strong> character from <code>s</code> and <strong>append</strong> it to the result.</li>
-	<li>Pick the <strong>largest</strong> character from <code>s</code> which is smaller than the last appended character to the result and <strong>append</strong> it.</li>
-	<li>Repeat step 5 until you cannot pick more characters.</li>
-	<li>Repeat the steps from 1 to 6 until you pick all characters from <code>s</code>.</li>
+	<li>Remove the <strong>smallest</strong> character from <code>s</code> and <strong>append</strong> it to the result.</li>
+	<li>Remove the <strong>smallest</strong> character from <code>s</code> that is greater than the last appended character, and <strong>append</strong> it to the result.</li>
+	<li>Repeat step 2 until no more characters can be removed.</li>
+	<li>Remove the <strong>largest</strong> character from <code>s</code> and <strong>append</strong> it to the result.</li>
+	<li>Remove the <strong>largest</strong> character from <code>s</code> that is smaller than the last appended character, and <strong>append</strong> it to the result.</li>
+	<li>Repeat step 5 until no more characters can be removed.</li>
+	<li>Repeat steps 1 through 6 until all characters from <code>s</code> have been removed.</li>
 </ol>
 
-<p>In each step, If the smallest or the largest character appears more than once you can choose any occurrence and append it to the result.</p>
+<p>If the smallest or largest character appears more than once, you may choose any occurrence to append to the result.</p>
 
-<p>Return <em>the result string after sorting </em><code>s</code><em> with this algorithm</em>.</p>
+<p>Return the resulting string after reordering <code>s</code> using this algorithm.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
@@ -49,7 +65,11 @@ After steps 4, 5 and 6 of the second iteration, result = &quot;abccbaabccba&quot
 	<li><code>s</code> consists of only lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Counting + Simulation
 
@@ -60,6 +80,8 @@ Then, we enumerate the letters $[a,...,z]$. For the current enumerated letter $c
 The time complexity is $O(n \times |\Sigma|)$, and the space complexity is $O(|\Sigma|)$. Where $n$ is the length of the string $s$, and $\Sigma$ is the character set. In this problem, the character set is all lowercase letters, so $|\Sigma| = 26$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -74,6 +96,8 @@ class Solution:
                     cnt[c] -= 1
         return "".join(ans)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -103,6 +127,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -131,6 +157,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func sortString(s string) string {
 	cnt := [26]int{}
@@ -157,6 +185,8 @@ func sortString(s string) string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function sortString(s: string): string {
     const cnt: number[] = Array(26).fill(0);
@@ -181,6 +211,8 @@ function sortString(s: string): string {
     return ans.join('');
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -213,4 +245,6 @@ var sortString = function (s) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

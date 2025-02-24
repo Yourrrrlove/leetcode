@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1800-1899/1825.Finding%20MK%20Average/README.md
+rating: 2395
+source: 第 236 场周赛 Q4
+tags:
+    - 设计
+    - 队列
+    - 数据流
+    - 有序集合
+    - 堆（优先队列）
+---
+
+<!-- problem:start -->
+
 # [1825. 求出 MK 平均值](https://leetcode.cn/problems/finding-mk-average)
 
 [English Version](/solution/1800-1899/1825.Finding%20MK%20Average/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你两个整数&nbsp;<code>m</code>&nbsp;和&nbsp;<code>k</code>&nbsp;，以及数据流形式的若干整数。你需要实现一个数据结构，计算这个数据流的 <b>MK 平均值</b>&nbsp;。</p>
 
@@ -63,7 +79,11 @@ obj.calculateMKAverage(); // 最后 3 个元素为 [5,5,5]
 	<li><code>addElement</code> 与&nbsp;<code>calculateMKAverage</code>&nbsp;总操作次数不超过 <code>10<sup>5</sup></code> 次。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：有序集合 + 队列
 
@@ -89,10 +109,9 @@ obj.calculateMKAverage(); // 最后 3 个元素为 [5,5,5]
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedList
-
-
 class MKAverage:
     def __init__(self, m: int, k: int):
         self.m = m
@@ -147,6 +166,8 @@ class MKAverage:
 # obj.addElement(num)
 # param_2 = obj.calculateMKAverage()
 ```
+
+#### Java
 
 ```java
 class MKAverage {
@@ -242,6 +263,8 @@ class MKAverage {
  */
 ```
 
+#### C++
+
 ```cpp
 class MKAverage {
 public:
@@ -317,6 +340,8 @@ private:
  * int param_2 = obj->calculateMKAverage();
  */
 ```
+
+#### Go
 
 ```go
 type MKAverage struct {
@@ -415,14 +440,17 @@ func (this *MKAverage) CalculateMKAverage() int {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedList
-
-
 class MKAverage:
     def __init__(self, m: int, k: int):
         self.m = m
@@ -468,4 +496,6 @@ class MKAverage:
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

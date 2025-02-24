@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0600-0699/0653.Two%20Sum%20IV%20-%20Input%20is%20a%20BST/README.md
+tags:
+    - 树
+    - 深度优先搜索
+    - 广度优先搜索
+    - 二叉搜索树
+    - 哈希表
+    - 双指针
+    - 二叉树
+---
+
+<!-- problem:start -->
+
 # [653. 两数之和 IV - 输入二叉搜索树](https://leetcode.cn/problems/two-sum-iv-input-is-a-bst)
 
 [English Version](/solution/0600-0699/0653.Two%20Sum%20IV%20-%20Input%20is%20a%20BST/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个二叉搜索树 <code>root</code> 和一个目标结果 <code>k</code>，如果二叉搜索树中存在两个元素且它们的和等于给定的目标结果，则返回 <code>true</code>。</p>
 
@@ -35,7 +51,11 @@
 	<li><code>-10<sup>5</sup>&nbsp;&lt;= k &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：哈希表 + DFS
 
@@ -44,6 +64,8 @@ DFS 遍历二叉搜索树，对于每个节点，判断 `k - node.val` 是否在
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为二叉搜索树的节点个数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -65,6 +87,8 @@ class Solution:
         vis = set()
         return dfs(root)
 ```
+
+#### Java
 
 ```java
 /**
@@ -104,6 +128,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -136,6 +162,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -161,6 +189,8 @@ func findTarget(root *TreeNode, k int) bool {
 	return dfs(root)
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -193,6 +223,8 @@ function findTarget(root: TreeNode | null, k: number): boolean {
 }
 ```
 
+#### Rust
+
 ```rust
 // Definition for a binary tree node.
 // #[derive(Debug, PartialEq, Eq)]
@@ -212,9 +244,9 @@ function findTarget(root: TreeNode | null, k: number): boolean {
 //     }
 //   }
 // }
-use std::rc::Rc;
 use std::cell::RefCell;
-use std::collections::{ HashSet, VecDeque };
+use std::collections::{HashSet, VecDeque};
+use std::rc::Rc;
 impl Solution {
     pub fn find_target(root: Option<Rc<RefCell<TreeNode>>>, k: i32) -> bool {
         let mut set = HashSet::new();
@@ -238,6 +270,10 @@ impl Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：哈希表 + BFS
 
 与方法一类似，只是使用 BFS 遍历二叉搜索树。
@@ -245,6 +281,8 @@ impl Solution {
 时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为二叉搜索树的节点个数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -269,6 +307,8 @@ class Solution:
                     q.append(node.right)
         return False
 ```
+
+#### Java
 
 ```java
 /**
@@ -311,6 +351,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -349,6 +391,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -380,6 +424,8 @@ func findTarget(root *TreeNode, k int) bool {
 	return false
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -416,4 +462,6 @@ function findTarget(root: TreeNode | null, k: number): boolean {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

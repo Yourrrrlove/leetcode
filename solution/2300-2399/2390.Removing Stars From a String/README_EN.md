@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2300-2399/2390.Removing%20Stars%20From%20a%20String/README_EN.md
+rating: 1347
+source: Weekly Contest 308 Q2
+tags:
+    - Stack
+    - String
+    - Simulation
+---
+
+<!-- problem:start -->
+
 # [2390. Removing Stars From a String](https://leetcode.com/problems/removing-stars-from-a-string)
 
 [中文文档](/solution/2300-2399/2390.Removing%20Stars%20From%20a%20String/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a string <code>s</code>, which contains stars <code>*</code>.</p>
 
@@ -51,11 +67,23 @@ There are no more stars, so we return &quot;lecoe&quot;.</pre>
 	<li>The operation above can be performed on <code>s</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Stack Simulation
+
+We can use a stack to simulate the operation process. Traverse the string $s$, and if the current character is not an asterisk, push it onto the stack; if the current character is an asterisk, pop the top element from the stack.
+
+Finally, concatenate the elements in the stack into a string and return it.
+
+The time complexity is $O(n)$, where $n$ is the length of the string $s$. Ignoring the space consumption of the answer string, the space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -68,6 +96,8 @@ class Solution:
                 ans.append(c)
         return ''.join(ans)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -84,6 +114,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -102,6 +134,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func removeStars(s string) string {
 	ans := []rune{}
@@ -116,6 +150,8 @@ func removeStars(s string) string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function removeStars(s: string): string {
     const ans: string[] = [];
@@ -129,6 +165,8 @@ function removeStars(s: string): string {
     return ans.join('');
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -146,6 +184,8 @@ impl Solution {
 }
 ```
 
+#### PHP
+
 ```php
 class Solution {
     /**
@@ -153,19 +193,23 @@ class Solution {
      * @return String
      */
     function removeStars($s) {
-        $rs = [];
-        for ($i = 0; $i < strlen($s); $i++) {
-            if ($s[$i] == '*') {
-                array_pop($rs);
+        $ans = [];
+        $n = strlen($s);
+        for ($i = 0; $i < $n; $i++) {
+            $c = $s[$i];
+            if ($c === '*') {
+                array_pop($ans);
             } else {
-                array_push($rs, $s[$i]);
+                $ans[] = $c;
             }
         }
-        return join($rs);
+        return implode('', $ans);
     }
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

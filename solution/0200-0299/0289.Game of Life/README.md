@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0289.Game%20of%20Life/README.md
+tags:
+    - 数组
+    - 矩阵
+    - 模拟
+---
+
+<!-- problem:start -->
+
 # [289. 生命游戏](https://leetcode.cn/problems/game-of-life)
 
 [English Version](/solution/0200-0299/0289.Game%20of%20Life/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>根据&nbsp;<a href="https://baike.baidu.com/item/%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F/2926434?fr=aladdin" target="_blank">百度百科</a>&nbsp;，&nbsp;<strong>生命游戏</strong>&nbsp;，简称为 <strong>生命</strong> ，是英国数学家约翰·何顿·康威在 1970 年发明的细胞自动机。</p>
 
@@ -17,7 +29,11 @@
 	<li>如果死细胞周围正好有三个活细胞，则该位置死细胞复活；</li>
 </ol>
 
-<p>下一个状态是通过将上述规则同时应用于当前状态下的每个细胞所形成的，其中细胞的出生和死亡是同时发生的。给你 <code>m x n</code> 网格面板 <code>board</code> 的当前状态，返回下一个状态。</p>
+<p>下一个状态是通过将上述规则同时应用于当前状态下的每个细胞所形成的，其中细胞的出生和死亡是 <strong>同时</strong> 发生的。给你 <code>m x n</code> 网格面板 <code>board</code> 的当前状态，返回下一个状态。</p>
+
+<p>给定当前&nbsp;<code>board</code>&nbsp;的状态，<strong>更新</strong>&nbsp;<code>board</code>&nbsp;到下一个状态。</p>
+
+<p><strong>注意</strong> 你不需要返回任何东西。</p>
 
 <p>&nbsp;</p>
 
@@ -55,7 +71,11 @@
 	<li>本题中，我们使用二维数组来表示面板。原则上，面板是无限的，但当活细胞侵占了面板边界时会造成问题。你将如何解决这些问题？</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：原地标记
 
@@ -68,6 +88,8 @@
 时间复杂度 $O(m \times n)$，其中 $m$ 和 $n$ 分别是面板的行数和列数。我们需要遍历整个面板。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -91,6 +113,8 @@ class Solution:
                 elif board[i][j] == -1:
                     board[i][j] = 1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -126,6 +150,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -163,6 +189,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func gameOfLife(board [][]int) {
 	m, n := len(board), len(board[0])
@@ -196,6 +224,8 @@ func gameOfLife(board [][]int) {
 	}
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -234,6 +264,8 @@ function gameOfLife(board: number[][]): void {
     }
 }
 ```
+
+#### Rust
 
 ```rust
 const DIR: [(i32, i32); 8] = [
@@ -293,6 +325,8 @@ impl Solution {
 }
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public void GameOfLife(int[][] board) {
@@ -332,4 +366,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

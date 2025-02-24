@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0053.Maximum%20Subarray/README_EN.md
+tags:
+    - Array
+    - Divide and Conquer
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray)
 
 [中文文档](/solution/0000-0099/0053.Maximum%20Subarray/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>nums</code>, find the <span data-keyword="subarray-nonempty">subarray</span> with the largest sum, and return <em>its sum</em>.</p>
 
@@ -42,29 +56,35 @@
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> If you have figured out the <code>O(n)</code> solution, try coding another solution using the <strong>divide and conquer</strong> approach, which is more subtle.</p>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Dynamic Programming
 
-We define $f[i]$ to represent the maximum sum of the continuous subarray ending with the element $nums[i]$. Initially, $f[0] = nums[0]$. The final answer we are looking for is $\max_{0 \leq i < n} f[i]$.
+We define $f[i]$ to represent the maximum sum of a contiguous subarray ending at element $\textit{nums}[i]$. Initially, $f[0] = \textit{nums}[0]$. The final answer we seek is $\max_{0 \leq i < n} f[i]$.
 
-Consider $f[i]$, where $i \geq 1$, its state transition equation is:
-
-$$
-f[i] = \max \{ f[i - 1] + nums[i], nums[i] \}
-$$
-
-Which is also:
+Consider $f[i]$ for $i \geq 1$. Its state transition equation is:
 
 $$
-f[i] = \max \{ f[i - 1], 0 \} + nums[i]
+f[i] = \max(f[i - 1] + \textit{nums}[i], \textit{nums}[i])
 $$
 
-Since $f[i]$ is only related to $f[i - 1]$, we can use a single variable $f$ to maintain the current value of $f[i]$, and then perform state transition. The answer is $\max_{0 \leq i < n} f$.
+That is:
 
-The time complexity is $O(n)$, where $n$ is the length of the array $nums$. We only need to traverse the array once to get the answer. The space complexity is $O(1)$, we only need constant space to store several variables.
+$$
+f[i] = \max(f[i - 1], 0) + \textit{nums}[i]
+$$
+
+Since $f[i]$ is only related to $f[i - 1]$, we can use a single variable $f$ to maintain the current value of $f[i]$ and perform the state transition. The answer is $\max_{0 \leq i < n} f$.
+
+The time complexity is $O(n)$, where $n$ is the length of the array $\textit{nums}$. The space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -75,6 +95,8 @@ class Solution:
             ans = max(ans, f)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -88,6 +110,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -103,6 +127,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxSubArray(nums []int) int {
 	ans, f := nums[0], nums[0]
@@ -114,6 +140,8 @@ func maxSubArray(nums []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function maxSubArray(nums: number[]): number {
     let [ans, f] = [nums[0], nums[0]];
@@ -124,6 +152,8 @@ function maxSubArray(nums: number[]): number {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -140,6 +170,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number[]} nums
@@ -154,6 +186,8 @@ var maxSubArray = function (nums) {
     return ans;
 };
 ```
+
+#### C#
 
 ```cs
 public class Solution {
@@ -170,9 +204,15 @@ public class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -200,6 +240,8 @@ class Solution:
         left, right = 0, len(nums) - 1
         return maxSub(nums, left, right)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -235,4 +277,6 @@ class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,10 +1,23 @@
-# [1618. 找出适应屏幕的最大字号](https://leetcode.cn/problems/maximum-font-to-fit-a-sentence-in-a-screen)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1618.Maximum%20Font%20to%20Fit%20a%20Sentence%20in%20a%20Screen/README.md
+tags:
+    - 数组
+    - 字符串
+    - 二分查找
+    - 交互
+---
+
+<!-- problem:start -->
+
+# [1618. 找出适应屏幕的最大字号 🔒](https://leetcode.cn/problems/maximum-font-to-fit-a-sentence-in-a-screen)
 
 [English Version](/solution/1600-1699/1618.Maximum%20Font%20to%20Fit%20a%20Sentence%20in%20a%20Screen/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定一个字符串&nbsp;<code>text</code>。并能够在 宽为 <code>w</code> 高为 <code>h</code> 的屏幕上显示该文本。</p>
 
@@ -75,7 +88,11 @@ interface FontInfo {
 	<li><code>fonts&nbsp;</code>已经按升序排序，且不包含重复项。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：二分查找
 
@@ -83,9 +100,11 @@ interface FontInfo {
 
 时间复杂度 $O(m\log n)$。其中 $m$, $n$ 为文本 `text` 的长度以及字体大小 `fonts` 个数。
 
-关于二分查找，见[整数二分算法模板 2](/basic/searching/BinarySearch/README.md)。
+关于二分查找，见[整数二分算法模板 2](https://github.com/doocs/leetcode/blob/main/basic/searching/BinarySearch/README.md)。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # """
@@ -126,6 +145,8 @@ class Solution:
         return fonts[left] if check(fonts[left]) else -1
 ```
 
+#### Java
+
 ```java
 /**
  * // This is the FontInfo's API interface.
@@ -164,6 +185,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * // This is the FontInfo's API interface.
@@ -201,6 +224,8 @@ public:
     }
 };
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -257,4 +282,6 @@ var maxFont = function (text, w, h, fonts, fontInfo) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

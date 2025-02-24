@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1700-1799/1727.Largest%20Submatrix%20With%20Rearrangements/README_EN.md
+rating: 1926
+source: Weekly Contest 224 Q3
+tags:
+    - Greedy
+    - Array
+    - Matrix
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [1727. Largest Submatrix With Rearrangements](https://leetcode.com/problems/largest-submatrix-with-rearrangements)
 
 [中文文档](/solution/1700-1799/1727.Largest%20Submatrix%20With%20Rearrangements/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a binary matrix <code>matrix</code> of size <code>m x n</code>, and you are allowed to rearrange the <strong>columns</strong> of the <code>matrix</code> in any order.</p>
 
@@ -45,11 +62,27 @@ The largest submatrix of 1s, in bold, has an area of 3.
 	<li><code>matrix[i][j]</code> is either <code>0</code> or <code>1</code>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Preprocessing + Sorting
+
+Since the matrix is rearranged by columns according to the problem, we can first preprocess each column of the matrix.
+
+For each element with a value of $1$, we update its value to the maximum consecutive number of $1$s above it, that is, $matrix[i][j] = matrix[i-1][j] + 1$.
+
+Next, we can sort each row of the updated matrix. Then traverse each row, calculate the area of the largest sub-matrix full of $1$s with this row as the bottom edge. The specific calculation logic is as follows:
+
+For a row of the matrix, we denote the value of the $k$-th largest element as $val_k$, where $k \geq 1$, then there are at least $k$ elements in this row that are not less than $val_k$, forming a sub-matrix full of $1$s with an area of $val_k \times k$. Traverse each element of this row from large to small, take the maximum value of $val_k \times k$, and update the answer.
+
+The time complexity is $O(m \times n \times \log n)$. Here, $m$ and $n$ are the number of rows and columns of the matrix, respectively.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -65,6 +98,8 @@ class Solution:
                 ans = max(ans, j * v)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -90,6 +125,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -114,6 +151,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func largestSubmatrix(matrix [][]int) int {
 	m, n := len(matrix), len(matrix[0])
@@ -134,6 +173,8 @@ func largestSubmatrix(matrix [][]int) int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function largestSubmatrix(matrix: number[][]): number {
@@ -176,4 +217,6 @@ function largestSubmatrix(matrix: number[][]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

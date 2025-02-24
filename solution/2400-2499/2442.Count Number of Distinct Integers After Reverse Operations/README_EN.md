@@ -1,8 +1,25 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2400-2499/2442.Count%20Number%20of%20Distinct%20Integers%20After%20Reverse%20Operations/README_EN.md
+rating: 1218
+source: Weekly Contest 315 Q2
+tags:
+    - Array
+    - Hash Table
+    - Math
+    - Counting
+---
+
+<!-- problem:start -->
+
 # [2442. Count Number of Distinct Integers After Reverse Operations](https://leetcode.com/problems/count-number-of-distinct-integers-after-reverse-operations)
 
 [中文文档](/solution/2400-2499/2442.Count%20Number%20of%20Distinct%20Integers%20After%20Reverse%20Operations/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an array <code>nums</code> consisting of <strong>positive</strong> integers.</p>
 
@@ -37,7 +54,11 @@ The number of distinct integers in this array is 1 (The number 2).
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>6</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hash Table
 
@@ -46,6 +67,8 @@ First, we use a hash table to record all integers in the array. Then, we travers
 The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -56,6 +79,8 @@ class Solution:
             s.add(y)
         return len(s)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -77,6 +102,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -94,6 +121,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func countDistinctIntegers(nums []int) int {
@@ -113,6 +142,8 @@ func countDistinctIntegers(nums []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function countDistinctIntegers(nums: number[]): number {
     const n = nums.length;
@@ -122,6 +153,8 @@ function countDistinctIntegers(nums: number[]): number {
     return new Set(nums).size;
 }
 ```
+
+#### Rust
 
 ```rust
 use std::collections::HashSet;
@@ -147,4 +180,6 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

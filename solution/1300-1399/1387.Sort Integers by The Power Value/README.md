@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1300-1399/1387.Sort%20Integers%20by%20The%20Power%20Value/README.md
+rating: 1506
+source: 第 22 场双周赛 Q3
+tags:
+    - 记忆化搜索
+    - 动态规划
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [1387. 将整数按权重排序](https://leetcode.cn/problems/sort-integers-by-the-power-value)
 
 [English Version](/solution/1300-1399/1387.Sort%20Integers%20by%20The%20Power%20Value/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>我们将整数 <code>x</code>&nbsp;的 <strong>权重</strong> 定义为按照下述规则将 <code>x</code>&nbsp;变成 <code>1</code>&nbsp;所需要的步数：</p>
 
@@ -55,19 +69,25 @@
 	<li><code>1 &lt;= k &lt;= hi - lo + 1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：自定义排序
 
-我们先定义一个函数 $f(x)$，表示将数字 $x$ 变成 $1$ 所需要的步数，也即是数字 $x$ 的权重。
+我们先定义一个函数 $\textit{f}(x)$，表示将数字 $x$ 变成 $1$ 所需要的步数，也即是数字 $x$ 的权重。
 
-然后我们将区间 $[lo, hi]$ 内的所有数字按照权重升序排序，如果权重相同，按照数字自身的数值升序排序。
+然后我们将区间 $[\textit{lo}, \textit{hi}]$ 内的所有数字按照权重升序排序，如果权重相同，按照数字自身的数值升序排序。
 
 最后返回排序后的第 $k$ 个数字。
 
-时间复杂度 $O(n \times \log n \times M)$，空间复杂度 $O(n)$。其中 $n$ 是区间 $[lo, hi]$ 内的数字个数，而 $M$ 是 $f(x)$ 的最大值，本题中 $M$ 最大为 $178$。
+时间复杂度 $O(n \times \log n \times M)$，空间复杂度 $O(n)$。其中 $n$ 是区间 $[\textit{lo}, \textit{hi}]$ 内的数字个数，而 $M$ 是 $f(x)$ 的最大值，本题中 $M$ 最大为 $178$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 @cache
@@ -86,6 +106,8 @@ class Solution:
     def getKth(self, lo: int, hi: int, k: int) -> int:
         return sorted(range(lo, hi + 1), key=f)[k - 1]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -114,6 +136,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -147,6 +171,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func getKth(lo int, hi int, k int) int {
 	f := func(x int) (ans int) {
@@ -174,6 +200,8 @@ func getKth(lo int, hi int, k int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function getKth(lo: number, hi: number, k: number): number {
     const f = (x: number): number => {
@@ -197,6 +225,33 @@ function getKth(lo: number, hi: number, k: number): number {
 }
 ```
 
+#### Rust
+
+```rust
+impl Solution {
+    pub fn get_kth(lo: i32, hi: i32, k: i32) -> i32 {
+        let f = |mut x: i32| -> i32 {
+            let mut ans = 0;
+            while x != 1 {
+                if x % 2 == 0 {
+                    x /= 2;
+                } else {
+                    x = 3 * x + 1;
+                }
+                ans += 1;
+            }
+            ans
+        };
+
+        let mut nums: Vec<i32> = (lo..=hi).collect();
+        nums.sort_by(|&x, &y| f(x).cmp(&f(y)));
+        nums[(k - 1) as usize]
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

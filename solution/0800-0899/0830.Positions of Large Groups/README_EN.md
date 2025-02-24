@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0800-0899/0830.Positions%20of%20Large%20Groups/README_EN.md
+tags:
+    - String
+---
+
+<!-- problem:start -->
+
 # [830. Positions of Large Groups](https://leetcode.com/problems/positions-of-large-groups)
 
 [中文文档](/solution/0800-0899/0830.Positions%20of%20Large%20Groups/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>In a string <code><font face="monospace">s</font></code>&nbsp;of lowercase letters, these letters form consecutive groups of the same character.</p>
 
@@ -47,11 +59,21 @@
 	<li><code>s</code> contains lowercase English letters only.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Two Pointers
+
+We use two pointers $i$ and $j$ to find the start and end positions of each group, then check if the group length is greater than or equal to $3$. If so, we add it to the result array.
+
+The time complexity is $O(n)$, where $n$ is the length of the string $s$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -68,6 +90,8 @@ class Solution:
         return ans
 ```
 
+#### Java
+
 ```java
 class Solution {
     public List<List<Integer>> largeGroupPositions(String s) {
@@ -80,7 +104,7 @@ class Solution {
                 ++j;
             }
             if (j - i >= 3) {
-                ans.add(Arrays.asList(i, j - 1));
+                ans.add(List.of(i, j - 1));
             }
             i = j;
         }
@@ -88,6 +112,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -111,6 +137,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func largeGroupPositions(s string) [][]int {
 	i, n := 0, len(s)
@@ -129,6 +157,30 @@ func largeGroupPositions(s string) [][]int {
 }
 ```
 
+#### TypeScript
+
+```ts
+function largeGroupPositions(s: string): number[][] {
+    const n = s.length;
+    const ans: number[][] = [];
+
+    for (let i = 0; i < n; ) {
+        let j = i;
+        while (j < n && s[j] === s[i]) {
+            ++j;
+        }
+        if (j - i >= 3) {
+            ans.push([i, j - 1]);
+        }
+        i = j;
+    }
+
+    return ans;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

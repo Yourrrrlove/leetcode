@@ -1,10 +1,21 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0400-0499/0453.Minimum%20Moves%20to%20Equal%20Array%20Elements/README.md
+tags:
+    - 数组
+    - 数学
+---
+
+<!-- problem:start -->
+
 # [453. 最小操作次数使数组元素相等](https://leetcode.cn/problems/minimum-moves-to-equal-array-elements)
 
 [English Version](/solution/0400-0499/0453.Minimum%20Moves%20to%20Equal%20Array%20Elements/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个长度为 <code>n</code> 的整数数组，每次操作将会使 <code>n - 1</code> 个元素增加 <code>1</code> 。返回让数组所有元素相等的最小操作次数。</p>
 
@@ -38,18 +49,22 @@
 	<li>答案保证符合 <strong>32-bit</strong> 整数</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：数学
 
-我们不妨记数组 $nums$ 的最小值为 $mi$，数组的和为 $s$，数组的长度为 $n$。
+我们不妨记数组 $\textit{nums}$ 的最小值为 $\textit{mi}$，数组的和为 $\textit{s}$，数组的长度为 $\textit{n}$。
 
-假设最小操作次数为 $k$，最终数组的所有元素都为 $x$，则有：
+假设最小操作次数为 $\textit{k}$，最终数组的所有元素都为 $\textit{x}$，则有：
 
 $$
 \begin{aligned}
-s + (n - 1) \times k &= n \times x \\
-x &= mi + k \\
+\textit{s} + (\textit{n} - 1) \times \textit{k} &= \textit{n} \times \textit{x} \\
+\textit{x} &= \textit{mi} + \textit{k} \\
 \end{aligned}
 $$
 
@@ -57,23 +72,27 @@ $$
 
 $$
 \begin{aligned}
-s + (n - 1) \times k &= n \times (mi + k) \\
-s + (n - 1) \times k &= n \times mi + n \times k \\
-k &= s - n \times mi \\
+\textit{s} + (\textit{n} - 1) \times \textit{k} &= \textit{n} \times (\textit{mi} + \textit{k}) \\
+\textit{s} + (\textit{n} - 1) \times \textit{k} &= \textit{n} \times \textit{mi} + \textit{n} \times \textit{k} \\
+\textit{k} &= \textit{s} - \textit{n} \times \textit{mi} \\
 \end{aligned}
 $$
 
-因此，最小操作次数为 $s - n \times mi$。
+因此，最小操作次数为 $\textit{s} - \textit{n} \times \textit{mi}$。
 
 时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为数组的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def minMoves(self, nums: List[int]) -> int:
         return sum(nums) - min(nums) * len(nums)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -82,6 +101,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -98,6 +119,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minMoves(nums []int) int {
 	mi := 1 << 30
@@ -111,6 +134,8 @@ func minMoves(nums []int) int {
 	return s - mi*len(nums)
 }
 ```
+
+#### TypeScript
 
 ```ts
 function minMoves(nums: number[]): number {
@@ -126,24 +151,6 @@ function minMoves(nums: number[]): number {
 
 <!-- tabs:end -->
 
-### 方法二
+<!-- solution:end -->
 
-<!-- tabs:start -->
-
-```java
-class Solution {
-    public int minMoves(int[] nums) {
-        int s = 0;
-        int mi = 1 << 30;
-        for (int x : nums) {
-            s += x;
-            mi = Math.min(mi, x);
-        }
-        return s - mi * nums.length;
-    }
-}
-```
-
-<!-- tabs:end -->
-
-<!-- end -->
+<!-- problem:end -->

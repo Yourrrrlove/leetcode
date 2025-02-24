@@ -1,12 +1,25 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0763.Partition%20Labels/README.md
+tags:
+    - 贪心
+    - 哈希表
+    - 双指针
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [763. 划分字母区间](https://leetcode.cn/problems/partition-labels)
 
 [English Version](/solution/0700-0799/0763.Partition%20Labels/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给你一个字符串 <code>s</code> 。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。</p>
+<p>给你一个字符串 <code>s</code> 。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。例如，字符串&nbsp;<code>"ababcc"</code> 能够被分为 <code>["abab", "cc"]</code>，但类似&nbsp;<code>["aba", "bcc"]</code> 或&nbsp;<code>["ab", "ab", "cc"]</code> 的划分是非法的。</p>
 
 <p>注意，划分结果需要满足：将所有划分结果按顺序连接，得到的字符串仍然是 <code>s</code> 。</p>
 
@@ -39,25 +52,31 @@
 	<li><code>s</code> 仅由小写英文字母组成</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：贪心
 
-我们先用数组或哈希表 $last$ 记录字符串 $s$ 中每个字母最后一次出现的位置。
+我们先用数组或哈希表 $\textit{last}$ 记录字符串 $s$ 中每个字母最后一次出现的位置。
 
 接下来我们使用贪心的方法，将字符串划分为尽可能多的片段。
 
 从左到右遍历字符串 $s$，遍历的同时维护当前片段的开始下标 $j$ 和结束下标 $i$，初始均为 $0$。
 
-对于每个访问到的字母 $c$，获取到最后一次出现的位置 $last[c]$。由于当前片段的结束下标一定不会小于 $last[c]$，因此令 $mx = \max(mx, last[c])$。
+对于每个访问到的字母 $c$，获取到最后一次出现的位置 $\textit{last}[c]$。由于当前片段的结束下标一定不会小于 $\textit{last}[c]$，因此令 $\textit{mx} = \max(\textit{mx}, \textit{last}[c])$。
 
-当访问到下标 $mx$ 时，意味着当前片段访问结束，当前片段的下标范围是 $[j,.. i]$，长度为 $i - j + 1$，我们将其添加到结果数组中。然后令 $j = i + 1$, 继续寻找下一个片段。
+当访问到下标 $\textit{mx}$ 时，意味着当前片段访问结束，当前片段的下标范围是 $[j,.. i]$，长度为 $i - j + 1$，我们将其添加到结果数组中。然后令 $j = i + 1$, 继续寻找下一个片段。
 
 重复上述过程，直至字符串遍历结束，即可得到所有片段的长度。
 
-时间复杂度 $O(n)$，空间复杂度 $O(C)$。其中 $n$ 为字符串 $s$ 的长度，而 $C$ 为字符集的大小。本题中 $C = 26$。
+时间复杂度 $O(n)$，空间复杂度 $O(|\Sigma|)$。其中 $n$ 为字符串 $s$ 的长度，而 $|\Sigma|$ 为字符集的大小。本题中 $|\Sigma| = 26$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -72,6 +91,8 @@ class Solution:
                 j = i + 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -94,6 +115,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -118,6 +141,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func partitionLabels(s string) (ans []int) {
 	last := [26]int{}
@@ -135,6 +160,8 @@ func partitionLabels(s string) (ans []int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function partitionLabels(s: string): number[] {
@@ -155,6 +182,8 @@ function partitionLabels(s: string): number[] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -180,6 +209,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {string} s
@@ -204,6 +235,8 @@ var partitionLabels = function (s) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public IList<int> PartitionLabels(string s) {
@@ -227,4 +260,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

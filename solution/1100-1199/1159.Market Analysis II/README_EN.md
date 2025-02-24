@@ -1,8 +1,20 @@
-# [1159. Market Analysis II](https://leetcode.com/problems/market-analysis-ii)
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1100-1199/1159.Market%20Analysis%20II/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
+# [1159. Market Analysis II 🔒](https://leetcode.com/problems/market-analysis-ii)
 
 [中文文档](/solution/1100-1199/1159.Market%20Analysis%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table: <code>Users</code></p>
 
@@ -53,11 +65,11 @@ item_id is the primary key (column with unique values) of this table.
 
 <p>&nbsp;</p>
 
-<p>Write a solution&nbsp;to find for each user, the join date and the number of orders they made as a buyer in <code>2019</code>.</p>
+<p>Write a solution to find for each user whether the brand of the second item (by date) they sold is their favorite brand. If a user sold less than two items, report the answer for that user as no. It is guaranteed that no seller sells more than one item in a day.</p>
 
 <p>Return the result table in <strong>any order</strong>.</p>
 
-<p>The&nbsp;result format is in the following example.</p>
+<p>The result format is in the following example.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
@@ -108,11 +120,17 @@ The answer for the users with id 2 and 3 is yes because the brands of their seco
 The answer for the user with id 4 is no because the brand of their second sold item is not their favorite brand.
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -141,4 +159,6 @@ FROM
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

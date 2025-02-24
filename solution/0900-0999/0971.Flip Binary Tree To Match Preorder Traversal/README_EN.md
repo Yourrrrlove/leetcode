@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0900-0999/0971.Flip%20Binary%20Tree%20To%20Match%20Preorder%20Traversal/README_EN.md
+tags:
+    - Tree
+    - Depth-First Search
+    - Binary Tree
+---
+
+<!-- problem:start -->
+
 # [971. Flip Binary Tree To Match Preorder Traversal](https://leetcode.com/problems/flip-binary-tree-to-match-preorder-traversal)
 
 [中文文档](/solution/0900-0999/0971.Flip%20Binary%20Tree%20To%20Match%20Preorder%20Traversal/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given the <code>root</code> of a binary tree with <code>n</code> nodes, where each node is uniquely assigned a value from <code>1</code> to <code>n</code>. You are also given a sequence of <code>n</code> values <code>voyage</code>, which is the <strong>desired</strong> <a href="https://en.wikipedia.org/wiki/Tree_traversal#Pre-order" target="_blank"><strong>pre-order traversal</strong></a> of the binary tree.</p>
 
@@ -48,11 +62,23 @@
 	<li>All the values in <code>voyage</code> are <strong>unique</strong>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: DFS
+
+We can traverse the entire tree using depth-first search, using an index $i$ to record the current node's index in the $\textit{voyage}$ array. If the value of the current node does not equal $\textit{voyage}[i]$, it means that it is impossible to match after flipping, we mark $\textit{ok}$ as `false` and return immediately. Otherwise, we increment $i$ by $1$, then check if the current node has a left child. If it does not, or if the value of the left child equals $\textit{voyage}[i]$, we recursively traverse the current left and right children; otherwise, we need to flip the current node and then recursively traverse the current right and left children.
+
+After the search, if $\textit{ok}$ is `true`, it means that it is possible to match after flipping, and we return the answer array $\textit{ans}$, otherwise, we return $[-1]$.
+
+The time complexity is $O(n)$, and the space complexity is $O(n)$, where $n$ is the number of nodes in the tree.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for a binary tree node.
@@ -85,6 +111,8 @@ class Solution:
         dfs(root)
         return ans if ok else [-1]
 ```
+
+#### Java
 
 ```java
 /**
@@ -136,6 +164,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for a binary tree node.
@@ -178,6 +208,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for a binary tree node.
@@ -217,6 +249,8 @@ func flipMatchVoyage(root *TreeNode, voyage []int) []int {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -261,4 +295,6 @@ function flipMatchVoyage(root: TreeNode | null, voyage: number[]): number[] {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

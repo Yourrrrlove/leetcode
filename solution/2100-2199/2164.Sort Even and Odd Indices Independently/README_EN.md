@@ -1,13 +1,29 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2100-2199/2164.Sort%20Even%20and%20Odd%20Indices%20Independently/README_EN.md
+rating: 1252
+source: Weekly Contest 279 Q1
+tags:
+    - Array
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [2164. Sort Even and Odd Indices Independently](https://leetcode.com/problems/sort-even-and-odd-indices-independently)
 
 [中文文档](/solution/2100-2199/2164.Sort%20Even%20and%20Odd%20Indices%20Independently/README.md)
 
 ## Description
 
+<!-- description:start -->
+
 <p>You are given a <strong>0-indexed</strong> integer array <code>nums</code>. Rearrange the values of <code>nums</code> according to the following rules:</p>
 
 <ol>
 	<li>Sort the values at <strong>odd indices</strong> of <code>nums</code> in <strong>non-increasing</strong> order.
+
     <ul>
     	<li>For example, if <code>nums = [4,<strong><u>1</u></strong>,2,<u><strong>3</strong></u>]</code> before this step, it becomes <code>[4,<u><strong>3</strong></u>,2,<strong><u>1</u></strong>]</code> after. The values at odd indices <code>1</code> and <code>3</code> are sorted in non-increasing order.</li>
     </ul>
@@ -17,6 +33,7 @@
     	<li>For example, if <code>nums = [<u><strong>4</strong></u>,1,<u><strong>2</strong></u>,3]</code> before this step, it becomes <code>[<u><strong>2</strong></u>,1,<u><strong>4</strong></u>,3]</code> after. The values at even indices <code>0</code> and <code>2</code> are sorted in non-decreasing order.</li>
     </ul>
     </li>
+
 </ol>
 
 <p>Return <em>the array formed after rearranging the values of</em> <code>nums</code>.</p>
@@ -53,11 +70,21 @@ The resultant array formed is [2,1], which is the same as the initial array.
 	<li><code>1 &lt;= nums[i] &lt;= 100</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Sorting
+
+We can extract the elements at odd and even indices separately, then sort the array of odd indices in non-increasing order and the array of even indices in non-decreasing order. Finally, merge the two arrays back together.
+
+The time complexity is $O(n \log n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{nums}$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -68,6 +95,8 @@ class Solution:
         nums[1::2] = b
         return nums
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -96,6 +125,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -104,20 +135,27 @@ public:
         vector<int> a;
         vector<int> b;
         for (int i = 0; i < n; ++i) {
-            if (i % 2 == 0)
+            if (i % 2 == 0) {
                 a.push_back(nums[i]);
-            else
+            } else {
                 b.push_back(nums[i]);
+            }
         }
         sort(a.begin(), a.end());
-        sort(b.begin(), b.end(), greater<int>());
+        sort(b.rbegin(), b.rend());
         vector<int> ans(n);
-        for (int i = 0, j = 0; j < a.size(); i += 2, ++j) ans[i] = a[j];
-        for (int i = 1, j = 0; j < b.size(); i += 2, ++j) ans[i] = b[j];
+        for (int i = 0, j = 0; j < a.size(); i += 2, ++j) {
+            ans[i] = a[j];
+        }
+        for (int i = 1, j = 0; j < b.size(); i += 2, ++j) {
+            ans[i] = b[j];
+        }
         return ans;
     }
 };
 ```
+
+#### Go
 
 ```go
 func sortEvenOdd(nums []int) []int {
@@ -146,6 +184,35 @@ func sortEvenOdd(nums []int) []int {
 }
 ```
 
+#### TypeScript
+
+```ts
+function sortEvenOdd(nums: number[]): number[] {
+    const n = nums.length;
+    const a: number[] = [];
+    const b: number[] = [];
+    for (let i = 0; i < n; ++i) {
+        if (i % 2 === 0) {
+            a.push(nums[i]);
+        } else {
+            b.push(nums[i]);
+        }
+    }
+    a.sort((x, y) => x - y);
+    b.sort((x, y) => y - x);
+    const ans: number[] = [];
+    for (let i = 0, j = 0; j < a.length; i += 2, ++j) {
+        ans[i] = a[j];
+    }
+    for (let i = 1, j = 0; j < b.length; i += 2, ++j) {
+        ans[i] = b[j];
+    }
+    return ans;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0228.Summary%20Ranges/README_EN.md
+tags:
+    - Array
+---
+
+<!-- problem:start -->
+
 # [228. Summary Ranges](https://leetcode.com/problems/summary-ranges)
 
 [中文文档](/solution/0200-0299/0228.Summary%20Ranges/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>sorted unique</strong> integer array <code>nums</code>.</p>
 
@@ -51,7 +63,11 @@
 	<li><code>nums</code> is sorted in ascending order.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Two Pointers
 
@@ -62,6 +78,8 @@ Traverse the array, when $j + 1 < n$ and $nums[j + 1] = nums[j] + 1$, move $j$ t
 Time complexity $O(n)$, where $n$ is the length of the array. Space complexity $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -80,6 +98,8 @@ class Solution:
             i = j + 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -101,6 +121,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -121,6 +143,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func summaryRanges(nums []int) (ans []string) {
 	f := func(i, j int) string {
@@ -140,6 +164,8 @@ func summaryRanges(nums []int) (ans []string) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function summaryRanges(nums: number[]): string[] {
     const f = (i: number, j: number): string => {
@@ -157,6 +183,8 @@ function summaryRanges(nums: number[]): string[] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -198,6 +226,8 @@ impl Solution {
 }
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public IList<string> SummaryRanges(int[] nums) {
@@ -220,4 +250,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

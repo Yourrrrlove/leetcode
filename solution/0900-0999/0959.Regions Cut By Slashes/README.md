@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0900-0999/0959.Regions%20Cut%20By%20Slashes/README.md
+tags:
+    - 深度优先搜索
+    - 广度优先搜索
+    - 并查集
+    - 数组
+    - 哈希表
+    - 矩阵
+---
+
+<!-- problem:start -->
+
 # [959. 由斜杠划分区域](https://leetcode.cn/problems/regions-cut-by-slashes)
 
 [English Version](/solution/0900-0999/0959.Regions%20Cut%20By%20Slashes/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>在由 <code>1 x 1</code> 方格组成的 <code>n&nbsp;x n</code>&nbsp;网格&nbsp;<code>grid</code> 中，每个 <code>1 x 1</code>&nbsp;方块由 <code>'/'</code>、<code>'\'</code> 或空格构成。这些字符会将方块划分为一些共边的区域。</p>
 
@@ -54,11 +69,17 @@
 	<li><code>grid[i][j]</code> 是&nbsp;<code>'/'</code>、<code>'\'</code>、或&nbsp;<code>' '</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -97,6 +118,8 @@ class Solution:
                     union(4 * k + 2, 4 * k + 3)
         return size
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -155,6 +178,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -202,6 +227,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func regionsBySlashes(grid []string) int {
@@ -252,6 +279,277 @@ func regionsBySlashes(grid []string) int {
 }
 ```
 
+#### TypeScript
+
+```ts
+function regionsBySlashes(grid: string[]): number {
+    const find = (x: number) => {
+        if (p[x] !== x) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    };
+
+    const union = (a: number, b: number) => {
+        const pa = find(a);
+        const pb = find(b);
+        if (pa !== pb) {
+            p[pa] = pb;
+            size--;
+        }
+    };
+
+    const n = grid.length;
+    let size = n * n * 4;
+    const p = Array.from({ length: size }, (_, i) => i);
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            const k = i * n + j;
+            if (i < n - 1) {
+                union(4 * k + 2, (k + n) * 4);
+            }
+            if (j < n - 1) {
+                union(4 * k + 1, (k + 1) * 4 + 3);
+            }
+            if (grid[i][j] === '/') {
+                union(4 * k, 4 * k + 3);
+                union(4 * k + 1, 4 * k + 2);
+            } else if (grid[i][j] === '\\') {
+                union(4 * k, 4 * k + 1);
+                union(4 * k + 2, 4 * k + 3);
+            } else {
+                union(4 * k, 4 * k + 1);
+                union(4 * k + 1, 4 * k + 2);
+                union(4 * k + 2, 4 * k + 3);
+            }
+        }
+    }
+
+    return size;
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {string[]} grid
+ * @return {number}
+ */
+
+function regionsBySlashes(grid) {
+    const find = x => {
+        if (p[x] !== x) {
+            p[x] = find(p[x]);
+        }
+        return p[x];
+    };
+
+    const union = (a, b) => {
+        const pa = find(a);
+        const pb = find(b);
+        if (pa !== pb) {
+            p[pa] = pb;
+            size--;
+        }
+    };
+
+    const n = grid.length;
+    let size = n * n * 4;
+    const p = Array.from({ length: size }, (_, i) => i);
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            const k = i * n + j;
+            if (i < n - 1) {
+                union(4 * k + 2, (k + n) * 4);
+            }
+            if (j < n - 1) {
+                union(4 * k + 1, (k + 1) * 4 + 3);
+            }
+            if (grid[i][j] === '/') {
+                union(4 * k, 4 * k + 3);
+                union(4 * k + 1, 4 * k + 2);
+            } else if (grid[i][j] === '\\') {
+                union(4 * k, 4 * k + 1);
+                union(4 * k + 2, 4 * k + 3);
+            } else {
+                union(4 * k, 4 * k + 1);
+                union(4 * k + 1, 4 * k + 2);
+                union(4 * k + 2, 4 * k + 3);
+            }
+        }
+    }
+
+    return size;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### 方法二：DFS
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function regionsBySlashes(grid: string[]): number {
+    const createGraph = () => {
+        const n = grid.length;
+        const g = Array.from({ length: n * 2 }, () => Array(n * 2).fill(0));
+
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                const [y, x] = [i * 2, j * 2];
+
+                switch (grid[i][j]) {
+                    case '/':
+                        g[y][x] = g[y + 1][x + 1] = 0;
+                        g[y][x + 1] = g[y + 1][x] = 1;
+                        break;
+
+                    case '\\':
+                        g[y][x] = g[y + 1][x + 1] = 2;
+                        g[y][x + 1] = g[y + 1][x] = 0;
+                        break;
+
+                    default:
+                        g[y][x] = g[y][x + 1] = g[y + 1][x] = g[y + 1][x + 1] = 0;
+                        break;
+                }
+            }
+        }
+
+        return g;
+    };
+
+    const isValid = (x: number) => 0 <= x && x < n;
+    const dfs = (i: number, j: number) => {
+        if (!isValid(i) || !isValid(j) || g[i][j]) return;
+
+        g[i][j] = -1;
+        const dirs = [-1, 0, 1, 0, -1];
+        const neighbours: number[] = [];
+
+        for (let d = 0; d < 4; d++) {
+            const [y, x] = [i + dirs[d], j + dirs[d + 1]];
+
+            if (isValid(y) && isValid(x)) {
+                dfs(y, x);
+                neighbours.push(g[y][x]);
+            } else {
+                neighbours.push(-1);
+            }
+        }
+
+        const [top, right, bottom, left] = neighbours;
+        if (top === 1 && right === 1) dfs(i - 1, j + 1);
+        if (bottom === 1 && left === 1) dfs(i + 1, j - 1);
+        if (top === 2 && left === 2) dfs(i - 1, j - 1);
+        if (bottom === 2 && right === 2) dfs(i + 1, j + 1);
+    };
+
+    const g = createGraph();
+    const n = g.length;
+    let res = 0;
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            if (g[i][j] === 0) {
+                dfs(i, j);
+                res++;
+            }
+        }
+    }
+
+    return res;
+}
+```
+
+#### JavaScript
+
+```js
+function regionsBySlashes(grid) {
+    const createGraph = () => {
+        const n = grid.length;
+        const g = Array.from({ length: n * 2 }, () => Array(n * 2).fill(0));
+
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                const [y, x] = [i * 2, j * 2];
+
+                switch (grid[i][j]) {
+                    case '/':
+                        g[y][x] = g[y + 1][x + 1] = 0;
+                        g[y][x + 1] = g[y + 1][x] = 1;
+                        break;
+
+                    case '\\':
+                        g[y][x] = g[y + 1][x + 1] = 2;
+                        g[y][x + 1] = g[y + 1][x] = 0;
+                        break;
+
+                    default:
+                        g[y][x] = g[y][x + 1] = g[y + 1][x] = g[y + 1][x + 1] = 0;
+                        break;
+                }
+            }
+        }
+
+        return g;
+    };
+
+    const isValid = x => 0 <= x && x < n;
+    const dfs = (i, j) => {
+        if (!isValid(i) || !isValid(j) || g[i][j]) return;
+
+        g[i][j] = -1;
+        const dirs = [-1, 0, 1, 0, -1];
+        const neighbours = [];
+
+        for (let d = 0; d < 4; d++) {
+            const [y, x] = [i + dirs[d], j + dirs[d + 1]];
+
+            if (isValid(y) && isValid(x)) {
+                dfs(y, x);
+                neighbours.push(g[y][x]);
+            } else {
+                neighbours.push(-1);
+            }
+        }
+
+        const [top, right, bottom, left] = neighbours;
+        if (top === 1 && right === 1) dfs(i - 1, j + 1);
+        if (bottom === 1 && left === 1) dfs(i + 1, j - 1);
+        if (top === 2 && left === 2) dfs(i - 1, j - 1);
+        if (bottom === 2 && right === 2) dfs(i + 1, j + 1);
+    };
+
+    const g = createGraph();
+    const n = g.length;
+    let res = 0;
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            if (g[i][j] === 0) {
+                dfs(i, j);
+                res++;
+            }
+        }
+    }
+
+    return res;
+}
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

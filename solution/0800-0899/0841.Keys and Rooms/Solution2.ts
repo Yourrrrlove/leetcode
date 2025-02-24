@@ -1,14 +1,15 @@
 function canVisitAllRooms(rooms: number[][]): boolean {
-    const n = rooms.length;
-    const isOpen = new Array(n).fill(false);
-    const keys = [0];
-    while (keys.length !== 0) {
-        const i = keys.pop();
-        if (isOpen[i]) {
+    const vis = new Set<number>();
+    const q: number[] = [0];
+
+    while (q.length) {
+        const i = q.pop()!;
+        if (vis.has(i)) {
             continue;
         }
-        isOpen[i] = true;
-        keys.push(...rooms[i]);
+        vis.add(i);
+        q.push(...rooms[i]);
     }
-    return isOpen.every(v => v);
+
+    return vis.size == rooms.length;
 }

@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2624.Snail%20Traversal/README_EN.md
+tags:
+    - JavaScript
+---
+
+<!-- problem:start -->
+
 # [2624. Snail Traversal](https://leetcode.com/problems/snail-traversal)
 
 [中文文档](/solution/2600-2699/2624.Snail%20Traversal/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Write code that enhances all arrays such that you can call the <code>snail(rowsCount, colsCount)</code> method that transforms the 1D&nbsp;array into&nbsp;a 2D array organised in&nbsp;the pattern known as <strong>snail traversal order</strong>. Invalid input values should output an empty array. If&nbsp;<code>rowsCount * colsCount !== nums.length</code>,&nbsp;the input is considered invalid.</p>
 
@@ -63,11 +75,17 @@ colsCount = 2
 
 <p>&nbsp;</p>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### TypeScript
 
 ```ts
 declare global {
@@ -101,4 +119,6 @@ Array.prototype.snail = function (rowsCount: number, colsCount: number): number[
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

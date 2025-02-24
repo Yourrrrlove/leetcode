@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2900-2999/2924.Find%20Champion%20II/README.md
+rating: 1430
+source: 第 370 场周赛 Q2
+tags:
+    - 图
+---
+
+<!-- problem:start -->
+
 # [2924. 找到冠军 II](https://leetcode.cn/problems/find-champion-ii)
 
 [English Version](/solution/2900-2999/2924.Find%20Champion%20II/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>一场比赛中共有 <code>n</code> 支队伍，按从 <code>0</code> 到&nbsp; <code>n - 1</code> 编号。每支队伍也是 <strong>有向无环图（DAG）</strong> 上的一个节点。</p>
 
@@ -60,7 +72,11 @@
 	<li>生成的输入满足：如果 <code>a</code> 队比 <code>b</code> 队强，<code>b</code> 队比 <code>c</code> 队强，那么 <code>a</code> 队比 <code>c</code> 队强</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：统计入度
 
@@ -70,6 +86,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def findChampion(self, n: int, edges: List[List[int]]) -> int:
@@ -78,6 +96,8 @@ class Solution:
             indeg[v] += 1
         return -1 if indeg.count(0) != 1 else indeg.index(0)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -97,6 +117,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -119,6 +141,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func findChampion(n int, edges [][]int) int {
 	indeg := make([]int, n)
@@ -139,6 +163,8 @@ func findChampion(n int, edges [][]int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function findChampion(n: number, edges: number[][]): number {
     const indeg: number[] = Array(n).fill(0);
@@ -156,6 +182,63 @@ function findChampion(n: number, edges: number[][]): number {
 }
 ```
 
+#### JavaScript
+
+```js
+function findChampion(n, edges) {
+    const indeg = Array(n).fill(0);
+    for (const [_, v] of edges) {
+        ++indeg[v];
+    }
+    let [ans, cnt] = [-1, 0];
+    for (let i = 0; i < n; ++i) {
+        if (indeg[i] === 0) {
+            ++cnt;
+            ans = i;
+        }
+    }
+    return cnt === 1 ? ans : -1;
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### 方法二
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function findChampion(n: number, edges: number[][]): number {
+    const vertexes = new Set<number>(Array.from({ length: n }, (_, i) => i));
+
+    for (const [_, v] of edges) {
+        vertexes.delete(v);
+    }
+
+    return vertexes.size === 1 ? vertexes[Symbol.iterator]().next().value! : -1;
+}
+```
+
+#### JavaScript
+
+```js
+function findChampion(n, edges) {
+    const vertexes = new Set(Array.from({ length: n }, (_, i) => i));
+    for (const [_, v] of edges) {
+        vertexes.delete(v);
+    }
+    return vertexes.size === 1 ? vertexes[Symbol.iterator]().next().value : -1;
+}
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

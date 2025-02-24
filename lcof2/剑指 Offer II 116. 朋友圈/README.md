@@ -1,8 +1,15 @@
+---
+comments: true
+edit_url: https://github.com/doocs/leetcode/edit/main/lcof2/%E5%89%91%E6%8C%87%20Offer%20II%20116.%20%E6%9C%8B%E5%8F%8B%E5%9C%88/README.md
+---
+
+<!-- problem:start -->
+
 # [剑指 Offer II 116. 朋友圈](https://leetcode.cn/problems/bLyHh0)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <div class="original__bRMd">
 <p>一个班上有 <code>n</code> 个同学，其中一些彼此是朋友，另一些不是。朋友关系是可以传递的，如果&nbsp;<font color="#c7254e" face="Menlo, Monaco, Consolas, Courier New, monospace"><span style="caret-color: rgb(199, 37, 78); font-size: 12.600000381469727px; background-color: rgb(249, 242, 244);">a</span></font>&nbsp;与&nbsp;<code>b</code>&nbsp;直接是朋友，且&nbsp;<code>b</code> 与&nbsp;<code>c</code>&nbsp;是直接朋友，那么&nbsp;<code>a</code> 与&nbsp;<code>c</code>&nbsp;就是间接朋友。</p>
@@ -47,13 +54,19 @@
 
 <p><meta charset="UTF-8" />注意：本题与主站 547&nbsp;题相同：&nbsp;<a href="https://leetcode.cn/problems/number-of-provinces/">https://leetcode.cn/problems/number-of-provinces/</a></p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：深度优先搜索
 
 判断城市之间是否属于同一个连通分量，最后连通分量的总数即为结果。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -73,6 +86,8 @@ class Solution:
                 ans += 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -105,6 +120,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -135,6 +152,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func findCircleNum(isConnected [][]int) int {
 	n := len(isConnected)
@@ -159,7 +178,45 @@ func findCircleNum(isConnected [][]int) int {
 }
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    private var isConnected: [[Int]] = []
+    private var visited: [Bool] = []
+    private var n: Int = 0
+
+    func findCircleNum(_ isConnected: [[Int]]) -> Int {
+        self.isConnected = isConnected
+        self.n = isConnected.count
+        self.visited = [Bool](repeating: false, count: n)
+        var numberOfCircles = 0
+
+        for i in 0..<n {
+            if !visited[i] {
+                dfs(i)
+                numberOfCircles += 1
+            }
+        }
+        return numberOfCircles
+    }
+
+    private func dfs(_ i: Int) {
+        visited[i] = true
+        for j in 0..<n {
+            if !visited[j] && isConnected[i][j] == 1 {
+                dfs(j)
+            }
+        }
+    }
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start-->
 
 ### 方法二：并查集
 
@@ -228,6 +285,8 @@ d[find(a)] = distance
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
@@ -244,6 +303,8 @@ class Solution:
                     p[find(i)] = find(j)
         return sum(i == v for i, v in enumerate(p))
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -280,6 +341,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -306,6 +369,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func findCircleNum(isConnected [][]int) int {
@@ -340,4 +405,6 @@ func findCircleNum(isConnected [][]int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

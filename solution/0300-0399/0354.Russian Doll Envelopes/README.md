@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0300-0399/0354.Russian%20Doll%20Envelopes/README.md
+tags:
+    - 数组
+    - 二分查找
+    - 动态规划
+    - 排序
+---
+
+<!-- problem:start -->
+
 # [354. 俄罗斯套娃信封问题](https://leetcode.cn/problems/russian-doll-envelopes)
 
 [English Version](/solution/0300-0399/0354.Russian%20Doll%20Envelopes/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个二维整数数组 <code>envelopes</code> ，其中 <code>envelopes[i] = [w<sub>i</sub>, h<sub>i</sub>]</code> ，表示第 <code>i</code> 个信封的宽度和高度。</p>
 
@@ -39,13 +52,19 @@
 	<li><code>1 &lt;= w<sub>i</sub>, h<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：贪心 + 二分查找
 
 时间复杂度 O(nlogn)。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -57,11 +76,11 @@ class Solution:
                 d.append(h)
             else:
                 idx = bisect_left(d, h)
-                if idx == len(d):
-                    idx = 0
                 d[idx] = h
         return len(d)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -94,6 +113,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -117,6 +138,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func maxEnvelopes(envelopes [][]int) int {
@@ -157,4 +180,6 @@ func maxEnvelopes(envelopes [][]int) int {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

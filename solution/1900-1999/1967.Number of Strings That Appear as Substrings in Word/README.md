@@ -1,10 +1,23 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1967.Number%20of%20Strings%20That%20Appear%20as%20Substrings%20in%20Word/README.md
+rating: 1231
+source: 第 254 场周赛 Q1
+tags:
+    - 数组
+    - 字符串
+---
+
+<!-- problem:start -->
+
 # [1967. 作为子字符串出现在单词中的字符串数目](https://leetcode.cn/problems/number-of-strings-that-appear-as-substrings-in-word)
 
 [English Version](/solution/1900-1999/1967.Number%20of%20Strings%20That%20Appear%20as%20Substrings%20in%20Word/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个字符串数组 <code>patterns</code> 和一个字符串 <code>word</code> ，统计 <code>patterns</code> 中有多少个字符串是 <code>word</code> 的子字符串。返回字符串数目。</p>
 
@@ -56,23 +69,31 @@ patterns 中有 2 个字符串作为子字符串出现在 word 中。
 	<li><code>patterns[i]</code> 和 <code>word</code> 由小写英文字母组成</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：模拟
 
-遍历字符串数组 $patterns$ 中的每个字符串 $p$，判断其是否为 $word$ 的子字符串，如果是，答案加一。
+遍历字符串数组 $\textit{patterns}$ 中的每个字符串 $p$，判断其是否为 $\textit{word}$ 的子字符串，如果是，答案加一。
 
 遍历结束后，返回答案。
 
-时间复杂度 $O(n \times m)$，空间复杂度 $O(1)$。其中 $n$ 和 $m$ 分别为 $patterns$ 和 $word$ 的长度。
+时间复杂度 $O(n \times m)$，空间复杂度 $O(1)$。其中 $n$ 和 $m$ 分别为 $\textit{patterns}$ 和 $\textit{word}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def numOfStrings(self, patterns: List[str], word: str) -> int:
         return sum(p in word for p in patterns)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -88,6 +109,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -101,6 +124,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numOfStrings(patterns []string, word string) (ans int) {
 	for _, p := range patterns {
@@ -112,18 +137,26 @@ func numOfStrings(patterns []string, word string) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function numOfStrings(patterns: string[], word: string): number {
-    let ans = 0;
-    for (const p of patterns) {
-        if (word.includes(p)) {
-            ++ans;
-        }
+    return patterns.filter(p => word.includes(p)).length;
+}
+```
+
+#### Rust
+
+```rust
+impl Solution {
+    pub fn num_of_strings(patterns: Vec<String>, word: String) -> i32 {
+        patterns.iter().filter(|p| word.contains(&**p)).count() as i32
     }
-    return ans;
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

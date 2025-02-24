@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0700-0799/0768.Max%20Chunks%20To%20Make%20Sorted%20II/README.md
+tags:
+    - 栈
+    - 贪心
+    - 数组
+    - 排序
+    - 单调栈
+---
+
+<!-- problem:start -->
+
 # [768. 最多能完成排序的块 II](https://leetcode.cn/problems/max-chunks-to-make-sorted-ii)
 
 [English Version](/solution/0700-0799/0768.Max%20Chunks%20To%20Make%20Sorted%20II/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个整数数组 <code>arr</code> 。</p>
 
@@ -19,8 +33,8 @@
 <strong>输入：</strong>arr = [5,4,3,2,1]
 <strong>输出：</strong>1
 <strong>解释：</strong>
-将数组分成2块或者更多块，都无法得到所需的结果。 
-例如，分成 [5, 4], [3, 2, 1] 的结果是 [4, 5, 1, 2, 3]，这不是有序的数组。 
+将数组分成2块或者更多块，都无法得到所需的结果。
+例如，分成 [5, 4], [3, 2, 1] 的结果是 [4, 5, 1, 2, 3]，这不是有序的数组。
 </pre>
 
 <p><strong class="example">示例 2：</strong></p>
@@ -29,8 +43,8 @@
 <strong>输入：</strong>arr = [2,1,3,4,4]
 <strong>输出：</strong>4
 <strong>解释：</strong>
-可以把它分成两块，例如 [2, 1], [3, 4, 4]。 
-然而，分成 [2, 1], [3], [4], [4] 可以得到最多的块数。 
+可以把它分成两块，例如 [2, 1], [3, 4, 4]。
+然而，分成 [2, 1], [3], [4], [4] 可以得到最多的块数。
 </pre>
 
 <p>&nbsp;</p>
@@ -42,15 +56,21 @@
 	<li><code>0 &lt;= arr[i] &lt;= 10<sup>8</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：单调栈
 
 根据题目，我们可以发现，从左到右，每个分块都有一个最大值，并且这些分块的最大值呈单调递增（非严格递增）。我们可以用一个栈来存储这些分块的最大值。最后得到的栈的大小，也就是题目所求的最多能完成排序的块。
 
-时间复杂度 $O(n)$，其中 $n$ 表示 $arr$ 的长度。
+时间复杂度 $O(n)$，其中 $n$ 表示 $\textit{arr}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -66,6 +86,8 @@ class Solution:
                 stk.append(mx)
         return len(stk)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -87,6 +109,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -107,6 +131,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxChunksToSorted(arr []int) int {
 	var stk []int
@@ -126,44 +152,54 @@ func maxChunksToSorted(arr []int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function maxChunksToSorted(arr: number[]): number {
-    const stack = [];
-    for (const num of arr) {
-        if (stack.length !== 0 && num < stack[stack.length - 1]) {
-            const max = stack.pop();
-            while (stack.length !== 0 && num < stack[stack.length - 1]) {
-                stack.pop();
-            }
-            stack.push(max);
+    const stk: number[] = [];
+    for (let v of arr) {
+        if (stk.length === 0 || v >= stk[stk.length - 1]) {
+            stk.push(v);
         } else {
-            stack.push(num);
+            let mx = stk.pop()!;
+            while (stk.length > 0 && stk[stk.length - 1] > v) {
+                stk.pop();
+            }
+            stk.push(mx);
         }
     }
-    return stack.length;
+    return stk.length;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
     pub fn max_chunks_to_sorted(arr: Vec<i32>) -> i32 {
-        let mut stack = vec![];
-        for num in arr.iter() {
-            if !stack.is_empty() && num < stack.last().unwrap() {
-                let max = stack.pop().unwrap();
-                while !stack.is_empty() && num < stack.last().unwrap() {
-                    stack.pop();
-                }
-                stack.push(max);
+        let mut stk = Vec::new();
+        for &v in arr.iter() {
+            if stk.is_empty() || v >= *stk.last().unwrap() {
+                stk.push(v);
             } else {
-                stack.push(*num);
+                let mut mx = stk.pop().unwrap();
+                while let Some(&top) = stk.last() {
+                    if top > v {
+                        stk.pop();
+                    } else {
+                        break;
+                    }
+                }
+                stk.push(mx);
             }
         }
-        stack.len() as i32
+        stk.len() as i32
     }
 }
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

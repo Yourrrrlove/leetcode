@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0007.Reverse%20Integer/README_EN.md
+tags:
+    - Math
+---
+
+<!-- problem:start -->
+
 # [7. Reverse Integer](https://leetcode.com/problems/reverse-integer)
 
 [中文文档](/solution/0000-0099/0007.Reverse%20Integer/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given a signed 32-bit integer <code>x</code>, return <code>x</code><em> with its digits reversed</em>. If reversing <code>x</code> causes the value to go outside the signed 32-bit integer range <code>[-2<sup>31</sup>, 2<sup>31</sup> - 1]</code>, then return <code>0</code>.</p>
 
@@ -37,7 +49,11 @@
 	<li><code>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Mathematics
 
@@ -63,6 +79,8 @@ The time complexity is $O(\log |x|)$, where $|x|$ is the absolute value of $x$. 
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def reverse(self, x: int) -> int:
@@ -79,6 +97,8 @@ class Solution:
         return ans
 ```
 
+#### Java
+
 ```java
 class Solution {
     public int reverse(int x) {
@@ -93,6 +113,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -110,6 +132,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func reverse(x int) (ans int) {
 	for ; x != 0; x /= 10 {
@@ -122,17 +146,28 @@ func reverse(x int) (ans int) {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
     pub fn reverse(mut x: i32) -> i32 {
         let is_minus = x < 0;
-        match x.abs().to_string().chars().rev().collect::<String>().parse::<i32>() {
+        match x
+            .abs()
+            .to_string()
+            .chars()
+            .rev()
+            .collect::<String>()
+            .parse::<i32>()
+        {
             Ok(x) => x * (if is_minus { -1 } else { 1 }),
             Err(_) => 0,
         }
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -153,6 +188,8 @@ var reverse = function (x) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public int Reverse(int x) {
@@ -168,6 +205,8 @@ public class Solution {
 }
 ```
 
+#### C
+
 ```c
 int reverse(int x) {
     int ans = 0;
@@ -181,6 +220,40 @@ int reverse(int x) {
 }
 ```
 
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param int $x
+     * @return int
+     */
+
+    function reverse($x) {
+        $isNegative = $x < 0;
+        $x = abs($x);
+
+        $reversed = 0;
+
+        while ($x > 0) {
+            $reversed = $reversed * 10 + ($x % 10);
+            $x = (int) ($x / 10);
+        }
+
+        if ($isNegative) {
+            $reversed *= -1;
+        }
+        if ($reversed < -pow(2, 31) || $reversed > pow(2, 31) - 1) {
+            return 0;
+        }
+
+        return $reversed;
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

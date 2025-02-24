@@ -1,23 +1,38 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1300-1399/1395.Count%20Number%20of%20Teams/README.md
+rating: 1343
+source: 第 182 场周赛 Q2
+tags:
+    - 树状数组
+    - 线段树
+    - 数组
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [1395. 统计作战单位数](https://leetcode.cn/problems/count-number-of-teams)
 
 [English Version](/solution/1300-1399/1395.Count%20Number%20of%20Teams/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p> <code>n</code> 名士兵站成一排。每个士兵都有一个 <strong>独一无二</strong> 的评分 <code>rating</code> 。</p>
+<p>&nbsp;<code>n</code> 名士兵站成一排。每个士兵都有一个 <strong>独一无二</strong> 的评分 <code>rating</code> 。</p>
 
-<p>每 <strong>3</strong> 个士兵可以组成一个作战单位，分组规则如下：</p>
+<p>从中选出 <strong>3</strong> 个士兵组成一个作战单位，规则如下：</p>
 
 <ul>
 	<li>从队伍中选出下标分别为 <code>i</code>、<code>j</code>、<code>k</code> 的 3 名士兵，他们的评分分别为 <code>rating[i]</code>、<code>rating[j]</code>、<code>rating[k]</code></li>
-	<li>作战单位需满足： <code>rating[i] < rating[j] < rating[k]</code> 或者 <code>rating[i] > rating[j] > rating[k]</code> ，其中  <code>0 <= i < j < k < n</code></li>
+	<li>作战单位需满足： <code>rating[i] &lt; rating[j] &lt; rating[k]</code> 或者 <code>rating[i] &gt; rating[j] &gt; rating[k]</code> ，其中&nbsp; <code>0&nbsp;&lt;= i &lt;&nbsp;j &lt;&nbsp;k &lt;&nbsp;n</code></li>
 </ul>
 
-<p>请你返回按上述条件可以组建的作战单位数量。每个士兵都可以是多个作战单位的一部分。</p>
+<p>请你返回按上述条件组建的作战单位的方案数。</p>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
 
@@ -42,18 +57,22 @@
 <strong>输出：</strong>4
 </pre>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>提示：</strong></p>
 
 <ul>
 	<li><code>n == rating.length</code></li>
-	<li><code>3 <= n <= 1000</code></li>
-	<li><code>1 <= rating[i] <= 10^5</code></li>
-	<li><code>rating</code> 中的元素都是唯一的</li>
+	<li><code>3 &lt;= n &lt;= 1000</code></li>
+	<li><code>1 &lt;= rating[i] &lt;= 10^5</code></li>
+	<li><code>rating</code>&nbsp;中的元素都是唯一的</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：枚举中间元素
 
@@ -62,6 +81,8 @@
 时间复杂度 $O(n^2)$，空间复杂度 $O(1)$。其中 $n$ 为数组 $rating$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -74,6 +95,8 @@ class Solution:
             ans += (i - l) * (n - i - 1 - r)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -99,6 +122,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -126,6 +151,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func numTeams(rating []int) (ans int) {
 	n := len(rating)
@@ -147,6 +174,8 @@ func numTeams(rating []int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function numTeams(rating: number[]): number {
@@ -174,6 +203,10 @@ function numTeams(rating: number[]): number {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：树状数组
 
 我们可以用两个树状数组分别维护数组 $rating$ 中每个元素的左边比它小的元素的个数 $l$，右边比它大的元素的个数 $r$，然后统计以该元素为中间元素的作战单位的个数为 $l \times r + (i - l) \times (n - i - 1 - r)$，累加到答案中即可。
@@ -181,6 +214,8 @@ function numTeams(rating: number[]): number {
 时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $rating$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class BinaryIndexedTree:
@@ -222,6 +257,8 @@ class Solution:
             ans += (i - l) * (n - i - 1 - r)
         return ans
 ```
+
+#### Java
 
 ```java
 class BinaryIndexedTree {
@@ -296,6 +333,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class BinaryIndexedTree {
 public:
@@ -352,6 +391,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 type BinaryIndexedTree struct {
@@ -410,6 +451,8 @@ func numTeams(rating []int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 class BinaryIndexedTree {
@@ -483,4 +526,110 @@ function numTeams(rating: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### 方法三：记忆化搜索
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function numTeams(rating: number[]): number {
+    const n = rating.length;
+    const f: Record<Type, number[][]> = {
+        asc: Array.from({ length: n }, () => Array(3).fill(-1)),
+        desc: Array.from({ length: n }, () => Array(3).fill(-1)),
+    };
+
+    const fn = (i: number, available: number, type: Type) => {
+        if (!available) {
+            return 1;
+        }
+        if (f[type][i][available] !== -1) {
+            return f[type][i][available];
+        }
+
+        let ans = 0;
+        for (let j = i + 1; j < n; j++) {
+            if (rating[j] > rating[i]) {
+                if (type === 'asc') {
+                    ans += fn(j, available - 1, 'asc');
+                }
+            } else {
+                if (type === 'desc') {
+                    ans += fn(j, available - 1, 'desc');
+                }
+            }
+        }
+        f[type][i][available] = ans;
+
+        return ans;
+    };
+
+    let ans = 0;
+    for (let i = 0; i < n; i++) {
+        ans += fn(i, 2, 'asc') + fn(i, 2, 'desc');
+    }
+
+    return ans;
+}
+
+type Type = 'asc' | 'desc';
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {number[]} rating
+ * @return {number}
+ */
+var numTeams = function (rating) {
+    const n = rating.length;
+    const f = {
+        asc: Array.from({ length: n }, () => Array(3).fill(-1)),
+        desc: Array.from({ length: n }, () => Array(3).fill(-1)),
+    };
+
+    const fn = (i, available, type) => {
+        if (!available) {
+            return 1;
+        }
+        if (f[type][i][available] !== -1) {
+            return f[type][i][available];
+        }
+
+        let ans = 0;
+        for (let j = i + 1; j < n; j++) {
+            if (rating[j] > rating[i]) {
+                if (type === 'asc') {
+                    ans += fn(j, available - 1, 'asc');
+                }
+            } else {
+                if (type === 'desc') {
+                    ans += fn(j, available - 1, 'desc');
+                }
+            }
+        }
+        f[type][i][available] = ans;
+
+        return ans;
+    };
+
+    let ans = 0;
+    for (let i = 0; i < n; i++) {
+        ans += fn(i, 2, 'asc') + fn(i, 2, 'desc');
+    }
+
+    return ans;
+};
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

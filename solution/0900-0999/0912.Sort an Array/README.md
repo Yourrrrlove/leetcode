@@ -1,12 +1,31 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0900-0999/0912.Sort%20an%20Array/README.md
+tags:
+    - 数组
+    - 分治
+    - 桶排序
+    - 计数排序
+    - 基数排序
+    - 排序
+    - 堆（优先队列）
+    - 归并排序
+---
+
+<!-- problem:start -->
+
 # [912. 排序数组](https://leetcode.cn/problems/sort-an-array)
 
 [English Version](/solution/0900-0999/0912.Sort%20an%20Array/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个整数数组&nbsp;<code>nums</code>，请你将该数组升序排列。</p>
+
+<p>你必须在 <strong>不使用任何内置函数</strong> 的情况下解决问题，时间复杂度为 <code>O(nlog(n))</code>，并且空间复杂度尽可能小。</p>
 
 <p>&nbsp;</p>
 
@@ -36,7 +55,11 @@
 	<li><code>-5 * 10<sup>4</sup> &lt;= nums[i] &lt;= 5 * 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：快速排序
 
@@ -45,6 +68,8 @@
 时间复杂度 $O(n \times \log n)$，空间复杂度 $O(\log n)$。其中 $n$ 为数组长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -69,6 +94,8 @@ class Solution:
         quick_sort(0, len(nums) - 1)
         return nums
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -103,6 +130,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -130,6 +159,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func sortArray(nums []int) []int {
@@ -165,6 +196,8 @@ func quickSort(nums []int, l, r int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function sortArray(nums: number[]): number[] {
     function quickSort(l: number, r: number) {
@@ -189,6 +222,8 @@ function sortArray(nums: number[]): number[] {
     return nums;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -219,7 +254,81 @@ var sortArray = function (nums) {
 };
 ```
 
+#### Rust
+
+```rs
+impl Solution {
+    pub fn sort_array(mut nums: Vec<i32>) -> Vec<i32> {
+        let n = nums.len();
+        Self::quick_sort(&mut nums, 0, n - 1);
+        return nums;
+    }
+
+    fn quick_sort(nums: &mut Vec<i32>, left: usize, right: usize) {
+        if left >= right {
+            return;
+        }
+        let mut i = left as i32 - 1;
+        let mut j = right as i32 + 1;
+        let pivot = nums[left];
+        while i < j {
+            loop {
+                i += 1;
+                if nums[i as usize] >= pivot {
+                    break;
+                }
+            }
+            loop {
+                j -= 1;
+                if nums[j as usize] <= pivot {
+                    break;
+                }
+            }
+            if i < j {
+                nums.swap(i as usize, j as usize);
+            }
+        }
+        Self::quick_sort(nums, left, j as usize);
+        Self::quick_sort(nums, j as usize + 1, right);
+    }
+}
+```
+
+#### Kotlin
+
+```kotlin
+class Solution {
+    fun sortArray(nums: IntArray): IntArray {
+        fun quickSort(left: Int, right: Int) {
+            if (left >= right) {
+                return
+            }
+            var i = left - 1
+            var j = right + 1
+            val pivot = nums[left]
+            while (i < j) {
+                while (nums[++i] < pivot) ;
+                while (nums[--j] > pivot) ;
+                if (i < j) {
+                    val temp = nums[i]
+                    nums[i] = nums[j]
+                    nums[j] = temp
+                }
+            }
+            quickSort(left, j)
+            quickSort(j + 1, right)
+        }
+        quickSort(0, nums.size - 1)
+        return nums
+    }
+}
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### 方法二：归并排序
 
@@ -228,6 +337,8 @@ var sortArray = function (nums) {
 归并排序是一种稳定的排序算法，时间复杂度为 $O(n \times \log n)$，空间复杂度为 $O(n)$。其中 $n$ 为数组长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -257,6 +368,8 @@ class Solution:
         merge_sort(0, len(nums) - 1)
         return nums
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -295,6 +408,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -330,6 +445,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func sortArray(nums []int) []int {
@@ -370,6 +487,8 @@ func mergeSort(nums []int, l, r int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function sortArray(nums: number[]): number[] {
     function mergetSort(l: number, r: number) {
@@ -403,6 +522,8 @@ function sortArray(nums: number[]): number[] {
     return nums;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -444,9 +565,15 @@ var sortArray = function (nums) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法三
 
 <!-- tabs:start -->
+
+#### Java
 
 ```java
 class Solution {
@@ -489,4 +616,6 @@ class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

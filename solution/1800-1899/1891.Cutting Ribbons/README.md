@@ -1,32 +1,42 @@
-# [1891. 割绳子](https://leetcode.cn/problems/cutting-ribbons)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1800-1899/1891.Cutting%20Ribbons/README.md
+tags:
+    - 数组
+    - 二分查找
+---
+
+<!-- problem:start -->
+
+# [1891. 割绳子 🔒](https://leetcode.cn/problems/cutting-ribbons)
 
 [English Version](/solution/1800-1899/1891.Cutting%20Ribbons/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给定一个整数数组 <code>ribbons</code> 和一个整数 <code>k</code>，数组每项 <code>ribbons[i]</code> 表示第 <code>i</code> 条绳子的长度。对于每条绳子，你可以将任意切割成一系列长度为<strong>正整数</strong>的部分，或者选择不进行切割。</p>
+<p>给定一个整数数组&nbsp;<code>ribbons</code>&nbsp;和一个整数 <code>k</code>，数组每项&nbsp;<code>ribbons[i]</code>&nbsp;表示第&nbsp;<code>i</code>&nbsp;条绳子的长度。对于每条绳子，你可以将任意切割成一系列长度为&nbsp;<strong>正整数&nbsp;</strong>的部分，或者选择不进行切割。</p>
 
 <p>例如，如果给你一条长度为 <code>4</code> 的绳子，你可以：</p>
 
 <ul>
 	<li>保持绳子的长度为 <code>4</code> 不变；</li>
 	<li>切割成一条长度为 <code>3</code> 和一条长度为 <code>1</code> 的绳子；</li>
-	<li>切割成两条长度为 <code>2</code> 的绳子；</li>
-	<li>切割成一条长度为 <code>2</code> 和两条长度为 <code>1</code> 的绳子；</li>
-	<li>切割成四条长度为 <code>1</code> 的绳子。</li>
+	<li>切割成两条长度为 <code>2</code>&nbsp;的绳子；</li>
+	<li>切割成一条长度为 <code>2</code>&nbsp;和两条长度为 <code>1</code> 的绳子；</li>
+	<li>切割成四条长度为 <code>1</code>&nbsp;的绳子。</li>
 </ul>
 
-<p>你的任务是最终得到 <code>k</code> 条完全一样的绳子，他们的长度均为<strong>相同的正整数</strong>。如果绳子切割后有剩余，你可以直接舍弃掉多余的部分。</p>
+<p>你的任务是找出最大 <code>x</code> 值，要求满足可以裁切出至少&nbsp;<code>k</code> 条长度均为 <code>x</code> 的绳子。你可以丢弃裁切后剩余的任意长度的绳子。如果不可能切割出&nbsp;<code>k</code> 条相同长度的绳子，返回 0。</p>
 
-<p>对于这 <code>k</code> 根绳子，返回你能得到的绳子<strong>最大</strong>长度；如果你无法得到 <code>k</code> 根相同长度的绳子，返回 <code>0</code>。</p>
-
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>示例 1:</strong></p>
 
-<pre><strong>输入:</strong> ribbons = [9,7,5], k = 3
+<pre>
+<strong>输入:</strong> ribbons = [9,7,5], k = 3
 <strong>输出:</strong> 5
 <strong>解释:</strong>
 - 把第一条绳子切成两部分，一条长度为 5，一条长度为 4；
@@ -36,7 +46,8 @@
 
 <p><strong>示例 2:</strong></p>
 
-<pre><strong>输入:</strong> ribbons = [7,5,9], k = 4
+<pre>
+<strong>输入:</strong> ribbons = [7,5,9], k = 4
 <strong>输出:</strong> 4
 <strong>解释:</strong>
 - 把第一条绳子切成两部分，一条长度为 4，一条长度为 3；
@@ -47,12 +58,13 @@
 
 <p><strong>示例 3:</strong></p>
 
-<pre><strong>输入:</strong> ribbons = [5,7,9], k = 22
+<pre>
+<strong>输入:</strong> ribbons = [5,7,9], k = 22
 <strong>输出:</strong> 0
 <strong>解释:</strong> 由于绳子长度需要为正整数，你无法得到 22 条长度相同的绳子。
 </pre>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>提示:</strong></p>
 
@@ -62,7 +74,11 @@
 	<li><code>1 &lt;= k &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：二分查找
 
@@ -75,6 +91,8 @@
 时间复杂度 $O(n \times \log M)$，其中 $n$ 和 $M$ 分别为绳子的数量和绳子的最大长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -89,6 +107,8 @@ class Solution:
                 right = mid - 1
         return left
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -114,6 +134,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -136,6 +158,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func maxLength(ribbons []int, k int) int {
 	left, right := 0, slices.Max(ribbons)
@@ -154,6 +178,8 @@ func maxLength(ribbons []int, k int) int {
 	return left
 }
 ```
+
+#### TypeScript
 
 ```ts
 function maxLength(ribbons: number[], k: number): number {
@@ -174,6 +200,8 @@ function maxLength(ribbons: number[], k: number): number {
     return left;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -199,6 +227,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -227,4 +257,6 @@ var maxLength = function (ribbons, k) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

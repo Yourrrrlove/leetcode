@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1200-1299/1218.Longest%20Arithmetic%20Subsequence%20of%20Given%20Difference/README_EN.md
+rating: 1597
+source: Weekly Contest 157 Q2
+tags:
+    - Array
+    - Hash Table
+    - Dynamic Programming
+---
+
+<!-- problem:start -->
+
 # [1218. Longest Arithmetic Subsequence of Given Difference](https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference)
 
 [中文文档](/solution/1200-1299/1218.Longest%20Arithmetic%20Subsequence%20of%20Given%20Difference/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an integer array <code>arr</code> and an integer <code>difference</code>, return the length of the longest subsequence in <code>arr</code> which is an arithmetic sequence such that the difference between adjacent elements in the subsequence equals <code>difference</code>.</p>
 
@@ -40,11 +56,25 @@
 	<li><code>-10<sup>4</sup> &lt;= arr[i], difference &lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Dynamic Programming
+
+We can use a hash table $f$ to store the length of the longest arithmetic subsequence ending with $x$.
+
+Traverse the array $\textit{arr}$, and for each element $x$, update $f[x]$ to be $f[x - \textit{difference}] + 1$.
+
+After the traversal, return the maximum value in $f$ as the answer.
+
+The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{arr}$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -54,6 +84,8 @@ class Solution:
             f[x] = f[x - difference] + 1
         return max(f.values())
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -68,6 +100,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -84,6 +118,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func longestSubsequence(arr []int, difference int) (ans int) {
 	f := map[int]int{}
@@ -95,6 +131,8 @@ func longestSubsequence(arr []int, difference int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function longestSubsequence(arr: number[], difference: number): number {
     const f: Map<number, number> = new Map();
@@ -104,6 +142,27 @@ function longestSubsequence(arr: number[], difference: number): number {
     return Math.max(...f.values());
 }
 ```
+
+#### Rust
+
+```rust
+use std::collections::HashMap;
+
+impl Solution {
+    pub fn longest_subsequence(arr: Vec<i32>, difference: i32) -> i32 {
+        let mut f = HashMap::new();
+        let mut ans = 0;
+        for &x in &arr {
+            let count = f.get(&(x - difference)).unwrap_or(&0) + 1;
+            f.insert(x, count);
+            ans = ans.max(count);
+        }
+        ans
+    }
+}
+```
+
+#### JavaScript
 
 ```js
 /**
@@ -122,4 +181,6 @@ var longestSubsequence = function (arr, difference) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

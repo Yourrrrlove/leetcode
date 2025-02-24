@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2527.Find%20Xor-Beauty%20of%20Array/README_EN.md
+rating: 1549
+source: Biweekly Contest 95 Q3
+tags:
+    - Bit Manipulation
+    - Array
+    - Math
+---
+
+<!-- problem:start -->
+
 # [2527. Find Xor-Beauty of Array](https://leetcode.com/problems/find-xor-beauty-of-array)
 
 [中文文档](/solution/2500-2599/2527.Find%20Xor-Beauty%20of%20Array/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a <strong>0-indexed</strong> integer array <code>nums</code>.</p>
 
@@ -53,17 +69,25 @@ Xor-beauty of array will be bitwise XOR of all beauties = 1 ^ 0 ^ 1 ^ 4 ^ 1 ^ 4 
 	<li><code>1 &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
     def xorBeauty(self, nums: List[int]) -> int:
         return reduce(xor, nums)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -76,6 +100,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -90,6 +116,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func xorBeauty(nums []int) (ans int) {
 	for _, x := range nums {
@@ -99,6 +127,8 @@ func xorBeauty(nums []int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function xorBeauty(nums: number[]): number {
     return nums.reduce((acc, cur) => acc ^ cur, 0);
@@ -107,4 +137,6 @@ function xorBeauty(nums: number[]): number {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

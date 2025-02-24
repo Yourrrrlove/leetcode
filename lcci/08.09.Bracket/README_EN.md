@@ -1,8 +1,18 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/lcci/08.09.Bracket/README_EN.md
+---
+
+<!-- problem:start -->
+
 # [08.09. Bracket](https://leetcode.cn/problems/bracket-lcci)
 
 [中文文档](/lcci/08.09.Bracket/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Implement an algorithm to print all valid (e.g., properly opened and closed) combinations of n pairs of parentheses.</p>
 
@@ -28,7 +38,11 @@
 
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: DFS + Pruning
 
@@ -44,6 +58,8 @@ We design a function `dfs(l, r, t)`, where $l$ and $r$ represent the number of l
 The time complexity is $O(2^{n\times 2} \times n)$, and the space complexity is $O(n)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -61,6 +77,8 @@ class Solution:
         dfs(0, 0, '')
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -87,13 +105,14 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
         vector<string> ans;
-        function<void(int, int, string)> dfs;
-        dfs = [&](int l, int r, string t) {
+        auto dfs = [&](this auto&& dfs, int l, int r, string t) {
             if (l > n || r > n || l < r) return;
             if (l == n && r == n) {
                 ans.push_back(t);
@@ -107,6 +126,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func generateParenthesis(n int) []string {
@@ -128,6 +149,8 @@ func generateParenthesis(n int) []string {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function generateParenthesis(n: number): string[] {
     function dfs(l, r, t) {
@@ -146,6 +169,8 @@ function generateParenthesis(n: number): string[] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -174,6 +199,8 @@ impl Solution {
 }
 ```
 
+#### JavaScript
+
 ```js
 /**
  * @param {number} n
@@ -197,6 +224,35 @@ var generateParenthesis = function (n) {
 };
 ```
 
+#### Swift
+
+```swift
+class Solution {
+    private var ans: [String] = []
+    private var n: Int = 0
+
+    func generateParenthesis(_ n: Int) -> [String] {
+        self.n = n
+        dfs(l: 0, r: 0, t: "")
+        return ans
+    }
+
+    private func dfs(l: Int, r: Int, t: String) {
+        if l > n || r > n || l < r {
+            return
+        }
+        if l == n && r == n {
+            ans.append(t)
+            return
+        }
+        dfs(l: l + 1, r: r, t: t + "(")
+        dfs(l: l, r: r + 1, t: t + ")")
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

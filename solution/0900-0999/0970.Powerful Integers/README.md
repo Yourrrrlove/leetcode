@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0900-0999/0970.Powerful%20Integers/README.md
+tags:
+    - 哈希表
+    - 数学
+    - 枚举
+---
+
+<!-- problem:start -->
+
 # [970. 强整数](https://leetcode.cn/problems/powerful-integers)
 
 [English Version](/solution/0900-0999/0970.Powerful%20Integers/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给定三个整数 <code>x</code>&nbsp;、&nbsp;<code>y</code>&nbsp;和<em>&nbsp;</em><code>bound</code><em>&nbsp;</em>，返回 <em>值小于或等于&nbsp;<code>bound</code>&nbsp;的所有&nbsp;<strong>强整数</strong>&nbsp;组成的列表</em>&nbsp;。</p>
 
@@ -44,7 +56,11 @@
 	<li><code>0 &lt;= bound &lt;= 10<sup>6</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：哈希表 + 枚举
 
@@ -59,6 +75,8 @@
 时间复杂度 $O(\log^2 bound)$，空间复杂度 $O(\log^2 bound)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -77,6 +95,8 @@ class Solution:
             a *= x
         return list(ans)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -97,6 +117,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -119,6 +141,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func powerfulIntegers(x int, y int, bound int) (ans []int) {
 	s := map[int]struct{}{}
@@ -140,6 +164,8 @@ func powerfulIntegers(x int, y int, bound int) (ans []int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function powerfulIntegers(x: number, y: number, bound: number): number[] {
     const ans = new Set<number>();
@@ -157,6 +183,8 @@ function powerfulIntegers(x: number, y: number, bound: number): number[] {
     return Array.from(ans);
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -184,4 +212,6 @@ var powerfulIntegers = function (x, y, bound) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

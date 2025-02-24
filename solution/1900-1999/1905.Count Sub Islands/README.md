@@ -1,10 +1,26 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1905.Count%20Sub%20Islands/README.md
+rating: 1678
+source: 第 246 场周赛 Q3
+tags:
+    - 深度优先搜索
+    - 广度优先搜索
+    - 并查集
+    - 数组
+    - 矩阵
+---
+
+<!-- problem:start -->
+
 # [1905. 统计子岛屿](https://leetcode.cn/problems/count-sub-islands)
 
 [English Version](/solution/1900-1999/1905.Count%20Sub%20Islands/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你两个 <code>m x n</code> 的二进制矩阵 <code>grid1</code> 和 <code>grid2</code> ，它们只包含 <code>0</code> （表示水域）和 <code>1</code> （表示陆地）。一个 <strong>岛屿</strong> 是由 <strong>四个方向</strong> （水平或者竖直）上相邻的 <code>1</code> 组成的区域。任何矩阵以外的区域都视为水域。</p>
 
@@ -41,7 +57,11 @@ grid2 中标红的 1 区域是子岛屿，总共有 2 个子岛屿。
 	<li><code>grid1[i][j]</code> 和 <code>grid2[i][j]</code> 都要么是 <code>0</code> 要么是 <code>1</code> 。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：DFS
 
@@ -50,6 +70,8 @@ grid2 中标红的 1 区域是子岛屿，总共有 2 个子岛屿。
 时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是矩阵 `grid1` 和 `grid2` 的行数和列数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -67,6 +89,8 @@ class Solution:
         dirs = (-1, 0, 1, 0, -1)
         return sum(dfs(i, j) for i in range(m) for j in range(n) if grid2[i][j])
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -106,6 +130,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -136,6 +162,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func countSubIslands(grid1 [][]int, grid2 [][]int) (ans int) {
 	m, n := len(grid1), len(grid1[0])
@@ -162,6 +190,8 @@ func countSubIslands(grid1 [][]int, grid2 [][]int) (ans int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function countSubIslands(grid1: number[][], grid2: number[][]): number {
@@ -190,34 +220,37 @@ function countSubIslands(grid1: number[][], grid2: number[][]): number {
 }
 ```
 
-<!-- tabs:end -->
+#### JavaScript
 
-### 方法二
-
-<!-- tabs:start -->
-
-```python
-class Solution:
-    def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int:
-        def bfs(i: int, j: int) -> int:
-            ok = grid1[i][j]
-            q = deque([(i, j)])
-            grid2[i][j] = 0
-            while q:
-                i, j = q.popleft()
-                for a, b in pairwise(dirs):
-                    x, y = i + a, j + b
-                    if 0 <= x < m and 0 <= y < n and grid2[x][y]:
-                        q.append((x, y))
-                        ok = ok & grid1[x][y]
-                        grid2[x][y] = 0
-            return ok
-
-        m, n = len(grid1), len(grid1[0])
-        dirs = (-1, 0, 1, 0, -1)
-        return sum(bfs(i, j) for i in range(m) for j in range(n) if grid2[i][j])
+```js
+function countSubIslands(grid1, grid2) {
+    const [m, n] = [grid1.length, grid1[0].length];
+    let ans = 0;
+    const dirs = [-1, 0, 1, 0, -1];
+    const dfs = (i, j) => {
+        let ok = grid1[i][j];
+        grid2[i][j] = 0;
+        for (let k = 0; k < 4; ++k) {
+            const [x, y] = [i + dirs[k], j + dirs[k + 1]];
+            if (x >= 0 && x < m && y >= 0 && y < n && grid2[x][y]) {
+                ok &= dfs(x, y);
+            }
+        }
+        return ok;
+    };
+    for (let i = 0; i < m; ++i) {
+        for (let j = 0; j < n; j++) {
+            if (grid2[i][j]) {
+                ans += dfs(i, j);
+            }
+        }
+    }
+    return ans;
+}
 ```
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

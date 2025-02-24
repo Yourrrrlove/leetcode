@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1944.Number%20of%20Visible%20People%20in%20a%20Queue/README.md
+rating: 2104
+source: 第 57 场双周赛 Q4
+tags:
+    - 栈
+    - 数组
+    - 单调栈
+---
+
+<!-- problem:start -->
+
 # [1944. 队列中可以看到的人数](https://leetcode.cn/problems/number-of-visible-people-in-a-queue)
 
 [English Version](/solution/1900-1999/1944.Number%20of%20Visible%20People%20in%20a%20Queue/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>有&nbsp;<code>n</code>&nbsp;个人排成一个队列，<strong>从左到右</strong>&nbsp;编号为&nbsp;<code>0</code>&nbsp;到&nbsp;<code>n - 1</code>&nbsp;。给你以一个整数数组&nbsp;<code>heights</code>&nbsp;，每个整数 <strong>互不相同</strong>，<code>heights[i]</code>&nbsp;表示第&nbsp;<code>i</code>&nbsp;个人的高度。</p>
 
@@ -48,27 +62,33 @@
 	<li><code>heights</code>&nbsp;中所有数 <strong>互不相同</strong>&nbsp;。</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：单调栈
 
 我们观察发现，对于第 $i$ 个人来说，他能看到的人一定是按从左到右高度严格单调递增的。
 
-因此，我们可以倒序遍历数组 $heights$，用一个从栈顶到栈底单调递增的栈 $stk$ 记录已经遍历过的人的高度。
+因此，我们可以倒序遍历数组 $\textit{heights}$，用一个从栈顶到栈底单调递增的栈 $\textit{stk}$ 记录已经遍历过的人的高度。
 
-对于第 $i$ 个人，如果栈不为空并且栈顶元素小于 $heights[i]$，累加当前第 $i$ 个人能看到的人数，然后将栈顶元素出栈，直到栈为空或者栈顶元素大于等于 $heights[i]$。如果此时栈不为空，说明栈顶元素大于等于 $heights[i]$，那么第 $i$ 个人能看到的人数还要再加 $1$。
+对于第 $i$ 个人，如果栈不为空并且栈顶元素小于 $\textit{heights}[i]$，累加当前第 $i$ 个人能看到的人数，然后将栈顶元素出栈，直到栈为空或者栈顶元素大于等于 $\textit{heights}[i]$。如果此时栈不为空，说明栈顶元素大于等于 $\textit{heights}[i]$，那么第 $i$ 个人能看到的人数还要再加 $1$。
 
-接下来，我们将 $heights[i]$ 入栈，继续遍历下一个人。
+接下来，我们将 $\textit{heights}[i]$ 入栈，继续遍历下一个人。
 
-遍历结束后，返回答案数组 $ans$。
+遍历结束后，返回答案数组 $\textit{ans}$。
 
-时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $heights$ 的长度。
+时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $\textit{heights}$ 的长度。
 
 相似题目：
 
--   [2282. 在一个网格中可以看到的人数](/solution/2200-2299/2282.Number%20of%20People%20That%20Can%20Be%20Seen%20in%20a%20Grid/README.md)
+-   [2282. 在一个网格中可以看到的人数](https://github.com/doocs/leetcode/blob/main/solution/2200-2299/2282.Number%20of%20People%20That%20Can%20Be%20Seen%20in%20a%20Grid/README.md)
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -85,6 +105,8 @@ class Solution:
             stk.append(heights[i])
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -106,6 +128,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -129,6 +153,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func canSeePersonsCount(heights []int) []int {
 	n := len(heights)
@@ -148,6 +174,8 @@ func canSeePersonsCount(heights []int) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function canSeePersonsCount(heights: number[]): number[] {
     const n = heights.length;
@@ -166,6 +194,8 @@ function canSeePersonsCount(heights: number[]): number[] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -187,6 +217,8 @@ impl Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 /**
@@ -214,4 +246,6 @@ int* canSeePersonsCount(int* heights, int heightsSize, int* returnSize) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

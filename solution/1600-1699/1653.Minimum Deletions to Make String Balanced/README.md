@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1653.Minimum%20Deletions%20to%20Make%20String%20Balanced/README.md
+rating: 1793
+source: 第 39 场双周赛 Q2
+tags:
+    - 栈
+    - 字符串
+    - 动态规划
+---
+
+<!-- problem:start -->
+
 # [1653. 使字符串平衡的最少删除次数](https://leetcode.cn/problems/minimum-deletions-to-make-string-balanced)
 
 [English Version](/solution/1600-1699/1653.Minimum%20Deletions%20to%20Make%20String%20Balanced/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个字符串&nbsp;<code>s</code>&nbsp;，它仅包含字符&nbsp;<code>'a'</code> 和&nbsp;<code>'b'</code>​​​​ 。</p>
 
@@ -41,7 +55,11 @@
 	<li><code>s[i]</code>&nbsp;要么是&nbsp;<code>'a'</code> 要么是&nbsp;<code>'b'</code>​<strong>&nbsp;</strong>。​</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：动态规划
 
@@ -65,9 +83,11 @@ $$
 
 我们注意到，状态转移方程中只与前一个状态以及变量 $b$ 有关，因此我们可以仅用一个答案变量 $ans$ 维护当前的 $f[i]$，并不需要开辟数组 $f$。
 
-时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为字符串 $s$ 的长度。
+时间复杂度 $O(n)$，其中 $n$ 为字符串 $s$ 的长度。空间复杂度 $O(1)$。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -83,6 +103,8 @@ class Solution:
                 f[i] = min(f[i - 1] + 1, b)
         return f[n]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -102,6 +124,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -124,6 +148,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minimumDeletions(s string) int {
 	n := len(s)
@@ -142,13 +168,15 @@ func minimumDeletions(s string) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minimumDeletions(s: string): number {
     const n = s.length;
     const f = new Array(n + 1).fill(0);
     let b = 0;
     for (let i = 1; i <= n; ++i) {
-        if (s.charAt(i - 1) === 'b') {
+        if (s[i - 1] === 'b') {
             f[i] = f[i - 1];
             ++b;
         } else {
@@ -159,7 +187,34 @@ function minimumDeletions(s: string): number {
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var minimumDeletions = function (s) {
+    const n = s.length;
+    const f = new Array(n + 1).fill(0);
+    let b = 0;
+    for (let i = 1; i <= n; ++i) {
+        if (s[i - 1] === 'b') {
+            f[i] = f[i - 1];
+            ++b;
+        } else {
+            f[i] = Math.min(f[i - 1] + 1, b);
+        }
+    }
+    return f[n];
+};
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### 方法二：枚举 + 前缀和
 
@@ -170,6 +225,8 @@ function minimumDeletions(s: string): number {
 时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为字符串 $s$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -182,6 +239,8 @@ class Solution:
                 ans = min(ans + 1, b)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -200,6 +259,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -217,6 +278,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minimumDeletions(s string) int {
 	ans, b := 0, 0
@@ -231,13 +294,14 @@ func minimumDeletions(s string) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minimumDeletions(s: string): number {
-    const n = s.length;
-    let ans = 0,
-        b = 0;
-    for (let i = 0; i < n; ++i) {
-        if (s.charAt(i) === 'b') {
+    let [ans, b] = [0, 0];
+
+    for (const ch of s) {
+        if (ch === 'b') {
             ++b;
         } else {
             ans = Math.min(ans + 1, b);
@@ -247,11 +311,38 @@ function minimumDeletions(s: string): number {
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var minimumDeletions = function (s) {
+    let [ans, b] = [0, 0];
+
+    for (const ch of s) {
+        if (ch === 'b') {
+            ++b;
+        } else {
+            ans = Math.min(ans + 1, b);
+        }
+    }
+    return ans;
+};
+```
+
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### 方法三
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -264,6 +355,8 @@ class Solution:
             lb += c == 'b'
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -286,6 +379,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -301,6 +396,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func minimumDeletions(s string) int {
@@ -321,26 +418,96 @@ func minimumDeletions(s string) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minimumDeletions(s: string): number {
-    let lb = 0,
-        ra = 0;
-    const n = s.length;
-    for (let i = 0; i < n; ++i) {
-        if (s.charAt(i) === 'a') {
-            ++ra;
-        }
-    }
-    let ans = n;
-    for (let i = 0; i < n; ++i) {
-        ra -= s.charAt(i) === 'a' ? 1 : 0;
+    let ra = [...s].reduce((acc, x) => (x === 'a' ? acc + 1 : acc), 0);
+    let lb = 0;
+
+    let ans = s.length;
+    for (const ch of s) {
+        if (ch === 'a') ra--;
         ans = Math.min(ans, lb + ra);
-        lb += s.charAt(i) === 'b' ? 1 : 0;
+        if (ch === 'b') lb++;
     }
     return ans;
 }
 ```
 
+#### JavaScript
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var minimumDeletions = function (s) {
+    let ra = [...s].reduce((acc, x) => (x === 'a' ? acc + 1 : acc), 0);
+    let lb = 0;
+
+    let ans = s.length;
+    for (const ch of s) {
+        if (ch === 'a') ra--;
+        ans = Math.min(ans, lb + ra);
+        if (ch === 'b') lb++;
+    }
+    return ans;
+};
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### Solution 4: Stack
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+function minimumDeletions(s: string): number {
+    const stk: string[] = [];
+    let res = 0;
+
+    for (const ch of s) {
+        if (stk.at(-1) === 'b' && ch === 'a') {
+            stk.pop();
+            res++;
+        } else stk.push(ch);
+    }
+
+    return res;
+}
+```
+
+#### JavaScript
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var minimumDeletions = function (s) {
+    const stk = [];
+    let res = 0;
+
+    for (const ch of s) {
+        if (stk.at(-1) === 'b' && ch === 'a') {
+            stk.pop();
+            res++;
+        } else stk.push(ch);
+    }
+
+    return res;
+};
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

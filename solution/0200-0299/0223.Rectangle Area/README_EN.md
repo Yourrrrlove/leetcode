@@ -1,8 +1,21 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0223.Rectangle%20Area/README_EN.md
+tags:
+    - Geometry
+    - Math
+---
+
+<!-- problem:start -->
+
 # [223. Rectangle Area](https://leetcode.com/problems/rectangle-area)
 
 [中文文档](/solution/0200-0299/0223.Rectangle%20Area/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given the coordinates of two <strong>rectilinear</strong> rectangles in a 2D plane, return <em>the total area covered by the two rectangles</em>.</p>
 
@@ -35,7 +48,11 @@
 	<li><code>-10<sup>4</sup> &lt;= by1 &lt;= by2 &lt;= 10<sup>4</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Calculate Overlapping Area
 
@@ -44,6 +61,8 @@ First, we calculate the area of the two rectangles separately, denoted as $a$ an
 The time complexity is $O(1)$, and the space complexity is $O(1)$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -65,6 +84,8 @@ class Solution:
         return a + b - max(height, 0) * max(width, 0)
 ```
 
+#### Java
+
 ```java
 class Solution {
     public int computeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
@@ -76,6 +97,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -90,6 +113,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func computeArea(ax1 int, ay1 int, ax2 int, ay2 int, bx1 int, by1 int, bx2 int, by2 int) int {
 	a := (ax2 - ax1) * (ay2 - ay1)
@@ -99,6 +124,8 @@ func computeArea(ax1 int, ay1 int, ax2 int, ay2 int, bx1 int, by1 int, bx2 int, 
 	return a + b - max(height, 0)*max(width, 0)
 }
 ```
+
+#### TypeScript
 
 ```ts
 function computeArea(
@@ -119,6 +146,8 @@ function computeArea(
 }
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public int ComputeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
@@ -133,4 +162,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

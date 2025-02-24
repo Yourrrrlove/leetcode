@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1996.The%20Number%20of%20Weak%20Characters%20in%20the%20Game/README_EN.md
+rating: 1860
+source: Weekly Contest 257 Q2
+tags:
+    - Stack
+    - Greedy
+    - Array
+    - Sorting
+    - Monotonic Stack
+---
+
+<!-- problem:start -->
+
 # [1996. The Number of Weak Characters in the Game](https://leetcode.com/problems/the-number-of-weak-characters-in-the-game)
 
 [中文文档](/solution/1900-1999/1996.The%20Number%20of%20Weak%20Characters%20in%20the%20Game/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are playing a game that contains multiple characters, and each of the characters has <strong>two</strong> main properties: <strong>attack</strong> and <strong>defense</strong>. You are given a 2D integer array <code>properties</code> where <code>properties[i] = [attack<sub>i</sub>, defense<sub>i</sub>]</code> represents the properties of the <code>i<sup>th</sup></code> character in the game.</p>
 
@@ -44,11 +62,25 @@
 	<li><code>1 &lt;= attack<sub>i</sub>, defense<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Sorting + Traversal
+
+We can sort all characters in descending order of attack power and ascending order of defense power.
+
+Then, traverse all characters. For the current character, if its defense power is less than the previous maximum defense power, it is a weak character, and we increment the answer by one. Otherwise, update the maximum defense power.
+
+After the traversal, we get the answer.
+
+The time complexity is $O(n \times \log n)$, and the space complexity is $O(\log n)$. Here, $n$ is the number of characters.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -60,6 +92,8 @@ class Solution:
             mx = max(mx, x)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -77,6 +111,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -91,6 +127,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func numberOfWeakCharacters(properties [][]int) (ans int) {
@@ -113,6 +151,8 @@ func numberOfWeakCharacters(properties [][]int) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function numberOfWeakCharacters(properties: number[][]): number {
     properties.sort((a, b) => (a[0] == b[0] ? a[1] - b[1] : b[0] - a[0]));
@@ -128,6 +168,8 @@ function numberOfWeakCharacters(properties: number[][]): number {
     return ans;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -151,4 +193,6 @@ var numberOfWeakCharacters = function (properties) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

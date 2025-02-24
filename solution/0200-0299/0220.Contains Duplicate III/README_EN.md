@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0220.Contains%20Duplicate%20III/README_EN.md
+tags:
+    - Array
+    - Bucket Sort
+    - Ordered Set
+    - Sorting
+    - Sliding Window
+---
+
+<!-- problem:start -->
+
 # [220. Contains Duplicate III](https://leetcode.com/problems/contains-duplicate-iii)
 
 [中文文档](/solution/0200-0299/0220.Contains%20Duplicate%20III/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given an integer array <code>nums</code> and two integers <code>indexDiff</code> and <code>valueDiff</code>.</p>
 
@@ -47,7 +63,11 @@ abs(nums[i] - nums[j]) &lt;= valueDiff --&gt; abs(1 - 1) &lt;= 0
 	<li><code>0 &lt;= valueDiff &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Sliding Window + Ordered Set
 
@@ -59,10 +79,9 @@ The time complexity is $O(n \times \log k)$, where $n$ is the length of the arra
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
-from sortedcontainers import SortedSet
-
-
 class Solution:
     def containsNearbyAlmostDuplicate(
         self, nums: List[int], indexDiff: int, valueDiff: int
@@ -77,6 +96,8 @@ class Solution:
                 s.remove(nums[i - indexDiff])
         return False
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -97,6 +118,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -112,6 +135,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func containsNearbyAlmostDuplicate(nums []int, k int, t int) bool {
@@ -136,6 +161,8 @@ func containsNearbyAlmostDuplicate(nums []int, k int, t int) bool {
 	return false
 }
 ```
+
+#### TypeScript
 
 ```ts
 function containsNearbyAlmostDuplicate(
@@ -798,6 +825,8 @@ class TreeMultiSet<T = number> {
 }
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public bool ContainsNearbyAlmostDuplicate(int[] nums, int k, int t) {
@@ -826,4 +855,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

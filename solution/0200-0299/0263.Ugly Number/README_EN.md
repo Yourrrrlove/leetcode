@@ -1,10 +1,22 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0200-0299/0263.Ugly%20Number/README_EN.md
+tags:
+    - Math
+---
+
+<!-- problem:start -->
+
 # [263. Ugly Number](https://leetcode.com/problems/ugly-number)
 
 [中文文档](/solution/0200-0299/0263.Ugly%20Number/README.md)
 
 ## Description
 
-<p>An <strong>ugly number</strong> is a positive integer whose prime factors are limited to <code>2</code>, <code>3</code>, and <code>5</code>.</p>
+<!-- description:start -->
+
+<p>An <strong>ugly number</strong> is a <em>positive</em> integer which does not have a prime factor other than 2, 3, and 5.</p>
 
 <p>Given an integer <code>n</code>, return <code>true</code> <em>if</em> <code>n</code> <em>is an <strong>ugly number</strong></em>.</p>
 
@@ -22,7 +34,7 @@
 <pre>
 <strong>Input:</strong> n = 1
 <strong>Output:</strong> true
-<strong>Explanation:</strong> 1 has no prime factors, therefore all of its prime factors are limited to 2, 3, and 5.
+<strong>Explanation:</strong> 1 has no prime factors.
 </pre>
 
 <p><strong class="example">Example 3:</strong></p>
@@ -40,11 +52,17 @@
 	<li><code>-2<sup>31</sup> &lt;= n &lt;= 2<sup>31</sup> - 1</code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -56,6 +74,8 @@ class Solution:
                 n //= x
         return n == 1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -74,6 +94,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -94,6 +116,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func isUgly(n int) bool {
 	if n < 1 {
@@ -107,6 +131,8 @@ func isUgly(n int) bool {
 	return n == 1
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -127,6 +153,8 @@ var isUgly = function (n) {
     return n === 1;
 };
 ```
+
+#### PHP
 
 ```php
 class Solution {
@@ -153,4 +181,6 @@ class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

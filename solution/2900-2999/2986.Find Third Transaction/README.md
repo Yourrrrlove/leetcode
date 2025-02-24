@@ -1,10 +1,20 @@
-# [2986. 找到第三笔交易](https://leetcode.cn/problems/find-third-transaction)
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2900-2999/2986.Find%20Third%20Transaction/README.md
+tags:
+    - 数据库
+---
+
+<!-- problem:start -->
+
+# [2986. 找到第三笔交易 🔒](https://leetcode.cn/problems/find-third-transaction)
 
 [English Version](/solution/2900-2999/2986.Find%20Third%20Transaction/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>表：&nbsp;<code>Transactions</code></p>
 
@@ -20,7 +30,7 @@
 该表包含 user_id, spend,和 transaction_date。
 </pre>
 
-<p>编写一个查询，找到每个用户的 <strong>第三笔交易</strong> （如果他们有至少三笔交易），其中 <strong>前两笔交易</strong> 的花费&nbsp;<strong>低于&nbsp;第三笔交易</strong>的花费。</p>
+<p>编写一个查询，找到符合要求的用户的 <strong>第三笔交易</strong> （如果他们有至少三笔交易），并且满足&nbsp;<strong>前两笔交易</strong> 的花费&nbsp;<strong>低于&nbsp;第三笔交易</strong>的花费。</p>
 
 <p>返回&nbsp;<em>按 <strong>升序</strong>&nbsp;<code>user_id</code>&nbsp;排序的结果表。</em></p>
 
@@ -60,11 +70,17 @@ Transactions table:
 
 </pre>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -97,4 +113,6 @@ WHERE rk = 3 AND st = 1;
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

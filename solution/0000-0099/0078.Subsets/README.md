@@ -1,16 +1,28 @@
+---
+comments: true
+difficulty: 中等
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0078.Subsets/README.md
+tags:
+    - 位运算
+    - 数组
+    - 回溯
+---
+
+<!-- problem:start -->
+
 # [78. 子集](https://leetcode.cn/problems/subsets)
 
 [English Version](/solution/0000-0099/0078.Subsets/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
-<p>给你一个整数数组 <code>nums</code> ，数组中的元素 <strong>互不相同</strong> 。返回该数组所有可能的子集（幂集）。</p>
+<p>给你一个整数数组&nbsp;<code>nums</code> ，数组中的元素 <strong>互不相同</strong> 。返回该数组所有可能的<span data-keyword="subset">子集</span>（幂集）。</p>
 
 <p>解集 <strong>不能</strong> 包含重复的子集。你可以按 <strong>任意顺序</strong> 返回解集。</p>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>示例 1：</strong></p>
 
@@ -26,17 +38,21 @@
 <strong>输出：</strong>[[],[0]]
 </pre>
 
-<p> </p>
+<p>&nbsp;</p>
 
 <p><strong>提示：</strong></p>
 
 <ul>
-	<li><code>1 <= nums.length <= 10</code></li>
-	<li><code>-10 <= nums[i] <= 10</code></li>
+	<li><code>1 &lt;= nums.length &lt;= 10</code></li>
+	<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
 	<li><code>nums</code> 中的所有元素 <strong>互不相同</strong></li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：DFS(回溯)
 
@@ -50,6 +66,8 @@
 时间复杂度 $O(n\times 2^n)$，空间复杂度 $O(n)$。其中 $n$ 为数组的长度。一共有 $2^n$ 个子集，每个子集需要 $O(n)$ 的时间来构造。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -68,6 +86,8 @@ class Solution:
         dfs(0)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -94,6 +114,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -116,6 +138,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func subsets(nums []int) (ans [][]int) {
 	t := []int{}
@@ -134,6 +158,8 @@ func subsets(nums []int) (ans [][]int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function subsets(nums: number[]): number[][] {
@@ -154,28 +180,34 @@ function subsets(nums: number[]): number[][] {
 }
 ```
 
+#### Rust
+
 ```rust
 impl Solution {
-    fn dfs(i: usize, t: &mut Vec<i32>, res: &mut Vec<Vec<i32>>, nums: &Vec<i32>) {
+    fn dfs(i: usize, t: &mut Vec<i32>, ans: &mut Vec<Vec<i32>>, nums: &Vec<i32>) {
         if i == nums.len() {
-            res.push(t.clone());
+            ans.push(t.clone());
             return;
         }
-        Self::dfs(i + 1, t, res, nums);
+        Self::dfs(i + 1, t, ans, nums);
         t.push(nums[i]);
-        Self::dfs(i + 1, t, res, nums);
+        Self::dfs(i + 1, t, ans, nums);
         t.pop();
     }
 
     pub fn subsets(nums: Vec<i32>) -> Vec<Vec<i32>> {
-        let mut res = Vec::new();
-        Self::dfs(0, &mut Vec::new(), &mut res, &nums);
-        res
+        let mut ans = Vec::new();
+        Self::dfs(0, &mut Vec::new(), &mut ans, &nums);
+        ans
     }
 }
 ```
 
 <!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- solution:start -->
 
 ### 方法二：二进制枚举
 
@@ -187,6 +219,8 @@ impl Solution {
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
@@ -196,6 +230,8 @@ class Solution:
             ans.append(t)
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -215,6 +251,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -236,6 +274,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func subsets(nums []int) (ans [][]int) {
 	n := len(nums)
@@ -251,6 +291,8 @@ func subsets(nums []int) (ans [][]int) {
 	return
 }
 ```
+
+#### TypeScript
 
 ```ts
 function subsets(nums: number[]): number[][] {
@@ -269,6 +311,29 @@ function subsets(nums: number[]): number[][] {
 }
 ```
 
+#### Rust
+
+```rust
+impl Solution {
+    pub fn subsets(nums: Vec<i32>) -> Vec<Vec<i32>> {
+        let n = nums.len();
+        let mut ans = Vec::new();
+        for mask in 0..(1 << n) {
+            let mut t = Vec::new();
+            for i in 0..n {
+                if (mask >> i) & 1 == 1 {
+                    t.push(nums[i]);
+                }
+            }
+            ans.push(t);
+        }
+        ans
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

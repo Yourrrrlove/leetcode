@@ -1,8 +1,20 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0092.Reverse%20Linked%20List%20II/README_EN.md
+tags:
+    - Linked List
+---
+
+<!-- problem:start -->
+
 # [92. Reverse Linked List II](https://leetcode.com/problems/reverse-linked-list-ii)
 
 [中文文档](/solution/0000-0099/0092.Reverse%20Linked%20List%20II/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given the <code>head</code> of a singly linked list and two integers <code>left</code> and <code>right</code> where <code>left &lt;= right</code>, reverse the nodes of the list from position <code>left</code> to position <code>right</code>, and return <em>the reversed list</em>.</p>
 
@@ -34,7 +46,11 @@
 <p>&nbsp;</p>
 <strong>Follow up:</strong> Could you do it in one pass?
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Simulation
 
@@ -43,6 +59,8 @@ Define a dummy head node `dummy`, pointing to the head node `head` of the linked
 The time complexity is $O(n)$, and the space complexity is $O(1)$. Here, $n$ is the length of the linked list.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 # Definition for singly-linked list.
@@ -70,6 +88,8 @@ class Solution:
         q.next = cur
         return dummy.next
 ```
+
+#### Java
 
 ```java
 /**
@@ -108,6 +128,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 /**
  * Definition for singly-linked list.
@@ -145,6 +167,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 /**
  * Definition for singly-linked list.
@@ -175,6 +199,8 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	return dummy.Next
 }
 ```
+
+#### TypeScript
 
 ```ts
 /**
@@ -216,6 +242,8 @@ function reverseBetween(head: ListNode | null, left: number, right: number): Lis
 }
 ```
 
+#### Rust
+
 ```rust
 // Definition for singly-linked list.
 // #[derive(PartialEq, Eq, Clone, Debug)]
@@ -237,7 +265,7 @@ impl Solution {
     pub fn reverse_between(
         head: Option<Box<ListNode>>,
         left: i32,
-        right: i32
+        right: i32,
     ) -> Option<Box<ListNode>> {
         let mut dummy = Some(Box::new(ListNode { val: 0, next: head }));
         let mut pre = &mut dummy;
@@ -259,6 +287,8 @@ impl Solution {
     }
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -297,6 +327,8 @@ var reverseBetween = function (head, left, right) {
     return dummy.next;
 };
 ```
+
+#### C#
 
 ```cs
 /**
@@ -338,4 +370,6 @@ public class Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

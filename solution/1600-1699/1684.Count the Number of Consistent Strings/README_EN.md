@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Easy
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1600-1699/1684.Count%20the%20Number%20of%20Consistent%20Strings/README_EN.md
+rating: 1288
+source: Biweekly Contest 41 Q1
+tags:
+    - Bit Manipulation
+    - Array
+    - Hash Table
+    - String
+    - Counting
+---
+
+<!-- problem:start -->
+
 # [1684. Count the Number of Consistent Strings](https://leetcode.com/problems/count-the-number-of-consistent-strings)
 
 [中文文档](/solution/1600-1699/1684.Count%20the%20Number%20of%20Consistent%20Strings/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>You are given a string <code>allowed</code> consisting of <strong>distinct</strong> characters and an array of strings <code>words</code>. A string is <strong>consistent </strong>if all characters in the string appear in the string <code>allowed</code>.</p>
 
@@ -44,7 +62,11 @@
 	<li><code>words[i]</code> and <code>allowed</code> contain only lowercase English letters.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Hash Table or Array
 
@@ -54,12 +76,16 @@ The time complexity is $O(m)$, and the space complexity is $O(C)$. Here, $m$ is 
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
         s = set(allowed)
         return sum(all(c in s for c in w) for w in words)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -88,6 +114,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -105,6 +133,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func countConsistentStrings(allowed string, words []string) (ans int) {
@@ -129,6 +159,8 @@ func countConsistentStrings(allowed string, words []string) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function countConsistentStrings(allowed: string, words: string[]): number {
     const set = new Set([...allowed]);
@@ -145,6 +177,8 @@ function countConsistentStrings(allowed: string, words: string[]): number {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -167,6 +201,8 @@ impl Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 int countConsistentStrings(char* allowed, char** words, int wordsSize) {
@@ -191,6 +227,10 @@ int countConsistentStrings(char* allowed, char** words, int wordsSize) {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### Solution 2: Bit Manipulation
 
 We can also use a single integer to represent the occurrence of characters in each string. In this integer, each bit in the binary representation indicates whether a character appears.
@@ -203,6 +243,8 @@ The time complexity is $O(m)$, where $m$ is the total length of all strings. The
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
@@ -212,6 +254,8 @@ class Solution:
         mask = f(allowed)
         return sum((mask | f(w)) == mask for w in words)
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -236,6 +280,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -252,6 +298,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func countConsistentStrings(allowed string, words []string) (ans int) {
@@ -272,6 +320,8 @@ func countConsistentStrings(allowed string, words []string) (ans int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function countConsistentStrings(allowed: string, words: string[]): number {
     const helper = (s: string) => {
@@ -291,6 +341,8 @@ function countConsistentStrings(allowed: string, words: string[]): number {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -314,6 +366,8 @@ impl Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 int helper(char* s) {
@@ -339,4 +393,6 @@ int countConsistentStrings(char* allowed, char** words, int wordsSize) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

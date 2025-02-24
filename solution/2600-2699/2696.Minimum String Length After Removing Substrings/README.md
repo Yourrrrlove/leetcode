@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2600-2699/2696.Minimum%20String%20Length%20After%20Removing%20Substrings/README.md
+rating: 1282
+source: 第 346 场周赛 Q1
+tags:
+    - 栈
+    - 字符串
+    - 模拟
+---
+
+<!-- problem:start -->
+
 # [2696. 删除子串后的字符串最小长度](https://leetcode.cn/problems/minimum-string-length-after-removing-substrings)
 
 [English Version](/solution/2600-2699/2696.Minimum%20String%20Length%20After%20Removing%20Substrings/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个仅由 <strong>大写</strong> 英文字符组成的字符串 <code>s</code> 。</p>
 
@@ -45,7 +59,11 @@
 	<li><code>s</code> 仅由大写英文字母组成</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：栈
 
@@ -59,6 +77,8 @@
 
 <!-- tabs:start -->
 
+#### Python3
+
 ```python
 class Solution:
     def minLength(self, s: str) -> int:
@@ -70,6 +90,8 @@ class Solution:
                 stk.append(c)
         return len(stk) - 1
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -88,6 +110,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -105,6 +129,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func minLength(s string) int {
 	stk := []byte{' '}
@@ -119,21 +145,39 @@ func minLength(s string) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function minLength(s: string): number {
-    const stk: string[] = [''];
+    const stk: string[] = [];
     for (const c of s) {
-        if (c === 'B' && stk.at(-1)! === 'A') {
-            stk.pop();
-        } else if (c === 'D' && stk.at(-1)! === 'C') {
+        if ((stk.at(-1) === 'A' && c === 'B') || (stk.at(-1) === 'C' && c === 'D')) {
             stk.pop();
         } else {
             stk.push(c);
         }
     }
-    return stk.length - 1;
+    return stk.length;
 }
 ```
+
+#### JavaScript
+
+```js
+function minLength(s) {
+    const stk = [];
+    for (const c of s) {
+        if ((stk.at(-1) === 'A' && c === 'B') || (stk.at(-1) === 'C' && c === 'D')) {
+            stk.pop();
+        } else {
+            stk.push(c);
+        }
+    }
+    return stk.length;
+}
+```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -161,4 +205,30 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### 方法二：递归（一行代码）
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+const minLength = (s: string, n = s.length): number =>
+    ((s = s.replace(/AB|CD/g, '')), s.length === n) ? n : minLength(s);
+```
+
+#### JavaScript
+
+```js
+const minLength = (s, n = s.length) =>
+    ((s = s.replace(/AB|CD/g, '')), s.length === n) ? n : minLength(s);
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

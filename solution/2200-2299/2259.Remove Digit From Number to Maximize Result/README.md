@@ -1,10 +1,24 @@
+---
+comments: true
+difficulty: 简单
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2200-2299/2259.Remove%20Digit%20From%20Number%20to%20Maximize%20Result/README.md
+rating: 1331
+source: 第 291 场周赛 Q1
+tags:
+    - 贪心
+    - 字符串
+    - 枚举
+---
+
+<!-- problem:start -->
+
 # [2259. 移除指定数字得到的最大结果](https://leetcode.cn/problems/remove-digit-from-number-to-maximize-result)
 
 [English Version](/solution/2200-2299/2259.Remove%20Digit%20From%20Number%20to%20Maximize%20Result/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>给你一个表示某个正整数的字符串 <code>number</code> 和一个字符 <code>digit</code> 。</p>
 
@@ -49,15 +63,21 @@
 	<li><code>digit</code> 在 <code>number</code> 中出现至少一次</li>
 </ul>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：暴力枚举
 
-我们可以枚举字符串 $number$ 的所有位置 $i$，如果 $number[i] = digit$，那么我们取 $number$ 的前缀 $number[0:i]$ 和后缀 $number[i+1:]$ 拼接起来，即为移除 $number[i]$ 后的结果。我们取所有可能的结果中最大的即可。
+我们可以枚举字符串 $\textit{number}$ 的所有位置 $\textit{i}$，如果 $\textit{number}[i] = \textit{digit}$，那么我们取 $\textit{number}$ 的前缀 $\textit{number}[0:i]$ 和后缀 $\textit{number}[i+1:]$ 拼接起来，即为移除 $\textit{number}[i]$ 后的结果。我们取所有可能的结果中最大的即可。
 
-时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 为字符串 $number$ 的长度。
+时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 为字符串 $\textit{number}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -66,6 +86,8 @@ class Solution:
             number[:i] + number[i + 1 :] for i, d in enumerate(number) if d == digit
         )
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -84,6 +106,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -104,6 +128,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func removeDigit(number string, digit byte) string {
 	ans := "0"
@@ -118,6 +144,8 @@ func removeDigit(number string, digit byte) string {
 	return ans
 }
 ```
+
+#### TypeScript
 
 ```ts
 function removeDigit(number: string, digit: string): string {
@@ -134,6 +162,8 @@ function removeDigit(number: string, digit: string): string {
     return number.substring(0, last) + number.substring(last + 1);
 }
 ```
+
+#### PHP
 
 ```php
 class Solution {
@@ -159,15 +189,21 @@ class Solution {
 
 <!-- tabs:end -->
 
+<!-- solution:end -->
+
+<!-- solution:start -->
+
 ### 方法二：贪心
 
-我们可以枚举字符串 $number$ 的所有位置 $i$，如果 $number[i] = digit$，记录 $digit$ 最后一次出现的位置 $last$，并且如果 $i + 1 \lt n$ 且 $number[i] \lt number[i + 1]$，那么我们可以直接返回 $number[0:i] + number[i+1:]$，即为移除 $number[i]$ 后的结果。这是因为如果 $number[i] < number[i + 1]$，那么移除 $number[i]$ 后，结果一定会更大。
+我们可以枚举字符串 $\textit{number}$ 的所有位置 $\textit{i}$，如果 $\textit{number}[i] = \textit{digit}$，记录 $\textit{digit}$ 最后一次出现的位置 $\textit{last}$，并且如果 $\textit{i} + 1 < \textit{n}$ 且 $\textit{number}[i] < \textit{number}[i + 1]$，那么我们可以直接返回 $\textit{number}[0:i] + \textit{number}[i+1:]$，即为移除 $\textit{number}[i]$ 后的结果。这是因为如果 $\textit{number}[i] < \textit{number}[i + 1]$，那么移除 $\textit{number}[i]$ 后，结果一定会更大。
 
-遍历结束，我们返回 $number[0:last] + number[last+1:]$ 即可。
+遍历结束，我们返回 $\textit{number}[0:\textit{last}] + \textit{number}[\textit{last}+1:]$ 即可。
 
-时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为字符串 $number$ 的长度。
+时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为字符串 $\textit{number}$ 的长度。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -181,6 +217,8 @@ class Solution:
                     break
         return number[:last] + number[last + 1 :]
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -200,6 +238,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -221,6 +261,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func removeDigit(number string, digit byte) string {
 	last := -1
@@ -239,4 +281,6 @@ func removeDigit(number string, digit byte) string {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

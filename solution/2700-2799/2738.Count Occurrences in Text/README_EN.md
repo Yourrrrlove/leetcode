@@ -1,8 +1,20 @@
-# [2738. Count Occurrences in Text](https://leetcode.com/problems/count-occurrences-in-text)
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2700-2799/2738.Count%20Occurrences%20in%20Text/README_EN.md
+tags:
+    - Database
+---
+
+<!-- problem:start -->
+
+# [2738. Count Occurrences in Text 🔒](https://leetcode.com/problems/count-occurrences-in-text)
 
 [中文文档](/solution/2700-2799/2738.Count%20Occurrences%20in%20Text/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Table:<font face="monospace"> <code>Files</code></font></p>
 
@@ -54,11 +66,17 @@ Files table:
 
 </pre>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### MySQL
 
 ```sql
 # Write your MySQL query statement below
@@ -73,4 +91,6 @@ WHERE content LIKE '% bear %';
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

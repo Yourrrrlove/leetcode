@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/2500-2599/2596.Check%20Knight%20Tour%20Configuration/README_EN.md
+rating: 1448
+source: Weekly Contest 337 Q2
+tags:
+    - Depth-First Search
+    - Breadth-First Search
+    - Array
+    - Matrix
+    - Simulation
+---
+
+<!-- problem:start -->
+
 # [2596. Check Knight Tour Configuration](https://leetcode.com/problems/check-knight-tour-configuration)
 
 [中文文档](/solution/2500-2599/2596.Check%20Knight%20Tour%20Configuration/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There is a knight on an <code>n x n</code> chessboard. In a valid configuration, the knight starts <strong>at the top-left cell</strong> of the board and visits every cell on the board <strong>exactly once</strong>.</p>
 
@@ -39,17 +57,23 @@
 	<li>All integers in <code>grid</code> are <strong>unique</strong>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Simulation
 
-We first use the array $pos$ to record the coordinates of the grid visited by the knight, and then traverse the $pos$ array to check whether the difference between the adjacent two grid coordinates is $(1, 2)$ or $(2, 1)$. If not, return `false`.
+We first use an array $\textit{pos}$ to record the coordinates of each cell visited by the knight, then traverse the $\textit{pos}$ array and check if the coordinate difference between two adjacent cells is $(1, 2)$ or $(2, 1)$. If not, return $\textit{false}$.
 
-Otherwise, return `true` after the traversal ends.
+Otherwise, after the traversal, return $\textit{true}$.
 
-The time complexity is $O(n^2)$ and the space complexity is $O(n^2)$, where $n$ is the length of the chessboard.
+The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Here, $n$ is the side length of the chessboard.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -68,6 +92,8 @@ class Solution:
                 return False
         return True
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -97,6 +123,8 @@ class Solution {
 }
 ```
 
+#### C++
+
 ```cpp
 class Solution {
 public:
@@ -125,6 +153,8 @@ public:
     }
 };
 ```
+
+#### Go
 
 ```go
 func checkValidGrid(grid [][]int) bool {
@@ -159,6 +189,8 @@ func abs(x int) int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function checkValidGrid(grid: number[][]): boolean {
     if (grid[0][0] !== 0) {
@@ -187,4 +219,6 @@ function checkValidGrid(grid: number[][]): boolean {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

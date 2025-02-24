@@ -1,8 +1,26 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1000-1099/1032.Stream%20of%20Characters/README_EN.md
+rating: 1970
+source: Weekly Contest 133 Q4
+tags:
+    - Design
+    - Trie
+    - Array
+    - String
+    - Data Stream
+---
+
+<!-- problem:start -->
+
 # [1032. Stream of Characters](https://leetcode.com/problems/stream-of-characters)
 
 [中文文档](/solution/1000-1099/1032.Stream%20of%20Characters/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Design an algorithm that accepts a stream of characters and checks if a suffix of these characters is a string of a given array of strings <code>words</code>.</p>
 
@@ -52,11 +70,17 @@ streamChecker.query(&quot;l&quot;); // return True, because &#39;kl&#39; is in t
 	<li>At most <code>4 * 10<sup>4</sup></code> calls will be made to query.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Trie:
@@ -102,6 +126,8 @@ class StreamChecker:
 # obj = StreamChecker(words)
 # param_1 = obj.query(letter)
 ```
+
+#### Java
 
 ```java
 class Trie {
@@ -159,16 +185,15 @@ class StreamChecker {
  */
 ```
 
+#### C++
+
 ```cpp
 class Trie {
+private:
+    Trie* children[26]{};
+    bool isEnd = false;
+
 public:
-    vector<Trie*> children;
-    bool isEnd;
-
-    Trie()
-        : children(26)
-        , isEnd(false) {}
-
     void insert(string& w) {
         Trie* node = this;
         reverse(w.begin(), w.end());
@@ -184,7 +209,7 @@ public:
 
     bool search(string& w) {
         Trie* node = this;
-        for (int i = w.size() - 1; ~i; --i) {
+        for (int i = w.size() - 1, j = 0; ~i && j < 201; --i, ++j) {
             int idx = w[i] - 'a';
             if (!node->children[idx]) {
                 return false;
@@ -204,7 +229,7 @@ public:
     string s;
 
     StreamChecker(vector<string>& words) {
-        for (auto&& w : words) {
+        for (auto& w : words) {
             trie->insert(w);
         }
     }
@@ -221,6 +246,8 @@ public:
  * bool param_1 = obj->query(letter);
  */
 ```
+
+#### Go
 
 ```go
 type Trie struct {
@@ -286,4 +313,6 @@ func (this *StreamChecker) Query(letter byte) bool {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

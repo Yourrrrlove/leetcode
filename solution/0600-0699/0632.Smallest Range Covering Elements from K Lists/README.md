@@ -1,10 +1,25 @@
+---
+comments: true
+difficulty: 困难
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0600-0699/0632.Smallest%20Range%20Covering%20Elements%20from%20K%20Lists/README.md
+tags:
+    - 贪心
+    - 数组
+    - 哈希表
+    - 排序
+    - 滑动窗口
+    - 堆（优先队列）
+---
+
+<!-- problem:start -->
+
 # [632. 最小区间](https://leetcode.cn/problems/smallest-range-covering-elements-from-k-lists)
 
 [English Version](/solution/0600-0699/0632.Smallest%20Range%20Covering%20Elements%20from%20K%20Lists/README_EN.md)
 
 ## 题目描述
 
-<!-- 这里写题目描述 -->
+<!-- description:start -->
 
 <p>你有&nbsp;<code>k</code>&nbsp;个 <strong>非递减排列</strong> 的整数列表。找到一个 <strong>最小 </strong>区间，使得&nbsp;<code>k</code>&nbsp;个列表中的每个列表至少有一个数包含在其中。</p>
 
@@ -44,19 +59,23 @@
 
 <p>&nbsp;</p>
 
+<!-- description:end -->
+
 ## 解法
+
+<!-- solution:start -->
 
 ### 方法一：排序 + 滑动窗口
 
-将每个数字 $v$ 及其所在的组 $i$，构成数据项 $(v, i)$，存放在一个新的列表或者数组中，记为 `t`。
+我们将每个数字 $x$ 及其所在的组 $i$，构成数据项 $(x, i)$，存放在一个新的数组 $t$ 中，然后对 $t$ 按照数字的大小进行排序（类似于将多个有序数组合并成一个新的有序数组）。
 
-对 `t` 按照数字的大小进行排序（类似于将多个有序数组合并成一个新的有序数组）。
+接下来，我们遍历 $t$ 中的每个数据项，只看其中数字所在的组，用哈希表记录滑动窗口内的数字出现的组，如果组数为 $k$，说明当前窗口满足题目要求，此时算出窗口的起始和结束位置，更新答案。
 
-然后遍历 `t` 中每个数据项，只看其中数字所在的组，用哈希表记录滑动窗口内的数字出现的组，如果组数为 $k$，说明当前窗口满足题目要求，此时算出窗口的起始和结束位置，更新答案。
-
-时间复杂度 $O(n\log n)$。其中 $n$ 是所有数字的总数。
+时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为所有数组中数字的个数。
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -81,6 +100,8 @@ class Solution:
         return ans
 ```
 
+#### Java
+
 ```java
 class Solution {
     public int[] smallestRange(List<List<Integer>> nums) {
@@ -102,7 +123,7 @@ class Solution {
         for (int[] e : t) {
             int b = e[0];
             int v = e[1];
-            cnt.put(v, cnt.getOrDefault(v, 0) + 1);
+            cnt.merge(v, 1, Integer::sum);
             while (cnt.size() == k) {
                 int a = t[j][0];
                 int w = t[j][1];
@@ -111,8 +132,7 @@ class Solution {
                     ans[0] = a;
                     ans[1] = b;
                 }
-                cnt.put(w, cnt.get(w) - 1);
-                if (cnt.get(w) == 0) {
+                if (cnt.merge(w, -1, Integer::sum) == 0) {
                     cnt.remove(w);
                 }
                 ++j;
@@ -122,6 +142,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -163,6 +185,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func smallestRange(nums [][]int) []int {
 	t := [][]int{}
@@ -194,6 +218,8 @@ func smallestRange(nums [][]int) []int {
 	return ans
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -238,4 +264,82 @@ impl Solution {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- solution:start -->
+
+### 方法二：优先队列（小根堆）
+
+<!-- tabs:start -->
+
+#### TypeScript
+
+```ts
+const smallestRange = (nums: number[][]): number[] => {
+    const pq = new MinPriorityQueue<[number, number, number]>({ priority: ([x]) => x });
+    const n = nums.length;
+    let [l, r, max] = [0, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY];
+
+    for (let j = 0; j < n; j++) {
+        const x = nums[j][0];
+        pq.enqueue([x, j, 0]);
+        max = Math.max(max, x);
+    }
+
+    while (pq.size() === n) {
+        const [min, j, i] = pq.dequeue().element;
+
+        if (max - min < r - l) {
+            [l, r] = [min, max];
+        }
+
+        const iNext = i + 1;
+        if (iNext < nums[j].length) {
+            const next = nums[j][iNext];
+            pq.enqueue([next, j, iNext]);
+            max = Math.max(max, next);
+        }
+    }
+
+    return [l, r];
+};
+```
+
+#### JavaScript
+
+```js
+const smallestRange = nums => {
+    const pq = new MinPriorityQueue({ priority: ([x]) => x });
+    const n = nums.length;
+    let [l, r, max] = [0, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY];
+
+    for (let j = 0; j < n; j++) {
+        const x = nums[j][0];
+        pq.enqueue([x, j, 0]);
+        max = Math.max(max, x);
+    }
+
+    while (pq.size() === n) {
+        const [min, j, i] = pq.dequeue().element;
+
+        if (max - min < r - l) {
+            [l, r] = [min, max];
+        }
+
+        const iNext = i + 1;
+        if (iNext < nums[j].length) {
+            const next = nums[j][iNext];
+            pq.enqueue([next, j, iNext]);
+            max = Math.max(max, next);
+        }
+    }
+
+    return [l, r];
+};
+```
+
+<!-- tabs:end -->
+
+<!-- solution:end -->
+
+<!-- problem:end -->

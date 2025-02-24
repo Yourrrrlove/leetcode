@@ -1,8 +1,24 @@
+---
+comments: true
+difficulty: Hard
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/1900-1999/1944.Number%20of%20Visible%20People%20in%20a%20Queue/README_EN.md
+rating: 2104
+source: Biweekly Contest 57 Q4
+tags:
+    - Stack
+    - Array
+    - Monotonic Stack
+---
+
+<!-- problem:start -->
+
 # [1944. Number of Visible People in a Queue](https://leetcode.com/problems/number-of-visible-people-in-a-queue)
 
 [中文文档](/solution/1900-1999/1944.Number%20of%20Visible%20People%20in%20a%20Queue/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>There are <code>n</code> people standing in a queue, and they numbered from <code>0</code> to <code>n - 1</code> in <strong>left to right</strong> order. You are given an array <code>heights</code> of <strong>distinct</strong> integers where <code>heights[i]</code> represents the height of the <code>i<sup>th</sup></code> person.</p>
 
@@ -44,11 +60,29 @@ Person 5 can see no one since nobody is to the right of them.
 	<li>All the values of <code>heights</code> are <strong>unique</strong>.</li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
 
-### Solution 1
+<!-- solution:start -->
+
+### Solution 1: Monotonic Stack
+
+We observe that for the $i$-th person, the people he can see must be strictly increasing in height from left to right.
+
+Therefore, we can traverse the array $\textit{heights}$ in reverse order, using a stack $\textit{stk}$ that is monotonically increasing from top to bottom to record the heights of the people we have traversed.
+
+For the $i$-th person, if the stack is not empty and the top element of the stack is less than $\textit{heights}[i]$, we increment the count of people the $i$-th person can see, then pop the top element of the stack, until the stack is empty or the top element of the stack is greater than or equal to $\textit{heights}[i]$. If the stack is not empty at this point, it means the top element of the stack is greater than or equal to $\textit{heights}[i]$, so we increment the count of people the $i$-th person can see by 1.
+
+Next, we push $\textit{heights}[i]$ onto the stack and continue to the next person.
+
+After traversing, we return the answer array $\textit{ans}$.
+
+The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{heights}$.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -65,6 +99,8 @@ class Solution:
             stk.append(heights[i])
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -86,6 +122,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -109,6 +147,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func canSeePersonsCount(heights []int) []int {
 	n := len(heights)
@@ -128,6 +168,8 @@ func canSeePersonsCount(heights []int) []int {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function canSeePersonsCount(heights: number[]): number[] {
     const n = heights.length;
@@ -146,6 +188,8 @@ function canSeePersonsCount(heights: number[]): number[] {
     return ans;
 }
 ```
+
+#### Rust
 
 ```rust
 impl Solution {
@@ -167,6 +211,8 @@ impl Solution {
     }
 }
 ```
+
+#### C
 
 ```c
 /**
@@ -194,4 +240,6 @@ int* canSeePersonsCount(int* heights, int heightsSize, int* returnSize) {
 
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->

@@ -1,8 +1,22 @@
+---
+comments: true
+difficulty: Medium
+edit_url: https://github.com/doocs/leetcode/edit/main/solution/0000-0099/0018.4Sum/README_EN.md
+tags:
+    - Array
+    - Two Pointers
+    - Sorting
+---
+
+<!-- problem:start -->
+
 # [18. 4Sum](https://leetcode.com/problems/4sum)
 
 [中文文档](/solution/0000-0099/0018.4Sum/README.md)
 
 ## Description
+
+<!-- description:start -->
 
 <p>Given an array <code>nums</code> of <code>n</code> integers, return <em>an array of all the <strong>unique</strong> quadruplets</em> <code>[nums[a], nums[b], nums[c], nums[d]]</code> such that:</p>
 
@@ -38,7 +52,11 @@
 	<li><code>-10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup></code></li>
 </ul>
 
+<!-- description:end -->
+
 ## Solutions
+
+<!-- solution:start -->
 
 ### Solution 1: Sorting + Double Pointers
 
@@ -53,6 +71,8 @@ Next, we enumerate the first two elements of the quadruplet, $nums[i]$ and $nums
 The time complexity is $O(n^3)$, and the space complexity is $O(\log n)$. Here, $n$ is the length of the array.
 
 <!-- tabs:start -->
+
+#### Python3
 
 ```python
 class Solution:
@@ -84,6 +104,8 @@ class Solution:
                             l -= 1
         return ans
 ```
+
+#### Java
 
 ```java
 class Solution {
@@ -125,6 +147,8 @@ class Solution {
     }
 }
 ```
+
+#### C++
 
 ```cpp
 class Solution {
@@ -168,6 +192,8 @@ public:
 };
 ```
 
+#### Go
+
 ```go
 func fourSum(nums []int, target int) (ans [][]int) {
 	n := len(nums)
@@ -208,6 +234,8 @@ func fourSum(nums []int, target int) (ans [][]int) {
 }
 ```
 
+#### TypeScript
+
 ```ts
 function fourSum(nums: number[], target: number): number[][] {
     const n = nums.length;
@@ -246,6 +274,8 @@ function fourSum(nums: number[], target: number): number[][] {
     return ans;
 }
 ```
+
+#### JavaScript
 
 ```js
 /**
@@ -291,6 +321,8 @@ var fourSum = function (nums, target) {
 };
 ```
 
+#### C#
+
 ```cs
 public class Solution {
     public IList<IList<int>> FourSum(int[] nums, int target) {
@@ -332,6 +364,66 @@ public class Solution {
 }
 ```
 
+#### PHP
+
+```php
+class Solution {
+    /**
+     * @param int[] $nums
+     * @param int $target
+     * @return int[][]
+     */
+
+    function fourSum($nums, $target) {
+        $result = [];
+        $n = count($nums);
+
+        sort($nums);
+
+        for ($i = 0; $i < $n - 3; $i++) {
+            if ($i > 0 && $nums[$i] === $nums[$i - 1]) {
+                continue;
+            }
+
+            for ($j = $i + 1; $j < $n - 2; $j++) {
+                if ($j > $i + 1 && $nums[$j] === $nums[$j - 1]) {
+                    continue;
+                }
+
+                $left = $j + 1;
+                $right = $n - 1;
+
+                while ($left < $right) {
+                    $sum = $nums[$i] + $nums[$j] + $nums[$left] + $nums[$right];
+
+                    if ($sum === $target) {
+                        $result[] = [$nums[$i], $nums[$j], $nums[$left], $nums[$right]];
+
+                        while ($left < $right && $nums[$left] === $nums[$left + 1]) {
+                            $left++;
+                        }
+
+                        while ($left < $right && $nums[$right] === $nums[$right - 1]) {
+                            $right--;
+                        }
+
+                        $left++;
+                        $right--;
+                    } elseif ($sum < $target) {
+                        $left++;
+                    } else {
+                        $right--;
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+}
+```
+
 <!-- tabs:end -->
 
-<!-- end -->
+<!-- solution:end -->
+
+<!-- problem:end -->
